@@ -364,14 +364,14 @@ section.tight-top { padding-top: 84px; }
 .cta-open p { color: var(--grey); font-weight: 400; margin: 18px auto 34px; max-width: 430px; }
 
 /* templates hanging on a wire, swaying on pegs */
-.wire-scene { position: relative; height: 350px; margin-top: 64px; }
+.wire-scene { position: relative; height: 360px; margin-top: 70px; }
 .wireline { position: absolute; top: 0; left: -4%; width: 108%; height: 140px; }
 .hang {
   position: absolute;
   left: var(--l);
   top: var(--t);
-  width: 16%;
-  min-width: 150px;
+  width: 17%;
+  min-width: 160px;
   display: block;
   text-decoration: none;
   transform: rotate(var(--tilt));
@@ -417,6 +417,104 @@ section.tight-top { padding-top: 84px; }
   to { transform: rotate(calc(var(--tilt) + 1.4deg)); }
 }
 @media (prefers-reduced-motion: reduce) { .hang { animation: none; } }
+
+
+/* ---------- quiz ---------- */
+#quiz-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+#quiz-overlay[hidden] { display: none; }
+.quiz-card {
+  position: relative;
+  width: min(560px, 100%);
+  background: #0d0d0d;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  padding: 52px 48px;
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 40px 120px rgba(0, 0, 0, 0.7);
+  animation: quiz-in 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes quiz-in { from { opacity: 0; transform: translateY(18px) scale(0.98); } to { opacity: 1; transform: none; } }
+.quiz-x {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--grey-2);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+}
+.quiz-x:hover { color: var(--ink); }
+.quiz-h { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.02; margin: 16px 0 14px; }
+.quiz-p { color: var(--grey); font-weight: 400; font-size: 15px; margin-bottom: 28px; }
+.quiz-gold { font-weight: 600; }
+.quiz-lab { font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey-2); }
+#quiz-name {
+  display: block;
+  width: 100%;
+  margin: 6px 0 24px;
+  background: #161616;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  color: var(--ink);
+  font-family: "Figtree", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+#quiz-name:focus { border-color: rgba(230, 196, 106, 0.5); }
+.quiz-opts { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+.quiz-opts button {
+  background: #141414;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--ink);
+  font-family: "Figtree", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s cubic-bezier(0.23,1,0.32,1);
+}
+.quiz-opts button:hover { border-color: rgba(230, 196, 106, 0.55); background: #191715; transform: scale(1.015); }
+.quiz-matches { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0 20px; }
+.quiz-match { display: block; text-decoration: none; color: var(--ink); text-align: left; }
+.quiz-match img { width: 100%; aspect-ratio: 16 / 10.5; object-fit: cover; object-position: top; border-radius: 12px; box-shadow: 0 0 0 1px rgba(255,255,255,0.1); }
+.quiz-match .qm-meta { display: flex; flex-direction: column; margin-top: 10px; gap: 2px; }
+.quiz-match b { font-size: 15px; font-weight: 600; }
+.quiz-match i { font-style: normal; font-size: 13px; color: var(--grey-2); }
+.quiz-match:hover img { box-shadow: 0 0 0 1px rgba(230, 196, 106, 0.5); }
+.quiz-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(64, 52, 30, 0.35);
+  border: 1px solid rgba(230, 196, 106, 0.35);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+}
+.quiz-code span { font-size: 13.5px; color: #e8d9ae; font-weight: 500; }
+.quiz-code b { font-family: "Geist Mono", monospace; font-size: 15px; letter-spacing: 0.08em; color: #f3dc8e; }
+@media (max-width: 560px) {
+  .quiz-card { padding: 40px 24px; }
+  .quiz-matches { grid-template-columns: 1fr; }
+}
 
 /* ---------- footer ---------- */
 footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40px; }

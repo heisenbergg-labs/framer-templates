@@ -30,7 +30,128 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">`;
 
-const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
+const QDATA = sorted.map(t => ({
+  name: t.name, slug: t.slug, cat: t.category, price: t.price, free: !!t.free,
+  soon: t.status === "soon", cover: t.cover, tag: t.tagline,
+}));
+
+const quizBlock = (root) => `
+<div id="quiz-overlay" hidden>
+  <div class="quiz-card" role="dialog" aria-modal="true" aria-label="Find your template quiz">
+    <button class="quiz-x" type="button" aria-label="Close">&times;</button>
+    <div class="quiz-step" data-step="intro">
+      <span class="badge-pill">Not sure which one?</span>
+      <h2 class="quiz-h">Find <span class="it">your</span> template</h2>
+      <p class="quiz-p">Three quick questions and we'll match you — plus <span class="goldtext quiz-gold">30% off</span> any paid template.</p>
+      <button class="pill lg" type="button" data-next>Let's find it</button>
+    </div>
+    <div class="quiz-step" data-step="name" hidden>
+      <p class="quiz-lab">01 — First things first</p>
+      <h2 class="quiz-h">What's your <span class="it">name?</span></h2>
+      <input id="quiz-name" type="text" autocomplete="off" placeholder="Type your name" maxlength="40">
+      <button class="pill lg" type="button" data-next>Next</button>
+    </div>
+    <div class="quiz-step" data-step="prof" hidden>
+      <p class="quiz-lab">02 — About you</p>
+      <h2 class="quiz-h">What do you <span class="it">do?</span></h2>
+      <div class="quiz-opts">
+        <button type="button" data-pick="portfolio">Photographer / creative</button>
+        <button type="button" data-pick="hospitality">Host / stays / hospitality</button>
+        <button type="button" data-pick="business">Finance / consulting / business</button>
+        <button type="button" data-pick="fun">Developer / personal brand</button>
+        <button type="button" data-pick="any">Something else</button>
+      </div>
+    </div>
+    <div class="quiz-step" data-step="plan" hidden>
+      <p class="quiz-lab">03 — The plan</p>
+      <h2 class="quiz-h">What are you <span class="it">building?</span></h2>
+      <div class="quiz-opts">
+        <button type="button" data-pick="portfolio">A portfolio</button>
+        <button type="button" data-pick="business">A business site</button>
+        <button type="button" data-pick="hospitality">A stays / booking site</button>
+        <button type="button" data-pick="fun">Something fun people remember</button>
+      </div>
+    </div>
+    <div class="quiz-step" data-step="result" hidden>
+      <p class="quiz-lab">Your match</p>
+      <h2 class="quiz-h" id="quiz-result-h">Made for you.</h2>
+      <div class="quiz-matches" id="quiz-matches"></div>
+      <div class="quiz-code"><span>30% off any paid template</span><b>PICKED30</b></div>
+      <a class="textlink" href="${root}/templates/index.html">or browse everything <span class="arr">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  var DATA = ${JSON.stringify(QDATA)};
+  var ROOT = "${root}";
+  var ov = document.getElementById("quiz-overlay");
+  if (!ov) return;
+  var steps = ov.querySelectorAll(".quiz-step");
+  var order = ["intro", "name", "prof", "plan", "result"];
+  var at = 0;
+  var picks = { prof: null, plan: null };
+  function show(i) {
+    at = i;
+    steps.forEach(function (st) { st.hidden = st.dataset.step !== order[i]; });
+    if (order[i] === "name") setTimeout(function () { document.getElementById("quiz-name").focus(); }, 60);
+  }
+  function open() { ov.hidden = false; document.body.style.overflow = "hidden"; show(0); }
+  function close() { ov.hidden = true; document.body.style.overflow = ""; localStorage.setItem("gs_quiz_seen", "1"); }
+  function score() {
+    var CAT = { portfolio: "Portfolio", hospitality: "Hospitality", business: "Business" };
+    var scored = DATA.map(function (t) {
+      var sc = 0;
+      ["prof", "plan"].forEach(function (k) {
+        var v = picks[k];
+        if (!v || v === "any") return;
+        if (v === "fun") { if (t.slug === "nostalgia-exe") sc += 2; if (t.cat === "Portfolio") sc += 1; }
+        else if (t.cat === CAT[v]) sc += 2;
+      });
+      if (t.free) sc += 0.5;
+      if (t.soon) sc -= 0.75;
+      return { t: t, sc: sc };
+    }).sort(function (a, b) { return b.sc - a.sc; });
+    return scored.slice(0, 2).map(function (x) { return x.t; });
+  }
+  function finish() {
+    var name = (document.getElementById("quiz-name").value || "").trim();
+    document.getElementById("quiz-result-h").innerHTML = name
+      ? "Made for you, <span class='it'>" + name.replace(/[<>&'\"]/g, "") + ".</span>"
+      : "Made <span class='it'>for you.</span>";
+    document.getElementById("quiz-matches").innerHTML = score().map(function (t) {
+      return "<a class='quiz-match' href='" + ROOT + "/templates/" + t.slug + "/index.html'>" +
+        "<img src='" + ROOT + "/" + t.cover + "' alt=''>" +
+        "<span class='qm-meta'><b>" + t.name + "</b><i>" + t.cat + " &middot; " + t.price + "</i></span></a>";
+    }).join("");
+    show(order.indexOf("result"));
+    localStorage.setItem("gs_quiz_done", "1");
+  }
+  ov.addEventListener("click", function (e) {
+    if (e.target === ov) { close(); return; }
+    if (e.target.closest(".quiz-x")) { close(); return; }
+    var nx = e.target.closest("[data-next]");
+    if (nx) { show(at + 1); return; }
+    var pk = e.target.closest("[data-pick]");
+    if (pk) {
+      picks[order[at] === "prof" ? "prof" : "plan"] = pk.dataset.pick;
+      if (order[at] === "prof") show(at + 1); else finish();
+    }
+  });
+  document.getElementById("quiz-name").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") show(order.indexOf("prof"));
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ov.hidden) close(); });
+  document.querySelectorAll("[data-quiz-open]").forEach(function (el) {
+    el.addEventListener("click", function (e) { e.preventDefault(); open(); });
+  });
+  if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_quiz_done")) {
+    setTimeout(function () { if (ov.hidden) open(); }, 12000);
+  }
+})();
+</script>`;
+
+const page = ({ title, description, body, root = ".", quiz = false }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -56,6 +177,7 @@ ${FONTS}
   </div>
 </div></nav>
 ${body}
+${quiz ? quizBlock(root) : ""}
 <footer><div class="wrap">
   <div class="foot-grid">
     <div class="foot-brand">
@@ -160,6 +282,7 @@ const WHY = [
 const home = page({
   title: site.title,
   description: site.description,
+  quiz: true,
   body: `
 <header>
   <p class="eyebrow"><svg class="laurel" width="26" height="40" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgl" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8a6a26"/><stop offset="0.45" stop-color="#e6c46a"/><stop offset="0.75" stop-color="#f9edbb"/><stop offset="1" stop-color="#c9a04b"/></linearGradient></defs><g fill="url(#lgl)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgl)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg><span class="goldtext">Premium Framer templates</span><svg class="laurel r" width="26" height="40" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgr" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8a6a26"/><stop offset="0.45" stop-color="#e6c46a"/><stop offset="0.75" stop-color="#f9edbb"/><stop offset="1" stop-color="#c9a04b"/></linearGradient></defs><g fill="url(#lgr)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgr)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg></p>
@@ -167,7 +290,7 @@ const home = page({
   <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
   <div class="ctas">
     <a class="pill lg" href="templates/index.html">Browse templates</a>
-    <a class="textlink" href="#how">How it works <span class="arr">→</span></a>
+    <a class="textlink" href="#" data-quiz-open>Take the 60-second quiz <span class="arr">→</span></a>
   </div>
   <div class="hero-visual reveal">
     <img src="assets/covers/aubrey.jpg" alt="A premium website template, live in the browser">
@@ -253,14 +376,14 @@ const home = page({
 <section class="cta-open"><div class="wrap">
   <div class="cta-inner reveal">
     <h2>Can't pick <span class="it goldtext">one?</span></h2>
-    <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
-    <a class="pill lg" href="templates/index.html">Browse all templates</a>
+    <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
+    <a class="pill lg" href="#" data-quiz-open>Take the quiz</a>
   </div>
   <div class="wire-scene reveal">
     <svg class="wireline" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 300 118, 900 118, 1200 28" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/></svg>
     ${sorted.map((t, i) => {
-      const L = [3, 22.5, 42, 61.5, 81];
-      const T = [52, 96, 110, 96, 52];
+      const L = [3, 22.25, 41.5, 60.75, 80];
+      const T = [56, 86, 96, 86, 56];
       const R = [-2.4, 1.8, -1.2, 2.2, -1.8];
       const D = [5.4, 6.2, 4.8, 5.8, 6.6];
       const n = i % 5;
@@ -343,6 +466,7 @@ const browse = page({
   title: `All templates | ${site.name}${site.tld}`,
   description: site.description,
   root: "..",
+  quiz: true,
   body: `
 <section class="browse-top"><div class="wrap">
   <div class="head">
