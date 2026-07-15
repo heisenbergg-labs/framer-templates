@@ -107,7 +107,7 @@ const home = page({
   body: `
 <header>
   <span class="eyebrow">★ COPY-AND-GO WEBSITES — NO CODE, NO CATCH</span>
-  <h1>Get a free website<br>that <span class="hl">doesn't look free.</span></h1>
+  <h1>Get a free website<br><span class="l2">that <span class="hl">doesn't look free.</span></span></h1>
   <p class="statement">${esc(site.description)}</p>
   <div class="ctas">
     <a class="pill lg" href="#websites">Show me the websites</a>
