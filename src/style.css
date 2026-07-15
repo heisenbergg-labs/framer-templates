@@ -118,15 +118,16 @@ header::before {
 }
 header .eyebrow {
   position: relative;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--grey);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  filter: drop-shadow(0 0 14px rgba(232, 196, 106, 0.35));
 }
-header .eyebrow .laurel { width: 18px; height: 26px; color: #cfa54e; opacity: 0.9; }
+header .eyebrow .laurel { width: 26px; height: 40px; }
 header .eyebrow .laurel.r { transform: scaleX(-1); }
 header h1 {
   position: relative;
@@ -158,18 +159,17 @@ header .ctas { position: relative; margin-top: 36px; display: flex; gap: 24px; j
 /* gold-plated shimmer — slow sheen sweeping across gold-leaf gradient */
 .goldtext {
   background: linear-gradient(105deg,
-    #6d5420 0%, #a8842e 16%, #d9b95c 30%, #f9edbb 42%, #e6c46a 52%,
-    #9a7728 64%, #c3a24a 78%, #6d5420 100%);
-  background-size: 250% 100%;
+    #8a6a26 0%, #c9a04b 14%, #f3dc8e 26%, #fffbe8 34%, #f3dc8e 42%,
+    #b8923a 56%, #dcb95e 70%, #8a6a26 84%, #c9a04b 100%);
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gold-sheen 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: gold-sheen 3.2s linear infinite;
 }
 @keyframes gold-sheen {
-  0% { background-position: 115% 0; }
-  55% { background-position: -15% 0; }
-  100% { background-position: -15% 0; }
+  from { background-position: 150% 0; }
+  to { background-position: -150% 0; }
 }
 @media (prefers-reduced-motion: reduce) { .goldtext { animation: none; background-position: 50% 0; } }
 
