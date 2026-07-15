@@ -178,22 +178,6 @@ header .ctas { position: relative; margin-top: 36px; display: flex; gap: 24px; j
   pointer-events: none;
 }
 
-/* ---------- stats bar ---------- */
-.stats {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin-top: -2px;
-}
-.stats .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
-.stat {
-  text-align: center;
-  padding: 34px 20px;
-  border-left: 1px solid var(--line);
-}
-.stat:first-child { border-left: none; }
-.stat .n { font-family: "Figtree", sans-serif; font-weight: 600; font-size: 26px; letter-spacing: -0.02em; color: var(--ink); }
-.stat .l { font-size: 13.5px; font-weight: 500; color: var(--grey-2); margin-top: 4px; }
-
 /* ---------- sections ---------- */
 section { padding: 100px 0; }
 section.tight-top { padding-top: 84px; }
@@ -415,9 +399,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   section { padding: 64px 0; }
   header { padding: 140px 20px 0; }
   .hero-visual { margin-top: 48px; aspect-ratio: 16 / 11; border-radius: 16px 16px 0 0; }
-  .stats .wrap { grid-template-columns: 1fr; }
-  .stat { border-left: none; border-top: 1px solid var(--line); padding: 22px; }
-  .stat:first-child { border-top: none; }
   .foot-grid { grid-template-columns: 1fr; gap: 30px; }
 }
 @media (max-width: 560px) {

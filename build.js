@@ -154,12 +154,6 @@ const home = page({
   </div>
 </header>
 
-<div class="stats"><div class="wrap">
-  <div class="stat"><div class="n">5</div><div class="l">Templates live today</div></div>
-  <div class="stat"><div class="n">$0</div><div class="l">To start with a free one</div></div>
-  <div class="stat"><div class="n">100%</div><div class="l">Editable without code</div></div>
-</div></div>
-
 <section id="templates" class="tight-top"><div class="wrap">
   <div class="head">
     <div>
