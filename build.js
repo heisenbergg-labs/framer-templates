@@ -72,7 +72,6 @@ ${body}
       <a href="${root}/index.html#templates">All templates</a>
       <a href="${root}/index.html#why">Why a template</a>
       <a href="${root}/index.html#how">How it works</a>
-      <a href="${root}/index.html#extras">Components</a>
     </div>
   </div>
 </div></footer>
@@ -142,7 +141,7 @@ const home = page({
   description: site.description,
   body: `
 <header>
-  <p class="eyebrow"><svg class="laurel" width="18" height="26" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>Premium Framer templates<svg class="laurel r" width="18" height="26" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></p>
+  <p class="eyebrow"><svg class="laurel" width="18" height="26" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="goldtext">Premium Framer templates</span><svg class="laurel r" width="18" height="26" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></p>
   <h1>Premium templates<br><span class="it">easy to make yours.</span></h1>
   <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
   <div class="ctas">
@@ -153,6 +152,36 @@ const home = page({
     <img src="assets/covers/aubrey.jpg" alt="A premium website template, live in the browser">
   </div>
 </header>
+
+<section id="how" class="flow"><div class="wrap">
+  <div class="flow-grid">
+    <div class="flow-cell reveal">
+      ${ART.triangle ? '<img class="icon3d" src="' + ART.triangle + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
+      <span class="steplab">01</span>
+      <h3>Get a template</h3>
+      <p>Buy one, or take a free one. It copies straight into your Framer account.</p>
+    </div>
+    <div class="flow-cell reveal">
+      ${ART.sphere ? '<img class="icon3d" src="' + ART.sphere + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
+      <span class="steplab">02</span>
+      <h3>Make it yours</h3>
+      <p>Change the words, the photos, the colors. Everything edits by clicking on it.</p>
+    </div>
+    <div class="flow-cell reveal">
+      ${ART.torus ? '<img class="icon3d" src="' + ART.torus + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
+      <span class="steplab">03</span>
+      <h3>Connect your domain</h3>
+      <p>Point your own domain at it in Framer's settings, or stay on the free link.</p>
+    </div>
+    <div class="flow-cell reveal">
+      ${ART.slab ? '<img class="icon3d" src="' + ART.slab + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
+      <span class="steplab">04</span>
+      <h3>Publish with Framer</h3>
+      <p>One click and you're live. Hosting, speed and SSL are Framer's problem, not yours.</p>
+    </div>
+  </div>
+</div></section>
+
 
 <section id="templates" class="tight-top"><div class="wrap">
   <div class="head">
@@ -179,57 +208,13 @@ const home = page({
   <div class="why-grid">
     ${WHY.map(w => `
     <div class="why-cell reveal">
-      ${w.art ? `<img class="icon3d" src="${w.art}" alt="" aria-hidden="true">` : `<span class="icon3d icon3d-ph" aria-hidden="true"></span>`}
       <h3>${esc(w.k)}</h3>
       <p>${esc(w.p)}</p>
     </div>`).join("\n")}
   </div>
 </div></section>
 
-<section id="how"><div class="wrap">
-  <div class="center-head">
-    <span class="badge-pill">How it works</span>
-    <h2><span class="it">Three</span> steps to<br>your new website</h2>
-    <p class="sub">You don't need to be technical. It's genuinely this simple.</p>
-  </div>
-  <div class="steps">
-    <div class="step reveal">
-      <span class="steplab">Step 1</span>
-      <h3>Choose a template</h3>
-      <p>Browse the collection and open the live demos until one feels like yours.</p>
-      <div class="step-shot"><img src="assets/covers/fernhollow.jpg" alt="" loading="lazy"></div>
-    </div>
-    <div class="step reveal">
-      <span class="steplab">Step 2</span>
-      <h3>Make it yours</h3>
-      <p>Click any word and retype it. Click any photo and swap it. No code, ever.</p>
-      <div class="step-shot"><img src="assets/covers/still.jpg" alt="" loading="lazy"></div>
-    </div>
-    <div class="step reveal">
-      <span class="steplab">Step 3</span>
-      <h3>Publish your site</h3>
-      <p>One click and you're live on a free link. Plug in your own domain whenever you're ready.</p>
-      <div class="step-shot"><img src="assets/covers/brookmere.jpg" alt="" loading="lazy"></div>
-    </div>
-  </div>
-</div></section>
 
-<section id="extras"><div class="wrap">
-  <div class="head">
-    <div>
-      <h2>Little <span class="it">extras</span></h2>
-      <p class="sub">Small pieces of motion that drop into any Framer site. $5 each.</p>
-    </div>
-  </div>
-  <div class="comp-grid">
-    ${components.map(c => `
-    <a class="comp reveal" href="${c.get}" target="_blank" rel="noreferrer">
-      <span class="price-tag">${esc(c.price)}</span>
-      <h3>${esc(c.name)}</h3>
-      <p>${esc(c.tagline)}</p>
-    </a>`).join("\n")}
-  </div>
-</div></section>
 
 <section><div class="wrap">
   <div class="center-head">

@@ -126,7 +126,7 @@ header .eyebrow {
   justify-content: center;
   gap: 10px;
 }
-header .eyebrow .laurel { width: 18px; height: 26px; opacity: 0.55; }
+header .eyebrow .laurel { width: 18px; height: 26px; color: #cfa54e; opacity: 0.9; }
 header .eyebrow .laurel.r { transform: scaleX(-1); }
 header h1 {
   position: relative;
@@ -153,6 +153,36 @@ header .ctas { position: relative; margin-top: 36px; display: flex; gap: 24px; j
 }
 .textlink .arr { display: inline-block; transition: transform 0.25s ease; }
 .textlink:hover .arr { transform: translateX(4px); }
+
+
+/* gold-plated shimmer — slow sheen sweeping across gold-leaf gradient */
+.goldtext {
+  background: linear-gradient(105deg,
+    #6d5420 0%, #a8842e 16%, #d9b95c 30%, #f9edbb 42%, #e6c46a 52%,
+    #9a7728 64%, #c3a24a 78%, #6d5420 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-sheen 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes gold-sheen {
+  0% { background-position: 115% 0; }
+  55% { background-position: -15% 0; }
+  100% { background-position: -15% 0; }
+}
+@media (prefers-reduced-motion: reduce) { .goldtext { animation: none; background-position: 50% 0; } }
+
+/* ---------- 4-step flow row (after hero) ---------- */
+section.flow { padding: 84px 0 8px; }
+.flow-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.flow-cell { padding: 8px 28px; border-left: 1px solid var(--line); }
+.flow-cell:first-child { border-left: none; padding-left: 0; }
+.flow-cell:last-child { padding-right: 0; }
+.flow-cell .steplab { display: block; font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; color: var(--grey-2); margin-bottom: 8px; }
+.flow-cell h3 { font-size: 17px; margin-bottom: 8px; }
+.flow-cell p { font-size: 14px; font-weight: 400; color: var(--grey-2); }
+.flow-cell .icon3d { width: 96px; height: 96px; margin-bottom: 20px; }
 
 /* the cinematic image that melts into the templates below */
 .hero-visual {
@@ -280,7 +310,7 @@ section.tight-top { padding-top: 84px; }
 
 /* ---------- why (3D icon cells) ---------- */
 .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.why-cell { padding: 44px 28px 48px; border-left: 1px solid var(--line); }
+.why-cell { padding: 36px 28px 40px; border-left: 1px solid var(--line); }
 .why-cell:first-child { border-left: none; padding-left: 0; }
 .why-cell:last-child { padding-right: 0; }
 .icon3d { display: block; width: 110px; height: 110px; object-fit: contain; margin-bottom: 26px; mix-blend-mode: screen; }
@@ -293,44 +323,6 @@ section.tight-top { padding-top: 84px; }
 .why-cell h3 { font-size: 17px; margin-bottom: 8px; }
 .why-cell p { font-size: 14px; font-weight: 400; color: var(--grey-2); }
 
-/* ---------- extras ---------- */
-.comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.comp {
-  display: block;
-  background: var(--card-2);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 26px;
-  text-decoration: none;
-  color: var(--ink);
-  transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease;
-}
-.comp:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.22); }
-.comp .price-tag { font-size: 12.5px; font-weight: 600; color: var(--green); }
-.comp h3 { font-size: 18px; margin: 12px 0 6px; }
-.comp p { font-size: 14px; font-weight: 400; color: var(--grey-2); }
-
-/* ---------- how (step cards w/ screenshots) ---------- */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.step {
-  background: var(--card-2);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 28px 28px 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.step .steplab { font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--grey-2); text-transform: uppercase; }
-.step h3 { font-size: 19px; margin: 14px 0 8px; }
-.step p { font-size: 14px; font-weight: 400; color: var(--grey-2); }
-.step .step-shot {
-  margin: 26px -28px 0;
-  aspect-ratio: 16 / 9.4;
-  overflow: hidden;
-  border-top: 1px solid var(--line);
-}
-.step .step-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: saturate(1.06) contrast(1.04); }
 
 /* ---------- fair questions ---------- */
 .props { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -428,6 +420,8 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 
 /* ---------- responsive ---------- */
 @media (max-width: 980px) {
+  .flow-grid { grid-template-columns: 1fr 1fr; gap: 30px 0; }
+  .flow-cell:nth-child(3) { border-left: none; padding-left: 0; }
   .why-grid { grid-template-columns: 1fr 1fr; }
   .why-cell { padding: 34px 24px; }
   .why-cell:first-child { padding-left: 0; }
@@ -435,7 +429,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .why-cell:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 880px) {
-  .grid, .steps, .comp-grid, .props { grid-template-columns: 1fr; }
+  .grid, .props { grid-template-columns: 1fr; }
   .detail { grid-template-columns: 1fr; gap: 30px; }
   nav .links a:not(.pill) { display: none; }
   section { padding: 64px 0; }
@@ -444,6 +438,8 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .foot-grid { grid-template-columns: 1fr; gap: 30px; }
 }
 @media (max-width: 560px) {
+  .flow-grid { grid-template-columns: 1fr; }
+  .flow-cell { border-left: none; padding-left: 0; }
   .why-grid { grid-template-columns: 1fr; }
   .why-cell { border-left: none; padding-left: 0; }
   .why-cell:nth-child(n+2) { border-top: 1px solid var(--line); }
