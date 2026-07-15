@@ -120,7 +120,7 @@ if (sw) {
 
 const tcard = (t, root = ".") => `
 <a class="tcard reveal" data-free="${t.free}" href="${root}/templates/${t.slug}/index.html">
-  <div class="frame"><span class="tag ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div></div>
+  <div class="framewrap"><span class="tag ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span><div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div></div></div>
   <div class="meta">
     <h3>${esc(t.name)}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
     <span class="catprice">${esc(t.category)} · <b>${esc(t.price)}</b></span>
@@ -264,7 +264,7 @@ const detail = (t) => {
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#templates">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap detail">
   <div class="gallery">
-    <div class="main"><span class="tag ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div></div>
+    <div class="framewrap"><span class="tag ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span><div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div></div></div>
   </div>
   <div class="info">
     <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
