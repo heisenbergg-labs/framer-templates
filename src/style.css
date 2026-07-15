@@ -280,6 +280,32 @@ section.tight-top { padding-top: 84px; }
 .ppill.paid::before { background: #e6c46a; box-shadow: 0 0 8px rgba(230, 196, 106, 0.8); }
 .ppill.free { color: #7ee2a8; }
 .ppill.paid { color: #f0d894; }
+.tcard .ppill { transition: opacity 0.25s ease; }
+.tcard.chip-active .ppill { opacity: 0; }
+
+/* cursor-follower price chip */
+#cursor-chip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  font-family: "Figtree", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  padding: 8px 15px;
+  border-radius: 100px;
+  color: #04180c;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.6;
+  transition: opacity 0.18s ease, scale 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+  white-space: nowrap;
+}
+#cursor-chip.on { opacity: 1; scale: 1; }
+#cursor-chip.free { background: linear-gradient(160deg, #34d873 0%, #1fa952 100%); color: #04180c; box-shadow: 0 6px 20px rgba(33, 196, 93, 0.35); }
+#cursor-chip.paid { background: linear-gradient(160deg, #ecc668 0%, #c1913a 100%); color: #241804; box-shadow: 0 6px 20px rgba(212, 168, 67, 0.35); }
 .tcard .frame .shot { width: 100%; height: 100%; overflow: hidden; }
 .tcard img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: saturate(1.08) contrast(1.05) brightness(1.04); transition: transform 0.5s cubic-bezier(0.23,1,0.32,1); }
 .tcard:hover img { transform: scale(1.03); }

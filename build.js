@@ -75,7 +75,28 @@ ${body}
     </div>
   </div>
 </div></footer>
+<div id="cursor-chip" aria-hidden="true"></div>
 <script>
+// cursor-follower price chip on template cards (fine pointers only)
+if (matchMedia("(pointer: fine)").matches) {
+  const chip = document.getElementById("cursor-chip");
+  let card = null;
+  document.addEventListener("mousemove", e => {
+    const c = e.target.closest ? e.target.closest(".tcard[data-cursor]") : null;
+    if (c !== card) {
+      card = c;
+      if (card) {
+        chip.textContent = card.dataset.cursor;
+        chip.className = "on " + card.dataset.kind;
+        document.querySelectorAll(".tcard").forEach(t => t.classList.toggle("chip-active", t === card));
+      } else {
+        chip.className = "";
+        document.querySelectorAll(".tcard.chip-active").forEach(t => t.classList.remove("chip-active"));
+      }
+    }
+    if (card) chip.style.transform = "translate3d(" + (e.clientX + 20) + "px," + (e.clientY + 14) + "px,0)";
+  }, { passive: true });
+}
 // progressive reveal: content is visible by default; animation only when JS + IO are healthy
 if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.1 });
@@ -118,7 +139,7 @@ if (sw) {
 </html>`;
 
 const tcard = (t, root = ".") => `
-<a class="tcard reveal" data-free="${t.free}" href="${root}/templates/${t.slug}/index.html">
+<a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" href="${root}/templates/${t.slug}/index.html">
   <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
   <div class="meta">
     <h3>${esc(t.name)}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
