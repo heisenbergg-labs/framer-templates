@@ -82,16 +82,16 @@ if (matchMedia("(pointer: fine)").matches) {
   const chip = document.getElementById("cursor-chip");
   let card = null;
   document.addEventListener("mousemove", e => {
-    const c = e.target.closest ? e.target.closest(".tcard[data-cursor]") : null;
+    const c = e.target.closest ? e.target.closest("[data-cursor]") : null;
     if (c !== card) {
       card = c;
       if (card) {
         chip.textContent = card.dataset.cursor;
         chip.className = "on " + card.dataset.kind;
-        document.querySelectorAll(".tcard").forEach(t => t.classList.toggle("chip-active", t === card));
+        document.querySelectorAll(".tcard, .hang").forEach(t => t.classList.toggle("chip-active", t === card));
       } else {
         chip.className = "";
-        document.querySelectorAll(".tcard.chip-active").forEach(t => t.classList.remove("chip-active"));
+        document.querySelectorAll(".chip-active").forEach(t => t.classList.remove("chip-active"));
       }
     }
     if (card) chip.style.transform = "translate3d(" + (e.clientX + 20) + "px," + (e.clientY + 14) + "px,0)";
@@ -250,20 +250,26 @@ const home = page({
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="cta-band reveal">
-    <div class="cta-fan" aria-hidden="true">
-      <img src="assets/covers/brookmere.jpg" alt="" style="--r:-16deg;--x:-330px;--y:64px">
-      <img src="assets/covers/still.jpg" alt="" style="--r:-8deg;--x:-165px;--y:22px">
-      <img src="assets/covers/fernhollow.jpg" alt="" style="--r:0deg;--x:0px;--y:6px">
-      <img src="assets/covers/aubrey.jpg" alt="" style="--r:8deg;--x:165px;--y:22px">
-      <img src="assets/covers/nostalgia.jpg" alt="" style="--r:16deg;--x:330px;--y:64px">
-    </div>
-    <div class="cta-inner">
-      <h2>Can't pick <span class="it goldtext">one?</span></h2>
-      <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
-      <a class="pill lg" href="templates/index.html">Browse all templates</a>
-    </div>
+<section class="cta-open"><div class="wrap">
+  <div class="cta-inner reveal">
+    <h2>Can't pick <span class="it goldtext">one?</span></h2>
+    <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
+    <a class="pill lg" href="templates/index.html">Browse all templates</a>
+  </div>
+  <div class="wire-scene reveal">
+    <svg class="wireline" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 300 118, 900 118, 1200 28" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/></svg>
+    ${sorted.map((t, i) => {
+      const L = [3, 22.5, 42, 61.5, 81];
+      const T = [52, 96, 110, 96, 52];
+      const R = [-2.4, 1.8, -1.2, 2.2, -1.8];
+      const D = [5.4, 6.2, 4.8, 5.8, 6.6];
+      const n = i % 5;
+      return `<a class="hang" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" href="templates/${t.slug}/index.html" style="--l:${L[n]}%;--t:${T[n]}px;--tilt:${R[n]}deg;--d:${D[n]}s">
+      <span class="peg"></span>
+      <img src="${t.cover}" alt="${esc(t.name)} template hanging on the line" loading="lazy">
+      <span class="cap">${esc(t.name)}</span>
+    </a>`;
+    }).join("\n    ")}
   </div>
 </div></section>`,
 });
