@@ -1,11 +1,9 @@
 {
   "site": {
-    "name": "carmy",
-    "title": "Carmy — Premium Framer Templates",
-    "description": "Premium Framer templates by Carmy Studio. Remix, customise, and launch your site in days, not months.",
-    "handle": "@madebycarmy",
-    "handleUrl": "https://x.com/madebycarmy",
-    "contact": "carmyhq@gmail.com",
+    "name": "template",
+    "tld": ".site",
+    "title": "Get a free website that doesn't look free",
+    "description": "Hand-picked website designs you can copy in one click and make yours in an afternoon. No code, no designer, no invoice.",
     "baseUrl": "https://heisenbergg-labs.github.io/framer-templates"
   },
   "templates": [
@@ -15,7 +13,12 @@
       "tagline": "A film photographer's contact sheet, alive.",
       "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet — marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
       "category": "Portfolio",
-      "tags": ["photography", "portfolio", "creative", "art"],
+      "tags": [
+        "photography",
+        "portfolio",
+        "creative",
+        "art"
+      ],
       "price": "$24",
       "free": false,
       "new": true,
@@ -32,7 +35,13 @@
       "tagline": "A members' club, after dark.",
       "description": "The Aubrey is a dark, cinematic template for members' clubs, bars, restaurants and hospitality brands. Candlelit motion, a velvet-rope invitation flow, events and journal CMS — the whole house, ready to open.",
       "category": "Hospitality",
-      "tags": ["club", "restaurant", "hospitality", "dark", "membership"],
+      "tags": [
+        "club",
+        "restaurant",
+        "hospitality",
+        "dark",
+        "membership"
+      ],
       "price": "$69",
       "free": false,
       "new": false,
@@ -49,7 +58,12 @@
       "tagline": "Luxury finance, by invitation.",
       "description": "Brookmere is a single-page template for boutique finance, wealth management and private advisory firms. Serif restraint, an emerald palette, and a working invitation form — quiet money, done right.",
       "category": "Business",
-      "tags": ["finance", "business", "luxury", "consulting"],
+      "tags": [
+        "finance",
+        "business",
+        "luxury",
+        "consulting"
+      ],
       "price": "$39",
       "free": false,
       "new": false,
@@ -66,7 +80,13 @@
       "tagline": "Boutique stays and cabin rentals, warm and quiet.",
       "description": "Fern Hollow is a free template for boutique stays, cabins and rentals. Warm photography-first layout, gallery and booking sections, and copy that feels like a host, not a hotel chain. Free, forever.",
       "category": "Hospitality",
-      "tags": ["rental", "stay", "hospitality", "travel", "free"],
+      "tags": [
+        "rental",
+        "stay",
+        "hospitality",
+        "travel",
+        "free"
+      ],
       "price": "Free",
       "free": true,
       "new": false,
@@ -83,7 +103,13 @@
       "tagline": "A Windows-XP operating system as a portfolio.",
       "description": "Nostalgia.exe turns your portfolio into a fully working retro operating system. BIOS boot, draggable windows, Minesweeper, a BSOD 404 and three easter eggs. The portfolio nobody closes in five seconds.",
       "category": "Portfolio",
-      "tags": ["portfolio", "fun", "retro", "creative", "developer"],
+      "tags": [
+        "portfolio",
+        "fun",
+        "retro",
+        "creative",
+        "developer"
+      ],
       "price": "$149",
       "free": false,
       "new": false,
