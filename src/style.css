@@ -217,6 +217,47 @@ section.tight-top { padding-top: 84px; }
   pointer-events: none;
 }
 .tcard:hover .frame { transform: translateY(-4px); }
+
+/* rotated price-tag sticker on the cover image */
+.tag {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  right: 14px;
+  transform: rotate(7deg);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Figtree", sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 16px 8px 20px;
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+.tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.55);
+  margin-left: -8px;
+}
+.tag.free {
+  color: #05230f;
+  background: linear-gradient(160deg, #34d873 0%, #1fa952 100%);
+}
+.tag.paid {
+  color: #2b1d05;
+  background: linear-gradient(160deg, #ecc668 0%, #c1913a 100%);
+}
+.tcard:hover .tag { transform: rotate(7deg) scale(1.04); }
+.tcard .tag { transition: transform 0.35s cubic-bezier(0.23,1,0.32,1); }
 .tcard .frame .shot { width: 100%; height: 100%; overflow: hidden; }
 .tcard img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: saturate(1.08) contrast(1.05) brightness(1.04); transition: transform 0.5s cubic-bezier(0.23,1,0.32,1); }
 .tcard:hover img { transform: scale(1.03); }
