@@ -330,3 +330,38 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   section { padding: 60px 0; }
   header { padding: 150px 20px 70px; }
 }
+
+/* ---------- AI art slots ---------- */
+.art { pointer-events: none; user-select: none; }
+.art-hero {
+  position: absolute;
+  right: -4%;
+  top: 16%;
+  width: clamp(220px, 26vw, 420px);
+  mix-blend-mode: screen;
+  animation: art-drift 14s cubic-bezier(0.45,0,0.55,1) infinite alternate;
+}
+.has-art { position: relative; overflow: hidden; }
+.art-side {
+  position: absolute;
+  right: -70px;
+  top: 30px;
+  width: clamp(160px, 18vw, 280px);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+.art-cta {
+  position: absolute;
+  right: 4%;
+  bottom: -14%;
+  width: clamp(160px, 20vw, 300px);
+  mix-blend-mode: screen;
+  animation: art-drift 18s cubic-bezier(0.45,0,0.55,1) infinite alternate;
+}
+@keyframes art-drift { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-14px) rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) { .art { animation: none; } }
+@media (max-width: 880px) {
+  .art-hero { position: static; margin: 36px auto 0; display: block; width: 200px; }
+  .art-side { display: none; }
+  .art-cta { right: -30px; bottom: -8%; width: 160px; opacity: 0.6; }
+}

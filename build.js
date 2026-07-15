@@ -8,6 +8,15 @@ const DIST = path.join(ROOT, "dist");
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, "templates.json"), "utf8"));
 const { site, templates, components } = data;
 
+// optional AI art (drop files into assets/art/: triangle.png|jpg, sphere, torus, slab)
+const findArt = (name) => {
+  for (const ext of ["png", "jpg", "webp"]) {
+    if (fs.existsSync(path.join(ROOT, "assets", "art", name + "." + ext))) return "assets/art/" + name + "." + ext;
+  }
+  return null;
+};
+const ART = { triangle: findArt("triangle"), sphere: findArt("sphere"), torus: findArt("torus"), slab: findArt("slab") };
+
 // free first, then paid cheapest-first
 const sorted = [...templates].sort((a, b) => {
   if (a.free !== b.free) return a.free ? -1 : 1;
@@ -29,6 +38,10 @@ const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
 <meta name="description" content="${esc(description)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+${ART.slab ? `<meta property="og:image" content="${site.baseUrl}/${ART.slab}">` : ""}
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 5 -4.3'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M14 10 L56 32 L14 54 Q8 57 8 50 L8 14 Q8 7 14 10 Z' fill='%23181818'/%3E%3Cpath d='M14 10 L56 32 L14 54 Q8 57 8 50 L8 14 Q8 7 14 10 Z' fill='white' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E">
 ${FONTS}
 <link rel="stylesheet" href="${root}/style.css">
 </head>
@@ -112,6 +125,7 @@ const home = page({
     <a class="pill lg" href="#websites">Show me the websites</a>
     <a class="textlink" href="#how">how does this work?</a>
   </div>
+  ${ART.triangle ? `<img class="art art-hero" src="${ART.triangle}" alt="" aria-hidden="true">` : ""}
 </header>
 
 <section id="websites"><div class="wrap">
@@ -130,7 +144,8 @@ const home = page({
   </div>
 </div></section>
 
-<section id="how"><div class="wrap">
+<section id="how" class="has-art"><div class="wrap">
+  ${ART.sphere ? `<img class="art art-side" src="${ART.sphere}" alt="" aria-hidden="true">` : ""}
   <div class="head">
     <div>
       <h2>How it <span class="it">works</span></h2>
@@ -177,6 +192,7 @@ const home = page({
 
 <section><div class="wrap">
   <div class="cta-band reveal">
+    ${ART.torus ? `<img class="art art-cta" src="${ART.torus}" alt="" aria-hidden="true">` : ""}
     <h2>Can't pick <span class="it">one?</span></h2>
     <p>A 60-second quiz that matches you with your website is coming this week. Until then, the free ones are a safe bet.</p>
     <a class="pill lg" href="#websites">Back to the shelf</a>
@@ -229,9 +245,20 @@ fs.writeFileSync(path.join(DIST, ".nojekyll"), "");
 for (const f of fs.readdirSync(path.join(ROOT, "assets", "covers"))) {
   fs.copyFileSync(path.join(ROOT, "assets", "covers", f), path.join(DIST, "assets", "covers", f));
 }
+if (fs.existsSync(path.join(ROOT, "assets", "art"))) {
+  fs.mkdirSync(path.join(DIST, "assets", "art"), { recursive: true });
+  for (const f of fs.readdirSync(path.join(ROOT, "assets", "art"))) {
+    fs.copyFileSync(path.join(ROOT, "assets", "art", f), path.join(DIST, "assets", "art", f));
+  }
+}
 for (const t of templates) {
   const dir = path.join(DIST, "templates", t.slug);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), detail(t));
 }
+const urls = [site.baseUrl + "/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
+fs.writeFileSync(path.join(DIST, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");
+fs.writeFileSync(path.join(DIST, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
 console.log("built:", ["index.html", ...templates.map(t => `templates/${t.slug}/`)].join(", "));
