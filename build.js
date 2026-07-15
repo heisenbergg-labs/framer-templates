@@ -96,7 +96,7 @@ const quizBlock = (root) => `
     steps.forEach(function (st) { st.hidden = st.dataset.step !== order[i]; });
     if (order[i] === "name") setTimeout(function () { document.getElementById("quiz-name").focus(); }, 60);
   }
-  function open() { ov.hidden = false; document.body.style.overflow = "hidden"; show(0); }
+  function open() { ov.hidden = false; document.body.style.overflow = "hidden"; show(0); if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-open", title: "Quiz opened", event: true }); }
   function close() { ov.hidden = true; document.body.style.overflow = ""; localStorage.setItem("gs_quiz_seen", "1"); }
   function score() {
     var CAT = { portfolio: "Portfolio", hospitality: "Hospitality", business: "Business" };
@@ -126,6 +126,7 @@ const quizBlock = (root) => `
     }).join("");
     show(order.indexOf("result"));
     localStorage.setItem("gs_quiz_done", "1");
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-complete", title: "Quiz completed", event: true });
   }
   ov.addEventListener("click", function (e) {
     if (e.target === ov) { close(); return; }
@@ -166,6 +167,7 @@ ${ART.slab ? `<meta property="og:image" content="${site.baseUrl}/${ART.slab}">` 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101010'/%3E%3Ctext x='32' y='44' font-family='sans-serif' font-weight='700' font-size='36' fill='%23F2F1EC' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
 ${FONTS}
 <link rel="stylesheet" href="${root}/style.css?v=${VER}">
+<script data-goatcounter="https://getsites.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <nav><div class="wrap">
@@ -404,6 +406,7 @@ const detail = (t) => {
     title: `${t.name} — ${t.category.toLowerCase()} website template${t.free ? " (free)" : ""} | ${site.name}${site.tld}`,
     description: t.description,
     root: "../..",
+    quiz: true,
     body: `
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#templates">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap detail">
@@ -422,6 +425,7 @@ const detail = (t) => {
       <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this template — free" : "Get this template"}</a>
       <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>
     </div>
+    <p class="quiz-nudge">Not sure it's the one? <a href="#" data-quiz-open>Take the 60-second quiz <span class="arr">&rarr;</span></a></p>
   </div>
 </div>
 <section class="detail-steps"><div class="wrap">
