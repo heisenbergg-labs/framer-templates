@@ -1,9 +1,9 @@
 {
   "site": {
-    "name": "template",
-    "tld": ".site",
-    "title": "Get a free website that doesn't look free",
-    "description": "Hand-picked website designs you can copy in one click and make yours in an afternoon. No code, no designer, no invoice.",
+    "name": "getsites",
+    "tld": ".co",
+    "title": "getsites — Premium website templates, easy to make yours",
+    "description": "Premium Framer templates that look custom-built and edit like a slide deck. Copy one, put your words in, and go live today — some are completely free.",
     "baseUrl": "https://heisenbergg-labs.github.io/framer-templates"
   },
   "templates": [

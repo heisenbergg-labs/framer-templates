@@ -27,7 +27,7 @@ const sorted = [...templates].sort((a, b) => {
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">`;
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">`;
 
 const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
 <html lang="en">
@@ -41,7 +41,7 @@ const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 ${ART.slab ? `<meta property="og:image" content="${site.baseUrl}/${ART.slab}">` : ""}
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 5 -4.3'/%3E%3CfeComposite operator='in' in2='SourceGraphic'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M14 10 L56 32 L14 54 Q8 57 8 50 L8 14 Q8 7 14 10 Z' fill='%23181818'/%3E%3Cpath d='M14 10 L56 32 L14 54 Q8 57 8 50 L8 14 Q8 7 14 10 Z' fill='white' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101010'/%3E%3Ctext x='32' y='44' font-family='sans-serif' font-weight='700' font-size='36' fill='%23F2F1EC' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
 ${FONTS}
 <link rel="stylesheet" href="${root}/style.css">
 </head>
@@ -49,16 +49,31 @@ ${FONTS}
 <nav><div class="wrap">
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
-    <a href="${root}/index.html#websites">FREE WEBSITES</a>
-    <a href="${root}/index.html#how">HOW IT WORKS</a>
-    <a class="pill" href="${root}/index.html#websites">Find yours</a>
+    <a href="${root}/index.html#templates">Templates</a>
+    <a href="${root}/index.html#how">How it works</a>
+    <a class="pill" href="${root}/index.html#templates">Browse templates</a>
   </div>
 </div></nav>
 ${body}
 <footer><div class="wrap">
-  <span class="mono-sm">© 2026 — HAND-PICKED WEBSITES</span>
-  <span class="mono-sm">NEW ONES ADDED OFTEN</span>
-  <span class="mono-sm">BUILT INDEPENDENTLY</span>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <span class="wordmark">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></span>
+      <p>Premium website templates,<br>easy to make yours.</p>
+      <span class="mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</span>
+    </div>
+    <div class="foot-col">
+      <span class="mono-sm">TEMPLATES</span>
+      ${sorted.map(t => `<a href="${root}/templates/${t.slug}/index.html">${esc(t.name)}</a>`).join("\n      ")}
+    </div>
+    <div class="foot-col">
+      <span class="mono-sm">EXPLORE</span>
+      <a href="${root}/index.html#templates">All templates</a>
+      <a href="${root}/index.html#why">Why a template</a>
+      <a href="${root}/index.html#how">How it works</a>
+      <a href="${root}/index.html#extras">Components</a>
+    </div>
+  </div>
 </div></footer>
 <script>
 // progressive reveal: content is visible by default; animation only when JS + IO are healthy
@@ -104,13 +119,21 @@ if (sw) {
 
 const tcard = (t, root = ".") => `
 <a class="tcard reveal" data-free="${t.free}" href="${root}/templates/${t.slug}/index.html">
-  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — free website design preview" loading="lazy"></div></div>
+  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div></div>
   <div class="meta">
-    <h3>${esc(t.name)}${t.free ? ' <span class="badge">Free</span>' : ""}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}</h3>
+    <h3>${esc(t.name)}${t.free ? ' <span class="badge">Free</span>' : ""}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
     <span class="catprice">${esc(t.category)} · <b>${esc(t.price)}</b></span>
   </div>
   <p class="line2">${esc(t.tagline)}</p>
 </a>`;
+
+// value-prop cells; icon images appear automatically once art files exist
+const WHY = [
+  { art: ART.triangle, k: "Live in days, not months", p: "No waiting on a designer's calendar. Take a template today, publish this week." },
+  { art: ART.sphere, k: "Looks custom-built", p: "Editorial type, real motion, considered detail. Nobody will guess it started as a template." },
+  { art: ART.torus, k: "Actually easy to edit", p: "Click a word, retype it. Click a photo, swap it. If you can edit a slide deck, you can edit this." },
+  { art: ART.slab, k: "Free to start", p: "Some templates cost nothing — no signup wall, no watermark. See the quality before spending a cent." },
+];
 
 /* ---------------- home ---------------- */
 const home = page({
@@ -118,25 +141,27 @@ const home = page({
   description: site.description,
   body: `
 <header>
-  <p class="eyebrow"><span class="leaf">❧</span> Hand-picked websites — free &amp; premium <span class="leaf">❧</span></p>
-  <h1>Get a free website<br><span class="it">that doesn't look free</span></h1>
-  <p class="statement">${esc(site.description)}</p>
+  <p class="eyebrow"><span class="badge-pill">✦&nbsp; Premium Framer templates</span></p>
+  <h1 class="grad">Premium templates,<br>easy to make yours.</h1>
+  <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
   <div class="ctas">
-    <a class="pill lg" href="#websites">Show me the websites</a>
-    <a class="textlink" href="#how">how does this work?</a>
+    <a class="pill lg" href="#templates">Browse templates</a>
+    <a class="textlink" href="#how">How it works <span class="arr">→</span></a>
   </div>
-  ${ART.triangle ? `<img class="art art-hero" src="${ART.triangle}" alt="" aria-hidden="true">` : ""}
+  <div class="hero-visual reveal">
+    <img src="assets/covers/aubrey.jpg" alt="A premium website template, live in the browser">
+  </div>
 </header>
 
-<section id="websites"><div class="wrap">
+<section id="templates" class="tight-top"><div class="wrap">
   <div class="head">
     <div>
-      <h2>Pick <span class="it">your</span> website</h2>
-      <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones cost nothing.</p>
+      <h2 class="grad">Find your template</h2>
+      <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones are free.</p>
     </div>
     <div class="toggle-row">
       <span class="lab">FREE ONLY</span>
-      <div class="switch" id="free-switch" role="switch" tabindex="0" aria-label="Show free websites only"></div>
+      <div class="switch" id="free-switch" role="switch" tabindex="0" aria-label="Show free templates only"></div>
     </div>
   </div>
   <div class="grid">
@@ -144,39 +169,54 @@ const home = page({
   </div>
 </div></section>
 
-<section id="how" class="has-art"><div class="wrap">
-  ${ART.sphere ? `<img class="art art-side" src="${ART.sphere}" alt="" aria-hidden="true">` : ""}
-  <div class="head">
-    <div>
-      <h2>How it <span class="it">works</span></h2>
-      <p class="sub">Three steps, one afternoon. You never touch code.</p>
-    </div>
+<section id="why"><div class="wrap">
+  <div class="center-head">
+    <span class="badge-pill">Why a template?</span>
+    <h2 class="grad">A premium website, without<br>the premium invoice</h2>
+    <p class="sub">Because you don't need to spend thousands, or wait months, to look like you did.</p>
   </div>
-  <div class="steps">
-    <div class="step reveal"><span class="num">1</span><h3>Take it</h3><p>Hit "Use this website" and it copies itself into a free Framer account. The whole thing — pages, pictures, motion.</p></div>
-    <div class="step reveal"><span class="num">2</span><h3>Make it yours</h3><p>Click any word and retype it. Click any photo and swap it. It keeps looking good while you change everything.</p></div>
-    <div class="step reveal"><span class="num">3</span><h3>Put it online</h3><p>One publish button and you're live on a free link. Plug in your own domain whenever you feel fancy.</p></div>
+  <div class="why-grid">
+    ${WHY.map(w => `
+    <div class="why-cell reveal">
+      ${w.art ? `<img class="icon3d" src="${w.art}" alt="" aria-hidden="true">` : `<span class="icon3d icon3d-ph" aria-hidden="true"></span>`}
+      <h3>${esc(w.k)}</h3>
+      <p>${esc(w.p)}</p>
+    </div>`).join("\n")}
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="head">
-    <div>
-      <h2>Fair <span class="it">questions</span></h2>
-    </div>
+<section id="how"><div class="wrap">
+  <div class="center-head">
+    <span class="badge-pill">How it works</span>
+    <h2 class="grad">Three steps to<br>your new website</h2>
+    <p class="sub">You don't need to be technical. It's genuinely this simple.</p>
   </div>
-  <div class="props">
-    <div class="prop reveal"><div class="k">Is it actually free?</div><p>The ones with the green badge — completely. No signup wall, no watermark, no "free trial". Take it and go.</p></div>
-    <div class="prop reveal"><div class="k">Do I need to know code?</div><p>No. If you can edit a slide deck, you can edit these. Everything changes by clicking on it.</p></div>
-    <div class="prop reveal"><div class="k">Then why is it free?</div><p>Some of our websites cost money. We give the rest away so you can see the quality is real before spending anything.</p></div>
-    <div class="prop reveal"><div class="k">What about the paid ones?</div><p>One flat price, yours forever, use it as long as you like. Cheaper than one hour of a designer's time.</p></div>
+  <div class="steps">
+    <div class="step reveal">
+      <span class="mono-sm">STEP 1</span>
+      <h3>Choose a template</h3>
+      <p>Browse the collection and open the live demos until one feels like yours.</p>
+      <div class="step-shot"><img src="assets/covers/fernhollow.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="step reveal">
+      <span class="mono-sm">STEP 2</span>
+      <h3>Make it yours</h3>
+      <p>Click any word and retype it. Click any photo and swap it. No code, ever.</p>
+      <div class="step-shot"><img src="assets/covers/still.jpg" alt="" loading="lazy"></div>
+    </div>
+    <div class="step reveal">
+      <span class="mono-sm">STEP 3</span>
+      <h3>Publish your site</h3>
+      <p>One click and you're live on a free link. Plug in your own domain whenever you're ready.</p>
+      <div class="step-shot"><img src="assets/covers/brookmere.jpg" alt="" loading="lazy"></div>
+    </div>
   </div>
 </div></section>
 
 <section id="extras"><div class="wrap">
   <div class="head">
     <div>
-      <h2>Little <span class="it">extras</span></h2>
+      <h2 class="grad">Little extras</h2>
       <p class="sub">Small pieces of motion that drop into any Framer site. $5 each.</p>
     </div>
   </div>
@@ -191,11 +231,23 @@ const home = page({
 </div></section>
 
 <section><div class="wrap">
+  <div class="center-head">
+    <span class="badge-pill">Fair questions</span>
+    <h2 class="grad">Questions? Answers.</h2>
+  </div>
+  <div class="props">
+    <div class="prop reveal"><div class="k">Are some really free?</div><p>The ones with the green badge — completely. No signup wall, no watermark, no "free trial". Take it and go.</p></div>
+    <div class="prop reveal"><div class="k">Do I need to know code?</div><p>No. If you can edit a slide deck, you can edit these. Everything changes by clicking on it.</p></div>
+    <div class="prop reveal"><div class="k">Why give any away free?</div><p>So you can see the quality is real before spending anything. The free ones are built to the same standard as the paid ones.</p></div>
+    <div class="prop reveal"><div class="k">What do the paid ones cost?</div><p>One flat price, yours forever, use it as long as you like. Cheaper than one hour of a designer's time.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
   <div class="cta-band reveal">
-    ${ART.torus ? `<img class="art art-cta" src="${ART.torus}" alt="" aria-hidden="true">` : ""}
-    <h2>Can't pick <span class="it">one?</span></h2>
-    <p>A 60-second quiz that matches you with your website is coming this week. Until then, the free ones are a safe bet.</p>
-    <a class="pill lg" href="#websites">Back to the shelf</a>
+    <h2 class="grad">Can't pick one?</h2>
+    <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
+    <a class="pill lg" href="#templates">Back to the templates</a>
   </div>
 </div></section>`,
 });
@@ -204,31 +256,31 @@ const home = page({
 const detail = (t) => {
   const related = sorted.filter(x => x.slug !== t.slug).slice(0, 2);
   return page({
-    title: `${t.name} — free ${t.category.toLowerCase()} website${t.free ? "" : " design"} | ${site.name}${site.tld}`,
+    title: `${t.name} — ${t.category.toLowerCase()} website template${t.free ? " (free)" : ""} | ${site.name}${site.tld}`,
     description: t.description,
     root: "../..",
     body: `
-<div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#websites">Websites</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
+<div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#templates">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap detail">
   <div class="gallery">
-    <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website design preview"></div></div>
+    <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div></div>
   </div>
   <div class="info">
-    <p class="cat mono">${esc(t.category.toUpperCase())} WEBSITE${t.status === "soon" ? ' — <span class="sticker blue" style="position:static;display:inline-block">SOON</span>' : ""}</p>
-    <h1>${esc(t.tagline)}</h1>
+    <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
+    <h1 class="grad">${esc(t.tagline)}</h1>
     <div class="price-row">
       <span class="price">${esc(t.price)}</span>
       ${t.free ? '<span class="vs">100% free — no signup</span>' : '<span class="vs">vs $2,000+ from a designer</span>'}
     </div>
     <p class="desc">${esc(t.description)}</p>
     <div class="actions">
-      <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this website — free" : "Get this website"}</a>
-      <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Open the live site</a>
+      <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this template — free" : "Get this template"}</a>
+      <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>
     </div>
   </div>
 </div>
 <section style="padding-top:0"><div class="wrap">
-  <div class="head"><div><h2>More like this</h2></div></div>
+  <div class="head"><div><h2 class="grad">You might also like</h2></div></div>
   <div class="grid">
     ${related.map(r => tcard(r, "../..")).join("\n")}
   </div>
