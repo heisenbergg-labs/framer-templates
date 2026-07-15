@@ -231,9 +231,18 @@ const home = page({
 
 <section><div class="wrap">
   <div class="cta-band reveal">
-    <h2>Can't pick <span class="it">one?</span></h2>
-    <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
-    <a class="pill lg" href="templates/index.html">Browse all templates</a>
+    <div class="cta-fan" aria-hidden="true">
+      <img src="assets/covers/brookmere.jpg" alt="" style="--r:-16deg;--x:-330px;--y:64px">
+      <img src="assets/covers/still.jpg" alt="" style="--r:-8deg;--x:-165px;--y:22px">
+      <img src="assets/covers/fernhollow.jpg" alt="" style="--r:0deg;--x:0px;--y:6px">
+      <img src="assets/covers/aubrey.jpg" alt="" style="--r:8deg;--x:165px;--y:22px">
+      <img src="assets/covers/nostalgia.jpg" alt="" style="--r:16deg;--x:330px;--y:64px">
+    </div>
+    <div class="cta-inner">
+      <h2>Can't pick <span class="it goldtext">one?</span></h2>
+      <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
+      <a class="pill lg" href="templates/index.html">Browse all templates</a>
+    </div>
   </div>
 </div></section>`,
 });
