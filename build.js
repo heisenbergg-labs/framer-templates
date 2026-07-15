@@ -27,7 +27,7 @@ const sorted = [...templates].sort((a, b) => {
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">`;
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">`;
 
 const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
 <html lang="en">
@@ -141,8 +141,8 @@ const home = page({
   description: site.description,
   body: `
 <header>
-  <p class="eyebrow"><span class="badge-pill">✦&nbsp; Premium Framer templates</span></p>
-  <h1 class="grad">Premium templates,<br>easy to make yours.</h1>
+  <p class="eyebrow"><svg class="laurel" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>Premium Framer templates<svg class="laurel r" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></p>
+  <h1>Premium templates<br><span class="it">easy to make yours.</span></h1>
   <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
   <div class="ctas">
     <a class="pill lg" href="#templates">Browse templates</a>
@@ -153,10 +153,16 @@ const home = page({
   </div>
 </header>
 
+<div class="stats"><div class="wrap">
+  <div class="stat"><div class="n">5</div><div class="l">Templates live today</div></div>
+  <div class="stat"><div class="n">$0</div><div class="l">To start with a free one</div></div>
+  <div class="stat"><div class="n">100%</div><div class="l">Editable without code</div></div>
+</div></div>
+
 <section id="templates" class="tight-top"><div class="wrap">
   <div class="head">
     <div>
-      <h2 class="grad">Find your template</h2>
+      <h2>Find <span class="it">your</span> template</h2>
       <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones are free.</p>
     </div>
     <div class="toggle-row">
@@ -172,7 +178,7 @@ const home = page({
 <section id="why"><div class="wrap">
   <div class="center-head">
     <span class="badge-pill">Why a template?</span>
-    <h2 class="grad">A premium website, without<br>the premium invoice</h2>
+    <h2>A premium website, without<br><span class="it">the premium invoice</span></h2>
     <p class="sub">Because you don't need to spend thousands, or wait months, to look like you did.</p>
   </div>
   <div class="why-grid">
@@ -188,24 +194,24 @@ const home = page({
 <section id="how"><div class="wrap">
   <div class="center-head">
     <span class="badge-pill">How it works</span>
-    <h2 class="grad">Three steps to<br>your new website</h2>
+    <h2><span class="it">Three</span> steps to<br>your new website</h2>
     <p class="sub">You don't need to be technical. It's genuinely this simple.</p>
   </div>
   <div class="steps">
     <div class="step reveal">
-      <span class="mono-sm">STEP 1</span>
+      <span class="steplab">Step 1</span>
       <h3>Choose a template</h3>
       <p>Browse the collection and open the live demos until one feels like yours.</p>
       <div class="step-shot"><img src="assets/covers/fernhollow.jpg" alt="" loading="lazy"></div>
     </div>
     <div class="step reveal">
-      <span class="mono-sm">STEP 2</span>
+      <span class="steplab">Step 2</span>
       <h3>Make it yours</h3>
       <p>Click any word and retype it. Click any photo and swap it. No code, ever.</p>
       <div class="step-shot"><img src="assets/covers/still.jpg" alt="" loading="lazy"></div>
     </div>
     <div class="step reveal">
-      <span class="mono-sm">STEP 3</span>
+      <span class="steplab">Step 3</span>
       <h3>Publish your site</h3>
       <p>One click and you're live on a free link. Plug in your own domain whenever you're ready.</p>
       <div class="step-shot"><img src="assets/covers/brookmere.jpg" alt="" loading="lazy"></div>
@@ -216,7 +222,7 @@ const home = page({
 <section id="extras"><div class="wrap">
   <div class="head">
     <div>
-      <h2 class="grad">Little extras</h2>
+      <h2>Little <span class="it">extras</span></h2>
       <p class="sub">Small pieces of motion that drop into any Framer site. $5 each.</p>
     </div>
   </div>
@@ -233,7 +239,7 @@ const home = page({
 <section><div class="wrap">
   <div class="center-head">
     <span class="badge-pill">Fair questions</span>
-    <h2 class="grad">Questions? Answers.</h2>
+    <h2>Questions? <span class="it">Answers.</span></h2>
   </div>
   <div class="props">
     <div class="prop reveal"><div class="k">Are some really free?</div><p>The ones with the green badge — completely. No signup wall, no watermark, no "free trial". Take it and go.</p></div>
@@ -245,7 +251,7 @@ const home = page({
 
 <section><div class="wrap">
   <div class="cta-band reveal">
-    <h2 class="grad">Can't pick one?</h2>
+    <h2>Can't pick <span class="it">one?</span></h2>
     <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
     <a class="pill lg" href="#templates">Back to the templates</a>
   </div>
@@ -267,7 +273,7 @@ const detail = (t) => {
   </div>
   <div class="info">
     <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
-    <h1 class="grad">${esc(t.tagline)}</h1>
+    <h1>${esc(t.tagline)}</h1>
     <div class="price-row">
       <span class="price">${esc(t.price)}</span>
       ${t.free ? '<span class="vs">100% free — no signup</span>' : '<span class="vs">vs $2,000+ from a designer</span>'}
@@ -280,7 +286,7 @@ const detail = (t) => {
   </div>
 </div>
 <section style="padding-top:0"><div class="wrap">
-  <div class="head"><div><h2 class="grad">You might also like</h2></div></div>
+  <div class="head"><div><h2>You might <span class="it">also like</span></h2></div></div>
   <div class="grid">
     ${related.map(r => tcard(r, "../..")).join("\n")}
   </div>
