@@ -25,6 +25,7 @@ const sorted = [...templates].sort((a, b) => {
   return pa - pb;
 });
 
+const VER = Date.now().toString(36);
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">`;
@@ -43,7 +44,7 @@ const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
 ${ART.slab ? `<meta property="og:image" content="${site.baseUrl}/${ART.slab}">` : ""}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101010'/%3E%3Ctext x='32' y='44' font-family='sans-serif' font-weight='700' font-size='36' fill='%23F2F1EC' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
 ${FONTS}
-<link rel="stylesheet" href="${root}/style.css">
+<link rel="stylesheet" href="${root}/style.css?v=${VER}">
 </head>
 <body>
 <nav><div class="wrap">
@@ -141,7 +142,7 @@ const home = page({
   description: site.description,
   body: `
 <header>
-  <p class="eyebrow"><svg class="laurel" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>Premium Framer templates<svg class="laurel r" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></p>
+  <p class="eyebrow"><svg class="laurel" width="18" height="26" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>Premium Framer templates<svg class="laurel r" width="18" height="26" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 28C9 24 5 17 6 8M6 8C7 11 9 12 11 12C9 9 8 6 8 3C10 5 12 8 12 11M6 8C4 9 2 9 1 8C2 11 4 12 6 12M6 13C4 14 2 14 1 13C2 16 5 18 7 17M8 18C7 20 5 21 3 21C5 23 8 24 9 22M11 23C11 25 10 27 8 27C10 28 13 28 14 26" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></p>
   <h1>Premium templates<br><span class="it">easy to make yours.</span></h1>
   <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
   <div class="ctas">
