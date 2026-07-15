@@ -18,7 +18,7 @@ const sorted = [...templates].sort((a, b) => {
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">`;
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">`;
 
 const page = ({ title, description, body, root = "." }) => `<!DOCTYPE html>
 <html lang="en">
@@ -91,10 +91,9 @@ if (sw) {
 
 const tcard = (t, root = ".") => `
 <a class="tcard reveal" data-free="${t.free}" href="${root}/templates/${t.slug}/index.html">
-  ${t.free ? '<span class="sticker">FREE</span>' : ""}${t.status === "soon" ? '<span class="sticker blue">SOON</span>' : ""}
-  <div class="frame"><img src="${root}/${t.cover}" alt="${esc(t.name)} — free website design preview" loading="lazy"></div>
+  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — free website design preview" loading="lazy"></div></div>
   <div class="meta">
-    <h3>${esc(t.name)}</h3>
+    <h3>${esc(t.name)}${t.free ? ' <span class="badge">Free</span>' : ""}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}</h3>
     <span class="catprice">${esc(t.category)} · <b>${esc(t.price)}</b></span>
   </div>
   <p class="line2">${esc(t.tagline)}</p>
@@ -106,8 +105,8 @@ const home = page({
   description: site.description,
   body: `
 <header>
-  <span class="eyebrow">★ COPY-AND-GO WEBSITES — NO CODE, NO CATCH</span>
-  <h1>Get a free website<br><span class="l2">that <span class="hl">doesn't look free.</span></span></h1>
+  <p class="eyebrow"><span class="leaf">❧</span> Hand-picked websites — free &amp; premium <span class="leaf">❧</span></p>
+  <h1>Get a free website<br><span class="it">that doesn't look free</span></h1>
   <p class="statement">${esc(site.description)}</p>
   <div class="ctas">
     <a class="pill lg" href="#websites">Show me the websites</a>
@@ -118,8 +117,8 @@ const home = page({
 <section id="websites"><div class="wrap">
   <div class="head">
     <div>
-      <h2>Pick a website</h2>
-      <p class="sub">Every one opens as a real, live site — click around before you take it. The yellow stickers cost nothing.</p>
+      <h2>Pick <span class="it">your</span> website</h2>
+      <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones cost nothing.</p>
     </div>
     <div class="toggle-row">
       <span class="lab">FREE ONLY</span>
@@ -134,7 +133,7 @@ const home = page({
 <section id="how"><div class="wrap">
   <div class="head">
     <div>
-      <h2>How it works</h2>
+      <h2>How it <span class="it">works</span></h2>
       <p class="sub">Three steps, one afternoon. You never touch code.</p>
     </div>
   </div>
@@ -148,11 +147,11 @@ const home = page({
 <section><div class="wrap">
   <div class="head">
     <div>
-      <h2>Fair questions</h2>
+      <h2>Fair <span class="it">questions</span></h2>
     </div>
   </div>
   <div class="props">
-    <div class="prop reveal"><div class="k">Is it actually free?</div><p>The ones with the yellow sticker — completely. No signup wall, no watermark, no "free trial". Take it and go.</p></div>
+    <div class="prop reveal"><div class="k">Is it actually free?</div><p>The ones with the green badge — completely. No signup wall, no watermark, no "free trial". Take it and go.</p></div>
     <div class="prop reveal"><div class="k">Do I need to know code?</div><p>No. If you can edit a slide deck, you can edit these. Everything changes by clicking on it.</p></div>
     <div class="prop reveal"><div class="k">Then why is it free?</div><p>Some of our websites cost money. We give the rest away so you can see the quality is real before spending anything.</p></div>
     <div class="prop reveal"><div class="k">What about the paid ones?</div><p>One flat price, yours forever, use it as long as you like. Cheaper than one hour of a designer's time.</p></div>
@@ -162,7 +161,7 @@ const home = page({
 <section id="extras"><div class="wrap">
   <div class="head">
     <div>
-      <h2>Little extras</h2>
+      <h2>Little <span class="it">extras</span></h2>
       <p class="sub">Small pieces of motion that drop into any Framer site. $5 each.</p>
     </div>
   </div>
@@ -178,7 +177,7 @@ const home = page({
 
 <section><div class="wrap">
   <div class="cta-band reveal">
-    <h2>Can't pick one?</h2>
+    <h2>Can't pick <span class="it">one?</span></h2>
     <p>A 60-second quiz that matches you with your website is coming this week. Until then, the free ones are a safe bet.</p>
     <a class="pill lg" href="#websites">Back to the shelf</a>
   </div>
@@ -196,7 +195,7 @@ const detail = (t) => {
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#websites">Websites</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap detail">
   <div class="gallery">
-    <div class="main"><img src="../../${t.cover}" alt="${esc(t.name)} — website design preview"></div>
+    <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website design preview"></div></div>
   </div>
   <div class="info">
     <p class="cat mono">${esc(t.category.toUpperCase())} WEBSITE${t.status === "soon" ? ' — <span class="sticker blue" style="position:static;display:inline-block">SOON</span>' : ""}</p>
