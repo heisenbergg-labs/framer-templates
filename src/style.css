@@ -1,21 +1,33 @@
 :root {
-  --bg: #0c0c0b;
-  --card: #161615;
-  --card-2: #1c1c1a;
+  --bg: #050505;
+  --card: #101010;
+  --card-2: #161616;
   --ink: #f2f1ec;
   --grey: #9a988f;
-  --line: rgba(242, 241, 236, 0.12);
+  --line: rgba(242, 241, 236, 0.1);
   --green: #4ade80;
   --green-bg: rgba(34, 90, 56, 0.35);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 6 -5.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  background-size: 420px 420px;
+  opacity: 0.24;
+}
+body > * { position: relative; z-index: 1; }
 html { scroll-behavior: smooth; }
 
 body {
+  position: relative;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Geist", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -24,18 +36,18 @@ body {
 
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
 
-.serif { font-family: "Instrument Serif", serif; font-weight: 400; }
+.serif { font-family: "Fraunces", serif; font-weight: 450; font-optical-sizing: auto; }
 
 .mono {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "Geist Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.1em;
   color: var(--grey);
 }
-.mono-sm { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.05em; color: var(--grey); }
+.mono-sm { font-family: "Geist Mono", monospace; font-size: 12px; letter-spacing: 0.05em; color: var(--grey); }
 
-h1, h2 { font-family: "Instrument Serif", serif; font-weight: 400; letter-spacing: 0; }
-h3 { font-family: "Inter", sans-serif; font-weight: 600; letter-spacing: -0.01em; }
+h1, h2 { font-family: "Fraunces", serif; font-weight: 450; font-optical-sizing: auto; letter-spacing: 0; }
+h3 { font-family: "Geist", sans-serif; font-weight: 600; letter-spacing: -0.01em; }
 
 /* ---------- nav ---------- */
 nav {
@@ -52,7 +64,7 @@ nav {
 }
 nav .wrap { max-width: none; height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px 0 24px; }
 .wordmark {
-  font-family: "Instrument Serif", serif;
+  font-family: "Fraunces", serif;
   font-size: 21px;
   color: var(--ink);
   text-decoration: none;
@@ -70,10 +82,10 @@ nav .links a:not(.pill):hover { opacity: 1; }
 
 .pill {
   display: inline-block;
-  font-family: "Inter", sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 14px;
-  color: #111 !important;
+  color: #0a0a0a !important;
   background: var(--ink);
   padding: 10px 20px;
   border-radius: 100px;
@@ -95,12 +107,12 @@ header::before {
   position: absolute;
   inset: -20% -10% auto;
   height: 130%;
-  background: radial-gradient(60% 55% at 50% 22%, rgba(64, 58, 40, 0.34) 0%, rgba(12, 12, 11, 0) 70%);
+  background: radial-gradient(60% 55% at 50% 22%, rgba(60, 60, 64, 0.32) 0%, rgba(12, 12, 11, 0) 70%);
   pointer-events: none;
 }
 header .eyebrow {
   position: relative;
-  font-family: "Inter", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 14px;
   color: var(--ink);
   opacity: 0.9;
@@ -142,7 +154,7 @@ section { padding: 92px 0; }
 
 /* toggle */
 .toggle-row { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.toggle-row .lab { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--grey); }
+.toggle-row .lab { font-family: "Geist Mono", monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--grey); }
 .switch { position: relative; width: 48px; height: 26px; background: var(--card-2); border: 1px solid var(--line); border-radius: 100px; cursor: pointer; transition: background 0.25s ease; }
 .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--grey); transition: transform 0.25s cubic-bezier(0.23,1,0.32,1), background 0.25s ease; }
 .switch.on { background: var(--green-bg); border-color: rgba(74, 222, 128, 0.4); }
@@ -173,7 +185,7 @@ section { padding: 92px 0; }
 .tcard .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-top: 18px; }
 .tcard .meta h3 { font-size: 19px; display: flex; align-items: center; gap: 10px; }
 .badge {
-  font-family: "Inter", sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 12px;
   color: var(--green);
@@ -199,7 +211,7 @@ section { padding: 92px 0; }
   transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease;
 }
 .comp:hover { transform: translateY(-4px); border-color: rgba(242, 241, 236, 0.24); }
-.comp .price-tag { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--green); letter-spacing: 0.06em; }
+.comp .price-tag { font-family: "Geist Mono", monospace; font-size: 12px; color: var(--green); letter-spacing: 0.06em; }
 .comp h3 { font-size: 19px; margin: 12px 0 6px; }
 .comp p { font-size: 14px; color: var(--grey); }
 
@@ -213,7 +225,7 @@ section { padding: 92px 0; }
   position: relative;
 }
 .step .num {
-  font-family: "Instrument Serif", serif;
+  font-family: "Fraunces", serif;
   font-style: italic;
   font-size: 44px;
   line-height: 1;
@@ -247,7 +259,7 @@ section { padding: 92px 0; }
   position: absolute;
   inset: auto -20% -70% -20%;
   height: 150%;
-  background: radial-gradient(50% 50% at 50% 80%, rgba(64, 58, 40, 0.5) 0%, rgba(12, 12, 11, 0) 70%);
+  background: radial-gradient(50% 50% at 50% 80%, rgba(60, 60, 64, 0.45) 0%, rgba(12, 12, 11, 0) 70%);
   pointer-events: none;
 }
 .cta-band h2 { position: relative; font-size: clamp(36px, 5.4vw, 60px); }
@@ -278,9 +290,9 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 .detail .info h1 { font-size: clamp(34px, 4.4vw, 52px); line-height: 1.05; }
 .detail .info h1 .it { font-style: italic; }
 .detail .price-row { display: flex; align-items: center; gap: 14px; margin: 22px 0; flex-wrap: wrap; }
-.detail .price { font-family: "Inter", sans-serif; font-weight: 600; font-size: 28px; }
+.detail .price { font-family: "Geist", sans-serif; font-weight: 600; font-size: 28px; }
 .detail .vs {
-  font-family: "Inter", sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 12.5px;
   color: var(--green);
@@ -293,7 +305,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 .btn-primary, .btn-secondary {
   display: block;
   text-align: center;
-  font-family: "Inter", sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 15px;
   padding: 16px;
