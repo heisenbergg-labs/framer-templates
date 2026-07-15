@@ -208,6 +208,10 @@ section.flow { padding: 84px 0 8px; }
   pointer-events: none;
 }
 
+/* ---------- browse page ---------- */
+.browse-top { padding-top: 150px; }
+.browse-h { font-size: clamp(40px, 5.6vw, 72px); line-height: 1.0; }
+
 /* ---------- sections ---------- */
 section { padding: 100px 0; }
 section.tight-top { padding-top: 84px; }
@@ -248,47 +252,34 @@ section.tight-top { padding-top: 84px; }
 }
 .tcard:hover .frame { transform: translateY(-4px); }
 
-/* rotated price-tag sticker straddling the card corner */
-.framewrap { position: relative; }
-.tag {
+/* price pill on the cover image (bottom-right) */
+.ppill {
   position: absolute;
   z-index: 2;
-  top: -13px;
-  right: 22px;
-  transform: rotate(-8deg);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  bottom: 14px;
+  right: 14px;
   font-family: "Figtree", sans-serif;
   font-weight: 600;
-  font-size: 12.5px;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  padding: 8px 16px 8px 20px;
-  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);
-  border-radius: 6px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 100px;
+  color: #fff;
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 4px 14px rgba(0, 0, 0, 0.35);
   pointer-events: none;
 }
-.tag::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.55);
-  margin-left: -8px;
-}
-.tag.free {
-  color: #05230f;
-  background: linear-gradient(160deg, #34d873 0%, #1fa952 100%);
-}
-.tag.paid {
-  color: #2b1d05;
-  background: linear-gradient(160deg, #ecc668 0%, #c1913a 100%);
-}
-.tcard:hover .tag { transform: rotate(-8deg) scale(1.05) translateY(-1px); }
-.tcard .tag { transition: transform 0.35s cubic-bezier(0.23,1,0.32,1); }
+.ppill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; }
+.ppill.free::before { background: var(--green); box-shadow: 0 0 8px rgba(33, 196, 93, 0.8); }
+.ppill.paid::before { background: #e6c46a; box-shadow: 0 0 8px rgba(230, 196, 106, 0.8); }
+.ppill.free { color: #7ee2a8; }
+.ppill.paid { color: #f0d894; }
 .tcard .frame .shot { width: 100%; height: 100%; overflow: hidden; }
 .tcard img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: saturate(1.08) contrast(1.05) brightness(1.04); transition: transform 0.5s cubic-bezier(0.23,1,0.32,1); }
 .tcard:hover img { transform: scale(1.03); }
@@ -323,6 +314,9 @@ section.tight-top { padding-top: 84px; }
 .why-cell h3 { font-size: 17px; margin-bottom: 8px; }
 .why-cell p { font-size: 14px; font-weight: 400; color: var(--grey-2); }
 
+
+/* ---------- detail steps ---------- */
+.detail-steps { padding-top: 20px; }
 
 /* ---------- fair questions ---------- */
 .props { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }

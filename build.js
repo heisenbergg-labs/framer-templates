@@ -50,9 +50,9 @@ ${FONTS}
 <nav><div class="wrap">
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
-    <a href="${root}/index.html#templates">Templates</a>
+    <a href="${root}/templates/index.html">Templates</a>
     <a href="${root}/index.html#how">How it works</a>
-    <a class="pill" href="${root}/index.html#templates">Browse templates</a>
+    <a class="pill" href="${root}/templates/index.html">Browse templates</a>
   </div>
 </div></nav>
 ${body}
@@ -69,7 +69,7 @@ ${body}
     </div>
     <div class="foot-col">
       <span class="mono-sm">EXPLORE</span>
-      <a href="${root}/index.html#templates">All templates</a>
+      <a href="${root}/templates/index.html">All templates</a>
       <a href="${root}/index.html#why">Why a template</a>
       <a href="${root}/index.html#how">How it works</a>
     </div>
@@ -119,7 +119,7 @@ if (sw) {
 
 const tcard = (t, root = ".") => `
 <a class="tcard reveal" data-free="${t.free}" href="${root}/templates/${t.slug}/index.html">
-  <div class="framewrap"><span class="tag ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span><div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div></div></div>
+  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
   <div class="meta">
     <h3>${esc(t.name)}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
     <span class="catprice">${esc(t.category)} · <b>${esc(t.price)}</b></span>
@@ -145,7 +145,7 @@ const home = page({
   <h1>Premium templates<br><span class="it">easy to make yours.</span></h1>
   <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
   <div class="ctas">
-    <a class="pill lg" href="#templates">Browse templates</a>
+    <a class="pill lg" href="templates/index.html">Browse templates</a>
     <a class="textlink" href="#how">How it works <span class="arr">→</span></a>
   </div>
   <div class="hero-visual reveal">
@@ -233,7 +233,7 @@ const home = page({
   <div class="cta-band reveal">
     <h2>Can't pick <span class="it">one?</span></h2>
     <p>A 60-second quiz that matches you with your template is coming soon. Until then, the free ones are a safe bet.</p>
-    <a class="pill lg" href="#templates">Back to the templates</a>
+    <a class="pill lg" href="templates/index.html">Browse all templates</a>
   </div>
 </div></section>`,
 });
@@ -249,7 +249,7 @@ const detail = (t) => {
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#templates">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap detail">
   <div class="gallery">
-    <div class="framewrap"><span class="tag ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span><div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div></div></div>
+    <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
   </div>
   <div class="info">
     <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
@@ -265,6 +265,34 @@ const detail = (t) => {
     </div>
   </div>
 </div>
+<section class="detail-steps"><div class="wrap">
+  <div class="center-head">
+    <h2>Make ${esc(t.name)} <span class="it">yours</span></h2>
+    <p class="sub">From this page to your own website, in four steps.</p>
+  </div>
+  <div class="flow-grid">
+    <div class="flow-cell reveal">
+      <span class="steplab">01</span>
+      <h3>${t.free ? "Get it free" : "Buy the template"}</h3>
+      <p>${t.free ? `Hit &quot;Use this template&quot; — no signup wall, ${esc(t.name)} is yours in one click.` : `Buy it once and it&#39;s yours forever. ${esc(t.name)} unlocks instantly.`}</p>
+    </div>
+    <div class="flow-cell reveal">
+      <span class="steplab">02</span>
+      <h3>Click Remix</h3>
+      <p>One click on Remix and ${esc(t.name)} opens in Framer, fully editable, in a free account.</p>
+    </div>
+    <div class="flow-cell reveal">
+      <span class="steplab">03</span>
+      <h3>Change it to your details</h3>
+      <p>Click any word or photo and swap it. Or tell Framer&#39;s AI agent what you want — it edits ${esc(t.name)} for you.</p>
+    </div>
+    <div class="flow-cell reveal">
+      <span class="steplab">04</span>
+      <h3>Publish your site</h3>
+      <p>Pick up a domain (or connect one you own) right inside Framer, hit Publish, and ${esc(t.name)} is live as your website.</p>
+    </div>
+  </div>
+</div></section>
 <section style="padding-top:0"><div class="wrap">
   <div class="head"><div><h2>You might <span class="it">also like</span></h2></div></div>
   <div class="grid">
@@ -273,6 +301,29 @@ const detail = (t) => {
 </div></section>`,
   });
 };
+
+/* ---------------- templates browse page ---------------- */
+const browse = page({
+  title: `All templates | ${site.name}${site.tld}`,
+  description: site.description,
+  root: "..",
+  body: `
+<section class="browse-top"><div class="wrap">
+  <div class="head">
+    <div>
+      <h1 class="browse-h">Find <span class="it">your</span> template</h1>
+      <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones are free.</p>
+    </div>
+    <div class="toggle-row">
+      <span class="lab">FREE ONLY</span>
+      <div class="switch" id="free-switch" role="switch" tabindex="0" aria-label="Show free templates only"></div>
+    </div>
+  </div>
+  <div class="grid">
+    ${sorted.map(t => tcard(t, "..")).join("\n")}
+  </div>
+</div></section>`,
+});
 
 /* ---------------- write dist ---------------- */
 fs.rmSync(DIST, { recursive: true, force: true });
@@ -289,12 +340,14 @@ if (fs.existsSync(path.join(ROOT, "assets", "art"))) {
     fs.copyFileSync(path.join(ROOT, "assets", "art", f), path.join(DIST, "assets", "art", f));
   }
 }
+fs.mkdirSync(path.join(DIST, "templates"), { recursive: true });
+fs.writeFileSync(path.join(DIST, "templates", "index.html"), browse);
 for (const t of templates) {
   const dir = path.join(DIST, "templates", t.slug);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), detail(t));
 }
-const urls = [site.baseUrl + "/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
+const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");
