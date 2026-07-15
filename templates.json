@@ -1,0 +1,118 @@
+{
+  "site": {
+    "name": "carmy",
+    "title": "Carmy — Premium Framer Templates",
+    "description": "Premium Framer templates by Carmy Studio. Remix, customise, and launch your site in days, not months.",
+    "handle": "@madebycarmy",
+    "handleUrl": "https://x.com/madebycarmy",
+    "contact": "carmyhq@gmail.com",
+    "baseUrl": "https://heisenbergg-labs.github.io/framer-templates"
+  },
+  "templates": [
+    {
+      "slug": "still",
+      "name": "Still",
+      "tagline": "A film photographer's contact sheet, alive.",
+      "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet — marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
+      "category": "Portfolio",
+      "tags": ["photography", "portfolio", "creative", "art"],
+      "price": "$24",
+      "free": false,
+      "new": true,
+      "featured": true,
+      "status": "live",
+      "cover": "assets/covers/still.jpg",
+      "demo": "https://stillfilm.framer.website",
+      "get": "https://stillfilm.framer.website",
+      "year": "2026"
+    },
+    {
+      "slug": "the-aubrey",
+      "name": "The Aubrey",
+      "tagline": "A members' club, after dark.",
+      "description": "The Aubrey is a dark, cinematic template for members' clubs, bars, restaurants and hospitality brands. Candlelit motion, a velvet-rope invitation flow, events and journal CMS — the whole house, ready to open.",
+      "category": "Hospitality",
+      "tags": ["club", "restaurant", "hospitality", "dark", "membership"],
+      "price": "$69",
+      "free": false,
+      "new": false,
+      "featured": true,
+      "status": "live",
+      "cover": "assets/covers/aubrey.jpg",
+      "demo": "https://theaubrey.framer.website",
+      "get": "https://theaubrey.framer.website",
+      "year": "2026"
+    },
+    {
+      "slug": "brookmere",
+      "name": "Brookmere",
+      "tagline": "Luxury finance, by invitation.",
+      "description": "Brookmere is a single-page template for boutique finance, wealth management and private advisory firms. Serif restraint, an emerald palette, and a working invitation form — quiet money, done right.",
+      "category": "Business",
+      "tags": ["finance", "business", "luxury", "consulting"],
+      "price": "$39",
+      "free": false,
+      "new": false,
+      "featured": true,
+      "status": "live",
+      "cover": "assets/covers/brookmere.jpg",
+      "demo": "https://brookmere.framer.website",
+      "get": "https://brookmere.framer.website",
+      "year": "2026"
+    },
+    {
+      "slug": "fern-hollow",
+      "name": "Fern Hollow",
+      "tagline": "Boutique stays and cabin rentals, warm and quiet.",
+      "description": "Fern Hollow is a free template for boutique stays, cabins and rentals. Warm photography-first layout, gallery and booking sections, and copy that feels like a host, not a hotel chain. Free, forever.",
+      "category": "Hospitality",
+      "tags": ["rental", "stay", "hospitality", "travel", "free"],
+      "price": "Free",
+      "free": true,
+      "new": false,
+      "featured": false,
+      "status": "live",
+      "cover": "assets/covers/fernhollow.jpg",
+      "demo": "https://fernhollow.framer.website",
+      "get": "https://fernhollow.framer.website",
+      "year": "2026"
+    },
+    {
+      "slug": "nostalgia-exe",
+      "name": "Nostalgia.exe",
+      "tagline": "A Windows-XP operating system as a portfolio.",
+      "description": "Nostalgia.exe turns your portfolio into a fully working retro operating system. BIOS boot, draggable windows, Minesweeper, a BSOD 404 and three easter eggs. The portfolio nobody closes in five seconds.",
+      "category": "Portfolio",
+      "tags": ["portfolio", "fun", "retro", "creative", "developer"],
+      "price": "$149",
+      "free": false,
+      "new": false,
+      "featured": false,
+      "status": "soon",
+      "cover": "assets/covers/nostalgia.jpg",
+      "demo": "https://fuchsia-iris-537502.framer.app",
+      "get": "https://fuchsia-iris-537502.framer.app",
+      "year": "2026"
+    }
+  ],
+  "components": [
+    {
+      "name": "The Wire",
+      "tagline": "Templates hung on a drying line, swaying on pegs.",
+      "price": "$5",
+      "get": "https://www.framer.com/@madebycarmy/"
+    },
+    {
+      "name": "ReelCarousel",
+      "tagline": "A 3D reel carousel. Drop in, bind, spin.",
+      "price": "$5",
+      "get": "https://www.framer.com/@madebycarmy/"
+    },
+    {
+      "name": "asciii",
+      "tagline": "Cards render as live monochrome ASCII, develop on hover.",
+      "price": "$5",
+      "get": "https://www.framer.com/@madebycarmy/"
+    }
+  ]
+}
