@@ -182,7 +182,7 @@ const quizBlock = (root) => `
 })();
 </script>`;
 
-const page = ({ title, description, body, root = ".", quiz = false, og = "assets/og/home.jpg", jsonld = null }) => `<!DOCTYPE html>
+const page = ({ title, description, body, root = ".", quiz = false, og = "assets/og/home.jpg", jsonld = null, bare = false }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -203,16 +203,16 @@ ${FONTS}
 <script data-goatcounter="https://getsites.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
-<nav><div class="wrap">
+${bare ? "" : `<nav><div class="wrap">
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
     <a class="pill" href="${root}/templates/index.html">Browse templates</a>
   </div>
-</div></nav>
+</div></nav>`}
 ${body}
 ${quiz ? quizBlock(root) : ""}
-<footer><div class="wrap">
+${bare ? "" : `<footer><div class="wrap">
   <div class="foot-grid">
     <div class="foot-brand">
       <span class="wordmark">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></span>
@@ -230,7 +230,7 @@ ${quiz ? quizBlock(root) : ""}
       <a href="#" data-quiz-open>Find your template (quiz)</a>
     </div>
   </div>
-</div></footer>
+</div></footer>`}
 <div id="cursor-chip" aria-hidden="true"></div>
 <script>
 // cursor-follower price chip on template cards (fine pointers only)
@@ -294,9 +294,9 @@ if (sw) {
 </body>
 </html>`;
 
-const tcard = (t, root = ".") => `
-<a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" href="${root}/templates/${t.slug}/index.html">
-  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
+const tcard = (t, root = ".", ql = false) => `
+<a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}"${ql ? ` data-name="${esc(t.name)}" data-cat="${esc(t.category)}" data-pricenum="${t.free ? 0 : parseInt(String(t.price).replace(/\D/g, "")) || 0}" data-new="${t.new ? 1 : 0}"` : ""} href="${root}/templates/${t.slug}/index.html">
+  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span>${ql ? `<button class="qlb" type="button" data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-meta="${esc(t.category)} · ${esc(t.price)}" data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.get}">Quick look</button>` : ""}</div>
   <div class="meta">
     <h3>${esc(t.name)}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
     <span class="catprice">${esc(t.category)} · <b>${esc(t.price)}</b></span>
@@ -313,93 +313,185 @@ const WHY = [
 ];
 
 /* ---------------- home ---------------- */
+const CATS = [...new Set(sorted.map(t => t.category))].map(c => ({ name: c, n: sorted.filter(t => t.category === c).length }));
+const FREE_N = sorted.filter(t => t.free).length;
+
 const home = page({
   title: site.title,
   description: site.description,
   quiz: true,
+  bare: true,
   jsonld: { "@context": "https://schema.org", "@type": "WebSite", name: site.name + site.tld, url: site.baseUrl + "/", description: site.description },
   body: `
-<header>
-  <p class="eyebrow"><svg class="laurel" width="26" height="40" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgl" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8a6a26"/><stop offset="0.45" stop-color="#e6c46a"/><stop offset="0.75" stop-color="#f9edbb"/><stop offset="1" stop-color="#c9a04b"/></linearGradient></defs><g fill="url(#lgl)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgl)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg><span class="goldtext">Premium Framer templates</span><svg class="laurel r" width="26" height="40" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgr" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8a6a26"/><stop offset="0.45" stop-color="#e6c46a"/><stop offset="0.75" stop-color="#f9edbb"/><stop offset="1" stop-color="#c9a04b"/></linearGradient></defs><g fill="url(#lgr)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgr)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg></p>
-  <h1>Premium templates<br><span class="it">easy to make yours.</span></h1>
-  <p class="statement">Websites that look custom-built and edit like a slide deck. Copy one, put your words in, go live today.</p>
-  <div class="ctas">
-    <a class="pill lg" href="templates/index.html">Browse templates</a>
-    <a class="textlink" href="#" data-quiz-open>Take the 60-second quiz <span class="arr">→</span></a>
-  </div>
-</header>
-
-
-
-<section id="templates"><div class="wrap">
-  <div class="head">
-    <div>
-      <h2>Find <span class="it">your</span> template</h2>
-      <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones are free.</p>
+<div class="shell">
+  <aside class="rail">
+    <a class="wordmark" href="index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
+    <input id="q" type="search" placeholder="Search templates" autocomplete="off" aria-label="Search templates">
+    <div class="rail-sec">
+      <span class="rail-lab">Browse</span>
+      <button class="rail-link on" type="button" data-cat="all">All templates <i>${sorted.length}</i></button>
+      <button class="rail-link" type="button" data-cat="__free">Free <i>${FREE_N}</i></button>
+      ${CATS.map(c => `<button class="rail-link" type="button" data-cat="${esc(c.name)}">${esc(c.name)} <i>${c.n}</i></button>`).join("\n      ")}
     </div>
-    <div class="toggle-row">
-      <span class="lab">FREE ONLY</span>
-      <div class="switch" id="free-switch" role="switch" tabindex="0" aria-label="Show free templates only"></div>
+    <div class="rail-quiz" data-quiz-open role="button" tabindex="0">
+      <span class="rail-quiz-k goldtext">Not sure which one?</span>
+      <span class="rail-quiz-p">A 60-second quiz matches you — and takes 30% off any paid template.</span>
+      <span class="rail-quiz-cta">Find my template →</span>
     </div>
-  </div>
-  <div class="grid">
-    ${sorted.map(t => tcard(t)).join("\n")}
-  </div>
-</div></section>
+    <div class="rail-foot mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</div>
+  </aside>
+  <main class="canvas">
+    <p class="brandline">Premium templates, <span class="it">easy to make yours.</span></p>
+    <div class="toolbar">
+      <h1 id="grid-title">All templates</h1>
+      <div class="tools">
+        <select id="sort" aria-label="Sort templates">
+          <option value="default">Free first</option>
+          <option value="new">Newest</option>
+          <option value="asc">Price: low to high</option>
+          <option value="desc">Price: high to low</option>
+        </select>
+        <div class="toggle-row">
+          <span class="lab">FREE ONLY</span>
+          <div class="switch" id="free-switch" role="switch" tabindex="0" aria-label="Show free templates only"></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-3" id="tgrid">
+      ${sorted.map(t => tcard(t, ".", true)).join("\n")}
+    </div>
+    <div id="empty" class="grid-empty" hidden>
+      <p class="serifline">Nothing hangs <span class="it">here yet.</span></p>
+      <p class="sub">No templates match that. Clear the search or pick another category.</p>
+    </div>
 
-<section id="why"><div class="wrap">
-  <div class="center-head">
-    <span class="badge-pill">Why a template?</span>
-    <h2>A premium website, without<br><span class="it">the premium invoice</span></h2>
-    <p class="sub">Because you don't need to spend thousands, or wait months, to look like you did.</p>
-  </div>
-  <div class="why-grid">
-    ${WHY.map(w => `
-    <div class="why-cell reveal">
-      ${w.art ? `<img class="icon3d" src="${w.art}" alt="" aria-hidden="true">` : ""}
-      <h3>${esc(w.k)}</h3>
-      <p>${esc(w.p)}</p>
-    </div>`).join("\n")}
-  </div>
-</div></section>
+    <section id="why">
+      <div class="center-head">
+        <span class="badge-pill">Why a template?</span>
+        <h2>A premium website, without<br><span class="it">the premium invoice</span></h2>
+        <p class="sub">Because you don't need to spend thousands, or wait months, to look like you did.</p>
+      </div>
+      <div class="why-grid">
+        ${WHY.map(w => `
+        <div class="why-cell reveal">
+          ${w.art ? `<img class="icon3d" src="${w.art}" alt="" aria-hidden="true">` : ""}
+          <h3>${esc(w.k)}</h3>
+          <p>${esc(w.p)}</p>
+        </div>`).join("\n")}
+      </div>
+    </section>
 
+    <section class="cta-open">
+      <div class="cta-inner reveal">
+        <h2>Can't pick <span class="it goldtext">one?</span></h2>
+        <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
+        <a class="pill lg" href="#" data-quiz-open>Take the quiz</a>
+      </div>
+      <div class="wire-scene reveal">
+        <svg class="wireline" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 300 118, 900 118, 1200 28" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/></svg>
+        ${sorted.map((t, i) => {
+          const L = [3, 22.25, 41.5, 60.75, 80];
+          const T = [56, 86, 96, 86, 56];
+          const R = [-2.4, 1.8, -1.2, 2.2, -1.8];
+          const D = [5.4, 6.2, 4.8, 5.8, 6.6];
+          const n = i % 5;
+          return `<a class="hang" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" href="templates/${t.slug}/index.html" style="--l:${L[n]}%;--t:${T[n]}px;--tilt:${R[n]}deg;--d:${D[n]}s">
+          <span class="peg"></span>
+          <img src="${t.cover}" alt="${esc(t.name)} template hanging on the line" loading="lazy">
+          <span class="cap">${esc(t.name)}</span>
+        </a>`;
+        }).join("\n    ")}
+      </div>
+    </section>
 
+    <div class="canvas-foot mono-sm">
+      <span>© 2026 ${esc(site.name)}${esc(site.tld)}</span>
+      <a href="#" data-quiz-open>Find your template (quiz)</a>
+    </div>
+  </main>
+</div>
 
-<section><div class="wrap">
-  <div class="center-head">
-    <span class="badge-pill">Fair questions</span>
-    <h2>Questions? <span class="it">Answers.</span></h2>
+<div id="ql" hidden>
+  <div class="ql-box">
+    <div class="ql-top">
+      <div class="ql-meta"><b id="ql-name"></b><span id="ql-sub" class="mono-sm"></span></div>
+      <div class="ql-actions">
+        <a id="ql-get" class="pill" href="#" target="_blank" rel="noreferrer">Get this template</a>
+        <a id="ql-page" class="textlink" href="#">Details →</a>
+        <button class="ql-x" type="button" aria-label="Close quick look">&times;</button>
+      </div>
+    </div>
+    <div class="ql-frame"><iframe id="ql-iframe" title="Live template preview"></iframe></div>
   </div>
-  <div class="props">
-    <div class="prop reveal"><div class="k">Are some really free?</div><p>The ones with the green badge — completely. No signup wall, no watermark, no "free trial". Take it and go.</p></div>
-    <div class="prop reveal"><div class="k">Do I need to know code?</div><p>No. If you can edit a slide deck, you can edit these. Everything changes by clicking on it.</p></div>
-    <div class="prop reveal"><div class="k">Why give any away free?</div><p>So you can see the quality is real before spending anything. The free ones are built to the same standard as the paid ones.</p></div>
-    <div class="prop reveal"><div class="k">What do the paid ones cost?</div><p>One flat price, yours forever, use it as long as you like. Cheaper than one hour of a designer's time.</p></div>
-  </div>
-</div></section>
+</div>
 
-<section class="cta-open"><div class="wrap">
-  <div class="cta-inner reveal">
-    <h2>Can't pick <span class="it goldtext">one?</span></h2>
-    <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
-    <a class="pill lg" href="#" data-quiz-open>Take the quiz</a>
-  </div>
-  <div class="wire-scene reveal">
-    <svg class="wireline" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 300 118, 900 118, 1200 28" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/></svg>
-    ${sorted.map((t, i) => {
-      const L = [3, 22.25, 41.5, 60.75, 80];
-      const T = [56, 86, 96, 86, 56];
-      const R = [-2.4, 1.8, -1.2, 2.2, -1.8];
-      const D = [5.4, 6.2, 4.8, 5.8, 6.6];
-      const n = i % 5;
-      return `<a class="hang" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" href="templates/${t.slug}/index.html" style="--l:${L[n]}%;--t:${T[n]}px;--tilt:${R[n]}deg;--d:${D[n]}s">
-      <span class="peg"></span>
-      <img src="${t.cover}" alt="${esc(t.name)} template hanging on the line" loading="lazy">
-      <span class="cap">${esc(t.name)}</span>
-    </a>`;
-    }).join("\n    ")}
-  </div>
-</div></section>`,
+<script>
+(function () {
+  var state = { q: "", cat: "all", sort: "default", free: false };
+  var grid = document.getElementById("tgrid");
+  var cards = [].slice.call(grid.querySelectorAll(".tcard"));
+  var initial = cards.slice();
+  var empty = document.getElementById("empty");
+  var title = document.getElementById("grid-title");
+  function apply() {
+    var vis = 0;
+    var list = initial.slice();
+    if (state.sort === "asc") list.sort(function (a, b) { return (+a.dataset.pricenum) - (+b.dataset.pricenum); });
+    if (state.sort === "desc") list.sort(function (a, b) { return (+b.dataset.pricenum) - (+a.dataset.pricenum); });
+    if (state.sort === "new") list.sort(function (a, b) { return (+b.dataset.new) - (+a.dataset.new); });
+    list.forEach(function (c) { grid.appendChild(c); });
+    cards.forEach(function (c) {
+      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : c.dataset.cat === state.cat);
+      var okFree = !state.free || c.dataset.free === "true";
+      var hay = (c.dataset.name + " " + c.dataset.cat + " " + c.textContent).toLowerCase();
+      var okQ = !state.q || hay.indexOf(state.q) !== -1;
+      var on = okCat && okFree && okQ;
+      c.style.display = on ? "" : "none";
+      if (on) vis++;
+    });
+    empty.hidden = vis !== 0;
+    title.textContent = state.q ? 'Results for "' + state.q + '"' : (state.cat === "all" ? "All templates" : (state.cat === "__free" ? "Free templates" : state.cat + " templates"));
+  }
+  document.getElementById("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
+  document.querySelectorAll(".rail-link").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll(".rail-link").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      state.cat = b.dataset.cat;
+      apply();
+    });
+  });
+  document.getElementById("sort").addEventListener("change", function () { state.sort = this.value; apply(); });
+  var sw = document.getElementById("free-switch");
+  sw.addEventListener("click", function () { setTimeout(function () { state.free = sw.classList.contains("on"); apply(); }, 0); });
+  sw.addEventListener("keydown", function () { setTimeout(function () { state.free = sw.classList.contains("on"); apply(); }, 0); });
+
+  var ql = document.getElementById("ql");
+  var qlf = document.getElementById("ql-iframe");
+  function qlClose() { ql.hidden = true; qlf.src = "about:blank"; document.body.style.overflow = ""; }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest(".qlb") : null;
+    if (b) {
+      e.preventDefault();
+      e.stopPropagation();
+      document.getElementById("ql-name").textContent = b.dataset.qlName;
+      document.getElementById("ql-sub").textContent = b.dataset.qlMeta;
+      document.getElementById("ql-get").href = b.dataset.qlGet;
+      document.getElementById("ql-page").href = b.dataset.qlHref;
+      qlf.src = b.dataset.qlDemo;
+      ql.hidden = false;
+      document.body.style.overflow = "hidden";
+      if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quick-look", title: "Quick look opened", event: true });
+      return;
+    }
+    if (!ql.hidden && (e.target === ql || (e.target.closest && e.target.closest(".ql-x")))) qlClose();
+  }, true);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ql.hidden) qlClose(); });
+  document.querySelectorAll(".rail-quiz").forEach(function (el) {
+    el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); el.click(); } });
+  });
+})();
+</script>`,
 });
 
 /* ---------------- detail pages ---------------- */
