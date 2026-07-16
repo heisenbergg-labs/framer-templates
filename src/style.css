@@ -656,9 +656,37 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 }
 @media (max-width: 880px) {
   .grid, .props { grid-template-columns: 1fr; }
-  .wire-scene { height: 260px; }
-  .hang { min-width: 108px; }
-  .hang .cap { font-size: 11px; }
+  /* mobile: straight wire + swipeable prints, pegs always on the line */
+  .wire-scene {
+    height: auto;
+    margin-top: 48px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 53px 8px 26px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .wire-scene::-webkit-scrollbar { display: none; }
+  .wire-scene::before {
+    content: "";
+    position: absolute;
+    top: 52px;
+    left: -28px;
+    right: -28px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .wireline { display: none; }
+  .hang {
+    position: relative;
+    left: auto;
+    top: auto;
+    flex: 0 0 58%;
+    min-width: 0;
+    scroll-snap-align: center;
+  }
+  .hang .cap { font-size: 11.5px; }
   .detail { grid-template-columns: 1fr; gap: 30px; }
   nav .links a:not(.pill) { display: none; }
   section { padding: 64px 0; }
