@@ -2,16 +2,17 @@
   "site": {
     "name": "getsites",
     "tld": ".co",
-    "title": "getsites — Premium website templates, easy to make yours",
-    "description": "Premium Framer templates that look custom-built and edit like a slide deck. Copy one, put your words in, and go live today — some are completely free.",
-    "baseUrl": "https://heisenbergg-labs.github.io/framer-templates"
+    "title": "getsites \u2014 Premium website templates, easy to make yours",
+    "description": "Premium Framer templates that look custom-built and edit like a slide deck. Copy one, put your words in, and go live today \u2014 some are completely free.",
+    "baseUrl": "https://heisenbergg-labs.github.io/framer-templates",
+    "leadWebhook": ""
   },
   "templates": [
     {
       "slug": "still",
       "name": "Still",
       "tagline": "A film photographer's contact sheet, alive.",
-      "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet — marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
+      "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet \u2014 marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
       "category": "Portfolio",
       "tags": [
         "photography",
@@ -33,7 +34,7 @@
       "slug": "the-aubrey",
       "name": "The Aubrey",
       "tagline": "A members' club, after dark.",
-      "description": "The Aubrey is a dark, cinematic template for members' clubs, bars, restaurants and hospitality brands. Candlelit motion, a velvet-rope invitation flow, events and journal CMS — the whole house, ready to open.",
+      "description": "The Aubrey is a dark, cinematic template for members' clubs, bars, restaurants and hospitality brands. Candlelit motion, a velvet-rope invitation flow, events and journal CMS \u2014 the whole house, ready to open.",
       "category": "Hospitality",
       "tags": [
         "club",
@@ -56,7 +57,7 @@
       "slug": "brookmere",
       "name": "Brookmere",
       "tagline": "Luxury finance, by invitation.",
-      "description": "Brookmere is a single-page template for boutique finance, wealth management and private advisory firms. Serif restraint, an emerald palette, and a working invitation form — quiet money, done right.",
+      "description": "Brookmere is a single-page template for boutique finance, wealth management and private advisory firms. Serif restraint, an emerald palette, and a working invitation form \u2014 quiet money, done right.",
       "category": "Business",
       "tags": [
         "finance",

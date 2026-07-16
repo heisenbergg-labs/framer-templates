@@ -77,6 +77,11 @@ const quizBlock = (root) => `
       <h2 class="quiz-h" id="quiz-result-h">Made for you.</h2>
       <div class="quiz-matches" id="quiz-matches"></div>
       <div class="quiz-code"><span>30% off any paid template</span><b>PICKED30</b></div>
+      ${site.leadWebhook ? `<form id="quiz-lead" novalidate>
+        <input id="quiz-email" type="email" placeholder="Your email" autocomplete="email" required>
+        <button class="pill" type="submit">Email me the code</button>
+      </form>
+      <p class="quiz-fine">The code plus new free templates when they drop. No spam, ever.</p>` : ""}
       <a class="textlink" href="${root}/templates/index.html">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
@@ -85,6 +90,8 @@ const quizBlock = (root) => `
 (function () {
   var DATA = ${JSON.stringify(QDATA)};
   var ROOT = "${root}";
+  var HOOK = "${site.leadWebhook || ""}";
+  var lastMatches = "";
   var ov = document.getElementById("quiz-overlay");
   if (!ov) return;
   var steps = ov.querySelectorAll(".quiz-step");
@@ -119,12 +126,34 @@ const quizBlock = (root) => `
     document.getElementById("quiz-result-h").innerHTML = name
       ? "Made for you, <span class='it'>" + name.replace(/[<>&'\"]/g, "") + ".</span>"
       : "Made <span class='it'>for you.</span>";
-    document.getElementById("quiz-matches").innerHTML = score().map(function (t) {
+    var picked = score();
+    lastMatches = picked.map(function (t) { return t.name; }).join(", ");
+    document.getElementById("quiz-matches").innerHTML = picked.map(function (t) {
       return "<a class='quiz-match' href='" + ROOT + "/templates/" + t.slug + "/index.html'>" +
         "<img src='" + ROOT + "/" + t.cover + "' alt=''>" +
         "<span class='qm-meta'><b>" + t.name + "</b><i>" + t.cat + " &middot; " + t.price + "</i></span></a>";
     }).join("");
     show(order.indexOf("result"));
+    var lf = document.getElementById("quiz-lead");
+    if (lf && !lf.dataset.wired) {
+      lf.dataset.wired = "1";
+      lf.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var em = document.getElementById("quiz-email");
+        if (!em.value || em.value.indexOf("@") < 1) { em.focus(); return; }
+        var body = new URLSearchParams({
+          name: (document.getElementById("quiz-name").value || "").trim(),
+          email: em.value.trim(),
+          prof: picks.prof || "",
+          plan: picks.plan || "",
+          matches: lastMatches,
+          page: location.pathname,
+        });
+        fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() });
+        lf.outerHTML = "<p class='quiz-sent'>Sent. Check your inbox \u2728</p>";
+        if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-lead", title: "Quiz lead captured", event: true });
+      });
+    }
     localStorage.setItem("gs_quiz_done", "1");
     if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-complete", title: "Quiz completed", event: true });
   }
