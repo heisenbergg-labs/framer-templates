@@ -329,9 +329,9 @@ const home = page({
     <div class="q-wrap"><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></div>
     <div class="rail-sec">
       <span class="rail-lab">Browse</span>
-      <button class="rail-link on" type="button" data-cat="all"><span class="rl-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg></span><span class="rl-t">All templates</span><i>${sorted.length}</i></button>
-      <button class="rail-link" type="button" data-cat="__free"><span class="rl-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.6 1.8 14 7.2a1.6 1.6 0 0 1 0 2.3l-4.5 4.5a1.6 1.6 0 0 1-2.3 0L1.8 8.6A1.3 1.3 0 0 1 1.4 7.7V3a1.6 1.6 0 0 1 1.6-1.6h4.7c.34 0 .66.13.9.4Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="rl-t">Free</span><i>${FREE_N}</i></button>
-      ${CATS.map(c => `<button class="rail-link" type="button" data-cat="${esc(c.name)}"><span class="rl-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4.5h12M2 8h12M2 11.5h8"/></svg></span><span class="rl-t">${esc(c.name)}</span><i>${c.n}</i></button>`).join("\n      ")}
+      <button class="rail-link on" type="button" data-cat="all"><span class="rl-ic c-gold"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg></span><span class="rl-t">All templates</span><i>${sorted.length}</i></button>
+      <button class="rail-link" type="button" data-cat="__free"><span class="rl-ic c-green"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.6 1.8 14 7.2a1.6 1.6 0 0 1 0 2.3l-4.5 4.5a1.6 1.6 0 0 1-2.3 0L1.8 8.6A1.3 1.3 0 0 1 1.4 7.7V3a1.6 1.6 0 0 1 1.6-1.6h4.7c.34 0 .66.13.9.4Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="rl-t">Free</span><i>${FREE_N}</i></button>
+      ${CATS.map((c, ci) => `<button class="rail-link" type="button" data-cat="${esc(c.name)}"><span class="rl-ic c-${ci % 4}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4.5h12M2 8h12M2 11.5h8"/></svg></span><span class="rl-t">${esc(c.name)}</span><i>${c.n}</i></button>`).join("\n      ")}
     </div>
     <div class="rail-quiz" data-quiz-open role="button" tabindex="0">
       <span class="rail-quiz-k goldtext">Not sure which one?</span>
@@ -379,8 +379,10 @@ const home = page({
       </div>
     </section>
 
-    <section class="cta-open left">
+    <section class="cta-open split">
+      <div class="cta-grid">
       <div class="cta-inner reveal">
+        <span class="badge-pill">The 60-second quiz</span>
         <h2>Can't pick <span class="it goldtext">one?</span></h2>
         <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
         <a class="pill lg" href="#" data-quiz-open>Take the quiz</a>
@@ -399,6 +401,7 @@ const home = page({
           <span class="cap">${esc(t.name)}</span>
         </a>`;
         }).join("\n    ")}
+      </div>
       </div>
     </section>
 
