@@ -393,20 +393,11 @@ const home = page({
         <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
         <a class="pill lg" href="#" data-quiz-open>Take the quiz</a>
       </div>
-      <div class="wire-scene reveal">
-        <svg class="wireline" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 28 C 300 118, 900 118, 1200 28" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="2"/></svg>
-        ${sorted.map((t, i) => {
-          const L = [3, 22.25, 41.5, 60.75, 80];
-          const T = [56, 86, 96, 86, 56];
-          const R = [-2.4, 1.8, -1.2, 2.2, -1.8];
-          const D = [5.4, 6.2, 4.8, 5.8, 6.6];
-          const n = i % 5;
-          return `<a class="hang" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" href="templates/${t.slug}/index.html" style="--l:${L[n]}%;--t:${T[n]}px;--tilt:${R[n]}deg;--d:${D[n]}s">
-          <span class="peg"></span>
-          <img src="${t.cover}" alt="${esc(t.name)} template hanging on the line" loading="lazy">
-          <span class="cap">${esc(t.name)}</span>
-        </a>`;
-        }).join("\n    ")}
+      <div class="deck reveal" id="deck" aria-label="Template covers shuffling">
+        ${sorted.map(t => `<a class="deck-card" href="templates/${t.slug}/index.html" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}">
+          <img src="${t.cover}" alt="${esc(t.name)} template cover" loading="lazy">
+          <span class="deck-cap"><b>${esc(t.name)}</b><i>${esc(t.category)} &middot; ${esc(t.price)}</i></span>
+        </a>`).join("\n        ")}
       </div>
       </div>
     </section>
@@ -500,6 +491,35 @@ const home = page({
   document.querySelectorAll(".rail-quiz").forEach(function (el) {
     el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); el.click(); } });
   });
+
+  // shuffling deck
+  var deckEl = document.getElementById("deck");
+  if (deckEl) {
+    var dc = [].slice.call(deckEl.querySelectorAll(".deck-card"));
+    var paused = false;
+    function layout() {
+      dc.forEach(function (c, i) {
+        c.style.zIndex = String(dc.length - i);
+        c.style.opacity = i < 4 ? "1" : "0";
+        c.style.transform = "translate(" + (i * 26) + "px, " + (i * 16) + "px) rotate(" + ((i - 1) * 1.6) + "deg) scale(" + (1 - i * 0.05) + ")";
+      });
+    }
+    layout();
+    deckEl.addEventListener("mouseenter", function () { paused = true; });
+    deckEl.addEventListener("mouseleave", function () { paused = false; });
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(function () {
+        if (paused || document.hidden) return;
+        var top = dc.shift();
+        top.classList.add("fly");
+        setTimeout(function () {
+          top.classList.remove("fly");
+          dc.push(top);
+          layout();
+        }, 560);
+      }, 2600);
+    }
+  }
 })();
 </script>`,
 });

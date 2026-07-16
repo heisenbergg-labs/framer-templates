@@ -391,6 +391,39 @@ section.tight-top { padding-top: 84px; }
 .cta-grid { display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 40px; align-items: center; }
 .cta-open.split .cta-inner h2 { margin-top: 18px; }
 .cta-open.split p { margin-left: 0; max-width: 380px; }
+.deck { position: relative; height: 380px; max-width: 560px; margin-left: 30px; }
+.deck-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 86%;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
+  display: block;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.13), 0 30px 80px rgba(0, 0, 0, 0.65);
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.45s ease;
+  will-change: transform;
+  background: #101010;
+}
+.deck-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; filter: saturate(1.06) contrast(1.04); }
+.deck-card.fly { transform: translate(56%, -6%) rotate(9deg) scale(0.97) !important; opacity: 0 !important; transition: transform 0.55s cubic-bezier(0.5, 0, 0.75, 0.4), opacity 0.4s ease 0.15s; }
+.deck-cap {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(8, 8, 8, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 8px 14px;
+}
+.deck-cap b { font-size: 14px; font-weight: 600; color: #fff; }
+.deck-cap i { font-style: normal; font-size: 11.5px; color: var(--grey); }
 .cta-open.split .wire-scene { margin-top: 0; height: 320px; }
 .cta-open.split .hang { width: 19%; min-width: 0; }
 .cta-open.split .hang .cap { font-size: 11px; }
@@ -480,25 +513,9 @@ section.tight-top { padding-top: 84px; }
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(42% 38% at 50% 30%, rgba(74, 58, 28, 0.55) 0%, rgba(0, 0, 0, 0) 70%),
-    radial-gradient(34% 30% at 12% 88%, rgba(64, 46, 18, 0.4) 0%, rgba(0, 0, 0, 0) 70%),
-    radial-gradient(30% 26% at 90% 10%, rgba(58, 44, 20, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
-  pointer-events: none;
-  animation: quiz-glow 9s ease-in-out infinite alternate;
-}
-@keyframes quiz-glow {
-  from { opacity: 0.85; }
-  to { opacity: 1.15; }
-}
-#quiz-overlay::after {
-  content: "";
-  position: fixed;
-  inset: -40%;
-  background: conic-gradient(from 210deg at 50% 40%, transparent 0deg, rgba(230, 196, 106, 0.05) 40deg, transparent 90deg, transparent 250deg, rgba(230, 196, 106, 0.04) 300deg, transparent 360deg);
+  background: radial-gradient(56% 42% at 50% 32%, rgba(230, 196, 106, 0.06) 0%, rgba(0, 0, 0, 0) 72%);
   pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { #quiz-overlay::before { animation: none; } }
 .quiz-card {
   position: relative;
   width: min(680px, 100%);
@@ -712,6 +729,8 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 }
 @media (max-width: 880px) {
   .grid, .props { grid-template-columns: 1fr; }
+  .deck { height: 250px; max-width: 100%; margin: 30px 0 0; }
+  .deck-card { width: 82%; }
   /* mobile: straight wire + swipeable prints, pegs always on the line */
   .wire-scene {
     height: auto;
