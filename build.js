@@ -143,8 +143,9 @@ const quizBlock = (root) => `
     if (e.key === "Enter") show(order.indexOf("prof"));
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ov.hidden) close(); });
-  document.querySelectorAll("[data-quiz-open]").forEach(function (el) {
-    el.addEventListener("click", function (e) { e.preventDefault(); open(); });
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest ? e.target.closest("[data-quiz-open]") : null;
+    if (o) { e.preventDefault(); open(); }
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_quiz_done")) {
     setTimeout(function () { if (ov.hidden) open(); }, 12000);
@@ -152,7 +153,7 @@ const quizBlock = (root) => `
 })();
 </script>`;
 
-const page = ({ title, description, body, root = ".", quiz = false }) => `<!DOCTYPE html>
+const page = ({ title, description, body, root = ".", quiz = false, og = "assets/og/home.jpg", jsonld = null }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -163,8 +164,11 @@ const page = ({ title, description, body, root = ".", quiz = false }) => `<!DOCT
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-${ART.slab ? `<meta property="og:image" content="${site.baseUrl}/${ART.slab}">` : ""}
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101010'/%3E%3Ctext x='32' y='44' font-family='sans-serif' font-weight='700' font-size='36' fill='%23F2F1EC' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="${site.baseUrl}/${og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f3dc8e'/%3E%3Cstop offset='0.55' stop-color='%23d9b95c'/%3E%3Cstop offset='1' stop-color='%23a8842e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='%23070707'/%3E%3Crect x='0.75' y='0.75' width='62.5' height='62.5' rx='14.4' fill='none' stroke='url(%23g)' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='42' fill='url(%23g)' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
 ${FONTS}
 <link rel="stylesheet" href="${root}/style.css?v=${VER}">
 <script data-goatcounter="https://getsites.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
@@ -196,6 +200,7 @@ ${quiz ? quizBlock(root) : ""}
       <a href="${root}/templates/index.html">All templates</a>
       <a href="${root}/index.html#why">Why a template</a>
       <a href="${root}/index.html#how">How it works</a>
+      <a href="#" data-quiz-open>Find your template (quiz)</a>
     </div>
   </div>
 </div></footer>
@@ -285,6 +290,7 @@ const home = page({
   title: site.title,
   description: site.description,
   quiz: true,
+  jsonld: { "@context": "https://schema.org", "@type": "WebSite", name: site.name + site.tld, url: site.baseUrl + "/", description: site.description },
   body: `
 <header>
   <p class="eyebrow"><svg class="laurel" width="26" height="40" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgl" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8a6a26"/><stop offset="0.45" stop-color="#e6c46a"/><stop offset="0.75" stop-color="#f9edbb"/><stop offset="1" stop-color="#c9a04b"/></linearGradient></defs><g fill="url(#lgl)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgl)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg><span class="goldtext">Premium Framer templates</span><svg class="laurel r" width="26" height="40" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lgr" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8a6a26"/><stop offset="0.45" stop-color="#e6c46a"/><stop offset="0.75" stop-color="#f9edbb"/><stop offset="1" stop-color="#c9a04b"/></linearGradient></defs><g fill="url(#lgr)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgr)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg></p>
@@ -402,10 +408,22 @@ const home = page({
 /* ---------------- detail pages ---------------- */
 const detail = (t) => {
   const related = sorted.filter(x => x.slug !== t.slug).slice(0, 2);
+  const price = t.free ? "0" : String(t.price).replace(/[^0-9.]/g, "");
   return page({
     title: `${t.name} — ${t.category.toLowerCase()} website template${t.free ? " (free)" : ""} | ${site.name}${site.tld}`,
     description: t.description,
     root: "../..",
+    og: `assets/og/${t.slug}.jpg`,
+    jsonld: {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: t.name,
+      description: t.description,
+      image: `${site.baseUrl}/assets/og/${t.slug}.jpg`,
+      url: `${site.baseUrl}/templates/${t.slug}/`,
+      brand: { "@type": "Brand", name: site.name + site.tld },
+      offers: { "@type": "Offer", price: price, priceCurrency: "USD", availability: t.status === "soon" ? "https://schema.org/PreOrder" : "https://schema.org/InStock", url: t.get },
+    },
     quiz: true,
     body: `
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#templates">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
@@ -498,6 +516,12 @@ fs.writeFileSync(path.join(DIST, ".nojekyll"), "");
 for (const f of fs.readdirSync(path.join(ROOT, "assets", "covers"))) {
   fs.copyFileSync(path.join(ROOT, "assets", "covers", f), path.join(DIST, "assets", "covers", f));
 }
+if (fs.existsSync(path.join(ROOT, "assets", "og"))) {
+  fs.mkdirSync(path.join(DIST, "assets", "og"), { recursive: true });
+  for (const f of fs.readdirSync(path.join(ROOT, "assets", "og"))) {
+    fs.copyFileSync(path.join(ROOT, "assets", "og", f), path.join(DIST, "assets", "og", f));
+  }
+}
 if (fs.existsSync(path.join(ROOT, "assets", "art"))) {
   fs.mkdirSync(path.join(DIST, "assets", "art"), { recursive: true });
   for (const f of fs.readdirSync(path.join(ROOT, "assets", "art"))) {
@@ -515,5 +539,17 @@ const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", ...templates.map
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");
+fs.writeFileSync(path.join(DIST, "404.html"), page({
+  title: `Page not found | ${site.name}${site.tld}`,
+  description: site.description,
+  root: "/framer-templates",
+  body: `
+<section class="notfound"><div class="wrap">
+  <p class="badge-pill">404</p>
+  <h1 class="nf-h">This page <span class="it">wandered off.</span></h1>
+  <p class="nf-p">The templates are all still here, though.</p>
+  <a class="pill lg" href="/framer-templates/templates/index.html">Browse the templates</a>
+</div></section>`,
+}));
 fs.writeFileSync(path.join(DIST, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
 console.log("built:", ["index.html", ...templates.map(t => `templates/${t.slug}/`)].join(", "));

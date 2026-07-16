@@ -652,3 +652,8 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .why-cell { border-left: none; padding-left: 0; }
   .why-cell:nth-child(n+2) { border-top: 1px solid var(--line); }
 }
+
+/* ---------- 404 ---------- */
+.notfound { padding: 220px 0 160px; text-align: center; }
+.nf-h { font-size: clamp(44px, 6.6vw, 84px); line-height: 1.0; margin: 26px 0 18px; }
+.nf-p { color: var(--grey); font-weight: 400; margin-bottom: 36px; }
