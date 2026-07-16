@@ -729,6 +729,14 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 }
 @media (max-width: 880px) {
   .grid, .props { grid-template-columns: 1fr; }
+  .cta-grid { grid-template-columns: 1fr; gap: 10px; }
+  .cta-open.split { padding: 64px 0 20px; }
+  .cta-open.split p { max-width: none; }
+  .deck { height: 240px; max-width: 340px; margin: 26px auto 0; }
+  .deck-card { width: 88%; }
+  .deck-cap { left: 10px; bottom: 10px; padding: 6px 11px; }
+  .deck-cap b { font-size: 12.5px; }
+  .deck-cap i { font-size: 10.5px; }
   .deck { height: 250px; max-width: 100%; margin: 30px 0 0; }
   .deck-card { width: 82%; }
   /* mobile: straight wire + swipeable prints, pegs always on the line */

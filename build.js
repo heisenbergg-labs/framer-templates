@@ -234,9 +234,10 @@ ${bare ? "" : `<footer><div class="wrap">
 <div id="cursor-chip" aria-hidden="true"></div>
 <script>
 // cursor-follower price chip on template cards (fine pointers only)
-if (matchMedia("(pointer: fine)").matches) {
+if (matchMedia("(pointer: fine) and (hover: hover)").matches) {
   const chip = document.getElementById("cursor-chip");
   let card = null;
+  document.addEventListener("touchstart", () => { chip.className = ""; }, { passive: true });
   document.addEventListener("mousemove", e => {
     const c = e.target.closest ? e.target.closest("[data-cursor]") : null;
     if (c !== card) {
