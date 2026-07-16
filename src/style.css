@@ -329,7 +329,18 @@ section.tight-top { padding-top: 84px; }
 
 /* ---------- why (3D icon cells) ---------- */
 .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.why-cell { padding: 36px 28px 40px; border-left: 1px solid var(--line); }
+.why-cell { padding: 48px 28px 52px; border-left: 1px solid var(--line); }
+.why-cell .icon3d {
+  width: 132px;
+  height: 132px;
+  margin: 0 0 26px -10px;
+  animation: icon-float 7s ease-in-out infinite alternate;
+}
+.why-cell:nth-child(2) .icon3d { animation-duration: 8.4s; }
+.why-cell:nth-child(3) .icon3d { animation-duration: 6.2s; }
+.why-cell:nth-child(4) .icon3d { animation-duration: 9.1s; }
+@keyframes icon-float { from { transform: translateY(0) rotate(-1.2deg); } to { transform: translateY(-9px) rotate(1.6deg); } }
+@media (prefers-reduced-motion: reduce) { .why-cell .icon3d { animation: none; } }
 .why-cell:first-child { border-left: none; padding-left: 0; }
 .why-cell:last-child { padding-right: 0; }
 .icon3d { display: block; width: 110px; height: 110px; object-fit: contain; margin-bottom: 26px; mix-blend-mode: screen; }

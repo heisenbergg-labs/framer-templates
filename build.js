@@ -356,6 +356,7 @@ const home = page({
   <div class="why-grid">
     ${WHY.map(w => `
     <div class="why-cell reveal">
+      ${w.art ? `<img class="icon3d" src="${w.art}" alt="" aria-hidden="true">` : ""}
       <h3>${esc(w.k)}</h3>
       <p>${esc(w.p)}</p>
     </div>`).join("\n")}
