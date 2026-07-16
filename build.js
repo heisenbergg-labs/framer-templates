@@ -207,7 +207,6 @@ ${FONTS}
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
-    <a href="${root}/index.html#how">How it works</a>
     <a class="pill" href="${root}/templates/index.html">Browse templates</a>
   </div>
 </div></nav>
@@ -228,7 +227,6 @@ ${quiz ? quizBlock(root) : ""}
       <span class="mono-sm">EXPLORE</span>
       <a href="${root}/templates/index.html">All templates</a>
       <a href="${root}/index.html#why">Why a template</a>
-      <a href="${root}/index.html#how">How it works</a>
       <a href="#" data-quiz-open>Find your template (quiz)</a>
     </div>
   </div>
@@ -329,42 +327,11 @@ const home = page({
     <a class="pill lg" href="templates/index.html">Browse templates</a>
     <a class="textlink" href="#" data-quiz-open>Take the 60-second quiz <span class="arr">→</span></a>
   </div>
-  <div class="hero-visual reveal">
-    <img src="assets/covers/aubrey.jpg" alt="A premium website template, live in the browser">
-  </div>
 </header>
 
-<section id="how" class="flow"><div class="wrap">
-  <div class="flow-grid">
-    <div class="flow-cell reveal">
-      ${ART.triangle ? '<img class="icon3d" src="' + ART.triangle + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
-      <span class="steplab">01</span>
-      <h3>Get a template</h3>
-      <p>Buy one, or take a free one. It copies straight into your Framer account.</p>
-    </div>
-    <div class="flow-cell reveal">
-      ${ART.sphere ? '<img class="icon3d" src="' + ART.sphere + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
-      <span class="steplab">02</span>
-      <h3>Make it yours</h3>
-      <p>Change the words, the photos, the colors. Everything edits by clicking on it.</p>
-    </div>
-    <div class="flow-cell reveal">
-      ${ART.torus ? '<img class="icon3d" src="' + ART.torus + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
-      <span class="steplab">03</span>
-      <h3>Connect your domain</h3>
-      <p>Point your own domain at it in Framer's settings, or stay on the free link.</p>
-    </div>
-    <div class="flow-cell reveal">
-      ${ART.slab ? '<img class="icon3d" src="' + ART.slab + '" alt="" aria-hidden="true">' : '<span class="icon3d icon3d-ph" aria-hidden="true"></span>'}
-      <span class="steplab">04</span>
-      <h3>Publish with Framer</h3>
-      <p>One click and you're live. Hosting, speed and SSL are Framer's problem, not yours.</p>
-    </div>
-  </div>
-</div></section>
 
 
-<section id="templates" class="tight-top"><div class="wrap">
+<section id="templates"><div class="wrap">
   <div class="head">
     <div>
       <h2>Find <span class="it">your</span> template</h2>
