@@ -326,12 +326,12 @@ const home = page({
 <div class="shell">
   <aside class="rail">
     <a class="wordmark" href="index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
-    <input id="q" type="search" placeholder="Search templates" autocomplete="off" aria-label="Search templates">
+    <div class="q-wrap"><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></div>
     <div class="rail-sec">
       <span class="rail-lab">Browse</span>
-      <button class="rail-link on" type="button" data-cat="all">All templates <i>${sorted.length}</i></button>
-      <button class="rail-link" type="button" data-cat="__free">Free <i>${FREE_N}</i></button>
-      ${CATS.map(c => `<button class="rail-link" type="button" data-cat="${esc(c.name)}">${esc(c.name)} <i>${c.n}</i></button>`).join("\n      ")}
+      <button class="rail-link on" type="button" data-cat="all"><span class="rl-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg></span><span class="rl-t">All templates</span><i>${sorted.length}</i></button>
+      <button class="rail-link" type="button" data-cat="__free"><span class="rl-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.6 1.8 14 7.2a1.6 1.6 0 0 1 0 2.3l-4.5 4.5a1.6 1.6 0 0 1-2.3 0L1.8 8.6A1.3 1.3 0 0 1 1.4 7.7V3a1.6 1.6 0 0 1 1.6-1.6h4.7c.34 0 .66.13.9.4Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="rl-t">Free</span><i>${FREE_N}</i></button>
+      ${CATS.map(c => `<button class="rail-link" type="button" data-cat="${esc(c.name)}"><span class="rl-ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4.5h12M2 8h12M2 11.5h8"/></svg></span><span class="rl-t">${esc(c.name)}</span><i>${c.n}</i></button>`).join("\n      ")}
     </div>
     <div class="rail-quiz" data-quiz-open role="button" tabindex="0">
       <span class="rail-quiz-k goldtext">Not sure which one?</span>
@@ -341,7 +341,6 @@ const home = page({
     <div class="rail-foot mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</div>
   </aside>
   <main class="canvas">
-    <p class="brandline">Premium templates, <span class="it">easy to make yours.</span></p>
     <div class="toolbar">
       <h1 id="grid-title">All templates</h1>
       <div class="tools">
@@ -366,9 +365,8 @@ const home = page({
     </div>
 
     <section id="why">
-      <div class="center-head">
-        <span class="badge-pill">Why a template?</span>
-        <h2>A premium website, without<br><span class="it">the premium invoice</span></h2>
+      <div class="sec-head">
+        <h2>A premium website, without <span class="it">the premium invoice</span></h2>
         <p class="sub">Because you don't need to spend thousands, or wait months, to look like you did.</p>
       </div>
       <div class="why-grid">
@@ -381,7 +379,7 @@ const home = page({
       </div>
     </section>
 
-    <section class="cta-open">
+    <section class="cta-open left">
       <div class="cta-inner reveal">
         <h2>Can't pick <span class="it goldtext">one?</span></h2>
         <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
@@ -453,6 +451,9 @@ const home = page({
     title.textContent = state.q ? 'Results for "' + state.q + '"' : (state.cat === "all" ? "All templates" : (state.cat === "__free" ? "Free templates" : state.cat + " templates"));
   }
   document.getElementById("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); document.getElementById("q").focus(); }
+  });
   document.querySelectorAll(".rail-link").forEach(function (b) {
     b.addEventListener("click", function () {
       document.querySelectorAll(".rail-link").forEach(function (x) { x.classList.remove("on"); });
