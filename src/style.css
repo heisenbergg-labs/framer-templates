@@ -158,6 +158,8 @@ header .ctas { position: relative; margin-top: 36px; display: flex; gap: 24px; j
 
 /* gold-plated shimmer — slow sheen sweeping across gold-leaf gradient */
 .goldtext {
+  padding: 0.15em 0.18em;
+  margin: -0.15em -0.18em;
   background: linear-gradient(105deg,
     #8a6a26 0%, #c9a04b 14%, #f3dc8e 26%, #fffbe8 34%, #f3dc8e 42%,
     #b8923a 56%, #dcb95e 70%, #8a6a26 84%, #c9a04b 100%);
