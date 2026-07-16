@@ -850,6 +850,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
   background: none;
   border: none;
   border-radius: 9px;
@@ -1065,4 +1066,52 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .ql-meta b { font-size: 18px; }
   .ql-actions .textlink { display: none; }
   .qlb { display: none; }
+}
+
+/* ---------- featured rail tab: gold, always shimmering ---------- */
+.rail-link.rail-feat {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(230, 196, 106, 0.38);
+  background: linear-gradient(110deg, rgba(230, 196, 106, 0.1) 0%, rgba(230, 196, 106, 0.03) 60%, rgba(230, 196, 106, 0.08) 100%);
+}
+.rail-link.rail-feat .rl-t {
+  background: linear-gradient(105deg, #c9a04b 0%, #f3dc8e 30%, #fffbe8 45%, #f3dc8e 60%, #c9a04b 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  animation: gold-sheen 3.4s linear infinite;
+}
+.rail-link.rail-feat i { color: #c9a862; }
+.rail-link.rail-feat::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 46px;
+  left: -60px;
+  background: linear-gradient(100deg, transparent 0%, rgba(255, 245, 205, 0.12) 50%, transparent 100%);
+  transform: skewX(-18deg);
+  animation: feat-sweep 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes feat-sweep { 0%, 55% { left: -60px; } 85%, 100% { left: 120%; } }
+.rl-ic.c-feat { background: rgba(214, 174, 84, 0.2); color: #f0d894; box-shadow: inset 0 0 0 1px rgba(230, 196, 106, 0.35); }
+.rail-link.rail-feat.on { background: linear-gradient(110deg, rgba(230, 196, 106, 0.18) 0%, rgba(230, 196, 106, 0.07) 100%); border-color: rgba(230, 196, 106, 0.6); }
+@media (prefers-reduced-motion: reduce) { .rail-link.rail-feat::after, .rail-link.rail-feat .rl-t { animation: none; } }
+
+/* ---------- detail page inside shell ---------- */
+.shell-crumb { padding: 26px 0 22px; }
+.canvas .detail { padding: 10px 0 40px; }
+.canvas .detail-steps { padding: 70px 0 0; }
+.canvas .related-sec { padding: 80px 0 10px; }
+.grid-2r { grid-template-columns: 1fr 1fr; }
+.quiz-nudge { margin-top: 18px; font-size: 13.5px; color: var(--grey-2); font-weight: 400; }
+.quiz-nudge a { color: var(--grey); text-decoration: none; font-weight: 500; }
+.quiz-nudge a:hover { color: var(--ink); }
+@media (max-width: 880px) {
+  .grid-2r { grid-template-columns: 1fr; }
+  .canvas .detail { grid-template-columns: 1fr; }
 }

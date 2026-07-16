@@ -295,7 +295,7 @@ if (sw) {
 </html>`;
 
 const tcard = (t, root = ".", ql = false) => `
-<a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}"${ql ? ` data-name="${esc(t.name)}" data-cat="${esc(t.category)}" data-pricenum="${t.free ? 0 : parseInt(String(t.price).replace(/\D/g, "")) || 0}" data-new="${t.new ? 1 : 0}"` : ""} href="${root}/templates/${t.slug}/index.html">
+<a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}"${ql ? ` data-name="${esc(t.name)}" data-cat="${esc(t.category)}" data-pricenum="${t.free ? 0 : parseInt(String(t.price).replace(/\D/g, "")) || 0}" data-new="${t.new ? 1 : 0}" data-feat="${t.featured ? 1 : 0}"` : ""} href="${root}/templates/${t.slug}/index.html">
   <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span>${ql ? `<button class="qlb" type="button" data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-meta="${esc(t.category)} · ${esc(t.price)}" data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.get}">Quick look</button>` : ""}</div>
   <div class="meta">
     <div class="meta-l">
@@ -319,22 +319,25 @@ const WHY = [
 const CATS = [...new Set(sorted.map(t => t.category))].map(c => ({ name: c, n: sorted.filter(t => t.category === c).length }));
 const FREE_N = sorted.filter(t => t.free).length;
 
-const home = page({
-  title: site.title,
-  description: site.description,
-  quiz: true,
-  bare: true,
-  jsonld: { "@context": "https://schema.org", "@type": "WebSite", name: site.name + site.tld, url: site.baseUrl + "/", description: site.description },
-  body: `
-<div class="shell">
+const STAR = `<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.6l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.4l-3.8 2 .7-4.3-3.1-3 4.3-.6L8 1.6z"/></svg>`;
+const railBlock = (root, app, active = "all") => {
+  const item = (cat, cls, icon, label, count, feat = false) => {
+    const inner = `<span class="rl-ic ${cls}">${icon}</span><span class="rl-t">${label}</span><i>${count}</i>`;
+    const on = active === cat ? " on" : "";
+    const featCls = feat ? " rail-feat" : "";
+    if (app) return `<button class="rail-link${featCls}${on}" type="button" data-cat="${cat}">${inner}</button>`;
+    return `<a class="rail-link${featCls}${on}" href="${root}/index.html?cat=${encodeURIComponent(cat)}">${inner}</a>`;
+  };
+  return `
   <aside class="rail">
-    <a class="wordmark" href="index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
-    <div class="q-wrap"><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></div>
+    <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
+    <form class="q-wrap" action="${root}/index.html" method="get"><input id="q" name="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></form>
     <div class="rail-sec">
       <span class="rail-lab">Browse</span>
-      <button class="rail-link on" type="button" data-cat="all"><span class="rl-ic c-gold"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg></span><span class="rl-t">All templates</span><i>${sorted.length}</i></button>
-      <button class="rail-link" type="button" data-cat="__free"><span class="rl-ic c-green"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.6 1.8 14 7.2a1.6 1.6 0 0 1 0 2.3l-4.5 4.5a1.6 1.6 0 0 1-2.3 0L1.8 8.6A1.3 1.3 0 0 1 1.4 7.7V3a1.6 1.6 0 0 1 1.6-1.6h4.7c.34 0 .66.13.9.4Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg></span><span class="rl-t">Free</span><i>${FREE_N}</i></button>
-      ${CATS.map((c, ci) => `<button class="rail-link" type="button" data-cat="${esc(c.name)}"><span class="rl-ic c-${ci % 4}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4.5h12M2 8h12M2 11.5h8"/></svg></span><span class="rl-t">${esc(c.name)}</span><i>${c.n}</i></button>`).join("\n      ")}
+      ${item("all", "c-gold", `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg>`, "All templates", sorted.length)}
+      ${item("__featured", "c-feat", STAR, "Featured", sorted.filter(t => t.featured).length, true)}
+      ${item("__free", "c-green", `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.6 1.8 14 7.2a1.6 1.6 0 0 1 0 2.3l-4.5 4.5a1.6 1.6 0 0 1-2.3 0L1.8 8.6A1.3 1.3 0 0 1 1.4 7.7V3a1.6 1.6 0 0 1 1.6-1.6h4.7c.34 0 .66.13.9.4Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>`, "Free", FREE_N)}
+      ${CATS.map((c, ci) => item(esc(c.name), "c-" + (ci % 4), `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4.5h12M2 8h12M2 11.5h8"/></svg>`, esc(c.name), c.n)).join("\n      ")}
     </div>
     <div class="rail-quiz" data-quiz-open role="button" tabindex="0">
       <span class="rail-quiz-k goldtext">Not sure which one?</span>
@@ -343,6 +346,19 @@ const home = page({
     </div>
     <div class="rail-foot mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</div>
   </aside>
+`;
+};
+
+
+const home = page({
+  title: site.title,
+  description: site.description,
+  quiz: true,
+  bare: true,
+  jsonld: { "@context": "https://schema.org", "@type": "WebSite", name: site.name + site.tld, url: site.baseUrl + "/", description: site.description },
+  body: `
+<div class="shell">
+  ${railBlock(".", true)}
   <main class="canvas">
     <div class="toolbar">
       <h1 id="grid-title">All templates</h1>
@@ -439,7 +455,7 @@ const home = page({
     if (state.sort === "new") list.sort(function (a, b) { return (+b.dataset.new) - (+a.dataset.new); });
     list.forEach(function (c) { grid.appendChild(c); });
     cards.forEach(function (c) {
-      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : c.dataset.cat === state.cat);
+      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : (state.cat === "__featured" ? c.dataset.feat === "1" : c.dataset.cat === state.cat));
       var okFree = !state.free || c.dataset.free === "true";
       var hay = (c.dataset.name + " " + c.dataset.cat + " " + c.textContent).toLowerCase();
       var okQ = !state.q || hay.indexOf(state.q) !== -1;
@@ -448,9 +464,17 @@ const home = page({
       if (on) vis++;
     });
     empty.hidden = vis !== 0;
-    title.textContent = state.q ? 'Results for "' + state.q + '"' : (state.cat === "all" ? "All templates" : (state.cat === "__free" ? "Free templates" : state.cat + " templates"));
+    title.textContent = state.q ? 'Results for "' + state.q + '"' : (state.cat === "all" ? "All templates" : (state.cat === "__free" ? "Free templates" : (state.cat === "__featured" ? "Featured templates" : state.cat + " templates")));
   }
   document.getElementById("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
+  document.querySelector(".q-wrap").addEventListener("submit", function (e) { e.preventDefault(); });
+  var qs = new URLSearchParams(location.search);
+  if (qs.get("q")) { state.q = qs.get("q").trim().toLowerCase(); document.getElementById("q").value = qs.get("q"); }
+  if (qs.get("cat")) {
+    state.cat = qs.get("cat");
+    document.querySelectorAll(".rail-link").forEach(function (x) { x.classList.toggle("on", x.dataset.cat === state.cat); });
+  }
+  if (qs.get("q") || qs.get("cat")) apply();
   document.addEventListener("keydown", function (e) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); document.getElementById("q").focus(); }
   });
@@ -532,6 +556,8 @@ const detail = (t) => {
     title: `${t.name} — ${t.category.toLowerCase()} website template${t.free ? " (free)" : ""} | ${site.name}${site.tld}`,
     description: t.description,
     root: "../..",
+    quiz: true,
+    bare: true,
     og: `assets/og/${t.slug}.jpg`,
     jsonld: {
       "@context": "https://schema.org",
@@ -543,62 +569,70 @@ const detail = (t) => {
       brand: { "@type": "Brand", name: site.name + site.tld },
       offers: { "@type": "Offer", price: price, priceCurrency: "USD", availability: t.status === "soon" ? "https://schema.org/PreOrder" : "https://schema.org/InStock", url: t.get },
     },
-    quiz: true,
     body: `
-<div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#templates">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
-<div class="wrap detail">
-  <div class="gallery">
-    <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
-  </div>
-  <div class="info">
-    <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
-    <h1>${esc(t.tagline)}</h1>
-    <div class="price-row">
-      <span class="price">${esc(t.price)}</span>
-      ${t.free ? '<span class="vs">100% free — no signup</span>' : '<span class="vs">vs $2,000+ from a designer</span>'}
+<div class="shell">
+  ${railBlock("../..", false, t.category)}
+  <main class="canvas">
+    <div class="crumb mono-sm shell-crumb"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
+    <div class="detail">
+      <div class="gallery">
+        <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
+      </div>
+      <div class="info">
+        <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
+        <h1>${esc(t.tagline)}</h1>
+        <div class="price-row">
+          <span class="price">${esc(t.price)}</span>
+          ${t.free ? '<span class="vs">100% free — no signup</span>' : '<span class="vs">vs $2,000+ from a designer</span>'}
+        </div>
+        <p class="desc">${esc(t.description)}</p>
+        <div class="actions">
+          <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this template — free" : "Get this template"}</a>
+          <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>
+        </div>
+        <p class="quiz-nudge">Not sure it's the one? <a href="#" data-quiz-open>Take the 60-second quiz →</a></p>
+      </div>
     </div>
-    <p class="desc">${esc(t.description)}</p>
-    <div class="actions">
-      <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this template — free" : "Get this template"}</a>
-      <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>
+    <section class="detail-steps">
+      <div class="center-head">
+        <h2>Make ${esc(t.name)} <span class="it">yours</span></h2>
+        <p class="sub">From this page to your own website, in four steps.</p>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-cell reveal">
+          <span class="steplab">01</span>
+          <h3>${t.free ? "Get it free" : "Buy the template"}</h3>
+          <p>${t.free ? `Hit &quot;Use this template&quot; — no signup wall, ${esc(t.name)} is yours in one click.` : `Buy it once and it&#39;s yours forever. ${esc(t.name)} unlocks instantly.`}</p>
+        </div>
+        <div class="flow-cell reveal">
+          <span class="steplab">02</span>
+          <h3>Click Remix</h3>
+          <p>One click on Remix and ${esc(t.name)} opens in Framer, fully editable, in a free account.</p>
+        </div>
+        <div class="flow-cell reveal">
+          <span class="steplab">03</span>
+          <h3>Change it to your details</h3>
+          <p>Click any word or photo and swap it. Or tell Framer&#39;s AI agent what you want — it edits ${esc(t.name)} for you.</p>
+        </div>
+        <div class="flow-cell reveal">
+          <span class="steplab">04</span>
+          <h3>Publish your site</h3>
+          <p>Pick up a domain (or connect one you own) right inside Framer, hit Publish, and ${esc(t.name)} is live as your website.</p>
+        </div>
+      </div>
+    </section>
+    <section class="related-sec">
+      <div class="head"><div><h2>You might <span class="it">also like</span></h2></div></div>
+      <div class="grid grid-2r">
+        ${related.map(r => tcard(r, "../..")).join("\n")}
+      </div>
+    </section>
+    <div class="canvas-foot mono-sm">
+      <span>© 2026 ${esc(site.name)}${esc(site.tld)}</span>
+      <a href="#" data-quiz-open>Find your template (quiz)</a>
     </div>
-    <p class="quiz-nudge">Not sure it's the one? <a href="#" data-quiz-open>Take the 60-second quiz <span class="arr">&rarr;</span></a></p>
-  </div>
-</div>
-<section class="detail-steps"><div class="wrap">
-  <div class="center-head">
-    <h2>Make ${esc(t.name)} <span class="it">yours</span></h2>
-    <p class="sub">From this page to your own website, in four steps.</p>
-  </div>
-  <div class="flow-grid">
-    <div class="flow-cell reveal">
-      <span class="steplab">01</span>
-      <h3>${t.free ? "Get it free" : "Buy the template"}</h3>
-      <p>${t.free ? `Hit &quot;Use this template&quot; — no signup wall, ${esc(t.name)} is yours in one click.` : `Buy it once and it&#39;s yours forever. ${esc(t.name)} unlocks instantly.`}</p>
-    </div>
-    <div class="flow-cell reveal">
-      <span class="steplab">02</span>
-      <h3>Click Remix</h3>
-      <p>One click on Remix and ${esc(t.name)} opens in Framer, fully editable, in a free account.</p>
-    </div>
-    <div class="flow-cell reveal">
-      <span class="steplab">03</span>
-      <h3>Change it to your details</h3>
-      <p>Click any word or photo and swap it. Or tell Framer&#39;s AI agent what you want — it edits ${esc(t.name)} for you.</p>
-    </div>
-    <div class="flow-cell reveal">
-      <span class="steplab">04</span>
-      <h3>Publish your site</h3>
-      <p>Pick up a domain (or connect one you own) right inside Framer, hit Publish, and ${esc(t.name)} is live as your website.</p>
-    </div>
-  </div>
-</div></section>
-<section style="padding-top:0"><div class="wrap">
-  <div class="head"><div><h2>You might <span class="it">also like</span></h2></div></div>
-  <div class="grid">
-    ${related.map(r => tcard(r, "../..")).join("\n")}
-  </div>
-</div></section>`,
+  </main>
+</div>`,
   });
 };
 
