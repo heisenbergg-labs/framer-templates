@@ -311,8 +311,29 @@ section.tight-top { padding-top: 84px; }
 .tcard .frame .shot { width: 100%; height: 100%; overflow: hidden; }
 .tcard img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: saturate(1.08) contrast(1.05) brightness(1.04); transition: transform 0.5s cubic-bezier(0.23,1,0.32,1); }
 .tcard:hover img { transform: scale(1.03); }
-.tcard .meta { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-top: 20px; }
-.tcard .meta h3 { font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.tcard .meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-top: 16px; }
+.tcard .meta-l { min-width: 0; }
+.tcard .cat-line {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+  margin-bottom: 5px;
+}
+.tcard .meta h3 { font-size: 16.5px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.tcard .price-r {
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  background: #141414;
+  border: 1px solid #242424;
+  border-radius: 100px;
+  padding: 5px 13px;
+}
+.tcard .price-r.free { color: var(--green); background: var(--green-bg); border-color: rgba(33, 196, 93, 0.3); }
 .badge {
   font-family: "Figtree", sans-serif;
   font-weight: 600;
@@ -325,7 +346,7 @@ section.tight-top { padding-top: 84px; }
 .badge.soon { color: #e8c568; background: rgba(120, 96, 40, 0.3); }
 .tcard .catprice { font-size: 14px; font-weight: 500; color: var(--grey-2); }
 .tcard .catprice b { color: var(--grey); font-weight: 500; }
-.tcard .line2 { color: var(--grey-2); font-weight: 400; font-size: 14px; margin-top: 6px; max-width: 460px; }
+.tcard .line2 { color: var(--grey-2); font-weight: 400; font-size: 13.5px; margin-top: 5px; max-width: 420px; }
 
 /* ---------- why (3D icon cells) ---------- */
 .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -890,6 +911,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 }
 .toolbar h1 { font-size: clamp(28px, 3vw, 38px); line-height: 1.0; }
 .toolbar .tools { display: flex; align-items: center; gap: 20px; }
+.sort-wrap { position: relative; display: inline-flex; align-items: center; }
 #sort {
   background: #0e0e0e;
   border: 1px solid var(--line);
@@ -898,18 +920,19 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   font-family: "Figtree", sans-serif;
   font-size: 13.5px;
   font-weight: 500;
-  padding: 9px 14px;
+  padding: 9px 34px 9px 14px;
   outline: none;
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
 }
+.sort-chev { position: absolute; right: 13px; width: 12px; height: 12px; color: var(--grey-2); pointer-events: none; }
 
 /* denser 3-col grid */
 .grid-3 { grid-template-columns: repeat(3, 1fr); gap: 36px 26px; }
 .grid-3 .tcard .meta h3 { font-size: 16px; }
 .grid-3 .tcard .line2 { font-size: 13px; }
-.grid-3 .tcard .catprice { font-size: 13px; }
+
 .grid-3 .tcard .frame { border-radius: 12px; }
 .grid-empty { text-align: center; padding: 70px 0 30px; }
 .grid-empty .serifline { font-family: "Instrument Serif", serif; font-size: clamp(30px, 3.6vw, 44px); }

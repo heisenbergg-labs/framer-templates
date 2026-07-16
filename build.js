@@ -298,10 +298,13 @@ const tcard = (t, root = ".", ql = false) => `
 <a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}"${ql ? ` data-name="${esc(t.name)}" data-cat="${esc(t.category)}" data-pricenum="${t.free ? 0 : parseInt(String(t.price).replace(/\D/g, "")) || 0}" data-new="${t.new ? 1 : 0}"` : ""} href="${root}/templates/${t.slug}/index.html">
   <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span>${ql ? `<button class="qlb" type="button" data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-meta="${esc(t.category)} · ${esc(t.price)}" data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.get}">Quick look</button>` : ""}</div>
   <div class="meta">
-    <h3>${esc(t.name)}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
-    <span class="catprice">${esc(t.category)} · <b>${esc(t.price)}</b></span>
+    <div class="meta-l">
+      <span class="cat-line">${esc(t.category)}</span>
+      <h3>${esc(t.name)}${t.status === "soon" ? ' <span class="badge soon">Soon</span>' : ""}${t.new ? ' <span class="badge">New</span>' : ""}</h3>
+      <p class="line2">${esc(t.tagline)}</p>
+    </div>
+    <span class="price-r ${t.free ? "free" : ""}">${esc(t.price)}</span>
   </div>
-  <p class="line2">${esc(t.tagline)}</p>
 </a>`;
 
 // value-prop cells; icon images appear automatically once art files exist
@@ -344,12 +347,15 @@ const home = page({
     <div class="toolbar">
       <h1 id="grid-title">All templates</h1>
       <div class="tools">
+        <div class="sort-wrap">
         <select id="sort" aria-label="Sort templates">
           <option value="default">Free first</option>
           <option value="new">Newest</option>
           <option value="asc">Price: low to high</option>
           <option value="desc">Price: high to low</option>
         </select>
+        <svg class="sort-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </div>
         <div class="toggle-row">
           <span class="lab">FREE ONLY</span>
           <div class="switch" id="free-switch" role="switch" tabindex="0" aria-label="Show free templates only"></div>
