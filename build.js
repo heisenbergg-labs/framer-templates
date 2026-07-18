@@ -402,22 +402,6 @@ const home = page({
       </div>
     </section>
 
-    <section class="cta-open split">
-      <div class="cta-grid">
-      <div class="cta-inner reveal">
-        <span class="badge-pill">The 60-second quiz</span>
-        <h2>Can't pick <span class="it goldtext">one?</span></h2>
-        <p>Answer three quick questions and we'll match you with your template — and take 30% off any paid one.</p>
-        <a class="pill lg" href="#" data-quiz-open>Take the quiz</a>
-      </div>
-      <div class="deck reveal" id="deck" aria-label="Template covers shuffling">
-        ${sorted.map(t => `<a class="deck-card" href="templates/${t.slug}/index.html" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}">
-          <img src="${t.cover}" alt="${esc(t.name)} template cover" loading="lazy">
-          <span class="deck-cap"><b>${esc(t.name)}</b><i>${esc(t.category)} &middot; ${esc(t.price)}</i></span>
-        </a>`).join("\n        ")}
-      </div>
-      </div>
-    </section>
 
     <div class="canvas-foot mono-sm">
       <span>© 2026 ${esc(site.name)}${esc(site.tld)}</span>
