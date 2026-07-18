@@ -311,15 +311,11 @@ const tcard = (t, root = ".", ql = false) => `
 // value-prop cells; icon images appear automatically once art files exist
 // contextual proof vignettes — real covers with the story overlaid
 const VIGS = {
-  publish: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">DAY 2</span></div>
-    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/fernhollow.jpg" alt="" aria-hidden="true">
-      <div class="vig-toast"><span class="vig-tick">✓</span> Site published</div>
+  get: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 getsites.co/templates</span></div>
+    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/still.jpg" alt="" aria-hidden="true">
+      <div class="vig-free-row"><span class="vig-pill ghost">$39</span><span class="vig-pill ghost">$29</span><span class="vig-pill ghost">$24</span><span class="vig-pill hero"><i></i>FREE</span></div>
     </div>
-  </div>`,
-  built: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 brookmere.com</span></div>
-    <div class="vig-stage"><img class="vig-bg" src="assets/covers/brookmere.jpg" alt="" aria-hidden="true"></div>
   </div>`,
   edit: `<div class="vig">
     <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 theaubrey.com — editing</span><span class="vig-day blue">FRAMER</span></div>
@@ -327,18 +323,36 @@ const VIGS = {
       <p class="vig-line">Behind the <span class="vig-sel">quiet<i class="vig-caret"></i><b class="vig-handle tl"></b><b class="vig-handle br"></b></span> door.</p>
     </div>
   </div>`,
-  free: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 getsites.co/fern-hollow</span></div>
-    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/still.jpg" alt="" aria-hidden="true">
-      <div class="vig-free-row"><span class="vig-pill ghost">$39</span><span class="vig-pill ghost">$29</span><span class="vig-pill ghost">$24</span><span class="vig-pill hero"><i></i>FREE</span></div>
+  domain: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span></div>
+    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/fernhollow.jpg" alt="" aria-hidden="true">
+      <div class="vig-toast"><span class="vig-tick">✓</span> Domain connected</div>
+    </div>
+  </div>`,
+  publish: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">DAY 1</span></div>
+    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/nostalgia.jpg" alt="" aria-hidden="true">
+      <div class="vig-toast"><span class="vig-tick">✓</span> Site published</div>
+    </div>
+  </div>`,
+  built: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 brookmere.com</span></div>
+    <div class="vig-stage"><img class="vig-bg" src="assets/covers/brookmere.jpg" alt="" aria-hidden="true"></div>
+  </div>`,
+  phone: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 on every screen</span></div>
+    <div class="vig-stage vig-stage-dark">
+      <div class="vig-phone"><img src="assets/covers/fernhollow.jpg" alt="" aria-hidden="true"></div>
     </div>
   </div>`,
 };
 const WHY = [
-  { vig: "publish", k: "Live in days, not months", p: "No waiting on a designer's calendar. Take a template today, publish this week." },
-  { vig: "built", k: "Looks custom-built", p: "Editorial type, real motion, considered detail. Nobody will guess it started as a template." },
-  { vig: "edit", k: "Actually easy to edit", p: "Click a word, retype it. Click a photo, swap it. If you can edit a slide deck, you can edit this." },
-  { vig: "free", k: "Free to start", p: "Some templates cost nothing — no signup wall, no watermark. See the quality before spending a cent." },
+  { vig: "get", num: "01", k: "Get the template", p: "Open it live, buy it — or take a free one. It copies into your Framer account in one click." },
+  { vig: "edit", num: "02", k: "Make it yours — or let AI", p: "Change every word and photo yourself, or tell Framer's AI agent what you want and it edits the template for you." },
+  { vig: "domain", num: "03", k: "Connect your domain", p: "Pick up a new domain, or point one you already own — right inside Framer's settings." },
+  { vig: "publish", num: "04", k: "Publish in a day", p: "One click and you're live. Hosting, speed and SSL are Framer's problem, not yours." },
+  { vig: "built", num: "", k: "Looks custom-built", p: "Editorial type, real motion, considered detail. Nobody will guess it started as a template." },
+  { vig: "phone", num: "", k: "Perfect on every screen", p: "Desktop, tablet, phone — every template is built responsive from the start." },
 ];
 
 /* ---------------- home ---------------- */
@@ -415,14 +429,14 @@ const home = page({
     <section id="why">
       <div class="sec-head">
         <h2>Skip the agency, <span class="it">keep the taste.</span></h2>
-        <p class="sub">Every template here is built like a client commission — you just skip the wait and the bill.</p>
+        <p class="sub">Four steps from template to your website — the taste is built in.</p>
       </div>
       <div class="why-grid">
         ${WHY.map(w => `
         <div class="why-cell reveal">
           ${VIGS[w.vig]}
           <div class="why-text">
-            <h3>${esc(w.k)}</h3>
+            <h3>${w.num ? `<span class="why-num">${w.num}</span>` : ""}${esc(w.k)}</h3>
             <p>${esc(w.p)}</p>
           </div>
         </div>`).join("\n")}

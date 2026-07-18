@@ -349,7 +349,7 @@ section.tight-top { padding-top: 84px; }
 .tcard .line2 { color: var(--grey-2); font-weight: 400; font-size: 13.5px; margin-top: 5px; max-width: 420px; }
 
 /* ---------- why (3D icon cells) ---------- */
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .why-cell {
   background: #0e0e0e;
   border-radius: 20px;
@@ -733,7 +733,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 @media (max-width: 980px) {
   .flow-grid { grid-template-columns: 1fr 1fr; gap: 30px 0; }
   .flow-cell:nth-child(3) { border-left: none; padding-left: 0; }
-  .why-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 880px) {
   .grid, .props { grid-template-columns: 1fr; }
@@ -1154,7 +1153,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   background: #131313;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
-.vig-stage { position: relative; height: 230px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.vig-stage { position: relative; height: 190px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .vig-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; filter: saturate(1.05); }
 .vig-bg.dim { filter: saturate(0.9) brightness(0.42); }
 .vig-bg.dark { filter: saturate(0.9) brightness(0.3) blur(3px); transform: scale(1.05); }
@@ -1268,3 +1267,30 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 .vig-pill.hero i { width: 7px; height: 7px; border-radius: 50%; background: #06210f; opacity: 0.7; }
 @media (prefers-reduced-motion: reduce) { .vig-caret { animation: none; } }
 
+
+/* step numbers + phone vignette */
+.why-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #e6c46a;
+  background: rgba(214, 174, 84, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(230, 196, 106, 0.25);
+}
+.vig-stage-dark { background: radial-gradient(90% 120% at 50% 0%, #1c1a17 0%, #0c0c0c 70%); }
+.vig-phone {
+  width: 96px;
+  height: 168px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px #2b2b2b, 0 0 0 4px rgba(255, 255, 255, 0.12), 0 18px 44px rgba(0, 0, 0, 0.6);
+  transform: translateY(26px) rotate(-3deg);
+}
+.vig-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+@media (max-width: 1180px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
