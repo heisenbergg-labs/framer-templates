@@ -445,8 +445,9 @@ const home = page({
 <header class="hero">
   <div class="wrap">
     <p class="mono eyebrow-line">ORIGINAL FRAMER TEMPLATES</p>
-    <h1>Skip the agency.<br><span class="it">Keep the taste.</span></h1>
-    <p class="statement">A small collection of complete websites for businesses that care how they look. Choose one, make it yours, and publish without starting from an empty canvas.</p>
+    <h1>A live site in <span class="it">ten words:</span></h1>
+    <p class="ten-words">Pick one. Change the copy. Attach your domain. Publish it.</p>
+    <p class="statement">A small collection of complete websites for businesses that care how they look. No empty canvas, no agency queue.</p>
     <div class="ctas">
       <a class="pill lg" href="#collection">Browse the collection</a>
       <a class="textlink" href="#" data-quiz-open>Find my template <span class="arr">&rarr;</span></a>
@@ -501,8 +502,8 @@ const home = page({
 <section class="studio-sec"><div class="wrap">
   <div class="studio-grid">
     <div class="reveal">
-      <span class="mono gold">WHY GETSITES</span>
-      <h2 class="serif">A studio, <span class="it">not a marketplace.</span></h2>
+      <span class="mono gold">A STUDIO, NOT A MARKETPLACE</span>
+      <h2 class="serif">Skip the agency, <span class="it">keep the taste.</span></h2>
       <p class="studio-p">${esc(site.name)}${esc(site.tld)} is an independent template studio creating original Framer websites for businesses that care about design. Every release is designed, tested and documented as a complete website, not assembled from generic sections.</p>
       <a class="textlink" href="about/index.html">About the studio <span class="arr">&rarr;</span></a>
     </div>

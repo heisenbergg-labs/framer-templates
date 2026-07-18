@@ -133,7 +133,15 @@ nav .links a:not(.pill):hover { color: var(--ink); }
 .hero .wrap { position: relative; }
 .eyebrow-line { margin-bottom: 22px; }
 .hero h1 { font-size: clamp(46px, 6.4vw, 86px); line-height: 1.0; max-width: 720px; }
-.hero .statement { margin: 24px 0 0; font-size: clamp(15px, 1.8vw, 18px); color: var(--grey); max-width: 540px; }
+.ten-words {
+  margin: 26px 0 0;
+  font-size: clamp(19px, 2.4vw, 26px);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  max-width: 620px;
+}
+.hero .statement { margin: 16px 0 0; font-size: clamp(14.5px, 1.6vw, 16.5px); color: var(--grey-2); max-width: 500px; }
 .ctas { margin-top: 34px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 
 /* ---------------- featured release ---------------- */
