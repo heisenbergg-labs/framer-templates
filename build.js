@@ -309,11 +309,32 @@ const tcard = (t, root = ".", ql = false) => `
 </a>`;
 
 // value-prop cells; icon images appear automatically once art files exist
+// contextual proof vignettes — the product demonstrating each claim
+const VIGS = {
+  publish: `<div class="vig vig-publish">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">DAY 2</span></div>
+    <div class="vig-body"><div class="vig-toast"><span class="vig-tick">✓</span> Site published</div></div>
+  </div>`,
+  built: `<div class="vig vig-built">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 brookmere.com</span></div>
+    <img src="assets/covers/brookmere.jpg" alt="" aria-hidden="true">
+  </div>`,
+  edit: `<div class="vig vig-edit">
+    <p class="vig-line">Behind the <span class="vig-sel">quiet<i class="vig-caret"></i><b class="vig-handle tl"></b><b class="vig-handle br"></b></span> door.</p>
+    <div class="vig-tip">Editing…</div>
+  </div>`,
+  free: `<div class="vig vig-free">
+    <span class="vig-pill ghost">$39</span>
+    <span class="vig-pill ghost">$29</span>
+    <span class="vig-pill ghost">$24</span>
+    <span class="vig-pill hero"><i></i>FREE</span>
+  </div>`,
+};
 const WHY = [
-  { art: ART.triangle, k: "Live in days, not months", p: "No waiting on a designer's calendar. Take a template today, publish this week." },
-  { art: ART.sphere, k: "Looks custom-built", p: "Editorial type, real motion, considered detail. Nobody will guess it started as a template." },
-  { art: ART.torus, k: "Actually easy to edit", p: "Click a word, retype it. Click a photo, swap it. If you can edit a slide deck, you can edit this." },
-  { art: ART.slab, k: "Free to start", p: "Some templates cost nothing — no signup wall, no watermark. See the quality before spending a cent." },
+  { vig: "publish", k: "Live in days, not months", p: "No waiting on a designer's calendar. Take a template today, publish this week." },
+  { vig: "built", k: "Looks custom-built", p: "Editorial type, real motion, considered detail. Nobody will guess it started as a template." },
+  { vig: "edit", k: "Actually easy to edit", p: "Click a word, retype it. Click a photo, swap it. If you can edit a slide deck, you can edit this." },
+  { vig: "free", k: "Free to start", p: "Some templates cost nothing — no signup wall, no watermark. See the quality before spending a cent." },
 ];
 
 /* ---------------- home ---------------- */
@@ -395,7 +416,7 @@ const home = page({
       <div class="why-grid">
         ${WHY.map(w => `
         <div class="why-cell reveal">
-          ${w.art ? `<img class="icon3d" src="${w.art}" alt="" aria-hidden="true">` : ""}
+          ${VIGS[w.vig]}
           <h3>${esc(w.k)}</h3>
           <p>${esc(w.p)}</p>
         </div>`).join("\n")}
@@ -681,13 +702,16 @@ fs.writeFileSync(path.join(DIST, "sitemap.xml"),
 fs.writeFileSync(path.join(DIST, "404.html"), page({
   title: `Page not found | ${site.name}${site.tld}`,
   description: site.description,
-  root: "/framer-templates",
+  root: "",
   body: `
 <section class="notfound"><div class="wrap">
+  ${ART.triangle ? `<img class="nf-art nf-a1" src="/${ART.triangle}" alt="" aria-hidden="true">` : ""}
+  ${ART.torus ? `<img class="nf-art nf-a2" src="/${ART.torus}" alt="" aria-hidden="true">` : ""}
+  ${ART.sphere ? `<img class="nf-art nf-a3" src="/${ART.sphere}" alt="" aria-hidden="true">` : ""}
   <p class="badge-pill">404</p>
   <h1 class="nf-h">This page <span class="it">wandered off.</span></h1>
   <p class="nf-p">The templates are all still here, though.</p>
-  <a class="pill lg" href="/framer-templates/templates/index.html">Browse the templates</a>
+  <a class="pill lg" href="/index.html">Browse the templates</a>
 </div></section>`,
 }));
 fs.writeFileSync(path.join(DIST, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
