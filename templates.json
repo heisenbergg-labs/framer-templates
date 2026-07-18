@@ -2,8 +2,8 @@
   "site": {
     "name": "getsites",
     "tld": ".co",
-    "title": "getsites — Premium website templates, easy to make yours",
-    "description": "Premium Framer templates that look custom-built and edit like a slide deck. Copy one, put your words in, and go live today — some are completely free.",
+    "title": "getsites — Original Framer websites with a point of view",
+    "description": "A small collection of complete Framer websites for businesses that care how they look. Choose one, make it yours, and publish without starting from an empty canvas.",
     "baseUrl": "https://getsites.co",
     "leadWebhook": "https://script.google.com/macros/s/AKfycbw140BmiNcoSyUfv8MeOnp_ESb9PD6NLv47oaPJSnAnXG21D0l7jZWZUpON2MleTVz39A/exec"
   },
@@ -28,7 +28,28 @@
       "cover": "assets/covers/still.jpg",
       "demo": "https://stillfilm.framer.website",
       "get": "https://stillfilm.framer.website",
-      "year": "2026"
+      "year": "2026",
+      "tier": "Standard",
+      "features": [
+        "13 pages",
+        "Photo archive CMS",
+        "Editorial motion",
+        "Mobile ready"
+      ],
+      "included": [
+        "13 designed pages",
+        "Photo archive CMS",
+        "Contact-sheet gallery system",
+        "Editorial type system",
+        "Responsive breakpoints",
+        "Free updates"
+      ],
+      "bestFor": [
+        "Film photographers",
+        "Visual artists",
+        "Creative portfolios"
+      ],
+      "checkout": ""
     },
     {
       "slug": "the-aubrey",
@@ -51,7 +72,30 @@
       "cover": "assets/covers/aubrey.jpg",
       "demo": "https://theaubrey.framer.website",
       "get": "https://theaubrey.framer.website",
-      "year": "2026"
+      "year": "2026",
+      "tier": "Premium",
+      "features": [
+        "Events CMS",
+        "Journal CMS",
+        "Invitation flow",
+        "Cinematic motion"
+      ],
+      "included": [
+        "Complete multi-page site",
+        "Events CMS collection",
+        "Journal CMS collection",
+        "Working invitation flow",
+        "Candlelit motion system",
+        "Responsive breakpoints",
+        "Free updates"
+      ],
+      "bestFor": [
+        "Members' clubs",
+        "Bars and restaurants",
+        "Boutique hotels",
+        "Private dining"
+      ],
+      "checkout": ""
     },
     {
       "slug": "brookmere",
@@ -73,7 +117,27 @@
       "cover": "assets/covers/brookmere.jpg",
       "demo": "https://brookmere.framer.website",
       "get": "https://brookmere.framer.website",
-      "year": "2026"
+      "year": "2026",
+      "tier": "Standard",
+      "features": [
+        "Single page",
+        "Invitation form",
+        "Serif type system",
+        "Quiet motion"
+      ],
+      "included": [
+        "Complete single-page site",
+        "Working invitation form",
+        "Serif and emerald design system",
+        "Responsive breakpoints",
+        "Free updates"
+      ],
+      "bestFor": [
+        "Wealth management",
+        "Private advisory",
+        "Boutique finance"
+      ],
+      "checkout": ""
     },
     {
       "slug": "fern-hollow",
@@ -96,7 +160,27 @@
       "cover": "assets/covers/fernhollow.jpg",
       "demo": "https://fernhollow.framer.website",
       "get": "https://fernhollow.framer.website",
-      "year": "2026"
+      "year": "2026",
+      "tier": "Free",
+      "features": [
+        "Gallery and booking sections",
+        "Photography-first layout",
+        "Mobile ready",
+        "No custom code"
+      ],
+      "included": [
+        "Complete one-page site",
+        "Gallery and booking sections",
+        "Responsive breakpoints",
+        "Documentation in-page",
+        "Free forever"
+      ],
+      "bestFor": [
+        "Boutique stays",
+        "Cabins and rentals",
+        "Guest houses"
+      ],
+      "checkout": ""
     },
     {
       "slug": "nostalgia-exe",
@@ -119,7 +203,29 @@
       "cover": "assets/covers/nostalgia.jpg",
       "demo": "https://fuchsia-iris-537502.framer.app",
       "get": "https://fuchsia-iris-537502.framer.app",
-      "year": "2026"
+      "year": "2026",
+      "tier": "Signature",
+      "features": [
+        "Working OS interface",
+        "Draggable windows",
+        "Playable Minesweeper",
+        "Three easter eggs"
+      ],
+      "included": [
+        "Full desktop-OS interface",
+        "BIOS boot sequence",
+        "Draggable window system",
+        "Minesweeper",
+        "BSOD 404",
+        "Portfolio CMS",
+        "PocketPC mobile mode"
+      ],
+      "bestFor": [
+        "Developers",
+        "Designers who want to be remembered",
+        "Creative portfolios"
+      ],
+      "checkout": ""
     }
   ],
   "components": [
