@@ -5,7 +5,7 @@
     "title": "getsites — Premium website templates, easy to make yours",
     "description": "Premium Framer templates that look custom-built and edit like a slide deck. Copy one, put your words in, and go live today — some are completely free.",
     "baseUrl": "https://getsites.co",
-    "leadWebhook": ""
+    "leadWebhook": "https://script.google.com/macros/s/AKfycbw140BmiNcoSyUfv8MeOnp_ESb9PD6NLv47oaPJSnAnXG21D0l7jZWZUpON2MleTVz39A/exec"
   },
   "templates": [
     {
