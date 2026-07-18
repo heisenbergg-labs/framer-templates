@@ -351,10 +351,14 @@ nav .links a:not(.pill):hover { color: var(--ink); }
 }
 .sig-info { padding: 48px 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; justify-content: center; }
 .sig-tag { color: var(--grey); font-size: 16px; }
-.sig-shot { display: block; min-height: 360px; overflow: hidden; }
+.sig-shot-wrap { position: relative; min-height: 360px; }
+.sig-shot { display: block; height: 100%; min-height: 360px; overflow: hidden; }
+.sig-ql { top: 16px; right: 16px; bottom: auto; opacity: 1; transform: none; }
 .sig-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; filter: saturate(0.92); transition: transform 0.7s var(--ease), filter 0.4s ease; }
 .sig-card:hover .sig-shot img { transform: scale(1.02); filter: saturate(1); }
-.sig-form { margin-top: 4px; }
+.news-form.sig-form { margin-top: 4px; flex-wrap: nowrap; width: 100%; max-width: 440px; }
+.news-form.sig-form input { flex: 1 1 auto; min-width: 0; width: auto; }
+.news-form.sig-form .pill { flex: 0 0 auto; white-space: nowrap; }
 
 /* ---------------- newsletter + footer ---------------- */
 footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
@@ -718,7 +722,8 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .nav-sheet .pill { margin-top: 14px; text-align: center; }
   .feature-card, .sig-card { grid-template-columns: 1fr; }
   .feature-shot { min-height: 240px; }
-  .sig-shot { order: -1; min-height: 220px; }
+  .sig-shot-wrap { order: -1; min-height: 220px; }
+  .sig-shot { min-height: 220px; }
   .feature-info, .sig-info { padding: 30px 26px; }
   .studio-grid, .inc-grid { grid-template-columns: 1fr; gap: 40px; }
   .steps3 { grid-template-columns: 1fr; gap: 30px; }
@@ -753,3 +758,7 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .foot-grid { grid-template-columns: 1fr; }
   .foot-brand { grid-column: auto; }
 }
+
+/* ===== standalone collection page (/templates/) ===== */
+.collection-sec.standalone { padding-top: 140px; }
+.collection-sec.standalone .col-head h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(40px, 5.4vw, 64px); line-height: 1.05; margin: 0 0 8px; }

@@ -20,7 +20,7 @@ const sorted = [...templates].sort((a, b) => {
 });
 const live = sorted.filter(t => t.status !== "soon");
 const upcoming = sorted.filter(t => t.status === "soon");
-const featured = templates.find(t => t.slug === "the-aubrey");
+const featured = templates.find(t => t.slug === "still");
 const CATS = [...new Set(sorted.map(t => t.category))];
 
 const shot = (slug, kind) => {
@@ -42,19 +42,17 @@ const NAV = (root) => `
 <nav><div class="wrap nav-row">
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
-    <a href="${root}/index.html#collection">Templates</a>
+    <a href="${root}/templates/index.html">Templates</a>
     <a href="${root}/index.html#drop">Current drop</a>
     <a href="${root}/about/index.html">Studio</a>
-    <a href="${root}/support/index.html">Support</a>
     <a class="pill" href="#" data-quiz-open>Find my template</a>
   </div>
   <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </div>
 <div class="nav-sheet" hidden>
-  <a href="${root}/index.html#collection">Templates</a>
+  <a href="${root}/templates/index.html">Templates</a>
   <a href="${root}/index.html#drop">Current drop</a>
   <a href="${root}/about/index.html">Studio</a>
-  <a href="${root}/support/index.html">Support</a>
   <a class="pill" href="#" data-quiz-open>Find my template</a>
 </div></nav>`;
 
@@ -221,7 +219,7 @@ const quizBlock = (root) => `
     if (o) { e.preventDefault(); open(); }
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
-    setTimeout(function () { if (ov.hidden) open(); }, 14000);
+    setTimeout(function () { if (ov.hidden) open(); }, 10000);
   }
 
   // shared email capture: quiz save, newsletter, waitlist -> one webhook
@@ -435,6 +433,69 @@ const card = (t, root = ".") => `
   </div>
 </article>`;
 
+/* ---------------- collection (shared: home + /templates/) ---------------- */
+const collectionSec = (root, standalone) => `
+<section id="collection" class="collection-sec${standalone ? " standalone" : ""}"><div class="wrap">
+  <div class="col-head">
+    <div>
+      ${standalone ? `<h1 class="serif">The <span class="it">collection</span></h1>` : `<h2 class="serif">The <span class="it">collection</span></h2>`}
+      <p class="sub">Five sites. No filler. Designed slowly, ready quickly.</p>
+    </div>
+    <div class="q-wrap"><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></div>
+  </div>
+  <div class="chip-row" aria-label="Filter templates">
+    <button class="chip on" type="button" data-cat="all">All</button>
+    ${CATS.map(c => `<button class="chip" type="button" data-cat="${esc(c)}">${esc(c)}</button>`).join("\n    ")}
+    <button class="chip" type="button" data-cat="__free">Free</button>
+  </div>
+  <div class="grid" id="tgrid">
+    ${live.map(t => card(t, root)).join("\n")}
+  </div>
+  <div id="empty" class="grid-empty" hidden>
+    <p class="serifline">Nothing here <span class="it">yet.</span></p>
+    <p class="sub">No templates match that. Clear the search or pick another category.</p>
+  </div>
+</div></section>`;
+
+const collectionScript = `
+<script>
+(function () {
+  var state = { q: "", cat: "all" };
+  var grid = document.getElementById("tgrid");
+  var cards = [].slice.call(grid.querySelectorAll(".tcard"));
+  var empty = document.getElementById("empty");
+  function apply() {
+    var vis = 0;
+    cards.forEach(function (c) {
+      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : c.dataset.cat === state.cat);
+      var okQ = !state.q || (c.dataset.name + " " + c.dataset.cat + " " + c.textContent).toLowerCase().indexOf(state.q) !== -1;
+      var on = okCat && okQ;
+      c.style.display = on ? "" : "none";
+      if (on) vis++;
+    });
+    empty.hidden = vis !== 0;
+  }
+  document.getElementById("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); document.getElementById("q").focus(); }
+  });
+  document.querySelectorAll(".chip").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll(".chip").forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      state.cat = b.dataset.cat;
+      apply();
+    });
+  });
+  var qs = new URLSearchParams(location.search);
+  if (qs.get("cat")) {
+    state.cat = qs.get("cat");
+    document.querySelectorAll(".chip").forEach(function (x) { x.classList.toggle("on", x.dataset.cat === state.cat); });
+    apply();
+  }
+})();
+</script>`;
+
 /* ---------------- home ---------------- */
 const home = page({
   title: site.title,
@@ -477,44 +538,7 @@ const home = page({
   </article>
 </div></section>
 
-<section id="collection" class="collection-sec"><div class="wrap">
-  <div class="col-head">
-    <div>
-      <h2 class="serif">The <span class="it">collection</span></h2>
-      <p class="sub">Five sites. No filler. Designed slowly, ready quickly.</p>
-    </div>
-    <div class="q-wrap"><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></div>
-  </div>
-  <div class="chip-row" aria-label="Filter templates">
-    <button class="chip on" type="button" data-cat="all">All</button>
-    ${CATS.map(c => `<button class="chip" type="button" data-cat="${esc(c)}">${esc(c)}</button>`).join("\n    ")}
-    <button class="chip" type="button" data-cat="__free">Free</button>
-  </div>
-  <div class="grid" id="tgrid">
-    ${live.map(t => card(t)).join("\n")}
-  </div>
-  <div id="empty" class="grid-empty" hidden>
-    <p class="serifline">Nothing here <span class="it">yet.</span></p>
-    <p class="sub">No templates match that. Clear the search or pick another category.</p>
-  </div>
-</div></section>
-
-<section class="studio-sec"><div class="wrap">
-  <div class="studio-grid">
-    <div class="reveal">
-      <span class="mono gold">A STUDIO, NOT A MARKETPLACE</span>
-      <h2 class="serif">Skip the agency, <span class="it">keep the taste.</span></h2>
-      <p class="studio-p">${esc(site.name)}${esc(site.tld)} is an independent template studio creating original Framer websites for businesses that care about design. Every release is designed, tested and documented as a complete website, not assembled from generic sections.</p>
-      <a class="textlink" href="about/index.html">About the studio <span class="arr">&rarr;</span></a>
-    </div>
-    <ul class="proof-list reveal">
-      <li><b>Original direction</b><span>Each template has one concept, held all the way through.</span></li>
-      <li><b>Tested on every screen</b><span>Desktop, tablet and mobile are checked before release.</span></li>
-      <li><b>Free template included</b><span>Fern Hollow is free forever, so you can judge the quality first.</span></li>
-      <li><b>Free updates</b><span>Fixes and improvements reach every buyer through the remix link.</span></li>
-    </ul>
-  </div>
-</div></section>
+${collectionSec(".")}
 
 <section class="steps-sec"><div class="wrap">
   <div class="sec-head">
@@ -539,51 +563,34 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
         <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Email for early access">
         <button class="pill" type="submit">Join early access</button>
       </form>
-      <a class="textlink" href="${t.demo}" target="_blank" rel="noreferrer">Preview the concept <span class="arr">&rarr;</span></a>
     </div>
-    <a class="sig-shot" href="templates/${t.slug}/index.html"><img src="${t.cover}" alt="${esc(t.name)} concept preview"></a>
+    <div class="sig-shot-wrap">
+      <a class="sig-shot" href="templates/${t.slug}/index.html"><img src="${t.cover}" alt="${esc(t.name)} concept preview"></a>
+      <button class="qlb sig-ql" type="button"
+        data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}"
+        data-ql-desc="${esc(t.tagline)}" data-ql-price="Coming soon"
+        data-ql-href="templates/${t.slug}/index.html" data-ql-get="templates/${t.slug}/index.html"
+        data-ql-free="false" data-ql-shots="${["inner","page2","mobile"].map(k => shot(t.slug, k)).filter(Boolean).map(p2 => "./" + p2).join(",")}">Preview the concept</button>
+    </div>
   </article>`).join("")}
 </div></section>` : ""}
 
 ${QL}
 
-<script>
-(function () {
-  var state = { q: "", cat: "all" };
-  var grid = document.getElementById("tgrid");
-  var cards = [].slice.call(grid.querySelectorAll(".tcard"));
-  var empty = document.getElementById("empty");
-  function apply() {
-    var vis = 0;
-    cards.forEach(function (c) {
-      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : c.dataset.cat === state.cat);
-      var okQ = !state.q || (c.dataset.name + " " + c.dataset.cat + " " + c.textContent).toLowerCase().indexOf(state.q) !== -1;
-      var on = okCat && okQ;
-      c.style.display = on ? "" : "none";
-      if (on) vis++;
-    });
-    empty.hidden = vis !== 0;
-  }
-  document.getElementById("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
-  document.addEventListener("keydown", function (e) {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); document.getElementById("q").focus(); }
-  });
-  document.querySelectorAll(".chip").forEach(function (b) {
-    b.addEventListener("click", function () {
-      document.querySelectorAll(".chip").forEach(function (x) { x.classList.remove("on"); });
-      b.classList.add("on");
-      state.cat = b.dataset.cat;
-      apply();
-    });
-  });
-  var qs = new URLSearchParams(location.search);
-  if (qs.get("cat")) {
-    state.cat = qs.get("cat");
-    document.querySelectorAll(".chip").forEach(function (x) { x.classList.toggle("on", x.dataset.cat === state.cat); });
-    apply();
-  }
-})();
-</script>`,
+${collectionScript}`,
+});
+
+/* ---------------- templates page ---------------- */
+const templatesPage = page({
+  title: `Templates | ${site.name}${site.tld}`,
+  description: "The full getsites collection of original Framer templates.",
+  root: "..",
+  og: "assets/og/home.jpg",
+  body: `
+${collectionSec("..", true)}
+
+${QL}
+${collectionScript}`,
 });
 
 /* ---------------- detail pages ---------------- */
@@ -801,6 +808,8 @@ for (const t of templates) {
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), detail(t));
 }
+fs.mkdirSync(path.join(DIST, "templates"), { recursive: true });
+fs.writeFileSync(path.join(DIST, "templates", "index.html"), templatesPage);
 for (const [name, html] of [["about", aboutPage], ["support", supportPage], ["license", licensePage]]) {
   fs.mkdirSync(path.join(DIST, name), { recursive: true });
   fs.writeFileSync(path.join(DIST, name, "index.html"), html);
@@ -817,7 +826,7 @@ fs.writeFileSync(path.join(DIST, "404.html"), page({
   <a class="pill lg" href="/index.html#collection">Browse the collection</a>
 </div></section>`,
 }));
-const urls = [site.baseUrl + "/", site.baseUrl + "/about/", site.baseUrl + "/support/", site.baseUrl + "/license/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
+const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/about/", site.baseUrl + "/support/", site.baseUrl + "/license/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");
