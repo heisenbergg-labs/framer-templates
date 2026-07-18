@@ -503,10 +503,11 @@ section.tight-top { padding-top: 84px; }
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 24px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 #quiz-overlay[hidden] { display: none; }
 #quiz-overlay::before {
@@ -524,6 +525,7 @@ section.tight-top { padding-top: 84px; }
   width: min(680px, 100%);
   text-align: center;
   padding: 40px 0;
+  margin: auto;
 }
 .quiz-step { animation: quiz-in 0.45s cubic-bezier(0.23, 1, 0.32, 1); }
 @keyframes quiz-in { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
