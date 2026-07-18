@@ -556,7 +556,7 @@ const home = page({
 
 <section id="drop" class="featured-sec"><div class="wrap">
   <div class="rel-head reveal">
-    <span class="mono gold">CURRENT RELEASE</span>
+    <span class="mono gold">FEATURED TEMPLATE</span>
     <span class="mono dim">DROP 01 · THE OPENING COLLECTION</span>
   </div>
   <article class="feature-card reveal">
