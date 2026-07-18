@@ -30,7 +30,7 @@ const shot = (slug, kind) => {
   return null;
 };
 
-const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">`;
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&family=Mrs+Saint+Delafield&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">`;
 
 const QDATA = sorted.map(t => ({
   name: t.name, slug: t.slug, cat: t.category, price: t.price, free: !!t.free,
@@ -109,7 +109,7 @@ const letterBlock = (root) => `
       <svg class="letter-seal" width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="sealg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3dc8e"/><stop offset="0.55" stop-color="#d9b95c"/><stop offset="1" stop-color="#a8842e"/></linearGradient></defs><circle cx="32" cy="32" r="30" fill="none" stroke="url(#sealg)" stroke-width="1.6"/><circle cx="32" cy="32" r="24.5" fill="none" stroke="url(#sealg)" stroke-width="0.8" stroke-dasharray="2.4 3"/><text x="32" y="42" font-family="Georgia,serif" font-size="28" fill="url(#sealg)" text-anchor="middle">C</text></svg>
     </div>
     <div class="letter-body">
-      <p>Hello,</p>
+      <p class="letter-hello">Hello,</p>
       <p>Before I started this studio, I watched the same thing happen over and over. A small business needs a website, gets quoted an agency price, and settles for something that looks like everyone else&rsquo;s. The tools were never the problem. Taste and time were.</p>
       <p>${site.name}${site.tld} exists to close that gap. Complete websites, designed with a point of view, that a normal person can open, edit and publish in a day. Your work deserves a site that actually converts, not just one that exists.</p>
       <p>Every template here is a site I would ship for a paying client. If it is not good enough for that, it does not get listed.</p>
