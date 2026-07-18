@@ -42,17 +42,17 @@ const quizBlock = (root) => `
     <div class="quiz-step" data-step="intro">
       <span class="badge-pill">Not sure which one?</span>
       <h2 class="quiz-h">Find <span class="it">your</span> template</h2>
-      <p class="quiz-p">Three quick questions and we'll match you — plus <span class="goldtext quiz-gold">30% off</span> any paid template.</p>
+      <p class="quiz-p">Three quick questions and we'll match you, plus <span class="goldtext quiz-gold">30% off</span> any paid template.</p>
       <button class="pill lg" type="button" data-next>Let's find it</button>
     </div>
     <div class="quiz-step" data-step="name" hidden>
-      <p class="quiz-lab">01 — First things first</p>
+      <p class="quiz-lab">01, First things first</p>
       <h2 class="quiz-h">What's your <span class="it">name?</span></h2>
       <input id="quiz-name" type="text" autocomplete="off" placeholder="Type your name" maxlength="40">
       <button class="pill lg" type="button" data-next>Next</button>
     </div>
     <div class="quiz-step" data-step="prof" hidden>
-      <p class="quiz-lab">02 — About you</p>
+      <p class="quiz-lab">02, About you</p>
       <h2 class="quiz-h">What do you <span class="it">do?</span></h2>
       <div class="quiz-opts">
         <button type="button" data-pick="portfolio">Photographer / creative</button>
@@ -63,7 +63,7 @@ const quizBlock = (root) => `
       </div>
     </div>
     <div class="quiz-step" data-step="plan" hidden>
-      <p class="quiz-lab">03 — The plan</p>
+      <p class="quiz-lab">03, The plan</p>
       <h2 class="quiz-h">What are you <span class="it">building?</span></h2>
       <div class="quiz-opts">
         <button type="button" data-pick="portfolio">A portfolio</button>
@@ -297,7 +297,7 @@ if (sw) {
 
 const tcard = (t, root = ".", ql = false) => `
 <a class="tcard reveal" data-free="${t.free}" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}"${ql ? ` data-name="${esc(t.name)}" data-cat="${esc(t.category)}" data-pricenum="${t.free ? 0 : parseInt(String(t.price).replace(/\D/g, "")) || 0}" data-new="${t.new ? 1 : 0}" data-feat="${t.featured ? 1 : 0}"` : ""} href="${root}/templates/${t.slug}/index.html">
-  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)} — website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span>${ql ? `<button class="qlb" type="button" data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-meta="${esc(t.category)} · ${esc(t.price)}" data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.get}">Quick look</button>` : ""}</div>
+  <div class="frame"><div class="shot"><img src="${root}/${t.cover}" alt="${esc(t.name)}, website template preview" loading="lazy"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span>${ql ? `<button class="qlb" type="button" data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-meta="${esc(t.category)} · ${esc(t.price)}" data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.get}">Quick look</button>` : ""}</div>
   <div class="meta">
     <div class="meta-l">
       <span class="cat-line">${esc(t.category)}</span>
@@ -309,7 +309,7 @@ const tcard = (t, root = ".", ql = false) => `
 </a>`;
 
 // value-prop cells; icon images appear automatically once art files exist
-// journey vignettes — real covers with the story overlaid
+// journey vignettes, real covers with the story overlaid
 const VIGS = {
   select: `<div class="vig">
     <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 getsites.co/templates</span></div>
@@ -325,7 +325,7 @@ const VIGS = {
     </div>
   </div>`,
   edit: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 theaubrey.com — editing</span><span class="vig-day blue">FRAMER</span></div>
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 theaubrey.com, editing</span><span class="vig-day blue">FRAMER</span></div>
     <div class="vig-stage"><img class="vig-bg dark" src="assets/covers/aubrey.jpg" alt="" aria-hidden="true">
       <p class="vig-line">Behind the <span class="vig-sel">quiet<i class="vig-caret"></i><b class="vig-handle tl"></b><b class="vig-handle br"></b></span> door.</p>
     </div>
@@ -336,10 +336,10 @@ const VIGS = {
       <div class="vig-toast"><span class="vig-tick">✓</span> Domain connected</div>
     </div>
   </div>`,
-  publish: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">ONE CLICK</span></div>
+  screens: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 on every screen</span></div>
     <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/nostalgia.jpg" alt="" aria-hidden="true">
-      <div class="vig-toast"><span class="vig-tick">✓</span> Site published</div>
+      <div class="vig-phone"><img src="assets/covers/fernhollow.jpg" alt="" aria-hidden="true"></div>
     </div>
   </div>`,
   live: `<div class="vig">
@@ -348,12 +348,12 @@ const VIGS = {
   </div>`,
 };
 const WHY = [
-  { vig: "select", num: "01", k: "Select your template", p: "Browse by niche — portfolio, hospitality, business. Grab a free one, or a paid one." },
+  { vig: "select", num: "01", k: "Select your template", p: "Browse by niche, portfolio, hospitality, business. Grab a free one, or a paid one." },
   { vig: "remix", num: "02", k: "Open it in Framer", p: "Hit Remix and the whole site copies into a free Framer account, fully editable." },
-  { vig: "edit", num: "03", k: "Easy to edit", p: "Change every word and photo yourself — or tell Framer's AI agent what you want." },
-  { vig: "domain", num: "04", k: "Add your domain", p: "Pick up a new domain, or connect one you already own — right inside Framer." },
-  { vig: "publish", num: "05", k: "Hit publish", p: "One click. Hosting, speed and SSL are Framer's problem, not yours." },
-  { vig: "live", num: "06", k: "Live in days, not months", p: "No agency queue, no six-week wait. The site is yours, and it's up." },
+  { vig: "edit", num: "03", k: "Easy to edit", p: "Change every word and photo yourself, or tell Framer's AI agent what you want." },
+  { vig: "domain", num: "04", k: "Add your domain", p: "Pick up a new domain, or connect one you already own, right inside Framer." },
+  { vig: "screens", num: "05", k: "Ready for every screen", p: "Desktop, tablet, phone, responsiveness is already handled. Nothing for you to worry about." },
+  { vig: "live", num: "06", k: "Live in days, not months", p: "One publish click and it's up. Hosting, speed and SSL are Framer's problem. No agency queue, no six-week wait." },
 ];
 
 /* ---------------- home ---------------- */
@@ -382,7 +382,7 @@ const railBlock = (root, app, active = "all") => {
     </div>
     <div class="rail-quiz" data-quiz-open role="button" tabindex="0">
       <span class="rail-quiz-k goldtext">Not sure which one?</span>
-      <span class="rail-quiz-p">A 60-second quiz matches you — and takes 30% off any paid template.</span>
+      <span class="rail-quiz-p">A 60-second quiz matches you, and takes 30% off any paid template.</span>
       <span class="rail-quiz-cta">Find my template →</span>
     </div>
     <div class="rail-foot mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</div>
@@ -430,7 +430,7 @@ const home = page({
     <section id="why">
       <div class="sec-head">
         <h2>Skip the agency, <span class="it">keep the taste.</span></h2>
-        <p class="sub">Six steps from template to your website — the taste is built in.</p>
+        <p class="sub">Six steps from template to your website. The taste is built in.</p>
       </div>
       <div class="why-grid">
         ${WHY.map(w => `
@@ -580,7 +580,7 @@ const detail = (t) => {
   const related = sorted.filter(x => x.slug !== t.slug).slice(0, 2);
   const price = t.free ? "0" : String(t.price).replace(/[^0-9.]/g, "");
   return page({
-    title: `${t.name} — ${t.category.toLowerCase()} website template${t.free ? " (free)" : ""} | ${site.name}${site.tld}`,
+    title: `${t.name}, ${t.category.toLowerCase()} website template${t.free ? " (free)" : ""} | ${site.name}${site.tld}`,
     description: t.description,
     root: "../..",
     quiz: true,
@@ -603,18 +603,18 @@ const detail = (t) => {
     <div class="crumb mono-sm shell-crumb"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
     <div class="detail">
       <div class="gallery">
-        <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)} — website template preview"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
+        <div class="main"><div class="shot"><img src="../../${t.cover}" alt="${esc(t.name)}, website template preview"></div><span class="ppill ${t.free ? "free" : "paid"}">${t.free ? "Free" : "Paid"}</span></div>
       </div>
       <div class="info">
         <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${t.status === "soon" ? ' · COMING SOON' : ""}</p>
         <h1>${esc(t.tagline)}</h1>
         <div class="price-row">
           <span class="price">${esc(t.price)}</span>
-          ${t.free ? '<span class="vs">100% free — no signup</span>' : '<span class="vs">vs $2,000+ from a designer</span>'}
+          ${t.free ? '<span class="vs">100% free, no signup</span>' : '<span class="vs">vs $2,000+ from a designer</span>'}
         </div>
         <p class="desc">${esc(t.description)}</p>
         <div class="actions">
-          <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this template — free" : "Get this template"}</a>
+          <a class="btn-primary" href="${t.get}" target="_blank" rel="noreferrer">${t.free ? "Use this template, free" : "Get this template"}</a>
           <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>
         </div>
         <p class="quiz-nudge">Not sure it's the one? <a href="#" data-quiz-open>Take the 60-second quiz →</a></p>
@@ -629,7 +629,7 @@ const detail = (t) => {
         <div class="flow-cell reveal">
           <span class="steplab">01</span>
           <h3>${t.free ? "Get it free" : "Buy the template"}</h3>
-          <p>${t.free ? `Hit &quot;Use this template&quot; — no signup wall, ${esc(t.name)} is yours in one click.` : `Buy it once and it&#39;s yours forever. ${esc(t.name)} unlocks instantly.`}</p>
+          <p>${t.free ? `Hit &quot;Use this template&quot;, no signup wall, ${esc(t.name)} is yours in one click.` : `Buy it once and it&#39;s yours forever. ${esc(t.name)} unlocks instantly.`}</p>
         </div>
         <div class="flow-cell reveal">
           <span class="steplab">02</span>
@@ -639,7 +639,7 @@ const detail = (t) => {
         <div class="flow-cell reveal">
           <span class="steplab">03</span>
           <h3>Change it to your details</h3>
-          <p>Click any word or photo and swap it. Or tell Framer&#39;s AI agent what you want — it edits ${esc(t.name)} for you.</p>
+          <p>Click any word or photo and swap it. Or tell Framer&#39;s AI agent what you want, it edits ${esc(t.name)} for you.</p>
         </div>
         <div class="flow-cell reveal">
           <span class="steplab">04</span>
@@ -674,7 +674,7 @@ const browse = page({
   <div class="head">
     <div>
       <h1 class="browse-h">Find <span class="it">your</span> template</h1>
-      <p class="sub">Every one opens as a real, live site — click around before you take it. The green ones are free.</p>
+      <p class="sub">Every one opens as a real, live site, click around before you take it. The green ones are free.</p>
     </div>
     <div class="toggle-row">
       <span class="lab">FREE ONLY</span>

@@ -349,7 +349,7 @@ section.tight-top { padding-top: 84px; }
 .tcard .line2 { color: var(--grey-2); font-weight: 400; font-size: 13.5px; margin-top: 5px; max-width: 420px; }
 
 /* ---------- why (3D icon cells) ---------- */
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .why-cell {
   background: #0e0e0e;
   border-radius: 20px;
@@ -1153,10 +1153,30 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   background: #131313;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
-.vig-stage { position: relative; height: 190px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.vig-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; filter: saturate(1.05); }
-.vig-bg.dim { filter: saturate(0.9) brightness(0.42); }
-.vig-bg.dark { filter: saturate(0.9) brightness(0.3) blur(3px); transform: scale(1.05); }
+.vig-stage {
+  position: relative;
+  height: 182px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(120% 160% at 50% -20%, #232220 0%, #131312 55%, #0e0e0e 100%);
+}
+.vig-bg {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 26px;
+  width: 80%;
+  height: calc(100% - 10px);
+  object-fit: cover;
+  object-position: top;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14), 0 18px 50px rgba(0, 0, 0, 0.55);
+  filter: saturate(1.04);
+}
+.vig-bg.dim { filter: saturate(0.95) brightness(0.62); }
+.vig-bg.dark { filter: saturate(0.9) brightness(0.45) blur(2px); }
 .vig-stage > :not(.vig-bg) { position: relative; z-index: 2; }
 .vig-browser {
   display: flex;
@@ -1215,7 +1235,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   font-size: 11px;
   font-weight: 800;
 }
-.vig-line { font-family: "Instrument Serif", serif; font-size: 42px; color: #fff; line-height: 1.3; text-shadow: 0 2px 22px rgba(0,0,0,0.8); }
+.vig-line { font-family: "Instrument Serif", serif; font-size: 38px; color: #fff; line-height: 1.3; text-shadow: 0 2px 22px rgba(0,0,0,0.8); }
 .vig-sel {
   position: relative;
   font-style: italic;
