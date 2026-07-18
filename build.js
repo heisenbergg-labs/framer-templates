@@ -309,25 +309,29 @@ const tcard = (t, root = ".", ql = false) => `
 </a>`;
 
 // value-prop cells; icon images appear automatically once art files exist
-// contextual proof vignettes — the product demonstrating each claim
+// contextual proof vignettes — real covers with the story overlaid
 const VIGS = {
-  publish: `<div class="vig vig-publish">
+  publish: `<div class="vig">
     <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">DAY 2</span></div>
-    <div class="vig-body"><div class="vig-toast"><span class="vig-tick">✓</span> Site published</div></div>
+    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/fernhollow.jpg" alt="" aria-hidden="true">
+      <div class="vig-toast"><span class="vig-tick">✓</span> Site published</div>
+    </div>
   </div>`,
-  built: `<div class="vig vig-built">
+  built: `<div class="vig">
     <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 brookmere.com</span></div>
-    <img src="assets/covers/brookmere.jpg" alt="" aria-hidden="true">
+    <div class="vig-stage"><img class="vig-bg" src="assets/covers/brookmere.jpg" alt="" aria-hidden="true"></div>
   </div>`,
-  edit: `<div class="vig vig-edit">
-    <p class="vig-line">Behind the <span class="vig-sel">quiet<i class="vig-caret"></i><b class="vig-handle tl"></b><b class="vig-handle br"></b></span> door.</p>
-    <div class="vig-tip">Editing…</div>
+  edit: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 theaubrey.com — editing</span><span class="vig-day blue">FRAMER</span></div>
+    <div class="vig-stage"><img class="vig-bg dark" src="assets/covers/aubrey.jpg" alt="" aria-hidden="true">
+      <p class="vig-line">Behind the <span class="vig-sel">quiet<i class="vig-caret"></i><b class="vig-handle tl"></b><b class="vig-handle br"></b></span> door.</p>
+    </div>
   </div>`,
-  free: `<div class="vig vig-free">
-    <span class="vig-pill ghost">$39</span>
-    <span class="vig-pill ghost">$29</span>
-    <span class="vig-pill ghost">$24</span>
-    <span class="vig-pill hero"><i></i>FREE</span>
+  free: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 getsites.co/fern-hollow</span></div>
+    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/still.jpg" alt="" aria-hidden="true">
+      <div class="vig-free-row"><span class="vig-pill ghost">$39</span><span class="vig-pill ghost">$29</span><span class="vig-pill ghost">$24</span><span class="vig-pill hero"><i></i>FREE</span></div>
+    </div>
   </div>`,
 };
 const WHY = [

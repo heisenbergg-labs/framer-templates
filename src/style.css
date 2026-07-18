@@ -349,7 +349,7 @@ section.tight-top { padding-top: 84px; }
 .tcard .line2 { color: var(--grey-2); font-weight: 400; font-size: 13.5px; margin-top: 5px; max-width: 420px; }
 
 /* ---------- why (3D icon cells) ---------- */
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1080px; }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .why-cell {
   background: #0e0e0e;
   border-radius: 20px;
@@ -789,7 +789,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .flow-grid { grid-template-columns: 1fr; }
   .flow-cell { border-left: none; padding-left: 0; }
   .why-grid { grid-template-columns: 1fr; }
-  .vig { height: 180px; }
+  .vig-stage { height: 185px; }
 }
 
 /* ---------- 404 ---------- */
@@ -1149,12 +1149,16 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 /* ================= proof vignettes (why row) ================= */
 .vig {
   position: relative;
-  height: 210px;
   border-radius: 0;
   overflow: hidden;
   background: #131313;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
+.vig-stage { position: relative; height: 230px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.vig-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; filter: saturate(1.05); }
+.vig-bg.dim { filter: saturate(0.9) brightness(0.42); }
+.vig-bg.dark { filter: saturate(0.9) brightness(0.3) blur(3px); transform: scale(1.05); }
+.vig-stage > :not(.vig-bg) { position: relative; z-index: 2; }
 .vig-browser {
   display: flex;
   align-items: center;
@@ -1176,6 +1180,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   text-align: center;
   letter-spacing: 0.01em;
 }
+.vig-day.blue { color: #8fc1f5; background: rgba(60, 110, 180, 0.3); }
 .vig-day {
   font-size: 9px;
   font-weight: 700;
@@ -1185,9 +1190,9 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   border-radius: 100px;
   padding: 3px 8px;
 }
-.vig-publish .vig-body { display: flex; align-items: center; justify-content: center; height: 170px; }
 .vig-toast {
   display: inline-flex;
+  backdrop-filter: blur(6px);
   align-items: center;
   gap: 9px;
   font-size: 13px;
@@ -1211,9 +1216,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   font-size: 11px;
   font-weight: 800;
 }
-.vig-built img { width: 100%; height: 174px; object-fit: cover; object-position: center 30%; display: block; filter: saturate(1.05); }
-.vig-edit { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 24px; gap: 16px; }
-.vig-line { font-family: "Instrument Serif", serif; font-size: 30px; color: var(--ink); line-height: 1.35; }
+.vig-line { font-family: "Instrument Serif", serif; font-size: 42px; color: #fff; line-height: 1.3; text-shadow: 0 2px 22px rgba(0,0,0,0.8); }
 .vig-sel {
   position: relative;
   font-style: italic;
@@ -1234,17 +1237,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 .vig-handle { position: absolute; width: 6px; height: 6px; background: #fff; border: 1.5px solid #4a90d9; }
 .vig-handle.tl { top: -4px; left: -4px; }
 .vig-handle.br { bottom: -4px; right: -4px; }
-.vig-tip {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--grey-2);
-  background: #171717;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 7px;
-  padding: 4px 9px;
-}
-.vig-free { display: flex; align-items: center; justify-content: center; gap: 0; }
-.vig-free .vig-pill { font-size: 15px; padding: 11px 19px; }
 .vig-free .vig-pill {
   font-family: "Figtree", sans-serif;
   font-weight: 700;
@@ -1252,15 +1244,18 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   border-radius: 100px;
   padding: 9px 16px;
 }
-.vig-free .vig-pill.ghost {
-  color: var(--grey-2);
-  background: #151515;
+.vig-free-row { display: flex; align-items: center; }
+.vig-pill { font-family: "Figtree", sans-serif; font-weight: 700; font-size: 14px; border-radius: 100px; padding: 10px 17px; }
+.vig-pill.ghost {
+  color: #b9b7ae;
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(6px);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
   margin-right: -10px;
   text-decoration: line-through;
   text-decoration-color: rgba(255, 255, 255, 0.25);
 }
-.vig-free .vig-pill.hero {
+.vig-pill.hero {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1270,6 +1265,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   z-index: 2;
   letter-spacing: 0.04em;
 }
-.vig-free .vig-pill.hero i { width: 7px; height: 7px; border-radius: 50%; background: #06210f; opacity: 0.7; }
+.vig-pill.hero i { width: 7px; height: 7px; border-radius: 50%; background: #06210f; opacity: 0.7; }
 @media (prefers-reduced-motion: reduce) { .vig-caret { animation: none; } }
 
