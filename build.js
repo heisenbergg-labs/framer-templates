@@ -30,7 +30,7 @@ const shot = (slug, kind) => {
   return null;
 };
 
-const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">`;
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">`;
 
 const QDATA = sorted.map(t => ({
   name: t.name, slug: t.slug, cat: t.category, price: t.price, free: !!t.free,
@@ -44,7 +44,7 @@ const NAV = (root) => `
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
     <a href="${root}/index.html#drop">Current drop</a>
-    <a href="${root}/about/index.html">Studio</a>
+    <a href="#" data-letter-open>Studio</a>
     <a class="pill" href="#" data-quiz-open>Find my template</a>
   </div>
   <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
@@ -52,7 +52,7 @@ const NAV = (root) => `
 <div class="nav-sheet" hidden>
   <a href="${root}/templates/index.html">Templates</a>
   <a href="${root}/index.html#drop">Current drop</a>
-  <a href="${root}/about/index.html">Studio</a>
+  <a href="#" data-letter-open>Studio</a>
   <a class="pill" href="#" data-quiz-open>Find my template</a>
 </div></nav>`;
 
@@ -90,12 +90,66 @@ const FOOT = (root) => `
     </div>
     <div class="foot-col">
       <span class="mono-sm">STUDIO</span>
-      <a href="${root}/about/index.html">About ${esc(site.name)}</a>
+      <a href="#" data-letter-open>A letter from Carmy</a>
       <a href="#" data-quiz-open>Find your template</a>
       <a href="${root}/license/index.html">License agreement</a>
     </div>
   </div>
 </div></footer>`;
+
+
+/* ---------------- letter from Carmy ---------------- */
+const letterBlock = (root) => `
+<div id="letter" class="letter-ov" hidden role="dialog" aria-modal="true" aria-label="A letter from Carmy">
+  <div class="letter-back" data-letter-close></div>
+  <article class="letter-paper">
+    <button class="letter-x" type="button" data-letter-close aria-label="Close letter">&times;</button>
+    <div class="letter-head">
+      <span class="letter-eyebrow">A LETTER FROM THE STUDIO</span>
+      <svg class="letter-seal" width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="sealg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3dc8e"/><stop offset="0.55" stop-color="#d9b95c"/><stop offset="1" stop-color="#a8842e"/></linearGradient></defs><circle cx="32" cy="32" r="30" fill="none" stroke="url(#sealg)" stroke-width="1.6"/><circle cx="32" cy="32" r="24.5" fill="none" stroke="url(#sealg)" stroke-width="0.8" stroke-dasharray="2.4 3"/><text x="32" y="42" font-family="Georgia,serif" font-size="28" fill="url(#sealg)" text-anchor="middle">C</text></svg>
+    </div>
+    <div class="letter-body">
+      <p>Hello,</p>
+      <p>Before I started this studio, I watched the same thing happen over and over. A small business needs a website, gets quoted an agency price, and settles for something that looks like everyone else&rsquo;s. The tools were never the problem. Taste and time were.</p>
+      <p>${site.name}${site.tld} exists to close that gap. Complete websites, designed with a point of view, that a normal person can open, edit and publish in a day. Your work deserves a site that actually converts, not just one that exists.</p>
+      <p>Every template here is a site I would ship for a paying client. If it is not good enough for that, it does not get listed.</p>
+      <p>Make something good with it.</p>
+    </div>
+    <div class="letter-sign">
+      <span class="letter-script">Carmy</span>
+      <span class="letter-role">The studio behind ${site.name}${site.tld}</span>
+    </div>
+    <a class="letter-cta" href="${root}/templates/index.html">Browse the templates <span class="arr">&rarr;</span></a>
+  </article>
+</div>
+<script>
+(function () {
+  var ov = document.getElementById("letter");
+  var last = null;
+  function open() {
+    last = document.activeElement;
+    ov.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(function () { ov.classList.add("in"); });
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "letter-open", event: true });
+  }
+  function close() {
+    ov.classList.remove("in");
+    document.body.style.overflow = "";
+    setTimeout(function () { ov.hidden = true; }, 260);
+    if (last && last.focus) last.focus();
+  }
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest ? e.target.closest("[data-letter-open]") : null;
+    if (o) { e.preventDefault(); open(); return; }
+    var c = e.target.closest ? e.target.closest("[data-letter-close]") : null;
+    if (c && !ov.hidden) close();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !ov.hidden) close();
+  });
+})();
+</script>`;
 
 /* ---------------- quiz (match-first, no discount) ---------------- */
 const quizBlock = (root) => `
@@ -375,6 +429,7 @@ ${FONTS}
 ${NAV(root)}
 ${body}
 ${quizBlock(root)}
+${letterBlock(root)}
 ${FOOT(root)}
 <div id="cursor-chip" aria-hidden="true"></div>
 <script>
@@ -704,34 +759,6 @@ ${QL}`,
 };
 
 /* ---------------- studio pages ---------------- */
-const aboutPage = page({
-  title: `About | ${site.name}${site.tld}`,
-  description: "getsites.co is an independent template studio creating original Framer websites.",
-  root: "..",
-  body: `
-<section class="doc-sec"><div class="wrap doc">
-  <span class="mono gold">THE STUDIO</span>
-  <h1 class="serif">A small studio with <span class="it">a point of view.</span></h1>
-  <p>${esc(site.name)}${esc(site.tld)} is an independent template studio creating original Framer websites for businesses that care about design.</p>
-  <p>Every release is designed, tested and documented as a complete website, not assembled from generic sections. Each template starts with one concept, a members' club after dark, a photographer's contact sheet, a retro operating system, and holds it through every page, breakpoint and interaction.</p>
-  <h2 class="serif">How a release is made</h2>
-  <ul class="check-list">
-    <li>One concept is locked before anything is built.</li>
-    <li>The design system comes first: color tokens, two font families, a fixed type scale.</li>
-    <li>Every section is tested on desktop, tablet and mobile before it ships.</li>
-    <li>Templates are checked for buyer editability: swap text, photos, fonts and colors without touching code.</li>
-    <li>Fern Hollow is free forever so you can judge the quality before paying for anything.</li>
-  </ul>
-  <h2 class="serif">What you get as a buyer</h2>
-  <ul class="check-list">
-    <li>A Framer remix link that copies the complete site to your account.</li>
-    <li>Free updates through the same link.</li>
-    <li>A clear <a href="../license/index.html">license</a>: one website per purchase, commercial use allowed.</li>
-    <li><a href="../support/index.html">Studio support</a> when something is unclear.</li>
-  </ul>
-  <div class="ctas"><a class="pill lg" href="../index.html#collection">Browse the collection</a></div>
-</div></section>`,
-});
 
 const supportPage = page({
   title: `Support | ${site.name}${site.tld}`,
@@ -809,7 +836,7 @@ for (const t of templates) {
 }
 fs.mkdirSync(path.join(DIST, "templates"), { recursive: true });
 fs.writeFileSync(path.join(DIST, "templates", "index.html"), templatesPage);
-for (const [name, html] of [["about", aboutPage], ["support", supportPage], ["license", licensePage]]) {
+for (const [name, html] of [["support", supportPage], ["license", licensePage]]) {
   fs.mkdirSync(path.join(DIST, name), { recursive: true });
   fs.writeFileSync(path.join(DIST, name, "index.html"), html);
 }
@@ -825,9 +852,9 @@ fs.writeFileSync(path.join(DIST, "404.html"), page({
   <a class="pill lg" href="/index.html#collection">Browse the collection</a>
 </div></section>`,
 }));
-const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/about/", site.baseUrl + "/support/", site.baseUrl + "/license/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
+const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");
 fs.writeFileSync(path.join(DIST, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${site.baseUrl}/sitemap.xml\n`);
-console.log("v3 built:", ["index", "about", "support", "license", "404", ...templates.map(t => t.slug)].join(", "));
+console.log("v3 built:", ["index", "support", "license", "404", ...templates.map(t => t.slug)].join(", "));
