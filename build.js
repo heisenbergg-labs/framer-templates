@@ -335,8 +335,8 @@ const railBlock = (root, app, active = "all") => {
     <form class="q-wrap" action="${root}/index.html" method="get"><input id="q" name="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></form>
     <div class="rail-sec">
       <span class="rail-lab">Browse</span>
-      ${item("all", "c-gold", `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg>`, "All templates", sorted.length)}
       ${item("__featured", "c-feat", STAR, "Featured", sorted.filter(t => t.featured).length, true)}
+      ${item("all", "c-gold", `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="1.5" width="5.4" height="5.4" rx="1.2"/><rect x="1.5" y="9.1" width="5.4" height="5.4" rx="1.2"/><rect x="9.1" y="9.1" width="5.4" height="5.4" rx="1.2"/></svg>`, "All templates", sorted.length)}
       ${item("__free", "c-green", `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.6 1.8 14 7.2a1.6 1.6 0 0 1 0 2.3l-4.5 4.5a1.6 1.6 0 0 1-2.3 0L1.8 8.6A1.3 1.3 0 0 1 1.4 7.7V3a1.6 1.6 0 0 1 1.6-1.6h4.7c.34 0 .66.13.9.4Z"/><circle cx="5" cy="5" r="1" fill="currentColor" stroke="none"/></svg>`, "Free", FREE_N)}
       ${CATS.map((c, ci) => item(esc(c.name), "c-" + (ci % 4), `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4.5h12M2 8h12M2 11.5h8"/></svg>`, esc(c.name), c.n)).join("\n      ")}
     </div>
