@@ -349,8 +349,15 @@ section.tight-top { padding-top: 84px; }
 .tcard .line2 { color: var(--grey-2); font-weight: 400; font-size: 13.5px; margin-top: 5px; max-width: 420px; }
 
 /* ---------- why (3D icon cells) ---------- */
-.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.why-cell { padding: 48px 28px 52px; border-left: 1px solid var(--line); }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1080px; }
+.why-cell {
+  background: #0e0e0e;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
+}
+.why-cell:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 24px 60px rgba(0, 0, 0, 0.45); }
 .why-cell .icon3d {
   width: 132px;
   height: 132px;
@@ -362,8 +369,6 @@ section.tight-top { padding-top: 84px; }
 .why-cell:nth-child(4) .icon3d { animation-duration: 9.1s; }
 @keyframes icon-float { from { transform: translateY(0) rotate(-1.2deg); } to { transform: translateY(-9px) rotate(1.6deg); } }
 @media (prefers-reduced-motion: reduce) { .why-cell .icon3d { animation: none; } }
-.why-cell:first-child { border-left: none; padding-left: 0; }
-.why-cell:last-child { padding-right: 0; }
 .icon3d { display: block; width: 110px; height: 110px; object-fit: contain; margin-bottom: 26px; mix-blend-mode: screen; }
 .icon3d-ph {
   border-radius: 26px;
@@ -371,8 +376,9 @@ section.tight-top { padding-top: 84px; }
     radial-gradient(130% 130% at 28% 18%, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 55%, rgba(255,255,255,0) 100%),
     var(--card);
 }
-.why-cell h3 { font-size: 17px; margin-bottom: 8px; }
-.why-cell p { font-size: 14px; font-weight: 400; color: var(--grey-2); }
+.why-cell h3 { font-size: 18px; margin-bottom: 8px; }
+.why-cell .why-text { padding: 22px 26px 26px; }
+.why-cell p { font-size: 14px; font-weight: 400; color: var(--grey-2); max-width: 420px; }
 
 
 /* ---------- detail steps ---------- */
@@ -728,10 +734,6 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .flow-grid { grid-template-columns: 1fr 1fr; gap: 30px 0; }
   .flow-cell:nth-child(3) { border-left: none; padding-left: 0; }
   .why-grid { grid-template-columns: 1fr 1fr; }
-  .why-cell { padding: 34px 24px; }
-  .why-cell:first-child { padding-left: 0; }
-  .why-cell:nth-child(3) { border-left: none; padding-left: 0; }
-  .why-cell:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 880px) {
   .grid, .props { grid-template-columns: 1fr; }
@@ -787,8 +789,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   .flow-grid { grid-template-columns: 1fr; }
   .flow-cell { border-left: none; padding-left: 0; }
   .why-grid { grid-template-columns: 1fr; }
-  .why-cell { border-left: none; padding-left: 0; }
-  .why-cell:nth-child(n+2) { border-top: 1px solid var(--line); }
+  .vig { height: 180px; }
 }
 
 /* ---------- 404 ---------- */
@@ -1148,12 +1149,11 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 /* ================= proof vignettes (why row) ================= */
 .vig {
   position: relative;
-  height: 128px;
-  margin-bottom: 22px;
-  border-radius: 12px;
+  height: 210px;
+  border-radius: 0;
   overflow: hidden;
-  background: #101010;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  background: #131313;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 .vig-browser {
   display: flex;
@@ -1167,7 +1167,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
 .vig-dots i { width: 7px; height: 7px; border-radius: 50%; background: #333; }
 .vig-url {
   flex: 1;
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--grey);
   background: #0d0d0d;
@@ -1185,7 +1185,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   border-radius: 100px;
   padding: 3px 8px;
 }
-.vig-publish .vig-body { display: flex; align-items: center; justify-content: center; height: 88px; }
+.vig-publish .vig-body { display: flex; align-items: center; justify-content: center; height: 170px; }
 .vig-toast {
   display: inline-flex;
   align-items: center;
@@ -1211,9 +1211,9 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   font-size: 11px;
   font-weight: 800;
 }
-.vig-built img { width: 100%; height: 92px; object-fit: cover; object-position: center 20%; display: block; filter: saturate(1.05); }
-.vig-edit { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 0 18px; gap: 10px; }
-.vig-line { font-family: "Instrument Serif", serif; font-size: 21px; color: var(--ink); line-height: 1.3; }
+.vig-built img { width: 100%; height: 174px; object-fit: cover; object-position: center 30%; display: block; filter: saturate(1.05); }
+.vig-edit { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 24px; gap: 16px; }
+.vig-line { font-family: "Instrument Serif", serif; font-size: 30px; color: var(--ink); line-height: 1.35; }
 .vig-sel {
   position: relative;
   font-style: italic;
@@ -1244,6 +1244,7 @@ footer { border-top: 1px solid var(--line); padding: 56px 0 46px; margin-top: 40
   padding: 4px 9px;
 }
 .vig-free { display: flex; align-items: center; justify-content: center; gap: 0; }
+.vig-free .vig-pill { font-size: 15px; padding: 11px 19px; }
 .vig-free .vig-pill {
   font-family: "Figtree", sans-serif;
   font-weight: 700;

@@ -410,15 +410,17 @@ const home = page({
 
     <section id="why">
       <div class="sec-head">
-        <h2>A premium website, without <span class="it">the premium invoice</span></h2>
-        <p class="sub">Because you don't need to spend thousands, or wait months, to look like you did.</p>
+        <h2>Skip the agency, <span class="it">keep the taste.</span></h2>
+        <p class="sub">Every template here is built like a client commission — you just skip the wait and the bill.</p>
       </div>
       <div class="why-grid">
         ${WHY.map(w => `
         <div class="why-cell reveal">
           ${VIGS[w.vig]}
-          <h3>${esc(w.k)}</h3>
-          <p>${esc(w.p)}</p>
+          <div class="why-text">
+            <h3>${esc(w.k)}</h3>
+            <p>${esc(w.p)}</p>
+          </div>
         </div>`).join("\n")}
       </div>
     </section>
