@@ -335,14 +335,11 @@ const QL = `
       <div class="ql-actions">
         <button class="ql-view on" type="button" data-view="desktop">Desktop</button>
         <button class="ql-view" type="button" data-view="mobile">Mobile</button>
-        <button class="ql-view" type="button" data-view="screens">Screens</button>
         <a id="ql-get" class="pill" href="#" target="_blank" rel="noreferrer">Get</a>
-        <a id="ql-page" class="textlink" href="#">Details &rarr;</a>
         <button class="ql-x" type="button" aria-label="Close quick look">&times;</button>
       </div>
     </div>
     <div class="ql-frame" id="ql-frame-wrap"><iframe id="ql-iframe" title="Live template preview"></iframe></div>
-    <div class="ql-shots" id="ql-shots" hidden></div>
   </div>
 </div>
 <script>
@@ -367,17 +364,8 @@ const QL = `
       var get = document.getElementById("ql-get");
       get.href = b.dataset.qlGet;
       get.textContent = b.dataset.qlFree === "true" ? "Get free template" : "Buy · " + b.dataset.qlPrice;
-      document.getElementById("ql-page").href = b.dataset.qlHref;
       wrap.classList.remove("as-phone");
       wrap.hidden = false;
-      var shotsEl = document.getElementById("ql-shots");
-      shotsEl.hidden = true;
-      var shots = (b.dataset.qlShots || "").split(",").filter(Boolean);
-      shotsEl.innerHTML = shots.map(function (src) {
-        var isMob = src.indexOf("mobile") !== -1;
-        return "<figure class='" + (isMob ? "qls-m" : "qls-d") + "'><img src='" + src + "' alt='' loading='lazy'></figure>";
-      }).join("") || "<p class='mono-sm'>NO EXTRA SCREENS YET. USE THE LIVE PREVIEW.</p>";
-      document.querySelector('.ql-view[data-view="screens"]').style.display = shots.length ? "" : "none";
       document.querySelectorAll(".ql-view").forEach(function (v) { v.classList.toggle("on", v.dataset.view === "desktop"); });
       qlf.src = b.dataset.qlDemo;
       ql.hidden = false;
@@ -391,10 +379,6 @@ const QL = `
     if (v) {
       document.querySelectorAll(".ql-view").forEach(function (x) { x.classList.remove("on"); });
       v.classList.add("on");
-      var shotsEl2 = document.getElementById("ql-shots");
-      var isScreens = v.dataset.view === "screens";
-      wrap.hidden = isScreens;
-      shotsEl2.hidden = !isScreens;
       wrap.classList.toggle("as-phone", v.dataset.view === "mobile");
       return;
     }
