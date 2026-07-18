@@ -667,6 +667,7 @@ fs.mkdirSync(path.join(DIST, "assets", "covers"), { recursive: true });
 fs.writeFileSync(path.join(DIST, "index.html"), home);
 fs.writeFileSync(path.join(DIST, "style.css"), fs.readFileSync(path.join(ROOT, "src", "style.css")));
 fs.writeFileSync(path.join(DIST, ".nojekyll"), "");
+fs.writeFileSync(path.join(DIST, "CNAME"), "getsites.co\n");
 for (const f of fs.readdirSync(path.join(ROOT, "assets", "covers"))) {
   fs.copyFileSync(path.join(ROOT, "assets", "covers", f), path.join(DIST, "assets", "covers", f));
 }
