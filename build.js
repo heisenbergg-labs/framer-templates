@@ -309,12 +309,19 @@ const tcard = (t, root = ".", ql = false) => `
 </a>`;
 
 // value-prop cells; icon images appear automatically once art files exist
-// contextual proof vignettes — real covers with the story overlaid
+// journey vignettes — real covers with the story overlaid
 const VIGS = {
-  get: `<div class="vig">
+  select: `<div class="vig">
     <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 getsites.co/templates</span></div>
     <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/still.jpg" alt="" aria-hidden="true">
-      <div class="vig-free-row"><span class="vig-pill ghost">$39</span><span class="vig-pill ghost">$29</span><span class="vig-pill ghost">$24</span><span class="vig-pill hero"><i></i>FREE</span></div>
+      <div class="vig-stack"><div class="vig-chips"><span class="vig-chip">Portfolio</span><span class="vig-chip">Hospitality</span><span class="vig-chip">Business</span></div>
+      <div class="vig-free-row"><span class="vig-pill ghost">$29</span><span class="vig-pill ghost">$24</span><span class="vig-pill hero"><i></i>FREE</span></div></div>
+    </div>
+  </div>`,
+  remix: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 framer.com</span><span class="vig-day blue">FRAMER</span></div>
+    <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/brookmere.jpg" alt="" aria-hidden="true">
+      <span class="vig-remix">Remix ↗</span>
     </div>
   </div>`,
   edit: `<div class="vig">
@@ -330,29 +337,23 @@ const VIGS = {
     </div>
   </div>`,
   publish: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">DAY 1</span></div>
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day">ONE CLICK</span></div>
     <div class="vig-stage"><img class="vig-bg dim" src="assets/covers/nostalgia.jpg" alt="" aria-hidden="true">
       <div class="vig-toast"><span class="vig-tick">✓</span> Site published</div>
     </div>
   </div>`,
-  built: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 brookmere.com</span></div>
+  live: `<div class="vig">
+    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 yourname.com</span><span class="vig-day green"><i class="vig-livedot"></i>LIVE</span></div>
     <div class="vig-stage"><img class="vig-bg" src="assets/covers/brookmere.jpg" alt="" aria-hidden="true"></div>
-  </div>`,
-  phone: `<div class="vig">
-    <div class="vig-browser"><span class="vig-dots"><i></i><i></i><i></i></span><span class="vig-url">🔒 on every screen</span></div>
-    <div class="vig-stage vig-stage-dark">
-      <div class="vig-phone"><img src="assets/covers/fernhollow.jpg" alt="" aria-hidden="true"></div>
-    </div>
   </div>`,
 };
 const WHY = [
-  { vig: "get", num: "01", k: "Get the template", p: "Open it live, buy it — or take a free one. It copies into your Framer account in one click." },
-  { vig: "edit", num: "02", k: "Make it yours — or let AI", p: "Change every word and photo yourself, or tell Framer's AI agent what you want and it edits the template for you." },
-  { vig: "domain", num: "03", k: "Connect your domain", p: "Pick up a new domain, or point one you already own — right inside Framer's settings." },
-  { vig: "publish", num: "04", k: "Publish in a day", p: "One click and you're live. Hosting, speed and SSL are Framer's problem, not yours." },
-  { vig: "built", num: "", k: "Looks custom-built", p: "Editorial type, real motion, considered detail. Nobody will guess it started as a template." },
-  { vig: "phone", num: "", k: "Perfect on every screen", p: "Desktop, tablet, phone — every template is built responsive from the start." },
+  { vig: "select", num: "01", k: "Select your template", p: "Browse by niche — portfolio, hospitality, business. Grab a free one, or a paid one." },
+  { vig: "remix", num: "02", k: "Open it in Framer", p: "Hit Remix and the whole site copies into a free Framer account, fully editable." },
+  { vig: "edit", num: "03", k: "Easy to edit", p: "Change every word and photo yourself — or tell Framer's AI agent what you want." },
+  { vig: "domain", num: "04", k: "Add your domain", p: "Pick up a new domain, or connect one you already own — right inside Framer." },
+  { vig: "publish", num: "05", k: "Hit publish", p: "One click. Hosting, speed and SSL are Framer's problem, not yours." },
+  { vig: "live", num: "06", k: "Live in days, not months", p: "No agency queue, no six-week wait. The site is yours, and it's up." },
 ];
 
 /* ---------------- home ---------------- */
@@ -429,7 +430,7 @@ const home = page({
     <section id="why">
       <div class="sec-head">
         <h2>Skip the agency, <span class="it">keep the taste.</span></h2>
-        <p class="sub">Four steps from template to your website — the taste is built in.</p>
+        <p class="sub">Six steps from template to your website — the taste is built in.</p>
       </div>
       <div class="why-grid">
         ${WHY.map(w => `
