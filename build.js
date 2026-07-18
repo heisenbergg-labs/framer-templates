@@ -707,9 +707,6 @@ fs.writeFileSync(path.join(DIST, "404.html"), page({
   root: "",
   body: `
 <section class="notfound"><div class="wrap">
-  ${ART.triangle ? `<img class="nf-art nf-a1" src="/${ART.triangle}" alt="" aria-hidden="true">` : ""}
-  ${ART.torus ? `<img class="nf-art nf-a2" src="/${ART.torus}" alt="" aria-hidden="true">` : ""}
-  ${ART.sphere ? `<img class="nf-art nf-a3" src="/${ART.sphere}" alt="" aria-hidden="true">` : ""}
   <p class="badge-pill">404</p>
   <h1 class="nf-h">This page <span class="it">wandered off.</span></h1>
   <p class="nf-p">The templates are all still here, though.</p>
