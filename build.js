@@ -43,7 +43,7 @@ const NAV = (root) => `
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
-    <a href="${root}/index.html#drop">Current drop</a>
+    <a href="${root}/templates/still/index.html">Current drop</a>
     <a href="#" data-letter-open>Studio</a>
     <a class="pill" href="#" data-quiz-open>Find my template</a>
   </div>
@@ -51,7 +51,7 @@ const NAV = (root) => `
 </div>
 <div class="nav-sheet" hidden>
   <a href="${root}/templates/index.html">Templates</a>
-  <a href="${root}/index.html#drop">Current drop</a>
+  <a href="${root}/templates/still/index.html">Current drop</a>
   <a href="#" data-letter-open>Studio</a>
   <a class="pill" href="#" data-quiz-open>Find my template</a>
 </div></nav>`;
@@ -78,7 +78,7 @@ const FOOT = (root) => `
       <span class="mono-sm">SHOP</span>
       <a href="${root}/index.html#collection">All templates</a>
       <a href="${root}/index.html?cat=__free#collection">Free templates</a>
-      <a href="${root}/index.html#drop">Current drop</a>
+      <a href="${root}/templates/still/index.html">Current drop</a>
       <a href="${root}/index.html#signature">Upcoming release</a>
     </div>
     <div class="foot-col">
@@ -273,7 +273,7 @@ const quizBlock = (root) => `
     if (o) { e.preventDefault(); open(); }
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
-    setTimeout(function () { if (ov.hidden) open(); }, 10000);
+    setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
   }
 
   // shared email capture: quiz save, newsletter, waitlist -> one webhook
@@ -555,28 +555,6 @@ const home = page({
   </div>
 </header>
 
-<section id="drop" class="featured-sec"><div class="wrap">
-  <div class="rel-head reveal">
-    <span class="mono gold">FEATURED TEMPLATE</span>
-    <span class="mono dim">DROP 01 · THE OPENING COLLECTION</span>
-  </div>
-  <article class="feature-card reveal">
-    <a class="feature-shot" href="templates/${featured.slug}/index.html" data-cursor="${esc(featured.price)}" data-kind="paid">
-      <img src="${featured.cover}" alt="${esc(featured.name)} website template">
-    </a>
-    <div class="feature-info">
-      <span class="cat-line">${esc(featured.category)}</span>
-      <h2 class="serif big">${esc(featured.name)}</h2>
-      <p class="feature-tag">${esc(featured.tagline)}</p>
-      <ul class="ind-list">${(featured.features || []).slice(0, 3).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
-      <div class="feature-ctas">
-        <a class="pill" href="templates/${featured.slug}/index.html">View ${esc(featured.name)} · ${esc(featured.price)}</a>
-        <a class="textlink" href="${featured.demo}" target="_blank" rel="noreferrer">Preview live <span class="arr">&rarr;</span></a>
-      </div>
-    </div>
-  </article>
-</div></section>
-
 ${collectionSec(".")}
 
 <section class="steps-sec"><div class="wrap">
@@ -613,6 +591,40 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
     </div>
   </article>`).join("")}
 </div></section>` : ""}
+
+<div id="feat-nudge" hidden>
+  <button class="fn-x" type="button" aria-label="Dismiss">&times;</button>
+  <button class="fn-body" type="button" data-ql-open
+    data-ql-demo="${featured.demo}" data-ql-name="${esc(featured.name)}" data-ql-cat="${esc(featured.category)}"
+    data-ql-desc="${esc(featured.tagline)}" data-ql-price="${featured.free ? "Free" : esc(featured.price)}"
+    data-ql-get="${featured.get}" data-ql-free="${featured.free}">
+    <img src="${featured.cover}" alt="">
+    <span class="fn-txt">
+      <span class="mono gold">FEATURED TEMPLATE</span>
+      <b>${esc(featured.name)} &middot; ${esc(featured.price)}</b>
+      <span class="fn-sub">${esc(featured.tagline)}</span>
+    </span>
+  </button>
+</div>
+<script>
+(function () {
+  var n = document.getElementById("feat-nudge");
+  if (!n || sessionStorage.getItem("gs_feat_x")) return;
+  var quiz = document.getElementById("quiz-overlay");
+  function show() {
+    if (quiz && !quiz.hidden) { setTimeout(show, 8000); return; }
+    n.hidden = false;
+    requestAnimationFrame(function () { n.classList.add("in"); });
+  }
+  setTimeout(show, 10000 + Math.random() * 10000);
+  n.querySelector(".fn-x").addEventListener("click", function () {
+    n.classList.remove("in");
+    sessionStorage.setItem("gs_feat_x", "1");
+    setTimeout(function () { n.hidden = true; }, 300);
+  });
+  n.querySelector(".fn-body").addEventListener("click", function () { n.classList.remove("in"); });
+})();
+</script>
 
 ${QL}
 

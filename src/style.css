@@ -880,3 +880,40 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .letter-back, .letter-paper { transition: none; }
   .letter-paper { transform: none; opacity: 1; }
 }
+
+/* ===== featured corner nudge ===== */
+#feat-nudge {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 180;
+  max-width: 340px;
+  background: var(--surface);
+  border-radius: var(--r);
+  box-shadow: var(--ring), 0 18px 60px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
+}
+#feat-nudge.in { opacity: 1; transform: none; }
+#feat-nudge[hidden] { display: none !important; }
+#feat-nudge .fn-x {
+  position: absolute; top: -10px; left: -10px; z-index: 2;
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--line-2); background: var(--bg-deep); color: var(--grey);
+  font-size: 15px; line-height: 1; cursor: pointer;
+}
+#feat-nudge .fn-body {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; padding: 12px; border: 0; background: none;
+  font: inherit; color: var(--ink); text-align: left; cursor: pointer;
+}
+#feat-nudge img { width: 92px; height: 64px; object-fit: cover; object-position: top; border-radius: 8px; flex-shrink: 0; }
+#feat-nudge .fn-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#feat-nudge .fn-txt b { font-size: 14.5px; font-weight: 600; }
+#feat-nudge .fn-sub { font-size: 12.5px; color: var(--grey-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#feat-nudge:hover { box-shadow: inset 0 0 0 1px rgba(116, 92, 255, 0.5), 0 18px 60px rgba(0, 0, 0, 0.6); }
+@media (max-width: 640px) {
+  #feat-nudge { right: 12px; left: 12px; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) { #feat-nudge { transition: none; } }
