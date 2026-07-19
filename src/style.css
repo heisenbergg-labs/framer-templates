@@ -160,20 +160,22 @@ button.textlink { background: none; border: 0; color: var(--ink); font-size: 14.
 .goldtext {
   padding: 0.15em 0.18em;
   margin: -0.15em -0.18em;
-  background: linear-gradient(105deg,
-    #463a99 0%, #745cff 14%, #c3b6ff 26%, #f2edff 34%, #c3b6ff 42%,
-    #5f49d6 56%, #9b87ff 70%, #463a99 84%, #745cff 100%);
-  background-size: 300% 100%;
+  background:
+    linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.95) 50%, transparent 60%) no-repeat,
+    linear-gradient(#a390ff, #a390ff);
+  background-size: 240% 100%, 100% 100%;
+  background-position: 240% 0, 0 0;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gold-sheen 7s linear infinite;
+  animation: white-glint 12s linear infinite;
 }
-@keyframes gold-sheen {
-  from { background-position: 150% 0; }
-  to { background-position: -150% 0; }
+@keyframes white-glint {
+  0% { background-position: 240% 0, 0 0; }
+  38% { background-position: -140% 0, 0 0; }
+  100% { background-position: -140% 0, 0 0; }
 }
-@media (prefers-reduced-motion: reduce) { .goldtext { animation: none; background-position: 50% 0; } }
+@media (prefers-reduced-motion: reduce) { .goldtext { animation: none; } }
 .hero .wrap { position: relative; }
 .eyebrow-line { margin-bottom: 22px; }
 .hero h1 { font-size: clamp(46px, 6.4vw, 86px); line-height: 1.0; max-width: 720px; }
