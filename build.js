@@ -571,7 +571,7 @@ const home = page({
       <ul class="ind-list">${(featured.features || []).slice(0, 3).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
       <div class="feature-ctas">
         <a class="pill" href="templates/${featured.slug}/index.html">View ${esc(featured.name)} · ${esc(featured.price)}</a>
-        <button class="textlink" type="button" data-ql-open data-ql-demo="${featured.demo}" data-ql-name="${esc(featured.name)}" data-ql-cat="${esc(featured.category)}" data-ql-desc="${esc(featured.tagline)}" data-ql-price="${featured.free ? "Free" : esc(featured.price)}" data-ql-get="${featured.get}" data-ql-free="${featured.free}">Preview live <span class="arr">&rarr;</span></button>
+        <a class="textlink" href="${featured.demo}" target="_blank" rel="noreferrer">Preview live <span class="arr">&rarr;</span></a>
       </div>
     </div>
   </article>
@@ -685,7 +685,7 @@ const detail = (t) => {
            </form>
            <button class="btn-secondary" type="button" data-ql-open data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}" data-ql-desc="${esc(t.tagline)}" data-ql-price="Coming soon" data-ql-get="#" data-ql-free="false">Preview the concept</button>`
         : `<a class="btn-primary" href="${buyHref}" target="_blank" rel="noreferrer">${t.free ? "Get free template" : `Buy template · ${esc(t.price)}`}</a>
-           <button class="btn-secondary" type="button" data-ql-open data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}" data-ql-desc="${esc(t.tagline)}" data-ql-price="${t.free ? "Free" : esc(t.price)}" data-ql-get="${buyHref}" data-ql-free="${t.free}">Preview live</button>
+           <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live</a>
            ${t.checkout ? "" : `<p class="buy-note mono-sm">${t.free ? "OPENS THE LIVE SITE. HIT USE FOR FREE THERE AND IT REMIXES INTO YOUR FRAMER ACCOUNT." : "CHECKOUT OPENS FROM THE LIVE SITE. HIT BUY THIS TEMPLATE THERE."}</p>`}`}
     </div>
     <p class="quiz-nudge">Not sure it's the one? <a href="#" data-quiz-open>Take the 60 second quiz &rarr;</a></p>
