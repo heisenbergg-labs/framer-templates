@@ -194,20 +194,18 @@ const quizBlock = (root) => `
       </div>
     </div>
     <div class="quiz-step" data-step="result" hidden>
-      <p class="quiz-lab">Your match</p>
       <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
       <div class="quiz-matches" id="quiz-matches"></div>
       <p class="quiz-why" id="quiz-why"></p>
       <div class="quiz-code">
-        <span class="mono-sm qc-label">YOUR 25% CODE</span>
         <button class="qc-chip" type="button" id="qc-copy">SITES25</button>
-        <span class="qc-note">Use it at checkout on any template. Tap the code to copy.</span>
+        <span class="qc-note">25% off at checkout &middot; tap to copy</span>
       </div>
       ${site.leadWebhook ? `<form id="quiz-lead" data-capture="quiz" novalidate>
         <input id="quiz-email" type="email" placeholder="Your email" autocomplete="email" required aria-label="Email">
         <button class="pill" type="submit">Save my match</button>
       </form>
-      <p class="quiz-fine">We email your match and code so you don't lose them, plus early access to the next release. No spam, ever.</p>` : ""}
+      <p class="quiz-fine">We email your match and code. No spam, ever.</p>` : ""}
       <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
@@ -251,13 +249,13 @@ const quizBlock = (root) => `
   function finish() {
     var picked = score();
     lastMatches = picked.map(function (t) { return t.name; }).join(", ");
-    document.getElementById("quiz-matches").innerHTML = picked.map(function (t, i) {
-      return "<a class='quiz-match' href='" + ROOT + "/templates/" + t.slug + "/index.html'>" +
-        "<img src='" + ROOT + "/" + t.cover + "' alt=''>" +
-        "<span class='qm-meta'><b>" + t.name + (i === 0 ? " <em>Best match</em>" : " <em class='alt'>Alternative</em>") + "</b><i>" + t.cat + " &middot; " + t.price + "</i></span></a>";
-    }).join("");
-    var top = picked[0];
-    document.getElementById("quiz-why").textContent = "Why this matches: " + top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + " and fits what you told us. You may still want to swap the photography and colors for yours.";
+    var top = picked[0], alt = picked[1];
+    var html = "<a class='quiz-match hero' href='" + ROOT + "/templates/" + top.slug + "/index.html'>" +
+      "<img src='" + ROOT + "/" + top.cover + "' alt=''>" +
+      "<span class='qm-meta'><b>" + top.name + " <em>Best match</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i></span></a>";
+    if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
+    document.getElementById("quiz-matches").innerHTML = html;
+    document.getElementById("quiz-why").textContent = top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + ", matched to your answers.";
     show(order.indexOf("result"));
     if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-complete", title: "Quiz completed", event: true });
   }
