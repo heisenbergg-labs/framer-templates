@@ -197,11 +197,16 @@ const quizBlock = (root) => `
       <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
       <div class="quiz-matches" id="quiz-matches"></div>
       <p class="quiz-why" id="quiz-why"></p>
+      <div class="quiz-code">
+        <span class="mono-sm qc-label">YOUR 30% CODE</span>
+        <button class="qc-chip" type="button" id="qc-copy">PICKED30</button>
+        <span class="qc-note">Use it at checkout on any template. Tap the code to copy.</span>
+      </div>
       ${site.leadWebhook ? `<form id="quiz-lead" data-capture="quiz" novalidate>
         <input id="quiz-email" type="email" placeholder="Your email" autocomplete="email" required aria-label="Email">
         <button class="pill" type="submit">Save my match</button>
       </form>
-      <p class="quiz-fine">We email your match with your 30% launch code, plus early access to the next release. No spam, ever.</p>` : ""}
+      <p class="quiz-fine">We email your match and code so you don't lose them, plus early access to the next release. No spam, ever.</p>` : ""}
       <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
@@ -274,6 +279,11 @@ const quizBlock = (root) => `
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
     setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
+  var qc = document.getElementById("qc-copy");
+  if (qc) qc.addEventListener("click", function () {
+    var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "PICKED30"; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("PICKED30").then(done, done); else done();
+  });
   }
 
   // shared email capture: quiz save, newsletter, waitlist -> one webhook
