@@ -64,6 +64,7 @@ nav {
   border-bottom: 1px solid var(--line);
 }
 .nav-row { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.wordmark .wm-globe { width: 26px; height: 26px; vertical-align: -6px; margin-right: 9px; }
 .wordmark {
   font-family: "Averia Serif Libre", Georgia, serif;
   font-size: 23px;

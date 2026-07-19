@@ -40,7 +40,7 @@ const QDATA = sorted.map(t => ({
 /* ---------------- shared chrome ---------------- */
 const NAV = (root) => `
 <nav><div class="wrap nav-row">
-  <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
+  <a class="wordmark" href="${root}/index.html"><img class="wm-globe" src="${root}/assets/brand/globe-round-96.png" alt="" width="26" height="26">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
     <a href="${root}/templates/still/index.html">Current drop</a>
@@ -70,7 +70,7 @@ const FOOT = (root) => `
   </div>
   <div class="foot-grid">
     <div class="foot-brand">
-      <span class="wordmark">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></span>
+      <span class="wordmark"><img class="wm-globe" src="${root}/assets/brand/globe-round-96.png" alt="" width="26" height="26">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></span>
       <p>Original Framer websites<br>with a point of view.</p>
       <span class="mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</span>
     </div>
@@ -405,7 +405,8 @@ const page = ({ title, description, body, root = ".", og = "assets/og/home.jpg",
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23c3b6ff'/%3E%3Cstop offset='0.55' stop-color='%238f7bff'/%3E%3Cstop offset='1' stop-color='%235b43d6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='%23111010'/%3E%3Crect x='0.75' y='0.75' width='62.5' height='62.5' rx='14.4' fill='none' stroke='url(%23g)' stroke-opacity='0.55' stroke-width='1.5'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='42' fill='url(%23g)' text-anchor='middle'%3Eg%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/assets/brand/globe-round-96.png">
+<link rel="apple-touch-icon" href="/assets/brand/globe-round.png">
 ${FONTS}
 <link rel="stylesheet" href="${root}/style.css?v=${VER}">
 <script data-goatcounter="https://getsites.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -824,7 +825,7 @@ fs.writeFileSync(path.join(DIST, "index.html"), home);
 fs.writeFileSync(path.join(DIST, "style.css"), fs.readFileSync(path.join(ROOT, "src", "style.css")));
 fs.writeFileSync(path.join(DIST, ".nojekyll"), "");
 fs.writeFileSync(path.join(DIST, "CNAME"), "getsites.co\n");
-for (const dir of ["covers", "og", "shots"]) {
+for (const dir of ["covers", "og", "shots", "brand"]) {
   const src = path.join(ROOT, "assets", dir);
   if (!fs.existsSync(src)) continue;
   fs.mkdirSync(path.join(DIST, "assets", dir), { recursive: true });
