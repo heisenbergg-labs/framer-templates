@@ -200,7 +200,7 @@ const quizBlock = (root) => `
       <p class="quiz-why" id="quiz-why"></p>
       <div class="quiz-code">
         <span class="mono-sm qc-label">YOUR 30% CODE</span>
-        <button class="qc-chip" type="button" id="qc-copy">MATCHED30</button>
+        <button class="qc-chip" type="button" id="qc-copy">SITES30</button>
         <span class="qc-note">Use it at checkout on any template. Tap the code to copy.</span>
       </div>
       ${site.leadWebhook ? `<form id="quiz-lead" data-capture="quiz" novalidate>
@@ -282,8 +282,8 @@ const quizBlock = (root) => `
     setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
   var qc = document.getElementById("qc-copy");
   if (qc) qc.addEventListener("click", function () {
-    var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "MATCHED30"; }, 1600); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("MATCHED30").then(done, done); else done();
+    var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES30"; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES30").then(done, done); else done();
   });
   }
 
