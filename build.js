@@ -85,6 +85,7 @@ const FOOT = (root) => `
       <span class="mono-sm">HELP</span>
       <a href="${root}/support/index.html">Support</a>
       <a href="${root}/support/index.html#framer">Framer setup</a>
+      <a href="mailto:support@getsites.co">support@getsites.co</a>
       <a href="${root}/license/index.html">Licensing</a>
       <a href="${root}/license/index.html#refunds">Refunds</a>
     </div>
@@ -780,7 +781,7 @@ const supportPage = page({
 <section class="doc-sec"><div class="wrap doc">
   <span class="mono gold">HELP</span>
   <h1 class="serif">Support</h1>
-  <p>Every template is built to be edited without code. This page covers the common questions. Buyers can reply to any receipt or release email and a human answers.</p>
+  <p>Every template is built to be edited without code. This page covers the common questions. Anything else, email <a href="mailto:support@getsites.co">support@getsites.co</a> and a human answers.</p>
   <h2 class="serif" id="framer">Framer setup</h2>
   <ul class="check-list">
     <li><b>Do I need Framer?</b> Yes. Templates open and edit in a free Framer account.</li>
@@ -793,6 +794,8 @@ const supportPage = page({
   <p>When a template is improved, the remix link serves the newest version. Your published site never changes unless you republish it.</p>
   <h2 class="serif">Licensing and refunds</h2>
   <p>One website per purchase, commercial use allowed. Full terms and the refund policy live on the <a href="../license/index.html">license page</a>.</p>
+  <h2 class="serif" id="contact">Contact</h2>
+  <p>Support and setup questions: <a href="mailto:support@getsites.co">support@getsites.co</a>. Anything else: <a href="mailto:hello@getsites.co">hello@getsites.co</a>. Replies within a day, usually much faster.</p>
   <div class="ctas"><a class="pill lg" href="../index.html#collection">Back to the collection</a></div>
 </div></section>`,
 });
