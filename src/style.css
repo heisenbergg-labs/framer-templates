@@ -720,7 +720,7 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   white-space: nowrap;
 }
 #cursor-chip.on { opacity: 1; scale: 1; }
-#cursor-chip.free { background: linear-gradient(160deg, #34d873 0%, #1fa952 100%); color: #04180c; box-shadow: 0 6px 20px rgba(33, 196, 93, 0.35); }
+#cursor-chip.free { background: linear-gradient(160deg, #34d873 0%, #1fa952 100%); color: #ffffff; box-shadow: 0 6px 20px rgba(33, 196, 93, 0.35); }
 #cursor-chip.paid { background: linear-gradient(160deg, #9b87ff 0%, #745cff 100%); color: #ffffff; box-shadow: 0 6px 20px rgba(116, 92, 255, 0.4); }
 
 /* ---------------- doc pages + 404 ---------------- */
