@@ -165,7 +165,7 @@ nav .links a:not(.pill):hover { color: var(--ink); }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gold-sheen 3.2s linear infinite;
+  animation: gold-sheen 7s linear infinite;
 }
 @keyframes gold-sheen {
   from { background-position: 150% 0; }

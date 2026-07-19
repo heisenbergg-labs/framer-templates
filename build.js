@@ -691,16 +691,6 @@ const detail = (t) => {
   </div>
 </div>
 
-${(inner || page2 || mobile) ? `<section class="shots-sec"><div class="wrap">
-  <div class="sec-head"><h2 class="serif">Inside <span class="it">${esc(t.name)}</span></h2></div>
-  <div class="shots-row">
-    ${inner ? `<figure class="shot-d"><img src="../../${inner}" alt="${esc(t.name)}, further down the page" loading="lazy"><figcaption class="mono-sm">SCROLLED IN</figcaption></figure>` : ""}
-    ${page2 ? `<figure class="shot-d"><img src="../../${page2}" alt="${esc(t.name)}, inner page" loading="lazy"><figcaption class="mono-sm">INNER PAGE</figcaption></figure>` : ""}
-    ${mobile ? `<figure class="shot-m"><img src="../../${mobile}" alt="${esc(t.name)} on mobile" loading="lazy"><figcaption class="mono-sm">MOBILE</figcaption></figure>` : ""}
-  </div>
-  <p class="shots-note">Every screen above is the real template, not a mockup. <a href="${t.demo}" target="_blank" rel="noreferrer">Open the live site</a> to click through all of it.</p>
-</div></section>` : ""}
-
 <section class="included-sec"><div class="wrap">
   <div class="inc-grid">
     <div class="reveal">
