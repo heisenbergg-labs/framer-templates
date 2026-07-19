@@ -58,11 +58,12 @@ nav {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: #000;
+  background: rgba(16, 16, 16, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
 .nav-row { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.wordmark .wm-globe { width: 34px; height: 34px; vertical-align: -9px; margin-right: 10px; }
 .wordmark {
   font-family: "Averia Serif Libre", Georgia, serif;
   font-size: 23px;

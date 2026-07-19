@@ -40,7 +40,7 @@ const QDATA = sorted.map(t => ({
 /* ---------------- shared chrome ---------------- */
 const NAV = (root) => `
 <nav><div class="wrap nav-row">
-  <a class="wordmark" href="${root}/index.html"><img class="wm-globe" src="${root}/assets/brand/globe-round-96.png" alt="" width="34" height="34">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
+  <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
     <a href="${root}/templates/still/index.html">Current drop</a>
@@ -70,7 +70,7 @@ const FOOT = (root) => `
   </div>
   <div class="foot-grid">
     <div class="foot-brand">
-      <span class="wordmark"><img class="wm-globe" src="${root}/assets/brand/globe-round-96.png" alt="" width="34" height="34">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></span>
+      <span class="wordmark">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></span>
       <p>Original Framer websites<br>with a point of view.</p>
       <span class="mono-sm">© 2026 ${esc(site.name)}${esc(site.tld)}</span>
     </div>
