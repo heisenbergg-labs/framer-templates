@@ -953,3 +953,10 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .news-form.sig-form { flex-wrap: wrap; }
   .news-form.sig-form .pill { flex: 1 1 100%; }
 }
+
+/* QL toolbar mobile: pill never wraps into a blob */
+@media (max-width: 640px) {
+  .ql-actions { gap: 6px; }
+  .ql-actions .pill { white-space: nowrap; padding: 8px 13px; font-size: 12.5px; }
+  .ql-view { padding: 7px 12px; font-size: 12.5px; }
+}
