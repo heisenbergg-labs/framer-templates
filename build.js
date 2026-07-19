@@ -485,7 +485,7 @@ const card = (t, root = ".") => `
     ${t.status !== "soon" ? `<button class="qlb" type="button"
       data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}"
       data-ql-desc="${esc(t.tagline)}" data-ql-price="${t.free ? "Free" : esc(t.price)}"
-      data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.get}"
+      data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.checkout || t.get}"
       data-ql-free="${t.free}" data-ql-shots="${["inner","page2","mobile"].map(k => shot(t.slug, k)).filter(Boolean).map(p2 => root + "/" + p2).join(",")}">Quick look</button>` : ""}
   </div>
   <div class="meta">
@@ -623,7 +623,7 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
   <button class="fn-body" type="button" data-ql-open
     data-ql-demo="${featured.demo}" data-ql-name="${esc(featured.name)}" data-ql-cat="${esc(featured.category)}"
     data-ql-desc="${esc(featured.tagline)}" data-ql-price="${featured.free ? "Free" : esc(featured.price)}"
-    data-ql-get="${featured.get}" data-ql-free="${featured.free}">
+    data-ql-get="${featured.checkout || featured.get}" data-ql-free="${featured.free}">
     <img src="${featured.cover}" alt="">
     <span class="fn-txt">
       <span class="mono gold">FEATURED TEMPLATE</span>
