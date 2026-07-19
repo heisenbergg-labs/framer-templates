@@ -201,7 +201,7 @@ const quizBlock = (root) => `
         <input id="quiz-email" type="email" placeholder="Your email" autocomplete="email" required aria-label="Email">
         <button class="pill" type="submit">Save my match</button>
       </form>
-      <p class="quiz-fine">We send your match plus early access to the next release. No spam, ever.</p>` : ""}
+      <p class="quiz-fine">We email your match with your 30% launch code, plus early access to the next release. No spam, ever.</p>` : ""}
       <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
@@ -411,6 +411,20 @@ ${FONTS}
 <script data-goatcounter="https://getsites.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<div id="sale-bar" hidden>
+  <button class="sb-msg" type="button" data-quiz-open>LAUNCH SALE &middot; Take the 60 second quiz, get <b>30% off</b> your match <span class="arr">&rarr;</span></button>
+  <button class="sb-x" type="button" aria-label="Dismiss">&times;</button>
+</div>
+<script>
+(function () {
+  var sb = document.getElementById("sale-bar");
+  if (!sessionStorage.getItem("gs_sale_x")) sb.hidden = false;
+  sb.querySelector(".sb-x").addEventListener("click", function () {
+    sb.hidden = true;
+    sessionStorage.setItem("gs_sale_x", "1");
+  });
+})();
+</script>
 ${NAV(root)}
 ${body}
 ${quizBlock(root)}
