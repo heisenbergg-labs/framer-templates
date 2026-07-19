@@ -199,8 +199,8 @@ const quizBlock = (root) => `
       <div class="quiz-matches" id="quiz-matches"></div>
       <p class="quiz-why" id="quiz-why"></p>
       <div class="quiz-code">
-        <span class="mono-sm qc-label">YOUR 30% CODE</span>
-        <button class="qc-chip" type="button" id="qc-copy">SITES30</button>
+        <span class="mono-sm qc-label">YOUR 25% CODE</span>
+        <button class="qc-chip" type="button" id="qc-copy">SITES25</button>
         <span class="qc-note">Use it at checkout on any template. Tap the code to copy.</span>
       </div>
       ${site.leadWebhook ? `<form id="quiz-lead" data-capture="quiz" novalidate>
@@ -282,8 +282,8 @@ const quizBlock = (root) => `
     setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
   var qc = document.getElementById("qc-copy");
   if (qc) qc.addEventListener("click", function () {
-    var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES30"; }, 1600); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES30").then(done, done); else done();
+    var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES25"; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES25").then(done, done); else done();
   });
   }
 
@@ -424,7 +424,7 @@ ${FONTS}
 </head>
 <body>
 <div id="sale-bar" hidden>
-  <button class="sb-msg" type="button" data-quiz-open>LAUNCH SALE &middot; Take the 60 second quiz, get <b>30% off</b> your match <span class="arr">&rarr;</span></button>
+  <button class="sb-msg" type="button" data-quiz-open>LAUNCH SALE &middot; Take the 60 second quiz, get <b>25% off</b> your match <span class="arr">&rarr;</span></button>
   <button class="sb-x" type="button" aria-label="Dismiss">&times;</button>
 </div>
 <script>
