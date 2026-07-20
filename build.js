@@ -203,6 +203,14 @@ const quizBlock = (root) => `
         <button type="button" data-pick="standout">Standing out completely</button>
       </div>
     </div>
+    <div class="quiz-step" data-step="reward" hidden>
+      <p class="quiz-lab">Your reward</p>
+      <h2 class="quiz-h">A little <span class="it">thank you.</span></h2>
+      <div class="reveal-code blurred" id="reveal-code" role="button" tabindex="0" aria-label="Discount code">SITES25</div>
+      <p class="quiz-p" id="reveal-note">Use this code at checkout. 25% off any template.</p>
+      <button class="pill lg" type="button" id="reveal-btn">Reveal my code</button>
+      <button class="pill lg" type="button" data-next hidden id="reveal-next">See my match <span class="arr">&rarr;</span></button>
+    </div>
     <div class="quiz-step" data-step="result" hidden>
       <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
       <div class="quiz-matches" id="quiz-matches"></div>
@@ -224,7 +232,7 @@ const quizBlock = (root) => `
   var ov = document.getElementById("quiz-overlay");
   if (!ov) return;
   var steps = ov.querySelectorAll(".quiz-step");
-  var order = ["intro", "contact", "build", "feel", "matters", "result"];
+  var order = ["intro", "contact", "build", "feel", "matters", "reward", "result"];
   var at = 0;
   var picks = { build: null, feel: null, matters: null };
   var lead = { name: "", email: "" };
@@ -262,7 +270,7 @@ const quizBlock = (root) => `
     if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
     document.getElementById("quiz-matches").innerHTML = html;
     document.getElementById("quiz-why").textContent = top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + ", matched to your answers.";
-    show(order.indexOf("result"));
+    show(order.indexOf("reward"));
     if (HOOK && lead.email) {
       fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({
         name: lead.name, email: lead.email, prof: "quiz", plan: picks.build || "", matches: lastMatches, page: location.pathname,
@@ -300,6 +308,21 @@ const quizBlock = (root) => `
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
     setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
+  var rb = document.getElementById("reveal-btn");
+  var rc = document.getElementById("reveal-code");
+  var rn = document.getElementById("reveal-next");
+  if (rb) rb.addEventListener("click", function () {
+    rc.classList.remove("blurred");
+    rb.hidden = true;
+    rn.hidden = false;
+    document.getElementById("reveal-note").textContent = "Tap the code to copy it. It works on every template.";
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "code-reveal", title: "Code revealed", event: true });
+  });
+  if (rc) rc.addEventListener("click", function () {
+    if (rc.classList.contains("blurred")) return;
+    var done = function () { rc.textContent = "Copied \u2713"; setTimeout(function () { rc.textContent = "SITES25"; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES25").then(done, done); else done();
+  });
   var qc = document.getElementById("qc-copy");
   if (qc) qc.addEventListener("click", function () {
     var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES25"; }, 1600); };
