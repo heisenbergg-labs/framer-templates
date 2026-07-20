@@ -290,7 +290,7 @@ const quizBlock = (root) => `
     show(order.indexOf("build"));
   });
   ov.addEventListener("click", function (e) {
-    if (e.target === ov) { close(); return; }
+    if (e.target === ov) { if (order[at] === "intro") close(); return; }
     if (e.target.closest(".quiz-x")) { close(); return; }
     var nx = e.target.closest("[data-next]");
     if (nx) { show(at + 1); return; }
