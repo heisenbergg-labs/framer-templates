@@ -733,14 +733,14 @@ const detail = (t) => {
     </div>` : ""}
   </div>
   <div class="pd-info">
-    <p class="cat mono">${esc(t.name.toUpperCase())}</p>
+    <p class="cat mono">${esc(t.name.toUpperCase())} &middot; ${esc(t.category.toUpperCase())} TEMPLATE FOR FRAMER</p>
     <h1 class="serif">${esc(t.tagline)}</h1>
-    <p class="pd-sub">${esc(t.category)} website template for Framer</p>
+    <p class="desc">${esc(t.description)}</p>
+    <div class="pd-div"></div>
     <div class="price-row">
       <span class="price">${esc(t.price)}</span>
-      ${t.free || soon ? "" : `<span class="pd-chip">SITES25 = 25% off</span>`}
+      ${t.free || soon ? "" : `<a class="textlink pd-quiz" href="#" data-quiz-open>Take the quiz, get 25% off <span class="arr">&rarr;</span></a>`}
     </div>
-    <p class="desc">${esc(t.description)}</p>
     <div class="actions pd-actions">
       ${soon
         ? `<form class="news-form" data-capture="waitlist" data-tpl="${esc(t.name)}" novalidate>
@@ -751,6 +751,7 @@ const detail = (t) => {
         : `<a class="btn-primary" href="${buyHref}" target="_blank" rel="noreferrer">${t.free ? "Get free template" : `Get this template &middot; ${esc(t.price)}`}</a>
            <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>`}
     </div>
+    ${soon ? "" : `<p class="pd-trust mono-sm">FREE UPDATES &nbsp;&middot;&nbsp; ONE-SITE LICENSE &nbsp;&middot;&nbsp; REMIX LINK AFTER CHECKOUT</p>`}
   </div>
 </div>
 <script>
