@@ -702,6 +702,8 @@ const TIERS = {
 };
 
 const detail = (t) => {
+  const related = live.filter(x => x.slug !== t.slug && x.category === t.category)
+    .concat(live.filter(x => x.slug !== t.slug && x.category !== t.category)).slice(0, 3);
   const price = t.free ? "0" : String(t.price).replace(/[^0-9.]/g, "");
   const soon = t.status === "soon";
   const inner = shot(t.slug, "inner"), page2 = shot(t.slug, "page2"), mobile = shot(t.slug, "mobile");
@@ -760,6 +762,16 @@ document.querySelectorAll(".pd-th").forEach(function (b) {
   });
 });
 </script>
+
+<section class="more-sec"><div class="wrap">
+  <div class="more-head">
+    <h2 class="serif">More <span class="it">templates</span></h2>
+    <a class="textlink" href="../../templates/index.html">See all <span class="arr">&rarr;</span></a>
+  </div>
+  <div class="grid rel3">
+    ${related.map(r => card(r, "../..")).join("\n")}
+  </div>
+</div></section>
 ${QL}`,
   });
 };

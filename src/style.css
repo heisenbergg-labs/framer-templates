@@ -1073,9 +1073,13 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .pd-th img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 .pd-th:hover { opacity: 0.85; }
 .pd-th.on { opacity: 1; box-shadow: inset 0 0 0 2px rgba(116, 92, 255, 0.8); }
-.pd-info { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-.pd-info h1 { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.06; }
-.pd-sub { color: var(--grey); font-size: 16px; }
+.pd-info { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 0; align-items: flex-start; }
+.pd-info .cat { margin-bottom: 16px; }
+.pd-info h1 { font-size: clamp(32px, 3.4vw, 46px); line-height: 1.05; margin-bottom: 10px; }
+.pd-sub { color: var(--grey); font-size: 15.5px; margin-bottom: 30px; }
+.pd .price-row { margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+.pd .price { font-size: 30px; }
+.pd .desc { color: var(--grey); font-size: 15.5px; line-height: 1.7; margin-bottom: 34px; max-width: 46ch; }
 .pd-chip { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; font-weight: 700; color: #b9aaff; background: rgba(116, 92, 255, 0.12); border: 1px dashed rgba(116, 92, 255, 0.5); border-radius: 8px; padding: 5px 10px; }
 .pd-actions { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 380px; margin-top: 6px; }
 .pd-actions .btn-primary, .pd-actions .btn-secondary { text-align: center; justify-content: center; display: inline-flex; }
@@ -1092,3 +1096,11 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 62%, transparent 98%);
   mask-image: radial-gradient(120% 100% at 50% 0%, #000 62%, transparent 98%);
 }
+
+/* ===== more templates strip ===== */
+.more-sec { padding: 8px 0 96px; }
+.more-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 26px; }
+.more-head h2 { font-size: clamp(24px, 2.4vw, 32px); }
+.grid.rel3 { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.grid.rel3 .meta-l h3 { font-size: 16px; }
+@media (max-width: 880px) { .grid.rel3 { grid-template-columns: 1fr; gap: 34px; } }
