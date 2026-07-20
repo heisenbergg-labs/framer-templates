@@ -209,7 +209,7 @@ const quizBlock = (root) => `
       <div class="reveal-code blurred" id="reveal-code" role="button" tabindex="0" aria-label="Discount code">SITES25</div>
       <p class="quiz-p" id="reveal-note">Use this code at checkout. 25% off any template.</p>
       <button class="pill lg" type="button" id="reveal-btn">Reveal my code</button>
-      <button class="pill lg" type="button" data-next hidden id="reveal-next">See my match <span class="arr">&rarr;</span></button>
+      <button class="pill lg" type="button" data-next hidden id="reveal-next">See the recommended template <span class="arr">&rarr;</span></button>
     </div>
     <div class="quiz-step" data-step="result" hidden>
       <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
@@ -266,7 +266,7 @@ const quizBlock = (root) => `
     var top = picked[0], alt = picked[1];
     var html = "<a class='quiz-match hero' href='" + ROOT + "/templates/" + top.slug + "/index.html'>" +
       "<img src='" + ROOT + "/" + top.cover + "' alt=''>" +
-      "<span class='qm-meta'><b>" + top.name + " <em>Best match</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i><span class='qm-cta'>Open " + top.name + " \u2192</span></span></a>";
+      "<span class='qm-meta'><b>" + top.name + " <em>Recommended</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i><span class='qm-cta'>Open " + top.name + " \u2192</span></span></a>";
     if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
     document.getElementById("quiz-matches").innerHTML = html;
     document.getElementById("quiz-why").textContent = top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + ", matched to your answers.";
