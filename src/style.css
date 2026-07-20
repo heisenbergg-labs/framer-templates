@@ -1019,3 +1019,20 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 }
 .seg-b:hover { color: var(--ink); }
 .seg-b.on { background: var(--ink); color: #101010; }
+
+/* ===== quiz contact gate + result CTA ===== */
+#quiz-contact { display: flex; flex-direction: column; gap: 12px; width: min(380px, 100%); margin: 30px auto 16px; }
+#quiz-contact input {
+  font: inherit; font-size: 15px; color: var(--ink);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-2); border-radius: 100px;
+  padding: 13px 22px; outline: none; text-align: center;
+}
+#quiz-contact input:focus { border-color: rgba(116, 92, 255, 0.6); }
+#quiz-contact .pill { margin-top: 6px; }
+.qm-cta {
+  display: inline-flex; align-self: center; align-items: center;
+  margin-top: 14px; padding: 10px 24px; border-radius: 100px;
+  background: var(--ink); color: #101010; font-weight: 600; font-size: 14px;
+}
+.quiz-match.hero img { max-height: 44vh; object-fit: cover; object-position: top; }

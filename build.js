@@ -163,6 +163,16 @@ const quizBlock = (root) => `
       <p class="quiz-p">Three quick questions. We match you with the right design and tell you why.</p>
       <button class="pill lg" type="button" data-next>Start matching</button>
     </div>
+    <div class="quiz-step" data-step="contact" hidden>
+      <p class="quiz-lab">Before we start</p>
+      <h2 class="quiz-h">Where do we send <span class="it">your match?</span></h2>
+      <form id="quiz-contact" novalidate>
+        <input id="qcn" type="text" placeholder="Your name" autocomplete="name" required aria-label="Name">
+        <input id="qce" type="email" placeholder="Your email" autocomplete="email" required aria-label="Email">
+        <button class="pill lg" type="submit">Continue</button>
+      </form>
+      <p class="quiz-fine">Your match and the 25% code land here too. No spam, ever.</p>
+    </div>
     <div class="quiz-step" data-step="build" hidden>
       <p class="quiz-lab">01 of 03</p>
       <h2 class="quiz-h">What are you <span class="it">building?</span></h2>
@@ -201,11 +211,6 @@ const quizBlock = (root) => `
         <button class="qc-chip" type="button" id="qc-copy">SITES25</button>
         <span class="qc-note">25% off at checkout &middot; tap to copy</span>
       </div>
-      ${site.leadWebhook ? `<form id="quiz-lead" data-capture="quiz" novalidate>
-        <input id="quiz-email" type="email" placeholder="Your email" autocomplete="email" required aria-label="Email">
-        <button class="pill" type="submit">Save my match</button>
-      </form>
-      <p class="quiz-fine">We email your match and code. No spam, ever.</p>` : ""}
       <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
@@ -219,9 +224,10 @@ const quizBlock = (root) => `
   var ov = document.getElementById("quiz-overlay");
   if (!ov) return;
   var steps = ov.querySelectorAll(".quiz-step");
-  var order = ["intro", "build", "feel", "matters", "result"];
+  var order = ["intro", "contact", "build", "feel", "matters", "result"];
   var at = 0;
   var picks = { build: null, feel: null, matters: null };
+  var lead = { name: "", email: "" };
   function show(i) { at = i; steps.forEach(function (st) { st.hidden = st.dataset.step !== order[i]; }); ov.scrollTop = 0; }
   function open() { ov.hidden = false; document.body.style.overflow = "hidden"; show(0); trapOn(ov); if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-open", title: "Quiz opened", event: true }); }
   function close() { ov.hidden = true; document.body.style.overflow = ""; trapOff(); localStorage.setItem("gs_quiz_seen", "1"); }
@@ -252,13 +258,29 @@ const quizBlock = (root) => `
     var top = picked[0], alt = picked[1];
     var html = "<a class='quiz-match hero' href='" + ROOT + "/templates/" + top.slug + "/index.html'>" +
       "<img src='" + ROOT + "/" + top.cover + "' alt=''>" +
-      "<span class='qm-meta'><b>" + top.name + " <em>Best match</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i></span></a>";
+      "<span class='qm-meta'><b>" + top.name + " <em>Best match</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i><span class='qm-cta'>Open " + top.name + " \u2192</span></span></a>";
     if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
     document.getElementById("quiz-matches").innerHTML = html;
     document.getElementById("quiz-why").textContent = top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + ", matched to your answers.";
     show(order.indexOf("result"));
+    if (HOOK && lead.email) {
+      fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({
+        name: lead.name, email: lead.email, prof: "quiz", plan: picks.build || "", matches: lastMatches, page: location.pathname,
+      }).toString() });
+      localStorage.setItem("gs_lead_sent", "1");
+      if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-lead", title: "Lead: quiz", event: true });
+    }
     if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quiz-complete", title: "Quiz completed", event: true });
   }
+  var cf = document.getElementById("quiz-contact");
+  if (cf) cf.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var n = document.getElementById("qcn"), em = document.getElementById("qce");
+    if (!n.value.trim()) { n.focus(); return; }
+    if (!em.value || em.value.indexOf("@") < 1) { em.focus(); return; }
+    lead.name = n.value.trim(); lead.email = em.value.trim();
+    show(order.indexOf("build"));
+  });
   ov.addEventListener("click", function (e) {
     if (e.target === ov) { close(); return; }
     if (e.target.closest(".quiz-x")) { close(); return; }
