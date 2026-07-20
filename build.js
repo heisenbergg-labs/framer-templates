@@ -308,6 +308,7 @@ const quizBlock = (root) => `
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
     setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
+  }
   var rb = document.getElementById("reveal-btn");
   var rc = document.getElementById("reveal-code");
   var rn = document.getElementById("reveal-next");
@@ -328,7 +329,6 @@ const quizBlock = (root) => `
     var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES25"; }, 1600); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES25").then(done, done); else done();
   });
-  }
 
   // shared email capture: quiz save, newsletter, waitlist -> one webhook
   document.querySelectorAll("form[data-capture]").forEach(function (f) {
