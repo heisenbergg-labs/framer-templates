@@ -39,7 +39,7 @@ const QDATA = sorted.map(t => ({
 
 /* ---------------- shared chrome ---------------- */
 const NAV = (root, navDelay) => `
-<nav${navDelay ? ' class="nav-wait"' : ""}><div class="wrap nav-row">
+<nav><div class="wrap nav-row">
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
@@ -483,17 +483,10 @@ ${FONTS}
 ${NAV(root, navDelay)}
 ${navDelay ? `<script>
 (function () {
-  var nav = document.querySelector("nav");
   var sb = document.getElementById("sale-bar");
-  var done = false;
-  function reveal() {
-    if (done) return; done = true;
-    nav.classList.add("nav-in");
-    if (sb && !sessionStorage.getItem("gs_sale_x")) sb.hidden = false;
-  }
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { reveal(); return; }
-  setTimeout(reveal, 6000);
-  addEventListener("scroll", reveal, { once: true, passive: true });
+  setTimeout(function () {
+    if (sb && !sessionStorage.getItem("gs_sale_x")) { sb.hidden = false; sb.classList.add("sb-in"); }
+  }, 6000);
 })();
 </script>` : ""}
 ${body}
