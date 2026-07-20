@@ -321,7 +321,13 @@ const quizBlock = (root) => `
   });
   if (rc) rc.addEventListener("click", function () {
     if (rc.classList.contains("blurred")) return;
-    var done = function () { rc.textContent = "Copied \u2713"; setTimeout(function () { rc.textContent = "SITES25"; }, 1400); };
+    var done = function () {
+      var t = rc.querySelector(".copy-toast");
+      if (!t) { t = document.createElement("span"); t.className = "copy-toast"; t.textContent = "Copied \u2713"; rc.appendChild(t); }
+      requestAnimationFrame(function () { t.classList.add("on"); });
+      clearTimeout(t._h);
+      t._h = setTimeout(function () { t.classList.remove("on"); }, 1400);
+    };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES25").then(done, done); else done();
   });
   var qc = document.getElementById("qc-copy");

@@ -624,9 +624,16 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(52% 40% at 50% 26%, rgba(116, 92, 255, 0.1) 0%, transparent 70%),
-    radial-gradient(38% 34% at 84% 82%, rgba(139, 109, 219, 0.07) 0%, transparent 70%);
+  background: radial-gradient(110% 80% at 50% 0%, rgba(116, 92, 255, 0.07) 0%, rgba(116, 92, 255, 0.025) 45%, transparent 78%);
+  pointer-events: none;
+}
+#quiz-overlay::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.04;
   pointer-events: none;
 }
 .quiz-card { position: relative; width: min(680px, 100%); text-align: center; padding: 48px 0 40px; margin: auto; }
@@ -1123,6 +1130,24 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   transition: filter 0.9s var(--ease), transform 0.9s var(--ease), opacity 0.9s ease;
 }
 .reveal-code.blurred { filter: blur(26px); transform: scale(0.96); opacity: 0.9; pointer-events: none; }
+.copy-toast {
+  position: absolute;
+  top: -14px;
+  right: -12px;
+  font-family: "Geist", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgba(116, 92, 255, 0.92);
+  border-radius: 100px;
+  padding: 6px 13px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.3s var(--ease);
+}
+.copy-toast.on { opacity: 1; transform: none; }
 #reveal-note { margin-bottom: 30px; }
 #reveal-next[hidden], #reveal-btn[hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { .reveal-code { transition: none; } }
