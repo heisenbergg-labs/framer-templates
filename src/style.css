@@ -1,9 +1,9 @@
 /* getsites v3 — curated template studio */
 :root {
-  --bg: #101010;
-  --bg-deep: #0b0b0b;
-  --surface: #161616;
-  --surface-2: #1c1b1a;
+  --bg: #0b0b0b;
+  --bg-deep: #060606;
+  --surface: #121212;
+  --surface-2: #171615;
   --ink: #f4f2ec;
   --grey: #a7a49b;
   --grey-2: #7a7770;
@@ -58,7 +58,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(16, 16, 16, 0.85);
+  background: rgba(9, 9, 9, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
@@ -162,7 +162,16 @@ button.textlink { background: none; border: 0; color: var(--ink); font-size: 14.
   margin: -0.15em -0.18em;
   color: #a390ff;
 }
-.hero .wrap { position: relative; }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+.hero .wrap { position: relative; z-index: 1; }
 .eyebrow-line { margin-bottom: 22px; }
 .hero h1 { font-size: clamp(46px, 6.4vw, 86px); line-height: 1.0; max-width: 720px; }
 .ten-words {
