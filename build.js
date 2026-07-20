@@ -203,22 +203,15 @@ const quizBlock = (root) => `
         <button type="button" data-pick="standout">Standing out completely</button>
       </div>
     </div>
-    <div class="quiz-step qr" data-step="result" hidden>
-      <div class="qr-grid">
-        <div class="qr-info">
-          <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
-          <div id="qr-meta"></div>
-          <p class="quiz-why" id="quiz-why"></p>
-          <a id="qr-open" class="pill lg" href="#">Open</a>
-          <div class="quiz-code">
-            <button class="qc-chip" type="button" id="qc-copy">SITES25</button>
-            <span class="qc-note">25% off at checkout &middot; tap to copy</span>
-          </div>
-          <a id="qr-alt" class="quiz-alt" href="#"></a>
-          <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
-        </div>
-        <a class="qr-shot" id="qr-shot" href="#"><img id="qr-img" src="" alt="Matched template preview"></a>
+    <div class="quiz-step" data-step="result" hidden>
+      <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
+      <div class="quiz-matches" id="quiz-matches"></div>
+      <p class="quiz-why" id="quiz-why"></p>
+      <div class="quiz-code">
+        <button class="qc-chip" type="button" id="qc-copy">SITES25</button>
+        <span class="qc-note">25% off at checkout &middot; tap to copy</span>
       </div>
+      <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
 </div>
@@ -263,14 +256,11 @@ const quizBlock = (root) => `
     var picked = score();
     lastMatches = picked.map(function (t) { return t.name; }).join(", ");
     var top = picked[0], alt = picked[1];
-    var url = ROOT + "/templates/" + top.slug + "/index.html";
-    document.getElementById("qr-meta").innerHTML = "<b>" + top.name + " <em>Best match</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i>";
-    document.getElementById("qr-img").src = ROOT + "/" + top.cover;
-    document.getElementById("qr-shot").href = url;
-    var openBtn = document.getElementById("qr-open");
-    openBtn.href = url; openBtn.textContent = "Open " + top.name + " \u2192";
-    var altEl = document.getElementById("qr-alt");
-    if (alt) { altEl.href = ROOT + "/templates/" + alt.slug + "/index.html"; altEl.innerHTML = "Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " \u2192"; altEl.hidden = false; } else altEl.hidden = true;
+    var html = "<a class='quiz-match hero' href='" + ROOT + "/templates/" + top.slug + "/index.html'>" +
+      "<img src='" + ROOT + "/" + top.cover + "' alt=''>" +
+      "<span class='qm-meta'><b>" + top.name + " <em>Best match</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i><span class='qm-cta'>Open " + top.name + " \u2192</span></span></a>";
+    if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
+    document.getElementById("quiz-matches").innerHTML = html;
     document.getElementById("quiz-why").textContent = top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + ", matched to your answers.";
     show(order.indexOf("result"));
     if (HOOK && lead.email) {
@@ -591,6 +581,9 @@ const collectionScript = `
 })();
 </script>`;
 
+/* ---------------- hero visual (optional asset) ---------------- */
+const HERO_VISUAL = ["png", "jpg", "webp"].map(e => `assets/brand/hero-visual.${e}`).find(p => fs.existsSync(path.join(ROOT, p))) || null;
+
 /* ---------------- home ---------------- */
 const home = page({
   title: site.title,
@@ -607,6 +600,7 @@ const home = page({
       <a class="pill lg" href="#collection">Browse the collection</a>
       <a class="textlink" href="#" data-quiz-open>Find my template <span class="arr">&rarr;</span></a>
     </div>
+    ${HERO_VISUAL ? `<div class="hero-visual"><img src="${HERO_VISUAL}" alt="A getsites template on screen"></div>` : ""}
   </div>
 </header>
 

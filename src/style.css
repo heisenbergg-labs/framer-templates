@@ -1,6 +1,6 @@
 /* getsites v3 — curated template studio */
 :root {
-  --bg: #0b0b0b;
+  --bg: #030303;
   --bg-deep: #060606;
   --surface: #121212;
   --surface-2: #171615;
@@ -58,7 +58,9 @@ nav {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(9, 9, 9, 0.85);
+  background: rgba(22, 22, 22, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
@@ -123,7 +125,7 @@ button.textlink { background: none; border: 0; color: var(--ink); font-size: 14.
 }
 
 /* ---------------- hero ---------------- */
-.hero { padding: 92px 0 72px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.hero { padding: 92px 0 72px; position: relative; overflow: hidden; }
 .hero::before {
   content: "";
   position: absolute;
@@ -1023,12 +1025,14 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 /* ===== quiz contact gate + result CTA ===== */
 #quiz-contact { display: flex; flex-direction: column; gap: 12px; width: min(380px, 100%); margin: 30px auto 16px; }
 #quiz-contact input {
-  font: inherit; font-size: 15px; color: var(--ink);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--line-2); border-radius: 100px;
-  padding: 13px 22px; outline: none; text-align: center;
+  font-family: var(--font-brand, "Instrument Serif"), serif;
+  font-size: 24px; color: var(--ink);
+  background: none; border: 0;
+  border-bottom: 1.5px dashed rgba(244, 242, 236, 0.3);
+  border-radius: 0; padding: 8px 4px 10px; outline: none; text-align: center;
 }
-#quiz-contact input:focus { border-color: rgba(116, 92, 255, 0.6); }
+#quiz-contact input::placeholder { color: var(--grey-2); font-style: italic; }
+#quiz-contact input:focus { border-bottom-color: rgba(116, 92, 255, 0.75); }
 #quiz-contact .pill { margin-top: 6px; }
 .qm-cta {
   display: inline-flex; align-self: center; align-items: center;
@@ -1079,4 +1083,12 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .pd { grid-template-columns: 1fr; gap: 28px; padding-bottom: 64px; }
   .pd-info { position: static; }
   .pd-th { width: 84px; height: 58px; }
+}
+
+/* ===== hero visual (generated image slot) ===== */
+.hero-visual { margin: 64px auto -20px; max-width: 1120px; position: relative; }
+.hero-visual img {
+  display: block; width: 100%;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 62%, transparent 98%);
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 62%, transparent 98%);
 }
