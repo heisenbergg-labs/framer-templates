@@ -488,10 +488,8 @@ const card = (t, root = ".") => `
   </div>
   <div class="meta">
     <div class="meta-l">
-      <span class="cat-line">${esc(t.category)}</span>
       <h3><a href="${root}/templates/${t.slug}/index.html">${esc(t.name)}</a>${statusBadge(t)}</h3>
       <p class="line2">${esc(t.tagline)}</p>
-      <p class="feat-line">${(t.features || []).slice(0, 2).map(esc).join(" &nbsp;&middot;&nbsp; ")}</p>
     </div>
     ${priceLabel(t)}
   </div>
@@ -500,24 +498,23 @@ const card = (t, root = ".") => `
 /* ---------------- collection (shared: home + /templates/) ---------------- */
 const collectionSec = (root, standalone) => `
 <section id="collection" class="collection-sec${standalone ? " standalone" : ""}"><div class="wrap">
-  <div class="col-head">
+  ${standalone ? `<div class="col-head">
     <div>
-      ${standalone ? `<h1 class="serif">The <span class="it">collection</span></h1>` : `<h2 class="serif">The <span class="it">collection</span></h2>`}
-      <p class="sub">Five sites. No filler. Designed slowly, ready quickly.</p>
+      <h1 class="serif">The <span class="it">collection</span></h1>
     </div>
     <div class="q-wrap"><input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search templates"><span class="q-kbd">⌘K</span></div>
-  </div>
-  <div class="chip-row" aria-label="Filter templates">
-    <button class="chip on" type="button" data-cat="all">All</button>
-    ${CATS.map(c => `<button class="chip" type="button" data-cat="${esc(c)}">${esc(c)}</button>`).join("\n    ")}
-    <button class="chip" type="button" data-cat="__free">Free</button>
+  </div>` : ""}
+  <div class="seg" role="tablist" aria-label="Filter templates">
+    <button class="seg-b on" type="button" data-cat="all">All</button>
+    <button class="seg-b" type="button" data-cat="__free">Free</button>
+    <button class="seg-b" type="button" data-cat="__paid">Paid</button>
   </div>
   <div class="grid" id="tgrid">
     ${live.map(t => card(t, root)).join("\n")}
   </div>
   <div id="empty" class="grid-empty" hidden>
     <p class="serifline">Nothing here <span class="it">yet.</span></p>
-    <p class="sub">No templates match that. Clear the search or pick another category.</p>
+    <p class="sub">No templates match that filter.</p>
   </div>
 </div></section>`;
 
@@ -531,7 +528,7 @@ const collectionScript = `
   function apply() {
     var vis = 0;
     cards.forEach(function (c) {
-      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : c.dataset.cat === state.cat);
+      var okCat = state.cat === "all" || (state.cat === "__free" ? c.dataset.free === "true" : state.cat === "__paid" ? c.dataset.free === "false" : c.dataset.cat === state.cat);
       var okQ = !state.q || (c.dataset.name + " " + c.dataset.cat + " " + c.textContent).toLowerCase().indexOf(state.q) !== -1;
       var on = okCat && okQ;
       c.style.display = on ? "" : "none";
@@ -539,13 +536,16 @@ const collectionScript = `
     });
     empty.hidden = vis !== 0;
   }
-  document.getElementById("q").addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
-  document.addEventListener("keydown", function (e) {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); document.getElementById("q").focus(); }
-  });
-  document.querySelectorAll(".chip").forEach(function (b) {
+  var q = document.getElementById("q");
+  if (q) {
+    q.addEventListener("input", function () { state.q = this.value.trim().toLowerCase(); apply(); });
+    document.addEventListener("keydown", function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); q.focus(); }
+    });
+  }
+  document.querySelectorAll(".seg-b").forEach(function (b) {
     b.addEventListener("click", function () {
-      document.querySelectorAll(".chip").forEach(function (x) { x.classList.remove("on"); });
+      document.querySelectorAll(".seg-b").forEach(function (x) { x.classList.remove("on"); });
       b.classList.add("on");
       state.cat = b.dataset.cat;
       apply();
@@ -554,7 +554,7 @@ const collectionScript = `
   var qs = new URLSearchParams(location.search);
   if (qs.get("cat")) {
     state.cat = qs.get("cat");
-    document.querySelectorAll(".chip").forEach(function (x) { x.classList.toggle("on", x.dataset.cat === state.cat); });
+    document.querySelectorAll(".seg-b").forEach(function (x) { x.classList.toggle("on", x.dataset.cat === state.cat); });
     apply();
   }
 })();
