@@ -38,8 +38,8 @@ const QDATA = sorted.map(t => ({
 }));
 
 /* ---------------- shared chrome ---------------- */
-const NAV = (root) => `
-<nav><div class="wrap nav-row">
+const NAV = (root, navDelay) => `
+<nav${navDelay ? ' class="nav-wait"' : ""}><div class="wrap nav-row">
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
@@ -307,7 +307,7 @@ const quizBlock = (root) => `
     if (o) { e.preventDefault(); open(); }
   });
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
-    setTimeout(function () { if (ov.hidden) open(); }, 10000 + Math.random() * 10000);
+    setTimeout(function () { if (ov.hidden) open(); }, 12000);
   }
   var rb = document.getElementById("reveal-btn");
   var rc = document.getElementById("reveal-code");
@@ -444,7 +444,7 @@ const QL = `
 </script>`;
 
 /* ---------------- page wrapper ---------------- */
-const page = ({ title, description, body, root = ".", og = "assets/og/home.jpg", jsonld = null }) => `<!DOCTYPE html>
+const page = ({ title, description, body, root = ".", og = "assets/og/home.jpg", jsonld = null, navDelay = false }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -473,14 +473,29 @@ ${FONTS}
 <script>
 (function () {
   var sb = document.getElementById("sale-bar");
-  if (!sessionStorage.getItem("gs_sale_x")) sb.hidden = false;
+  if (!sessionStorage.getItem("gs_sale_x")${navDelay ? " && false" : ""}) sb.hidden = false;
   sb.querySelector(".sb-x").addEventListener("click", function () {
     sb.hidden = true;
     sessionStorage.setItem("gs_sale_x", "1");
   });
 })();
 </script>
-${NAV(root)}
+${NAV(root, navDelay)}
+${navDelay ? `<script>
+(function () {
+  var nav = document.querySelector("nav");
+  var sb = document.getElementById("sale-bar");
+  var done = false;
+  function reveal() {
+    if (done) return; done = true;
+    nav.classList.add("nav-in");
+    if (sb && !sessionStorage.getItem("gs_sale_x")) sb.hidden = false;
+  }
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { reveal(); return; }
+  setTimeout(reveal, 6000);
+  addEventListener("scroll", reveal, { once: true, passive: true });
+})();
+</script>` : ""}
 ${body}
 ${quizBlock(root)}
 ${letterBlock(root)}
@@ -609,6 +624,7 @@ const HERO_VISUAL = ["png", "jpg", "webp"].map(e => `assets/brand/hero-visual.${
 
 /* ---------------- home ---------------- */
 const home = page({
+  navDelay: true,
   title: site.title,
   description: site.description,
   og: "assets/og/home.jpg",
@@ -688,7 +704,7 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
     n.hidden = false;
     requestAnimationFrame(function () { n.classList.add("in"); });
   }
-  setTimeout(show, 10000 + Math.random() * 10000);
+  setTimeout(show, 18000);
   n.querySelector(".fn-x").addEventListener("click", function () {
     n.classList.remove("in");
     sessionStorage.setItem("gs_feat_x", "1");

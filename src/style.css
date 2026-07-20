@@ -1126,3 +1126,7 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 #reveal-note { margin-bottom: 30px; }
 #reveal-next[hidden], #reveal-btn[hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { .reveal-code { transition: none; } }
+
+/* ===== staged nav arrival (home) ===== */
+nav.nav-wait { transform: translateY(-110%); opacity: 0; }
+nav.nav-wait.nav-in { transform: none; opacity: 1; transition: transform 0.7s var(--ease), opacity 0.5s ease; }
