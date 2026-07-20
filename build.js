@@ -521,9 +521,8 @@ const card = (t, root = ".") => `
   <div class="meta">
     <div class="meta-l">
       <h3><a href="${root}/templates/${t.slug}/index.html">${esc(t.name)}</a>${statusBadge(t)}</h3>
-      <p class="line2">${esc(t.tagline)}</p>
+      <p class="line2">${esc(t.category)} &middot; ${t.free ? "Free" : esc(t.price)}</p>
     </div>
-    ${priceLabel(t)}
   </div>
 </article>`;
 
@@ -709,8 +708,6 @@ const TIERS = {
 };
 
 const detail = (t) => {
-  const related = live.filter(x => x.slug !== t.slug && x.category === t.category)
-    .concat(live.filter(x => x.slug !== t.slug && x.category !== t.category)).slice(0, 2);
   const price = t.free ? "0" : String(t.price).replace(/[^0-9.]/g, "");
   const soon = t.status === "soon";
   const inner = shot(t.slug, "inner"), page2 = shot(t.slug, "page2"), mobile = shot(t.slug, "mobile");
@@ -731,72 +728,44 @@ const detail = (t) => {
       offers: { "@type": "Offer", price: price, priceCurrency: "USD", availability: soon ? "https://schema.org/PreOrder" : "https://schema.org/InStock", url: buyHref },
     },
     body: `
-<div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../index.html#collection">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
-<div class="wrap detail">
-  <div class="gallery">
-    <div class="main"><img src="../../${t.cover}" alt="${esc(t.name)} website template preview">${t.free ? '<span class="ppill free">Free</span>' : ""}</div>
+<div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../templates/index.html">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
+<div class="wrap pd">
+  <div class="pd-gallery">
+    <div class="pd-main"><img id="pd-img" src="../../${t.cover}" alt="${esc(t.name)} website template preview"></div>
+    ${[t.cover, inner, page2, mobile].filter(Boolean).length > 1 ? `<div class="pd-thumbs">
+      ${[t.cover, inner, page2, mobile].filter(Boolean).map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}"><img src="../../${src}" alt="" loading="lazy"></button>`).join("\n      ")}
+    </div>` : ""}
   </div>
-  <div class="info">
-    <p class="cat mono">${esc(t.category.toUpperCase())} TEMPLATE${soon ? " · COMING SOON" : ""} · ${esc((t.tier || "").toUpperCase())}</p>
+  <div class="pd-info">
+    <p class="cat mono">${esc(t.name.toUpperCase())}</p>
     <h1 class="serif">${esc(t.tagline)}</h1>
+    <p class="pd-sub">${esc(t.category)} website template for Framer</p>
     <div class="price-row">
       <span class="price">${esc(t.price)}</span>
-      <span class="tier-note">${esc(TIERS[t.tier] || "")}</span>
+      ${t.free || soon ? "" : `<span class="pd-chip">SITES25 = 25% off</span>`}
     </div>
     <p class="desc">${esc(t.description)}</p>
-    <ul class="ind-list">${(t.features || []).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
-    <div class="actions">
+    <div class="actions pd-actions">
       ${soon
         ? `<form class="news-form" data-capture="waitlist" data-tpl="${esc(t.name)}" novalidate>
              <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Email for early access">
              <button class="pill" type="submit">Join early access</button>
            </form>
            <button class="btn-secondary" type="button" data-ql-open data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}" data-ql-desc="${esc(t.tagline)}" data-ql-price="Coming soon" data-ql-get="#" data-ql-free="false">Preview the concept</button>`
-        : `<a class="btn-primary" href="${buyHref}" target="_blank" rel="noreferrer">${t.free ? "Get free template" : `Buy template · ${esc(t.price)}`}</a>
-           <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live</a>
-           ${t.checkout ? "" : `<p class="buy-note mono-sm">${t.free ? "OPENS THE LIVE SITE. HIT USE FOR FREE THERE AND IT REMIXES INTO YOUR FRAMER ACCOUNT." : "CHECKOUT OPENS FROM THE LIVE SITE. HIT BUY THIS TEMPLATE THERE."}</p>`}`}
+        : `<a class="btn-primary" href="${buyHref}" target="_blank" rel="noreferrer">${t.free ? "Get free template" : `Get this template &middot; ${esc(t.price)}`}</a>
+           <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>`}
     </div>
-    <p class="quiz-nudge">Not sure it's the one? <a href="#" data-quiz-open>Take the 60 second quiz &rarr;</a></p>
   </div>
 </div>
-
-<section class="included-sec"><div class="wrap">
-  <div class="inc-grid">
-    <div class="reveal">
-      <h2 class="serif">What's <span class="it">included</span></h2>
-      <ul class="check-list">${(t.included || []).map(i => `<li>${esc(i)}</li>`).join("")}</ul>
-    </div>
-    <div class="reveal">
-      <h2 class="serif">Best <span class="it">for</span></h2>
-      <ul class="check-list">${(t.bestFor || []).map(i => `<li>${esc(i)}</li>`).join("")}</ul>
-      <div class="prod-info">
-        <div><span>License</span><b>1 website per purchase</b></div>
-        <div><span>Framer plan</span><b>Free to edit, paid to use a custom domain</b></div>
-        <div><span>Updates</span><b>Free, through your remix link</b></div>
-        <div><span>Support</span><b><a href="../../support/index.html">Studio support</a></b></div>
-        <div><span>Refunds</span><b><a href="../../license/index.html#refunds">See policy</a></b></div>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-<section class="detail-steps"><div class="wrap">
-  <div class="sec-head">
-    <h2 class="serif">Make ${esc(t.name)} <span class="it">yours</span></h2>
-  </div>
-  <div class="steps3">
-    <div class="step3 reveal"><span class="steplab">01</span><h3>${soon ? "Get early access" : (t.free ? "Get it free" : "Buy it once")}</h3><p>${soon ? `Join the list and you get ${esc(t.name)} the moment it ships.` : (t.free ? `No signup wall. ${esc(t.name)} is yours in one click.` : "Yours forever, with free updates.")}</p></div>
-    <div class="step3 reveal"><span class="steplab">02</span><h3>Remix in Framer</h3><p>The whole site opens in a free Framer account, fully editable. Change anything yourself, or tell Framer's AI agent what you want.</p></div>
-    <div class="step3 reveal"><span class="steplab">03</span><h3>Publish</h3><p>Connect a domain and hit publish. Hosting, speed and SSL are Framer's problem, not yours.</p></div>
-  </div>
-</div></section>
-
-<section class="related-sec"><div class="wrap">
-  <div class="sec-head"><h2 class="serif">You might <span class="it">also like</span></h2></div>
-  <div class="grid">
-    ${related.map(r => card(r, "../..")).join("\n")}
-  </div>
-</div></section>
+<script>
+document.querySelectorAll(".pd-th").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.getElementById("pd-img").src = b.dataset.src;
+    document.querySelectorAll(".pd-th").forEach(function (x) { x.classList.remove("on"); });
+    b.classList.add("on");
+  });
+});
+</script>
 ${QL}`,
   });
 };
