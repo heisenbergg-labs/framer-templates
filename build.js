@@ -43,7 +43,7 @@ const NAV = (root) => `
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
-    <a href="${root}/templates/still/index.html">Current drop</a>
+    <a href="${root}/templates/still/index.html">Featured template</a>
     <a href="#" data-letter-open>Studio</a>
     <a class="pill" href="#" data-quiz-open>Find my template</a>
   </div>
@@ -51,7 +51,7 @@ const NAV = (root) => `
 </div>
 <div class="nav-sheet" hidden>
   <a href="${root}/templates/index.html">Templates</a>
-  <a href="${root}/templates/still/index.html">Current drop</a>
+  <a href="${root}/templates/still/index.html">Featured template</a>
   <a href="#" data-letter-open>Studio</a>
   <a class="pill" href="#" data-quiz-open>Find my template</a>
 </div></nav>`;
@@ -78,7 +78,7 @@ const FOOT = (root) => `
       <span class="mono-sm">SHOP</span>
       <a href="${root}/index.html#collection">All templates</a>
       <a href="${root}/index.html?cat=__free#collection">Free templates</a>
-      <a href="${root}/templates/still/index.html">Current drop</a>
+      <a href="${root}/templates/still/index.html">Featured template</a>
       <a href="${root}/index.html#signature">Upcoming release</a>
     </div>
     <div class="foot-col">
