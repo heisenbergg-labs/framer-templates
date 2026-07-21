@@ -1175,3 +1175,29 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .sc-bottom h3 { font-size: 17.5px; font-weight: 600; margin-bottom: 8px; }
 .sc-bottom p { color: var(--grey-2); font-size: 14px; line-height: 1.6; max-width: 300px; }
 @media (max-width: 880px) { .stepcard { min-height: 200px; } }
+
+/* ===== pricing ===== */
+.pricing-sec { padding: 80px 0; border-top: 1px solid var(--line); }
+.price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.price-card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--ring);
+  padding: 38px 38px 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.price-card h3 { font-size: 18px; font-weight: 600; }
+.pc-sub { color: var(--grey-2); font-size: 14.5px; max-width: 34ch; }
+.pc-price { font-size: 44px; font-weight: 600; letter-spacing: -0.02em; margin: 14px 0 6px; }
+.pc-from { font-size: 15px; font-weight: 400; color: var(--grey-2); margin-right: 6px; }
+.price-card .check-list { margin-top: 18px; }
+.price-card .check-list li { font-size: 14px; }
+.price-card.dark {
+  background: linear-gradient(150deg, #17142b 0%, #0d0c14 55%);
+  box-shadow: inset 0 0 0 1px rgba(116, 92, 255, 0.35), var(--shadow);
+}
+.pill.light { background: var(--ink); color: #101010; }
+@media (max-width: 880px) { .price-grid { grid-template-columns: 1fr; } }

@@ -664,6 +664,30 @@ ${collectionSec(".")}
   </div>
 </div></section>
 
+${site.bundle && site.bundle.checkout ? `<section id="pricing" class="pricing-sec"><div class="wrap">
+  <div class="sec-head"><h2 class="serif">One template, or <span class="it">all of them.</span></h2></div>
+  <div class="price-grid">
+    <div class="price-card reveal">
+      <h3>One template</h3>
+      <p class="pc-sub">Pick the one that fits. Perfect for a single website.</p>
+      <p class="pc-price"><span class="pc-from">From</span> $24</p>
+      <a class="pill" href="#collection">Choose your template</a>
+      <ul class="check-list">
+        <li>One complete website</li>
+        <li>One-site license, commercial use</li>
+        <li>Free updates through your remix link</li>
+      </ul>
+    </div>
+    <div class="price-card dark reveal">
+      <h3>${esc(site.bundle.name)}</h3>
+      <p class="pc-sub">${esc(site.bundle.note)}</p>
+      <p class="pc-price">${esc(site.bundle.price)}</p>
+      <a class="pill light" href="${site.bundle.checkout}" target="_blank" rel="noreferrer">Get all access</a>
+      <ul class="check-list">${site.bundle.includes.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
+    </div>
+  </div>
+</div></section>` : ""}
+
 ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
   ${upcoming.map(t => `
   <article class="sig-card reveal">

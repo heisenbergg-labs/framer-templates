@@ -5,7 +5,19 @@
     "title": "getsites, Original Framer websites with a point of view",
     "description": "A small collection of complete Framer websites for businesses that care how they look. Choose one, make it yours, and publish without starting from an empty canvas.",
     "baseUrl": "https://getsites.co",
-    "leadWebhook": "https://script.google.com/macros/s/AKfycbw140BmiNcoSyUfv8MeOnp_ESb9PD6NLv47oaPJSnAnXG21D0l7jZWZUpON2MleTVz39A/exec"
+    "leadWebhook": "https://script.google.com/macros/s/AKfycbw140BmiNcoSyUfv8MeOnp_ESb9PD6NLv47oaPJSnAnXG21D0l7jZWZUpON2MleTVz39A/exec",
+    "bundle": {
+      "name": "All access",
+      "price": "$249",
+      "checkout": "",
+      "note": "Every template today, plus the next five releases included.",
+      "includes": [
+        "Every current template",
+        "The next 5 releases, free when they ship",
+        "One-site license per template",
+        "Free updates through your remix links"
+      ]
+    }
   },
   "templates": [
     {
