@@ -648,10 +648,19 @@ ${collectionSec(".")}
   <div class="sec-head">
     <h2 class="serif">Three steps to <span class="it">yours</span></h2>
   </div>
-  <div class="steps3">
-    <div class="step3 reveal"><span class="steplab">01</span><h3>Choose</h3><p>Find a design that fits your business. Every demo is the real site, click through it.</p></div>
-    <div class="step3 reveal"><span class="steplab">02</span><h3>Remix</h3><p>The complete website copies into your Framer account, fully editable.</p></div>
-    <div class="step3 reveal"><span class="steplab">03</span><h3>Make it yours</h3><p>Replace the content yourself or with Framer's AI agent, connect your domain, publish.</p></div>
+  <div class="steps3 stepcards">
+    <div class="stepcard reveal">
+      <div class="sc-top"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a390ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 7l1-3h14l1 3M4 7v13h16V7"/><path d="M9 20v-6h6v6"/></svg><span class="mono-sm sc-num">01</span></div>
+      <div class="sc-bottom"><h3>Choose your template</h3><p>Browse the collection. Every demo is the real site, click through it before you decide.</p></div>
+    </div>
+    <div class="stepcard reveal">
+      <div class="sc-top"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a390ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span class="mono-sm sc-num">02</span></div>
+      <div class="sc-bottom"><h3>Customize in Framer</h3><p>The whole site copies into your free Framer account. Swap words, photos and colors. No code.</p></div>
+    </div>
+    <div class="stepcard reveal">
+      <div class="sc-top"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a390ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2 0-2.8a2 2 0 0 0-3-.2Z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.9 12.9 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg><span class="mono-sm sc-num">03</span></div>
+      <div class="sc-bottom"><h3>Publish and launch</h3><p>Connect your domain and hit publish. Hosting, speed and SSL are handled by Framer.</p></div>
+    </div>
   </div>
 </div></section>
 
