@@ -34,7 +34,7 @@ h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 64px; 
   const b = await chromium.launch({ channel: "chrome", headless: true });
   const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
   for (const t of templates) {
-    if (t.gallery) { console.log("og: " + t.slug + " (skipped, uses marketing image directly)"); continue; }
+    
     await p.setContent(cardHtml(t), { waitUntil: "networkidle" });
     await p.waitForTimeout(700);
     await p.screenshot({ path: path.join(ROOT, "assets", "og", t.slug + ".jpg"), type: "jpeg", quality: 88 });

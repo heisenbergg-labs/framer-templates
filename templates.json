@@ -119,7 +119,12 @@
         "Visual artists",
         "Creative portfolios"
       ],
-      "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g"
+      "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g",
+      "gallery": [
+        "assets/shots/still-1.jpg",
+        "assets/shots/still-2.jpg",
+        "assets/shots/still-3.jpg"
+      ]
     },
     {
       "slug": "fern-hollow",
@@ -162,7 +167,12 @@
         "Cabins and rentals",
         "Guest houses"
       ],
-      "checkout": ""
+      "checkout": "",
+      "gallery": [
+        "assets/shots/fern-hollow-1.jpg",
+        "assets/shots/fern-hollow-2.jpg",
+        "assets/shots/fern-hollow-3.jpg"
+      ]
     },
     {
       "slug": "the-aubrey",
@@ -208,7 +218,12 @@
         "Boutique hotels",
         "Private dining"
       ],
-      "checkout": "https://buy.polar.sh/polar_cl_YPejPZbrgBCRVdDqG8Q7ZiamZGOcMw1gKfEko19EfGW"
+      "checkout": "https://buy.polar.sh/polar_cl_YPejPZbrgBCRVdDqG8Q7ZiamZGOcMw1gKfEko19EfGW",
+      "gallery": [
+        "assets/shots/the-aubrey-1.jpg",
+        "assets/shots/the-aubrey-2.jpg",
+        "assets/shots/the-aubrey-3.jpg"
+      ]
     },
     {
       "slug": "brookmere",
@@ -250,7 +265,12 @@
         "Private advisory",
         "Boutique finance"
       ],
-      "checkout": "https://buy.polar.sh/polar_cl_TyVwEnJrBVIu0dqQYStfu8OuAUAiGXfm6gllP131UWc"
+      "checkout": "https://buy.polar.sh/polar_cl_TyVwEnJrBVIu0dqQYStfu8OuAUAiGXfm6gllP131UWc",
+      "gallery": [
+        "assets/shots/brookmere-1.jpg",
+        "assets/shots/brookmere-2.jpg",
+        "assets/shots/brookmere-3.jpg"
+      ]
     },
     {
       "slug": "nostalgia-exe",

@@ -297,7 +297,6 @@ const quizBlock = (root) => `
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ov.hidden) close(); });
   document.addEventListener("click", function (e) {
-    if (e.target.closest && e.target.closest(".qlb")) return;
     var o = e.target.closest ? e.target.closest("[data-quiz-open]") : null;
     if (o) { e.preventDefault(); open(); }
   });
@@ -382,67 +381,6 @@ const quizBlock = (root) => `
 </script>`;
 
 /* ---------------- quick look ---------------- */
-const QL = `
-<div id="ql" hidden>
-  <div class="ql-box" role="dialog" aria-modal="true" aria-label="Template quick look">
-    <div class="ql-top">
-      <div class="ql-meta"><b id="ql-name"></b><span id="ql-sub" class="mono-sm"></span></div>
-      <div class="ql-actions">
-        <button class="ql-view on" type="button" data-view="desktop">Desktop</button>
-        <button class="ql-view" type="button" data-view="mobile">Mobile</button>
-        <a id="ql-get" class="pill" href="#" target="_blank" rel="noreferrer">Get</a>
-        <button class="ql-x" type="button" aria-label="Close quick look">&times;</button>
-      </div>
-    </div>
-    <div class="ql-frame" id="ql-frame-wrap"><iframe id="ql-iframe" title="Live template preview"></iframe></div>
-  </div>
-</div>
-<script>
-(function () {
-  var ql = document.getElementById("ql");
-  var qlf = document.getElementById("ql-iframe");
-  var wrap = document.getElementById("ql-frame-wrap");
-  var lastFocus = null;
-  function qlClose() {
-    ql.hidden = true; qlf.src = "about:blank";
-    document.body.style.overflow = "";
-    if (window.gsTrap) gsTrap.off();
-    if (lastFocus) lastFocus.focus();
-  }
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest ? e.target.closest(".qlb, [data-ql-open]") : null;
-    if (b) {
-      e.preventDefault(); e.stopPropagation();
-      lastFocus = b;
-      document.getElementById("ql-name").textContent = b.dataset.qlName;
-      document.getElementById("ql-sub").textContent = b.dataset.qlCat + " · " + b.dataset.qlPrice + " · " + b.dataset.qlDesc;
-      var get = document.getElementById("ql-get");
-      get.href = b.dataset.qlGet;
-      get.textContent = b.dataset.qlFree === "true" ? "Get free template" : "Buy · " + b.dataset.qlPrice;
-      get.style.display = b.dataset.qlGet === "#" ? "none" : "";
-      wrap.classList.remove("as-phone");
-      wrap.hidden = false;
-      document.querySelectorAll(".ql-view").forEach(function (v) { v.classList.toggle("on", v.dataset.view === "desktop"); });
-      qlf.src = b.dataset.qlDemo;
-      ql.hidden = false;
-      document.body.style.overflow = "hidden";
-      if (window.gsTrap) gsTrap.on(ql.querySelector(".ql-box"));
-      ql.querySelector(".ql-x").focus();
-      if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "quick-look", title: "Quick look", event: true });
-      return;
-    }
-    var v = e.target.closest ? e.target.closest(".ql-view") : null;
-    if (v) {
-      document.querySelectorAll(".ql-view").forEach(function (x) { x.classList.remove("on"); });
-      v.classList.add("on");
-      wrap.classList.toggle("as-phone", v.dataset.view === "mobile");
-      return;
-    }
-    if (!ql.hidden && (e.target === ql || (e.target.closest && e.target.closest(".ql-x")))) qlClose();
-  }, true);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ql.hidden) qlClose(); });
-})();
-</script>`;
 
 /* ---------------- page wrapper ---------------- */
 const page = ({ title, description, body, root = ".", og = "assets/og/home.jpg", jsonld = null, navDelay = false }) => `<!DOCTYPE html>
@@ -534,11 +472,6 @@ const card = (t, root = ".") => `
     <a class="frame" href="${root}/templates/${t.slug}/index.html" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" aria-label="${esc(t.name)}">
       <img src="${root}/${t.cover}" alt="${esc(t.name)} website template" loading="lazy">
     </a>
-    ${t.status !== "soon" ? `<button class="qlb" type="button"
-      data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}"
-      data-ql-desc="${esc(t.tagline)}" data-ql-price="${t.free ? "Free" : esc(t.price)}"
-      data-ql-href="${root}/templates/${t.slug}/index.html" data-ql-get="${t.checkout || t.get}"
-      data-ql-free="${t.free}" data-ql-shots="${["inner","page2","mobile"].map(k => shot(t.slug, k)).filter(Boolean).map(p2 => root + "/" + p2).join(",")}">Quick look</button>` : ""}
   </div>
   <div class="meta">
     <div class="meta-l">
@@ -698,11 +631,6 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
     </div>
     <div class="sig-shot-wrap">
       <a class="sig-shot" href="templates/${t.slug}/index.html"><img src="${t.cover}" alt="${esc(t.name)} concept preview"></a>
-      <button class="qlb sig-ql" type="button"
-        data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}"
-        data-ql-desc="${esc(t.tagline)}" data-ql-price="Coming soon"
-        data-ql-href="templates/${t.slug}/index.html" data-ql-get="templates/${t.slug}/index.html"
-        data-ql-free="false" data-ql-shots="${["inner","page2","mobile"].map(k => shot(t.slug, k)).filter(Boolean).map(p2 => "./" + p2).join(",")}">Preview the concept</button>
     </div>
   </article>`).join("")}
 </div></section>` : ""}
@@ -773,8 +701,6 @@ ${site.bundle && site.bundle.checkout ? `<div id="feat-nudge" class="bundle-nudg
 })();
 </script>` : ""}
 
-${QL}
-
 ${collectionScript}`,
 });
 
@@ -787,7 +713,6 @@ const templatesPage = page({
   body: `
 ${collectionSec("..", true)}
 
-${QL}
 ${collectionScript}`,
 });
 
@@ -826,7 +751,7 @@ const detail = (t) => {
 <div class="wrap pd">
   <div class="pd-gallery">
     <div class="pd-main" id="pd-main"><img id="pd-img" src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt="${esc(t.name)} website template preview"></div>
-    ${(() => { const g = t.gallery || [t.cover, inner, page2, mobile].filter(Boolean); const items = g.map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}"><img src="../../${src}" alt="" loading="lazy"></button>`); if (t.video) items.push(`<button class="pd-th pd-th-video" type="button" data-video="${t.video}"><img src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt=""><span class="pd-play">&#9654;</span></button>`); return items.length > 1 ? `<div class="pd-thumbs">\n      ${items.join("\n      ")}\n    </div>` : ""; })()}
+    ${(() => { const g = t.gallery || [t.cover, inner, page2].filter(Boolean); const items = g.map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}"><img src="../../${src}" alt="" loading="lazy"></button>`); if (t.video) items.push(`<button class="pd-th pd-th-video" type="button" data-video="${t.video}"><img src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt=""><span class="pd-play">&#9654;</span></button>`); return items.length > 1 ? `<div class="pd-thumbs">\n      ${items.join("\n      ")}\n    </div>` : ""; })()}
   </div>
   <div class="pd-info">
     <p class="cat mono">${esc(t.name.toUpperCase())} &middot; ${esc(t.category.toUpperCase())} TEMPLATE FOR FRAMER</p>
@@ -842,8 +767,7 @@ const detail = (t) => {
         ? `<form class="news-form" data-capture="waitlist" data-tpl="${esc(t.name)}" novalidate>
              <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Email for early access">
              <button class="pill" type="submit">Join early access</button>
-           </form>
-           <button class="btn-secondary" type="button" data-ql-open data-ql-demo="${t.demo}" data-ql-name="${esc(t.name)}" data-ql-cat="${esc(t.category)}" data-ql-desc="${esc(t.tagline)}" data-ql-price="Coming soon" data-ql-get="#" data-ql-free="false">Preview the concept</button>`
+           </form>`
         : `<a class="btn-primary" href="${buyHref}" target="_blank" rel="noreferrer">${t.free ? "Get free template" : `Get this template &middot; ${esc(t.price)}`}</a>
            <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>`}
     </div>
@@ -874,7 +798,7 @@ document.querySelectorAll(".pd-th").forEach(function (b) {
     ${related.map(r => card(r, "../..")).join("\n")}
   </div>
 </div></section>
-${QL}`,
+`,
   });
 };
 
