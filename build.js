@@ -12,12 +12,7 @@ const VER = Date.now().toString(36);
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // free first, then paid cheapest-first (browsing order)
-const sorted = [...templates].sort((a, b) => {
-  if (a.free !== b.free) return a.free ? -1 : 1;
-  const pa = parseInt(String(a.price).replace(/\D/g, "")) || 0;
-  const pb = parseInt(String(b.price).replace(/\D/g, "")) || 0;
-  return pa - pb;
-});
+const sorted = [...templates]; // curated order = templates.json order
 const live = sorted.filter(t => t.status !== "soon");
 const upcoming = sorted.filter(t => t.status === "soon");
 const featured = templates.find(t => t.slug === "still");

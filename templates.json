@@ -21,49 +21,6 @@
   },
   "templates": [
     {
-      "slug": "still",
-      "name": "Still",
-      "tagline": "A film photographer's contact sheet, alive.",
-      "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet, marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
-      "category": "Portfolio",
-      "tags": [
-        "photography",
-        "portfolio",
-        "creative",
-        "art"
-      ],
-      "price": "$24",
-      "free": false,
-      "new": true,
-      "featured": true,
-      "status": "live",
-      "cover": "assets/covers/still.jpg",
-      "demo": "https://stillfilm.framer.website",
-      "get": "https://stillfilm.framer.website",
-      "year": "2026",
-      "tier": "Standard",
-      "features": [
-        "13 pages",
-        "Photo archive CMS",
-        "Editorial motion",
-        "Mobile ready"
-      ],
-      "included": [
-        "13 designed pages",
-        "Photo archive CMS",
-        "Contact-sheet gallery system",
-        "Editorial type system",
-        "Responsive breakpoints",
-        "Free updates"
-      ],
-      "bestFor": [
-        "Film photographers",
-        "Visual artists",
-        "Creative portfolios"
-      ],
-      "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g"
-    },
-    {
       "slug": "cut",
       "name": "CUT",
       "tagline": "A video editor's portfolio, cut like a film.",
@@ -120,6 +77,92 @@
         "assets/shots/cut-4.jpg"
       ],
       "video": "https://hsnbrg-cdn.pages.dev/cut-walkthrough.mp4"
+    },
+    {
+      "slug": "still",
+      "name": "Still",
+      "tagline": "A film photographer's contact sheet, alive.",
+      "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet, marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
+      "category": "Portfolio",
+      "tags": [
+        "photography",
+        "portfolio",
+        "creative",
+        "art"
+      ],
+      "price": "$24",
+      "free": false,
+      "new": true,
+      "featured": true,
+      "status": "live",
+      "cover": "assets/covers/still.jpg",
+      "demo": "https://stillfilm.framer.website",
+      "get": "https://stillfilm.framer.website",
+      "year": "2026",
+      "tier": "Standard",
+      "features": [
+        "13 pages",
+        "Photo archive CMS",
+        "Editorial motion",
+        "Mobile ready"
+      ],
+      "included": [
+        "13 designed pages",
+        "Photo archive CMS",
+        "Contact-sheet gallery system",
+        "Editorial type system",
+        "Responsive breakpoints",
+        "Free updates"
+      ],
+      "bestFor": [
+        "Film photographers",
+        "Visual artists",
+        "Creative portfolios"
+      ],
+      "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g"
+    },
+    {
+      "slug": "fern-hollow",
+      "name": "Fern Hollow",
+      "tagline": "Boutique stays and cabin rentals, warm and quiet.",
+      "description": "Fern Hollow is a free template for boutique stays, cabins and rentals. Warm photography-first layout, gallery and booking sections, and copy that feels like a host, not a hotel chain. Free, forever.",
+      "category": "Hospitality",
+      "tags": [
+        "rental",
+        "stay",
+        "hospitality",
+        "travel",
+        "free"
+      ],
+      "price": "Free",
+      "free": true,
+      "new": false,
+      "featured": false,
+      "status": "live",
+      "cover": "assets/covers/fernhollow.jpg",
+      "demo": "https://fernhollow.framer.website",
+      "get": "https://fernhollow.framer.website",
+      "year": "2026",
+      "tier": "Free",
+      "features": [
+        "Gallery and booking sections",
+        "Photography-first layout",
+        "Mobile ready",
+        "No custom code"
+      ],
+      "included": [
+        "Complete one-page site",
+        "Gallery and booking sections",
+        "Responsive breakpoints",
+        "Documentation in-page",
+        "Free forever"
+      ],
+      "bestFor": [
+        "Boutique stays",
+        "Cabins and rentals",
+        "Guest houses"
+      ],
+      "checkout": ""
     },
     {
       "slug": "the-aubrey",
@@ -208,49 +251,6 @@
         "Boutique finance"
       ],
       "checkout": "https://buy.polar.sh/polar_cl_TyVwEnJrBVIu0dqQYStfu8OuAUAiGXfm6gllP131UWc"
-    },
-    {
-      "slug": "fern-hollow",
-      "name": "Fern Hollow",
-      "tagline": "Boutique stays and cabin rentals, warm and quiet.",
-      "description": "Fern Hollow is a free template for boutique stays, cabins and rentals. Warm photography-first layout, gallery and booking sections, and copy that feels like a host, not a hotel chain. Free, forever.",
-      "category": "Hospitality",
-      "tags": [
-        "rental",
-        "stay",
-        "hospitality",
-        "travel",
-        "free"
-      ],
-      "price": "Free",
-      "free": true,
-      "new": false,
-      "featured": false,
-      "status": "live",
-      "cover": "assets/covers/fernhollow.jpg",
-      "demo": "https://fernhollow.framer.website",
-      "get": "https://fernhollow.framer.website",
-      "year": "2026",
-      "tier": "Free",
-      "features": [
-        "Gallery and booking sections",
-        "Photography-first layout",
-        "Mobile ready",
-        "No custom code"
-      ],
-      "included": [
-        "Complete one-page site",
-        "Gallery and booking sections",
-        "Responsive breakpoints",
-        "Documentation in-page",
-        "Free forever"
-      ],
-      "bestFor": [
-        "Boutique stays",
-        "Cabins and rentals",
-        "Guest houses"
-      ],
-      "checkout": ""
     },
     {
       "slug": "nostalgia-exe",
