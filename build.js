@@ -830,10 +830,8 @@ const detail = (t) => {
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../templates/index.html">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap pd">
   <div class="pd-gallery">
-    <div class="pd-main"><img id="pd-img" src="../../${t.cover}" alt="${esc(t.name)} website template preview"></div>
-    ${[t.cover, inner, page2, mobile].filter(Boolean).length > 1 ? `<div class="pd-thumbs">
-      ${[t.cover, inner, page2, mobile].filter(Boolean).map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}"><img src="../../${src}" alt="" loading="lazy"></button>`).join("\n      ")}
-    </div>` : ""}
+    <div class="pd-main" id="pd-main"><img id="pd-img" src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt="${esc(t.name)} website template preview"></div>
+    ${(() => { const g = t.gallery || [t.cover, inner, page2, mobile].filter(Boolean); const items = g.map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}"><img src="../../${src}" alt="" loading="lazy"></button>`); if (t.video) items.push(`<button class="pd-th pd-th-video" type="button" data-video="${t.video}"><img src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt=""><span class="pd-play">&#9654;</span></button>`); return items.length > 1 ? `<div class="pd-thumbs">\n      ${items.join("\n      ")}\n    </div>` : ""; })()}
   </div>
   <div class="pd-info">
     <p class="cat mono">${esc(t.name.toUpperCase())} &middot; ${esc(t.category.toUpperCase())} TEMPLATE FOR FRAMER</p>
@@ -860,7 +858,12 @@ const detail = (t) => {
 <script>
 document.querySelectorAll(".pd-th").forEach(function (b) {
   b.addEventListener("click", function () {
-    document.getElementById("pd-img").src = b.dataset.src;
+    var main = document.getElementById("pd-main");
+    if (b.dataset.video) {
+      main.innerHTML = "<video src='" + b.dataset.video + "' controls autoplay muted playsinline loop></video>";
+    } else {
+      main.innerHTML = "<img id='pd-img' src='" + b.dataset.src + "' alt=''>";
+    }
     document.querySelectorAll(".pd-th").forEach(function (x) { x.classList.remove("on"); });
     b.classList.add("on");
   });

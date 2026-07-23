@@ -1240,3 +1240,11 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .bm-list { columns: 1; }
   #feat-nudge.bundle-nudge { max-width: none; }
 }
+
+/* pd gallery video */
+.pd-main video { display: block; width: 100%; }
+.pd-th { position: relative; }
+.pd-play {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 18px; background: rgba(0, 0, 0, 0.45); border-radius: 10px;
+}

@@ -112,7 +112,14 @@
       "cover": "assets/covers/cut.jpg",
       "demo": "https://cutt.framer.website",
       "get": "https://cutt.framer.website",
-      "checkout": "https://buy.polar.sh/polar_cl_16i717WRENbGZBwDpLXVdOdSizOD4QTJmyNuv27BVcf"
+      "checkout": "https://buy.polar.sh/polar_cl_16i717WRENbGZBwDpLXVdOdSizOD4QTJmyNuv27BVcf",
+      "gallery": [
+        "assets/shots/cut-1.jpg",
+        "assets/shots/cut-2.jpg",
+        "assets/shots/cut-3.jpg",
+        "assets/shots/cut-4.jpg"
+      ],
+      "video": "https://hsnbrg-cdn.pages.dev/cut-walkthrough.mp4"
     },
     {
       "slug": "the-aubrey",
