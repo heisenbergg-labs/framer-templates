@@ -712,39 +712,71 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
   </article>`).join("")}
 </div></section>` : ""}
 
-<div id="feat-nudge" hidden>
+${site.bundle && site.bundle.checkout ? `<div id="feat-nudge" class="bundle-nudge" hidden>
   <button class="fn-x" type="button" aria-label="Dismiss">&times;</button>
-  <button class="fn-body" type="button" data-ql-open
-    data-ql-demo="${featured.demo}" data-ql-name="${esc(featured.name)}" data-ql-cat="${esc(featured.category)}"
-    data-ql-desc="${esc(featured.tagline)}" data-ql-price="${featured.free ? "Free" : esc(featured.price)}"
-    data-ql-get="${featured.checkout || featured.get}" data-ql-free="${featured.free}">
-    <img src="${featured.cover}" alt="">
+  <button class="fn-body" type="button" id="bundle-nudge-open">
     <span class="fn-txt">
-      <span class="mono gold">FEATURED TEMPLATE</span>
-      <b>${esc(featured.name)} &middot; ${esc(featured.price)}</b>
-      <span class="fn-sub">${esc(featured.tagline)}</span>
+      <span class="mono gold">ALL ACCESS</span>
+      <b>Every template &middot; ${esc(site.bundle.price)}</b>
+      <span class="fn-sub">${esc(site.bundle.note)}</span>
+    </span>
+    <span class="fn-covers">
+      ${live.filter(t => !t.free).slice(0, 3).map(t => `<img src="${t.cover}" alt="">`).join("")}
+      ${upcoming.slice(0, 1).map(t => `<img src="${t.cover}" alt="">`).join("")}
     </span>
   </button>
+</div>
+
+<div id="bundle-modal" hidden role="dialog" aria-modal="true" aria-label="All access bundle">
+  <div class="bm-back" data-bm-close></div>
+  <div class="bm-card">
+    <button class="bm-x" type="button" data-bm-close aria-label="Close">&times;</button>
+    <span class="mono gold">ALL ACCESS</span>
+    <h2 class="serif">Everything, <span class="it">one payment.</span></h2>
+    <div class="bm-covers">
+      ${live.filter(t => !t.free).map(t => `<figure><img src="${t.cover}" alt="${esc(t.name)}"><figcaption>${esc(t.name)} &middot; ${esc(t.price)}</figcaption></figure>`).join("")}
+      ${upcoming.slice(0, 1).map(t => `<figure class="bm-flag"><img src="${t.cover}" alt="${esc(t.name)}"><figcaption>${esc(t.name)} &middot; <em>Upcoming flagship, included</em></figcaption></figure>`).join("")}
+    </div>
+    <ul class="check-list bm-list">${(site.bundle.includes || []).map(i => `<li>${esc(i)}</li>`).join("")}</ul>
+    <div class="bm-cta">
+      <span class="bm-price">${esc(site.bundle.price)}</span>
+      <a class="pill lg" href="${site.bundle.checkout}" target="_blank" rel="noreferrer">Get all access</a>
+    </div>
+  </div>
 </div>
 <script>
 (function () {
   var n = document.getElementById("feat-nudge");
-  if (!n || sessionStorage.getItem("gs_feat_x")) return;
+  var bm = document.getElementById("bundle-modal");
+  if (!n || !bm) return;
   var quiz = document.getElementById("quiz-overlay");
   function show() {
     if (quiz && !quiz.hidden) { setTimeout(show, 8000); return; }
     n.hidden = false;
     requestAnimationFrame(function () { n.classList.add("in"); });
   }
-  setTimeout(show, 18000);
+  if (!sessionStorage.getItem("gs_feat_x")) setTimeout(show, 18000);
   n.querySelector(".fn-x").addEventListener("click", function () {
     n.classList.remove("in");
     sessionStorage.setItem("gs_feat_x", "1");
     setTimeout(function () { n.hidden = true; }, 300);
   });
-  n.querySelector(".fn-body").addEventListener("click", function () { n.classList.remove("in"); });
+  function openModal() {
+    bm.hidden = false;
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(function () { bm.classList.add("in"); });
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "bundle-modal", title: "Bundle modal", event: true });
+  }
+  function closeModal() {
+    bm.classList.remove("in");
+    document.body.style.overflow = "";
+    setTimeout(function () { bm.hidden = true; }, 250);
+  }
+  document.getElementById("bundle-nudge-open").addEventListener("click", function () { n.classList.remove("in"); openModal(); });
+  bm.addEventListener("click", function (e) { if (e.target.closest("[data-bm-close]")) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !bm.hidden) closeModal(); });
 })();
-</script>
+</script>` : ""}
 
 ${QL}
 

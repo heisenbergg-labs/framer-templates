@@ -10,10 +10,10 @@
       "name": "All access",
       "price": "$249",
       "checkout": "",
-      "note": "Every template today, plus the next five releases included.",
+      "note": "The three current templates, plus Nostalgia.exe when it ships.",
       "includes": [
-        "Every current template",
-        "The next 5 releases, free when they ship",
+        "Still, The Aubrey and Brookmere",
+        "Nostalgia.exe, the upcoming flagship, included",
         "One-site license per template",
         "Free updates through your remix links"
       ]
@@ -62,6 +62,57 @@
         "Creative portfolios"
       ],
       "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g"
+    },
+    {
+      "slug": "cut",
+      "name": "CUT",
+      "tagline": "A video editor's portfolio, cut like a film.",
+      "description": "CUT is a video editor portfolio and filmmaker website template for Framer. Dark and cinematic, built for video editors, filmmakers, videographers, colorists and cinematographers who need a fast, fully editable site to show their reel and land better clients. Viewfinder hero, a horizontal-scroll showreel gallery, and a dedicated Works page that plays YouTube, Vimeo or self-hosted video on click. CMS-driven projects, fully responsive, native and buyer-editable.",
+      "category": "Portfolio",
+      "tags": [
+        "video editor",
+        "filmmaker",
+        "videographer",
+        "colorist",
+        "cinematographer",
+        "portfolio",
+        "showreel",
+        "reel",
+        "cinematic",
+        "dark",
+        "motion",
+        "CMS",
+        "video production"
+      ],
+      "price": "$49",
+      "free": false,
+      "new": true,
+      "featured": false,
+      "status": "live",
+      "tier": "Premium",
+      "features": [
+        "Viewfinder hero + film-leader intro",
+        "Horizontal-scroll showreel",
+        "Works page with click-to-play video",
+        "Projects CMS"
+      ],
+      "included": [
+        "Home + Works pages",
+        "Projects CMS collection",
+        "Cinematic video lightbox (YouTube, Vimeo, mp4)",
+        "Desktop horizontal scroll, native vertical on phone",
+        "Free updates through your remix link"
+      ],
+      "bestFor": [
+        "video editors and filmmakers",
+        "videographers and colorists",
+        "cinematographers and motion designers",
+        "video production studios"
+      ],
+      "cover": "assets/covers/cut.jpg",
+      "demo": "https://cutt.framer.website",
+      "get": "https://cutt.framer.website",
+      "checkout": "https://buy.polar.sh/polar_cl_16i717WRENbGZBwDpLXVdOdSizOD4QTJmyNuv27BVcf"
     },
     {
       "slug": "the-aubrey",
