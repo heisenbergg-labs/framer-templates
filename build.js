@@ -83,6 +83,7 @@ const FOOT = (root) => `
       <a href="mailto:support@getsites.co">support@getsites.co</a>
       <a href="${root}/license/index.html">Licensing</a>
       <a href="${root}/license/index.html#refunds">Refunds</a>
+      <a href="${root}/privacy/index.html">Privacy</a>
     </div>
     <div class="foot-col">
       <span class="mono-sm">STUDIO</span>
@@ -854,6 +855,48 @@ const supportPage = page({
 </div></section>`,
 });
 
+
+const privacyPage = page({
+  title: `Privacy | ${site.name}${site.tld}`,
+  description: "What getsites collects, why, and how to get your data removed.",
+  root: "..",
+  body: `
+<section class="doc-sec"><div class="wrap doc">
+  <span class="mono gold">LEGAL</span>
+  <h1 class="serif">Privacy policy</h1>
+  <p>Plain language, because that is how we would want it explained to us. Last updated July 24, 2026.</p>
+
+  <h2 class="serif">What we collect, and when</h2>
+  <ul class="check-list">
+    <li><b>Nothing, by default.</b> Browsing ${esc(site.name)}${esc(site.tld)} requires no account and sets no advertising cookies.</li>
+    <li><b>Anonymous analytics.</b> We use GoatCounter, a privacy-focused counter that records page views and events without cookies or personal profiles. We cannot identify you from it.</li>
+    <li><b>What you type into our forms.</b> The template quiz asks for your name and email. The newsletter and waitlist forms ask for your email. We store these in a private spreadsheet we control and use them only to send what you asked for: your match, your discount code, release notes, or early access.</li>
+    <li><b>Campaign tags.</b> If you arrive from a link with campaign parameters (for example from Pinterest), we keep those tags in your browser's local storage for up to 30 days so a purchase can be credited to the right campaign. They stay on your device and are only attached to a checkout if you buy.</li>
+  </ul>
+
+  <h2 class="serif">Purchases</h2>
+  <p>Checkout runs on <b>Polar</b> (polar.sh), our merchant of record. Your payment details go to Polar and its payment processors, never to us. We receive your email and order details so we can deliver the template and honor the license. Polar's own privacy policy applies to the payment itself.</p>
+
+  <h2 class="serif">Email</h2>
+  <p>We send email through Brevo. Every marketing email has an unsubscribe link that works immediately. Replying to any email reaches a human.</p>
+
+  <h2 class="serif">What we never do</h2>
+  <ul class="check-list">
+    <li>No selling or renting your data, to anyone, ever.</li>
+    <li>No ad networks, no tracking pixels, no fingerprinting.</li>
+    <li>No spam. You only hear from us about things you signed up for.</li>
+  </ul>
+
+  <h2 class="serif">Your rights</h2>
+  <p>Want your data shown to you, corrected, or deleted? Email <a href="mailto:support@getsites.co">support@getsites.co</a> and it is done within a few days, no questions asked. If you are in the EU/EEA, UK, or California, this covers your access, deletion, and portability rights.</p>
+
+  <h2 class="serif">Third parties we rely on</h2>
+  <p>GitHub Pages (hosting), Cloudflare (DNS and email routing), GoatCounter (analytics), Google Sheets (form storage), Brevo (email), Polar (checkout), Framer (template delivery). Each processes only what is needed for its job.</p>
+
+  <div class="ctas"><a class="pill lg" href="../index.html#collection">Back to the collection</a></div>
+</div></section>`,
+});
+
 const licensePage = page({
   title: `License | ${site.name}${site.tld}`,
   description: "The getsites template license: one website per purchase, commercial use allowed.",
@@ -905,7 +948,7 @@ for (const t of templates) {
 }
 fs.mkdirSync(path.join(DIST, "templates"), { recursive: true });
 fs.writeFileSync(path.join(DIST, "templates", "index.html"), templatesPage);
-for (const [name, html] of [["support", supportPage], ["license", licensePage]]) {
+for (const [name, html] of [["support", supportPage], ["license", licensePage], ["privacy", privacyPage]]) {
   fs.mkdirSync(path.join(DIST, name), { recursive: true });
   fs.writeFileSync(path.join(DIST, name, "index.html"), html);
 }
@@ -921,7 +964,7 @@ fs.writeFileSync(path.join(DIST, "404.html"), page({
   <a class="pill lg" href="/index.html#collection">Browse the collection</a>
 </div></section>`,
 }));
-const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
+const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", site.baseUrl + "/privacy/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");
