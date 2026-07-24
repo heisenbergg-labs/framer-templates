@@ -459,6 +459,29 @@ if (matchMedia("(pointer: fine) and (hover: hover)").matches) {
   }, { passive: true });
 }
 </script>
+<script>
+(function () {
+  var KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  var TTL = 30 * 24 * 60 * 60 * 1000;
+  try {
+    var qs = new URLSearchParams(location.search);
+    var found = {};
+    KEYS.forEach(function (k) { var v = qs.get(k); if (v) found[k] = v; });
+    if (Object.keys(found).length) localStorage.setItem("gs_utm", JSON.stringify({ p: found, t: Date.now() }));
+    var raw = localStorage.getItem("gs_utm");
+    if (!raw) return;
+    var d = JSON.parse(raw);
+    if (!d || !d.p || Date.now() - d.t > TTL) { localStorage.removeItem("gs_utm"); return; }
+    document.querySelectorAll('a[href*="buy.polar.sh/"], a[href*="polar.sh/checkout/"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        KEYS.forEach(function (k) { if (d.p[k] && !u.searchParams.has(k)) u.searchParams.set(k, d.p[k]); });
+        a.href = u.toString();
+      } catch (e) {}
+    });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>`;
 
