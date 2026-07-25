@@ -525,7 +525,8 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .related-sec { padding: 72px 0 88px; border-top: 1px solid var(--line); }
 
 /* ---------------- quick look ---------------- */
-#ql {
+#ql,
+#cpv {
   position: fixed;
   inset: 0;
   z-index: 400;
@@ -537,7 +538,8 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   justify-content: center;
   padding: 28px;
 }
-#ql[hidden] { display: none; }
+#ql[hidden],
+#cpv[hidden] { display: none !important; }
 .ql-box {
   width: min(1240px, 100%);
   height: min(88vh, 900px);
