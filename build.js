@@ -446,6 +446,26 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
   setTimeout(() => { pending.forEach(el => el.classList.add("in")); }, 2500);
 }
 if (matchMedia("(pointer: fine) and (hover: hover)").matches) {
+  document.querySelectorAll(".tcard img[data-gal]").forEach(img => {
+    const gal = (img.dataset.gal || "").split(",").filter(Boolean);
+    if (gal.length < 2) return;
+    let idx = 0, timer = null, loaded = false;
+    const card = img.closest(".tcard");
+    const show = i => {
+      idx = i;
+      img.style.opacity = "0.35";
+      setTimeout(() => { img.src = gal[idx]; img.style.opacity = "1"; }, 130);
+    };
+    card.addEventListener("mouseenter", () => {
+      if (!loaded) { gal.forEach(u => { const p = new Image(); p.src = u; }); loaded = true; }
+      timer = setInterval(() => show((idx + 1) % gal.length), 1100);
+    });
+    card.addEventListener("mouseleave", () => {
+      clearInterval(timer); timer = null;
+      if (idx !== 0) show(0);
+    });
+    img.style.transition = "opacity 0.22s ease";
+  });
   const chip = document.getElementById("cursor-chip");
   let card = null;
   document.addEventListener("touchstart", () => { chip.className = ""; }, { passive: true });
@@ -494,7 +514,7 @@ const card = (t, root = ".") => `
 <article class="tcard reveal" data-free="${t.free}" data-cat="${esc(t.category)}" data-name="${esc(t.name)}">
   <div class="frame-wrap">
     <a class="frame" href="${root}/templates/${t.slug}/index.html" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" aria-label="${esc(t.name)}">
-      <img src="${root}/${t.cover}" alt="${esc(t.name)} website template" loading="lazy">
+      <img src="${root}/${t.cover}" alt="${esc(t.name)} website template" loading="lazy" data-gal="${(t.gallery && t.gallery.length > 1) ? t.gallery.map(g => root + "/" + g).join(",") : ""}">
     </a>
   </div>
   <div class="meta">
