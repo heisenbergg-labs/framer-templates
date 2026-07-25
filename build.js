@@ -514,7 +514,7 @@ const card = (t, root = ".") => `
 <article class="tcard reveal" data-free="${t.free}" data-cat="${esc(t.category)}" data-name="${esc(t.name)}">
   <div class="frame-wrap">
     <a class="frame" href="${root}/templates/${t.slug}/index.html" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" aria-label="${esc(t.name)}">
-      <img src="${root}/${t.cover}" alt="${esc(t.name)} website template" loading="lazy" data-gal="${(t.gallery && t.gallery.length > 1) ? t.gallery.map(g => root + "/" + g).join(",") : ""}">
+      <img src="${root}/${t.cover}?v=${VER}" alt="${esc(t.name)} website template" loading="lazy" data-gal="${(t.gallery && t.gallery.length > 1) ? t.gallery.map(g => root + "/" + g + "?v=${VER}").join(",") : ""}">
     </a>
   </div>
   <div class="meta">
@@ -674,7 +674,7 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
       </form>
     </div>
     <div class="sig-shot-wrap">
-      <a class="sig-shot" href="templates/${t.slug}/index.html"><img src="${t.cover}" alt="${esc(t.name)} concept preview"></a>
+      <a class="sig-shot" href="templates/${t.slug}/index.html"><img src="${t.cover}?v=${VER}" alt="${esc(t.name)} concept preview"></a>
     </div>
   </article>`).join("")}
 </div></section>` : ""}
@@ -794,8 +794,8 @@ const detail = (t) => {
 <div class="wrap crumb mono-sm"><a href="../../index.html">Home</a> &nbsp;/&nbsp; <a href="../../templates/index.html">Templates</a> &nbsp;/&nbsp; ${esc(t.name)}</div>
 <div class="wrap pd">
   <div class="pd-gallery">
-    <div class="pd-main" id="pd-main"><img id="pd-img" src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt="${esc(t.name)} website template preview"></div>
-    ${(() => { const g = t.gallery || [t.cover, inner, page2].filter(Boolean); const items = g.map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}"><img src="../../${src}" alt="" loading="lazy"></button>`); if (t.video) items.push(`<button class="pd-th pd-th-video" type="button" data-video="${t.video}"><img src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt=""><span class="pd-play">&#9654;</span></button>`); return items.length > 1 ? `<div class="pd-thumbs">\n      ${items.join("\n      ")}\n    </div>` : ""; })()}
+    <div class="pd-main" id="pd-main"><img id="pd-img" src="../../${(t.gallery && t.gallery[0]) || t.cover}?v=${VER}" alt="${esc(t.name)} website template preview"></div>
+    ${(() => { const g = t.gallery || [t.cover, inner, page2].filter(Boolean); const items = g.map((src, i) => `<button class="pd-th${i === 0 ? " on" : ""}" type="button" data-src="../../${src}?v=${VER}"><img src="../../${src}?v=${VER}" alt="" loading="lazy"></button>`); if (t.video) items.push(`<button class="pd-th pd-th-video" type="button" data-video="${t.video}"><img src="../../${(t.gallery && t.gallery[0]) || t.cover}" alt=""><span class="pd-play">&#9654;</span></button>`); return items.length > 1 ? `<div class="pd-thumbs">\n      ${items.join("\n      ")}\n    </div>` : ""; })()}
   </div>
   <div class="pd-info">
     <p class="cat mono">${esc(t.name.toUpperCase())} &middot; ${esc(t.category.toUpperCase())} TEMPLATE FOR FRAMER</p>
