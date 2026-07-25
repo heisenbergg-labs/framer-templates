@@ -148,6 +148,52 @@ const letterBlock = (root) => `
 })();
 </script>`;
 
+/* ---------------- concept preview (unpublished templates only) ---------------- */
+const conceptPreview = (t) => `
+<div id="cpv" hidden>
+  <div class="ql-box" role="dialog" aria-modal="true" aria-label="Concept preview">
+    <div class="ql-top">
+      <div class="ql-meta"><b>${esc(t.name)}</b><span class="mono-sm">${esc(t.category)} &middot; Coming soon &middot; ${esc(t.tagline)}</span></div>
+      <div class="ql-actions">
+        <button class="ql-view on" type="button" data-view="desktop">Desktop</button>
+        <button class="ql-view" type="button" data-view="mobile">Mobile</button>
+        <button class="ql-x" type="button" aria-label="Close preview">&times;</button>
+      </div>
+    </div>
+    <div class="ql-frame" id="cpv-wrap"><iframe id="cpv-iframe" title="Concept preview" data-src="${t.demo}"></iframe></div>
+  </div>
+</div>
+<script>
+(function () {
+  var cp = document.getElementById("cpv");
+  if (!cp) return;
+  var fr = document.getElementById("cpv-iframe");
+  var wrap = document.getElementById("cpv-wrap");
+  function open() {
+    if (!fr.src) fr.src = fr.dataset.src;
+    wrap.classList.remove("as-phone");
+    cp.querySelectorAll(".ql-view").forEach(function (v) { v.classList.toggle("on", v.dataset.view === "desktop"); });
+    cp.hidden = false;
+    document.body.style.overflow = "hidden";
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "concept-preview", title: "Concept preview", event: true });
+  }
+  function close() { cp.hidden = true; document.body.style.overflow = ""; }
+  document.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest("[data-concept-open]")) { e.preventDefault(); open(); return; }
+    if (cp.hidden) return;
+    var v = e.target.closest ? e.target.closest("#cpv .ql-view") : null;
+    if (v) {
+      cp.querySelectorAll(".ql-view").forEach(function (x) { x.classList.remove("on"); });
+      v.classList.add("on");
+      wrap.classList.toggle("as-phone", v.dataset.view === "mobile");
+      return;
+    }
+    if (e.target === cp || e.target.closest("#cpv .ql-x")) close();
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !cp.hidden) close(); });
+})();
+</script>`;
+
 /* ---------------- quiz (match-first, no discount) ---------------- */
 const quizBlock = (root) => `
 <div id="quiz-overlay" hidden>
@@ -199,22 +245,10 @@ const quizBlock = (root) => `
         <button type="button" data-pick="standout">Standing out completely</button>
       </div>
     </div>
-    <div class="quiz-step" data-step="reward" hidden>
-      <p class="quiz-lab">Your reward</p>
-      <h2 class="quiz-h">A little <span class="it">thank you.</span></h2>
-      <div class="reveal-code blurred" id="reveal-code" role="button" tabindex="0" aria-label="Discount code">SITES25</div>
-      <p class="quiz-p" id="reveal-note">Use this code at checkout. 25% off any template.</p>
-      <button class="pill lg" type="button" id="reveal-btn">Reveal my code</button>
-      <button class="pill lg" type="button" data-next hidden id="reveal-next">See the recommended template <span class="arr">&rarr;</span></button>
-    </div>
     <div class="quiz-step" data-step="result" hidden>
       <h2 class="quiz-h" id="quiz-result-h">Made <span class="it">for you.</span></h2>
       <div class="quiz-matches" id="quiz-matches"></div>
-      <p class="quiz-why" id="quiz-why"></p>
-      <div class="quiz-code">
-        <button class="qc-chip" type="button" id="qc-copy">SITES25</button>
-        <span class="qc-note">25% off at checkout &middot; tap to copy</span>
-      </div>
+      <p class="quiz-offer">Use <button class="qc-chip sm" type="button" id="qc-copy">SITES25</button> at checkout, 25% off this template.</p>
       <a class="textlink" href="${root}/index.html#collection">or browse everything <span class="arr">&rarr;</span></a>
     </div>
   </div>
@@ -228,7 +262,7 @@ const quizBlock = (root) => `
   var ov = document.getElementById("quiz-overlay");
   if (!ov) return;
   var steps = ov.querySelectorAll(".quiz-step");
-  var order = ["intro", "contact", "build", "feel", "matters", "reward", "result"];
+  var order = ["intro", "contact", "build", "feel", "matters", "result"];
   var at = 0;
   var picks = { build: null, feel: null, matters: null };
   var lead = { name: "", email: "" };
@@ -262,11 +296,10 @@ const quizBlock = (root) => `
     var top = picked[0], alt = picked[1];
     var html = "<a class='quiz-match hero' href='" + ROOT + "/templates/" + top.slug + "/index.html'>" +
       "<img src='" + ROOT + "/" + top.cover + "' alt=''>" +
-      "<span class='qm-meta'><b>" + top.name + " <em>Recommended</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i><span class='qm-cta'>Open " + top.name + " \u2192</span></span></a>";
+      "<span class='qm-meta'><b>" + top.name + " <em>Recommended</em></b><i>" + top.cat + " \u00b7 " + top.price + "</i><span class='qm-cta'>View " + top.name + " \u2192</span></span></a>";
     if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
     document.getElementById("quiz-matches").innerHTML = html;
-    document.getElementById("quiz-why").textContent = top.name + " is built for " + (top.bestFor[0] || top.cat.toLowerCase()).toLowerCase() + ", matched to your answers.";
-    show(order.indexOf("reward"));
+    show(order.indexOf("result"));
     if (HOOK && lead.email) {
       fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({
         name: lead.name, email: lead.email, prof: "quiz", plan: picks.build || "", matches: lastMatches, page: location.pathname,
@@ -304,27 +337,6 @@ const quizBlock = (root) => `
   if (!localStorage.getItem("gs_quiz_seen") && !localStorage.getItem("gs_lead_sent")) {
     setTimeout(function () { if (ov.hidden) open(); }, 12000);
   }
-  var rb = document.getElementById("reveal-btn");
-  var rc = document.getElementById("reveal-code");
-  var rn = document.getElementById("reveal-next");
-  if (rb) rb.addEventListener("click", function () {
-    rc.classList.remove("blurred");
-    rb.hidden = true;
-    rn.hidden = false;
-    document.getElementById("reveal-note").textContent = "Tap the code to copy it. It works on every template.";
-    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "code-reveal", title: "Code revealed", event: true });
-  });
-  if (rc) rc.addEventListener("click", function () {
-    if (rc.classList.contains("blurred")) return;
-    var done = function () {
-      var t = rc.querySelector(".copy-toast");
-      if (!t) { t = document.createElement("span"); t.className = "copy-toast"; t.textContent = "Copied \u2713"; rc.appendChild(t); }
-      requestAnimationFrame(function () { t.classList.add("on"); });
-      clearTimeout(t._h);
-      t._h = setTimeout(function () { t.classList.remove("on"); }, 1400);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES25").then(done, done); else done();
-  });
   var qc = document.getElementById("qc-copy");
   if (qc) qc.addEventListener("click", function () {
     var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES25"; }, 1600); };
@@ -675,9 +687,10 @@ ${upcoming.length ? `<section id="signature" class="sig-sec"><div class="wrap">
     </div>
     <div class="sig-shot-wrap">
       <a class="sig-shot" href="templates/${t.slug}/index.html"><img src="${t.cover}?v=${VER}" alt="${esc(t.name)} concept preview"></a>
+      <button class="qlb sig-ql" type="button" data-concept-open>Preview the concept</button>
     </div>
   </article>`).join("")}
-</div></section>` : ""}
+</div></section>${conceptPreview(upcoming[0])}` : ""}
 
 ${site.bundle && site.bundle.checkout ? `<div id="feat-nudge" class="bundle-nudge" hidden>
   <button class="fn-x" type="button" aria-label="Dismiss">&times;</button>
@@ -811,11 +824,12 @@ const detail = (t) => {
         ? `<form class="news-form" data-capture="waitlist" data-tpl="${esc(t.name)}" novalidate>
              <input type="email" name="email" placeholder="Your email" autocomplete="email" required aria-label="Email for early access">
              <button class="pill" type="submit">Join early access</button>
-           </form>`
+           </form>
+           <button class="btn-secondary" type="button" data-concept-open>Preview the concept</button>`
         : `<a class="btn-primary" href="${buyHref}" target="_blank" rel="noreferrer">${t.free ? "Get free template" : `Get this template &middot; ${esc(t.price)}`}</a>
            <a class="btn-secondary" href="${t.demo}" target="_blank" rel="noreferrer">Preview live demo</a>`}
     </div>
-    ${soon ? "" : `<p class="pd-trust mono-sm">FREE UPDATES &nbsp;&middot;&nbsp; ONE-SITE LICENSE &nbsp;&middot;&nbsp; REMIX LINK AFTER CHECKOUT</p>`}
+    ${soon ? conceptPreview(t) : `<p class="pd-trust mono-sm">FREE UPDATES &nbsp;&middot;&nbsp; ONE-SITE LICENSE &nbsp;&middot;&nbsp; REMIX LINK AFTER CHECKOUT</p>`}
   </div>
 </div>
 <script>

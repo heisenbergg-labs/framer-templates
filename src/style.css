@@ -1248,3 +1248,7 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   color: #fff; font-size: 18px; background: rgba(0, 0, 0, 0.45); border-radius: 10px;
 }
+
+/* quiz offer line (replaces code block) */
+.quiz-offer { color: var(--grey); font-size: 15px; margin: 18px 0 22px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.qc-chip.sm { font-size: 13px; padding: 6px 13px; border-radius: 9px; }
