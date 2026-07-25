@@ -502,13 +502,16 @@ if (matchMedia("(pointer: fine) and (hover: hover)").matches) {
     KEYS.forEach(function (k) { var v = qs.get(k); if (v) found[k] = v; });
     if (Object.keys(found).length) localStorage.setItem("gs_utm", JSON.stringify({ p: found, t: Date.now() }));
     var raw = localStorage.getItem("gs_utm");
-    if (!raw) return;
-    var d = JSON.parse(raw);
-    if (!d || !d.p || Date.now() - d.t > TTL) { localStorage.removeItem("gs_utm"); return; }
+    var d = null;
+    if (raw) {
+      d = JSON.parse(raw);
+      if (!d || !d.p || Date.now() - d.t > TTL) { localStorage.removeItem("gs_utm"); d = null; }
+    }
     document.querySelectorAll('a[href*="buy.polar.sh/"], a[href*="polar.sh/checkout/"]').forEach(function (a) {
       try {
         var u = new URL(a.href);
-        KEYS.forEach(function (k) { if (d.p[k] && !u.searchParams.has(k)) u.searchParams.set(k, d.p[k]); });
+        if (d && d.p) KEYS.forEach(function (k) { if (d.p[k] && !u.searchParams.has(k)) u.searchParams.set(k, d.p[k]); });
+        if (!u.searchParams.has("utm_term")) u.searchParams.set("utm_term", "via-getsites");
         a.href = u.toString();
       } catch (e) {}
     });
