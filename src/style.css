@@ -1252,3 +1252,8 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 /* quiz offer line (replaces code block) */
 .quiz-offer { color: var(--grey); font-size: 15px; margin: 18px 0 22px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
 .qc-chip.sm { font-size: 13px; padding: 6px 13px; border-radius: 9px; }
+
+/* nostalgia detail waitlist: single inline row aligned with the preview button */
+.pd-actions .news-form { flex-wrap: nowrap; width: 100%; gap: 10px; }
+.pd-actions .news-form input { flex: 1 1 auto; min-width: 0; width: auto; }
+.pd-actions .news-form .pill { flex: 0 0 auto; white-space: nowrap; }
