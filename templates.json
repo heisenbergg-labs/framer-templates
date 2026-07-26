@@ -21,6 +21,62 @@
   },
   "templates": [
     {
+      "slug": "the-collection",
+      "name": "The Collection",
+      "tagline": "A creator storefront that reads like an edit, not a wall of links.",
+      "description": "Turn your link in bio into a real shop. The Collection is a mobile-first storefront for fashion, beauty and lifestyle creators: a magazine-style hero introduces you, curated edits group the pieces you actually recommend, and a weekly product feed runs off the CMS so your links never go stale. Everything is native and editable on the Framer canvas. Swap the photos, rewrite the copy, drop in your products, change two fonts, publish. No code needed.",
+      "category": "Creator",
+      "tags": [
+        "creator",
+        "storefront",
+        "shop my links",
+        "linktree alternative",
+        "personal brand",
+        "fashion",
+        "beauty",
+        "lifestyle",
+        "ecommerce",
+        "cms",
+        "editorial",
+        "mobile-first"
+      ],
+      "price": "$49",
+      "free": false,
+      "new": true,
+      "featured": false,
+      "status": "live",
+      "tier": "Premium",
+      "features": [
+        "Editorial hero with live intro + 3D tilt",
+        "Curated looks and finds sections",
+        "9-item Products CMS",
+        "Private-list email capture"
+      ],
+      "included": [
+        "Home + 404 + Start Here guide pages",
+        "Products CMS collection",
+        "Intro animation + tilt effects",
+        "Email capture wired for your list",
+        "Free updates through your remix link"
+      ],
+      "bestFor": [
+        "fashion, beauty and lifestyle creators",
+        "creators replacing a Linktree",
+        "personal brands selling curated products"
+      ],
+      "cover": "assets/covers/the-collection.jpg",
+      "demo": "https://thecollectionn.framer.website",
+      "get": "https://thecollectionn.framer.website",
+      "checkout": "https://buy.polar.sh/polar_cl_F6CpsTeYslkURKr43koIb3Q4AmbIARXc0QDce1B4Um3",
+      "gallery": [
+        "assets/shots/the-collection-m1.jpg",
+        "assets/shots/the-collection-m2.jpg",
+        "assets/shots/the-collection-m3.jpg",
+        "assets/shots/the-collection-m4.jpg"
+      ],
+      "video": "https://hsnbrg-cdn.pages.dev/collection-walkthrough.mp4"
+    },
+    {
       "slug": "cut",
       "name": "CUT",
       "tagline": "A video editor's portfolio, cut like a film.",
