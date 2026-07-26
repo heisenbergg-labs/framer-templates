@@ -1074,9 +1074,10 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 
 /* ===== product detail (compact) ===== */
 .pd { display: grid; grid-template-columns: 1.35fr 1fr; gap: 64px; align-items: start; padding: 26px 0 96px; }
+.pd-gallery { min-width: 0; }
 .pd-main { border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--ring), var(--shadow); }
 .pd-main img { display: block; width: 100%; }
-.pd-thumbs { display: flex; gap: 12px; margin-top: 14px; }
+.pd-thumbs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
 .pd-th { padding: 0; border: 0; background: none; border-radius: 10px; overflow: hidden; cursor: pointer; width: 108px; height: 72px; opacity: 0.55; box-shadow: var(--ring); transition: opacity 0.2s ease, box-shadow 0.2s ease; }
 .pd-th img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 .pd-th:hover { opacity: 0.85; }
