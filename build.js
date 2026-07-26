@@ -15,7 +15,7 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const sorted = [...templates]; // curated order = templates.json order
 const live = sorted.filter(t => t.status !== "soon");
 const upcoming = sorted.filter(t => t.status === "soon");
-const featured = templates.find(t => t.slug === "still");
+const featured = templates.find(t => t.slug === "cut");
 const CATS = [...new Set(sorted.map(t => t.category))];
 
 const shot = (slug, kind) => {
@@ -38,7 +38,7 @@ const NAV = (root, navDelay) => `
   <a class="wordmark" href="${root}/index.html">${esc(site.name)}<span class="tld">${esc(site.tld)}</span></a>
   <div class="links">
     <a href="${root}/templates/index.html">Templates</a>
-    <a href="${root}/templates/still/index.html">Featured template</a>
+    <a href="${root}/templates/cut/index.html">Featured template</a>
     <a href="#" data-letter-open>Studio</a>
     <a class="pill" href="#" data-quiz-open>Find my template</a>
   </div>
@@ -46,7 +46,7 @@ const NAV = (root, navDelay) => `
 </div>
 <div class="nav-sheet" hidden>
   <a href="${root}/templates/index.html">Templates</a>
-  <a href="${root}/templates/still/index.html">Featured template</a>
+  <a href="${root}/templates/cut/index.html">Featured template</a>
   <a href="#" data-letter-open>Studio</a>
   <a class="pill" href="#" data-quiz-open>Find my template</a>
 </div></nav>`;
@@ -73,7 +73,7 @@ const FOOT = (root) => `
       <span class="mono-sm">SHOP</span>
       <a href="${root}/index.html#collection">All templates</a>
       <a href="${root}/index.html?cat=__free#collection">Free templates</a>
-      <a href="${root}/templates/still/index.html">Featured template</a>
+      <a href="${root}/templates/cut/index.html">Featured template</a>
       <a href="${root}/index.html#signature">Upcoming release</a>
     </div>
     <div class="foot-col">
