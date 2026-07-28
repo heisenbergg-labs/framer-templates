@@ -347,8 +347,9 @@ const quizBlock = (root) => `
   });
 
   // shared email capture: quiz save, newsletter, waitlist -> one webhook
-  document.querySelectorAll("form[data-capture]").forEach(function (f) {
-    f.addEventListener("submit", function (ev) {
+  document.addEventListener("submit", function (ev) {
+      var f = ev.target.closest ? ev.target.closest("form[data-capture]") : null;
+      if (!f) return;
       ev.preventDefault();
       var em = f.querySelector("input[type=email]");
       if (!em || !em.value || em.value.indexOf("@") < 1) { if (em) em.focus(); return; }
@@ -370,8 +371,7 @@ const quizBlock = (root) => `
       done.textContent = f.dataset.capture === "waitlist" ? "You're on the list." : "Sent. Watch your inbox.";
       f.replaceWith(done);
       if (window.goatcounter && goatcounter.count) goatcounter.count({ path: f.dataset.capture + "-lead", title: "Lead: " + f.dataset.capture, event: true });
-    });
-  });
+  }, true);
 
   // minimal focus trap
   var trapped = null;
