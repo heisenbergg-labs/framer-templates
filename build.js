@@ -300,6 +300,7 @@ const quizBlock = (root) => `
     if (alt) html += "<a class='quiz-alt' href='" + ROOT + "/templates/" + alt.slug + "/index.html'>Also fits: <b>" + alt.name + "</b> \u00b7 " + alt.cat + " \u00b7 " + alt.price + " <span class='arr'>\u2192</span></a>";
     document.getElementById("quiz-matches").innerHTML = html;
     show(order.indexOf("result"));
+    if (window.gsPing) gsPing("quiz-complete", { recommended: picked[0].name, building: picks.build || "", email: lead.email || "" });
     if (HOOK && lead.email) {
       fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({
         name: lead.name, email: lead.email, prof: "quiz", plan: picks.build || "", matches: lastMatches, page: location.pathname,
@@ -316,6 +317,7 @@ const quizBlock = (root) => `
     if (!n.value.trim()) { n.focus(); return; }
     if (!em.value || em.value.indexOf("@") < 1) { em.focus(); return; }
     lead.name = n.value.trim(); lead.email = em.value.trim();
+    if (window.gsPing) gsPing("lead", { name: lead.name, email: lead.email });
     show(order.indexOf("build"));
   });
   ov.addEventListener("click", function (e) {
@@ -340,6 +342,7 @@ const quizBlock = (root) => `
   var qc = document.getElementById("qc-copy");
   if (qc) qc.addEventListener("click", function () {
     var done = function () { qc.textContent = "Copied \u2713"; setTimeout(function () { qc.textContent = "SITES25"; }, 1600); };
+    if (window.gsPing) gsPing("code-reveal", { email: lead.email || "" });
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText("SITES25").then(done, done); else done();
   });
 
@@ -359,6 +362,9 @@ const quizBlock = (root) => `
         fetch(HOOK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString() });
       }
       localStorage.setItem("gs_lead_sent", "1");
+      if (window.gsPing && (f.dataset.capture === "newsletter" || f.dataset.capture === "waitlist")) {
+        gsPing(f.dataset.capture, { email: em.value.trim(), template: f.dataset.tpl || "" });
+      }
       var done = document.createElement("p");
       done.className = "quiz-sent";
       done.textContent = f.dataset.capture === "waitlist" ? "You're on the list." : "Sent. Watch your inbox.";
@@ -493,6 +499,13 @@ if (matchMedia("(pointer: fine) and (hover: hover)").matches) {
 }
 </script>
 <script>
+window.gsPing = function (e, d) {
+  try { navigator.sendBeacon("https://getsites-pings.pragadeesigns.workers.dev/", JSON.stringify({ e: e, d: d || {}, p: location.pathname })); } catch (err) {}
+};
+document.addEventListener("click", function (ev) {
+  var a = ev.target.closest && ev.target.closest('a[href*="buy.polar.sh/"], a[href*="polar.sh/checkout/"]');
+  if (a) gsPing("buy-click", { template: (document.title.split(",")[0] || "").slice(0, 60) });
+}, true);
 (function () {
   var KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
   var TTL = 30 * 24 * 60 * 60 * 1000;
