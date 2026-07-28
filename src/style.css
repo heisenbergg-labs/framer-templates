@@ -806,6 +806,13 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
   .shots-row { grid-template-columns: 1fr; }
   .shot-m { grid-column: auto; }
   .quiz-matches { grid-template-columns: 1fr; gap: 20px; }
+  /* result step: SITES25 offer must be visible without scrolling — lift it above the card */
+  .quiz-step[data-step="result"] { display: flex; flex-direction: column; align-items: center; }
+  .quiz-step[data-step="result"][hidden] { display: none; }
+  .quiz-step[data-step="result"] .quiz-h { order: 0; margin-bottom: 8px; }
+  .quiz-step[data-step="result"] .quiz-offer { order: 1; margin: 0 0 8px; }
+  .quiz-step[data-step="result"] .quiz-matches { order: 2; margin-top: 12px; }
+  .quiz-step[data-step="result"] .textlink { order: 3; }
   #quiz-lead { flex-direction: column; }
   .quiz-card { padding: 64px 0 40px; }
   .quiz-h { font-size: 34px; }
