@@ -97,7 +97,7 @@
         "CMS",
         "video production"
       ],
-      "price": "$49",
+      "price": "$69",
       "free": false,
       "new": true,
       "featured": false,
@@ -146,7 +146,7 @@
         "creative",
         "art"
       ],
-      "price": "$24",
+      "price": "$49",
       "free": false,
       "new": true,
       "featured": true,
@@ -247,7 +247,7 @@
         "dark",
         "membership"
       ],
-      "price": "$29",
+      "price": "$69",
       "free": false,
       "new": false,
       "featured": true,
@@ -298,7 +298,7 @@
         "luxury",
         "consulting"
       ],
-      "price": "$39",
+      "price": "$49",
       "free": false,
       "new": false,
       "featured": true,

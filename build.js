@@ -670,7 +670,7 @@ ${site.bundle && site.bundle.checkout ? `<section id="pricing" class="pricing-se
     <div class="price-card reveal">
       <h3>One template</h3>
       <p class="pc-sub">Pick the one that fits. Perfect for a single website.</p>
-      <p class="pc-price"><span class="pc-from">From</span> $24</p>
+      <p class="pc-price"><span class="pc-from">From</span> $${Math.min(...live.filter(t => !t.free && t.status !== "soon").map(t => Number(String(t.price).replace(/[^0-9.]/g, "")) || Infinity))}</p>
       <a class="pill" href="#collection">Choose your template</a>
       <ul class="check-list">
         <li>One complete website</li>
