@@ -77,6 +77,16 @@ const FOOT = (root) => `
       <a href="${root}/index.html#signature">Upcoming release</a>
     </div>
     <div class="foot-col">
+      <span class="mono-sm">TEMPLATES FOR</span>
+      <a href="${root}/templates/for-photographers/index.html">Photographers</a>
+      <a href="${root}/templates/for-video-editors/index.html">Video editors</a>
+      <a href="${root}/templates/for-restaurants-and-bars/index.html">Restaurants &amp; bars</a>
+      <a href="${root}/templates/for-hotels-and-rentals/index.html">Stays &amp; rentals</a>
+      <a href="${root}/templates/for-finance-and-consulting/index.html">Finance &amp; consulting</a>
+      <a href="${root}/templates/for-creators/index.html">Creators</a>
+      <a href="${root}/templates/free/index.html">Free templates</a>
+    </div>
+    <div class="foot-col">
       <span class="mono-sm">HELP</span>
       <a href="${root}/support/index.html">Support</a>
       <a href="${root}/support/index.html#framer">Framer setup</a>
@@ -978,6 +988,129 @@ const licensePage = page({
 </div></section>`,
 });
 
+/* ---------------- niche landing pages (SEO) ---------------- */
+/* Tag-driven: a template appears on a niche page when any of its tags (or its
+   category) matches the niche's tag list — new catalog entries place themselves. */
+const NICHES = [
+  {
+    slug: "for-photographers",
+    label: "Photographers",
+    title: "Framer Templates for Photographers",
+    h1: `Framer templates <span class="it">for photographers.</span>`,
+    description: "Portfolio templates for photographers, built in Framer. Galleries that let the photos do the talking, easy image swaps, no code.",
+    intro: [
+      "A photography site has one job: get out of the way of the pictures. These templates are built around galleries, big images and quiet type, so the work carries the page.",
+      "Every image is a native Framer image fill. Swap the demo shots for your own by double-clicking, connect your domain, and the site is live.",
+    ],
+    tags: ["photography", "art", "creative"],
+  },
+  {
+    slug: "for-video-editors",
+    label: "Video editors",
+    title: "Framer Templates for Video Editors and Filmmakers",
+    h1: `Framer templates <span class="it">for video editors.</span>`,
+    description: "Showreel and portfolio templates for video editors, filmmakers and colorists. Built in Framer, video-first, no code.",
+    intro: [
+      "Clients hire editors off the reel. These templates put your work front and center, with layouts built for motion, stills from your grade, and space for the credits that matter.",
+      "Everything is editable on the Framer canvas: replace the reel, retitle the projects, publish. No code, no plugins.",
+    ],
+    tags: ["video editor", "filmmaker", "videographer", "showreel"],
+  },
+  {
+    slug: "for-restaurants-and-bars",
+    label: "Restaurants & bars",
+    title: "Framer Templates for Restaurants, Bars and Clubs",
+    h1: `Framer templates for <span class="it">restaurants and bars.</span>`,
+    description: "Website templates for restaurants, bars, clubs and member venues. Built in Framer, easy menu edits, no code.",
+    intro: [
+      "A venue site needs atmosphere and answers: what it feels like, what is on the menu, how to book. These templates handle all three without a designer on retainer.",
+      "Menus, hours and photos are plain text and image layers on the Framer canvas. Your staff can update tonight's menu without calling anyone.",
+    ],
+    tags: ["restaurant", "club", "bar", "membership"],
+  },
+  {
+    slug: "for-hotels-and-rentals",
+    label: "Stays & rentals",
+    title: "Framer Templates for Hotels, Stays and Rentals",
+    h1: `Framer templates for <span class="it">stays and rentals.</span>`,
+    description: "Website templates for boutique hotels, guest houses and vacation rentals. Built in Framer, booking-ready, no code.",
+    intro: [
+      "Guests book places they can already picture themselves in. These templates sell the stay with big photography, warm type and a clear path to the booking link.",
+      "Swap the photos, write your own welcome, point the button at your booking system. Live in an afternoon.",
+    ],
+    tags: ["rental", "stay", "travel", "hospitality"],
+  },
+  {
+    slug: "for-finance-and-consulting",
+    label: "Finance & consulting",
+    title: "Framer Templates for Finance and Consulting Firms",
+    h1: `Framer templates for <span class="it">finance firms.</span>`,
+    description: "Website templates for finance, wealth management, advisory and consulting firms. Built in Framer, credible by default, no code.",
+    intro: [
+      "In finance, the website is a credibility check before the first call. These templates are built to pass it: restrained type, quiet color, and copy structure that reads established.",
+      "Every line of text is editable on the canvas. Replace the demo firm with yours, connect your domain, done.",
+    ],
+    tags: ["finance", "consulting", "business", "luxury"],
+  },
+  {
+    slug: "for-creators",
+    label: "Creators",
+    title: "Framer Templates for Creators, a Linktree Alternative",
+    h1: `Framer templates <span class="it">for creators.</span>`,
+    description: "Creator storefront templates built in Framer. A real website instead of a link-in-bio page: products, links and content in one place you own.",
+    intro: [
+      "A link-in-bio page rents your audience a hallway. These templates give you the whole house: your products, your links, your content, on a domain you own.",
+      "Cards and products live in the Framer CMS, so adding a new drop is filling in a form, not redesigning a page.",
+    ],
+    tags: ["creator", "linktree alternative", "storefront", "personal brand"],
+  },
+  {
+    slug: "free",
+    label: "Free templates",
+    title: "Free Framer Templates",
+    h1: `Free Framer <span class="it">templates.</span>`,
+    description: "Free Framer website templates from getsites.co. Complete sites, commercial use allowed, no attribution required.",
+    intro: [
+      "Free here means the full site, not a teaser. Same license as the paid templates: one site, commercial use allowed, no attribution required.",
+      "Remix the demo into your own Framer account, make it yours, publish. If you outgrow it, the paid collection is one step up.",
+    ],
+    tags: ["free"],
+    match: (t) => t.free,
+  },
+];
+
+const nicheMatch = (n, t) => n.match ? n.match(t) : (t.tags || []).concat(t.category).some((x) => n.tags.map((s) => s.toLowerCase()).includes(String(x).toLowerCase()));
+
+const nichePage = (n) => {
+  const hits = live.filter((t) => nicheMatch(n, t));
+  const rest = live.filter((t) => !nicheMatch(n, t));
+  const root = "../..";
+  return page({
+    title: `${n.title} | ${site.name}${site.tld}`,
+    description: n.description,
+    root,
+    body: `
+<section class="collection-sec standalone niche-sec"><div class="wrap">
+  <div class="col-head"><div>
+    <p class="badge-pill">${esc(site.name)}${esc(site.tld)} collection</p>
+    <h1 class="serif">${n.h1}</h1>
+  </div></div>
+  <div class="niche-intro">${n.intro.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+  <div class="grid">
+    ${hits.map((t) => card(t, root)).join("\n")}
+  </div>
+  ${rest.length ? `<div class="niche-more">
+    <h2 class="serif">The rest of the <span class="it">collection.</span></h2>
+    <div class="grid">${rest.map((t) => card(t, root)).join("\n")}</div>
+  </div>` : ""}
+  <div class="ctas niche-ctas">
+    <a class="pill lg" href="#" data-quiz-open>Not sure? Take the 30-second quiz</a>
+    <a class="textlink" href="${root}/templates/index.html">Browse everything <span class="arr">&rarr;</span></a>
+  </div>
+</div></section>`,
+  });
+};
+
 /* ---------------- write dist ---------------- */
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, "assets", "covers"), { recursive: true });
@@ -998,6 +1131,11 @@ for (const t of templates) {
 }
 fs.mkdirSync(path.join(DIST, "templates"), { recursive: true });
 fs.writeFileSync(path.join(DIST, "templates", "index.html"), templatesPage);
+for (const n of NICHES) {
+  const dir = path.join(DIST, "templates", n.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "index.html"), nichePage(n));
+}
 for (const [name, html] of [["support", supportPage], ["license", licensePage], ["privacy", privacyPage]]) {
   fs.mkdirSync(path.join(DIST, name), { recursive: true });
   fs.writeFileSync(path.join(DIST, name, "index.html"), html);
@@ -1014,7 +1152,7 @@ fs.writeFileSync(path.join(DIST, "404.html"), page({
   <a class="pill lg" href="/index.html#collection">Browse the collection</a>
 </div></section>`,
 }));
-const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", site.baseUrl + "/privacy/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`)];
+const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", site.baseUrl + "/privacy/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`), ...NICHES.map(n => `${site.baseUrl}/templates/${n.slug}/`)];
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");

@@ -431,7 +431,15 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .news-form input:focus { border-color: rgba(116, 92, 255, 0.55); }
 .quiz-sent { font-size: 14.5px; color: #7ee2a8; font-weight: 500; }
 
-.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; padding: 48px 0 44px; }
+.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; gap: 40px; padding: 48px 0 44px; }
+
+/* ===== niche landing pages ===== */
+.niche-sec .col-head .badge-pill { margin-bottom: 14px; }
+.niche-intro { max-width: 640px; margin: 6px 0 40px; }
+.niche-intro p { color: var(--grey); font-size: 15.5px; line-height: 1.65; margin: 0 0 12px; }
+.niche-more { margin-top: 72px; }
+.niche-more h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); margin: 0 0 26px; }
+.niche-ctas { margin-top: 64px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 .foot-brand p { color: var(--grey-2); font-size: 14px; margin: 14px 0 22px; }
 .foot-col { display: flex; flex-direction: column; gap: 10px; }
 .foot-col .mono-sm { margin-bottom: 6px; letter-spacing: 0.12em; }
