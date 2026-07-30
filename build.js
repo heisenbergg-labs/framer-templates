@@ -88,6 +88,7 @@ const FOOT = (root) => `
     </div>
     <div class="foot-col">
       <span class="mono-sm">HELP</span>
+      <a href="${root}/learn/index.html">Framer, answered</a>
       <a href="${root}/support/index.html">Support</a>
       <a href="${root}/support/index.html#framer">Framer setup</a>
       <a href="mailto:support@getsites.co">support@getsites.co</a>
@@ -1399,6 +1400,61 @@ const nichePage = (n) => {
   });
 };
 
+/* ---------------- learn / guides (SEO answer pages) ---------------- */
+const GUIDES = require(path.join(ROOT, "src", "guides.js"));
+
+const guideCard = (g, root) => `
+<a class="guide-card reveal" href="${root}/learn/${g.slug}/index.html">
+  <span class="mono-sm">${esc(g.category.toUpperCase())}</span>
+  <h3>${esc(g.title)}</h3>
+  <p>${esc(g.answer.split(". ")[0])}.</p>
+  <span class="qm-cta">Read the answer &rarr;</span>
+</a>`;
+
+const guidePage = (g) => {
+  const root = "../..";
+  const rel = (g.related || []).map((slug) => NICHES.find((n) => n.slug === slug)).filter(Boolean);
+  return page({
+    title: `${g.title} | ${site.name}${site.tld}`,
+    description: g.description,
+    root,
+    jsonld: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [{ "@type": "Question", name: g.question, acceptedAnswer: { "@type": "Answer", text: g.answer } }],
+    },
+    body: `
+<section class="guide-sec"><div class="wrap">
+  <p class="badge-pill">${esc(g.category)}</p>
+  <h1 class="serif">${esc(g.title.replace(/\?$/, ""))}<span class="it">${g.title.endsWith("?") ? "?" : ""}</span></h1>
+  <p class="guide-answer">${esc(g.answer)}</p>
+  <div class="guide-body">${g.body}</div>
+  ${rel.length ? `<div class="guide-rel">
+    <span class="mono-sm">TEMPLATES FOR THIS</span>
+    <div class="niche-chiprow">${rel.map((n) => `<a class="chip" href="${root}/templates/${n.slug}/index.html">${esc(n.label)}</a>`).join("")}</div>
+  </div>` : ""}
+  <div class="guide-more">
+    <span class="mono-sm">MORE ANSWERS</span>
+    <div class="guide-grid">${GUIDES.filter((x) => x.slug !== g.slug).slice(0, 3).map((x) => guideCard(x, root)).join("")}</div>
+    <a class="textlink" href="${root}/learn/index.html">All guides <span class="arr">&rarr;</span></a>
+  </div>
+</div></section>`,
+  });
+};
+
+const learnIndex = page({
+  title: `Framer, answered | ${site.name}${site.tld}`,
+  description: "Plain answers to the questions people ask before building a website with Framer: cost, code, domains, SEO, templates.",
+  root: "..",
+  body: `
+<section class="guide-sec learn-index"><div class="wrap">
+  <p class="badge-pill">Guides</p>
+  <h1 class="serif">Framer, <span class="it">answered.</span></h1>
+  <p class="guide-answer">The questions people ask before they build. Plain answers, no jargon, and the honest limits included.</p>
+  <div class="guide-grid">${GUIDES.map((g) => guideCard(g, "..")).join("")}</div>
+</div></section>`,
+});
+
 /* ---------------- write dist ---------------- */
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, "assets", "covers"), { recursive: true });
@@ -1424,6 +1480,13 @@ for (const n of NICHES) {
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), nichePage(n));
 }
+fs.mkdirSync(path.join(DIST, "learn"), { recursive: true });
+fs.writeFileSync(path.join(DIST, "learn", "index.html"), learnIndex);
+for (const g of GUIDES) {
+  const dir = path.join(DIST, "learn", g.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "index.html"), guidePage(g));
+}
 for (const [name, html] of [["support", supportPage], ["license", licensePage], ["privacy", privacyPage]]) {
   fs.mkdirSync(path.join(DIST, name), { recursive: true });
   fs.writeFileSync(path.join(DIST, name, "index.html"), html);
@@ -1440,7 +1503,7 @@ fs.writeFileSync(path.join(DIST, "404.html"), page({
   <a class="pill lg" href="/index.html#collection">Browse the collection</a>
 </div></section>`,
 }));
-const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", site.baseUrl + "/privacy/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`), ...NICHES.map(n => `${site.baseUrl}/templates/${n.slug}/`)];
+const urls = [site.baseUrl + "/", site.baseUrl + "/templates/", site.baseUrl + "/support/", site.baseUrl + "/license/", site.baseUrl + "/privacy/", ...templates.map(t => `${site.baseUrl}/templates/${t.slug}/`), ...NICHES.map(n => `${site.baseUrl}/templates/${n.slug}/`), site.baseUrl + "/learn/", ...GUIDES.map(g => `${site.baseUrl}/learn/${g.slug}/`)];
 fs.writeFileSync(path.join(DIST, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map(u => `  <url><loc>${u}</loc></url>`).join("\n") + "\n</urlset>");

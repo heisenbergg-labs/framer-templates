@@ -440,6 +440,31 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .niche-more { margin-top: 72px; }
 .niche-more h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); margin: 0 0 26px; }
 .niche-ctas { margin-top: 64px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+/* ===== learn / guide pages ===== */
+.guide-sec { padding: 150px 0 90px; }
+.guide-sec .badge-pill { margin-bottom: 16px; }
+.guide-sec h1.serif { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06; margin: 0 0 22px; max-width: 760px; }
+.guide-answer { color: var(--ink); font-size: 18px; line-height: 1.6; max-width: 680px; margin: 0 0 34px; padding: 18px 22px; border-left: 2px solid var(--gold); background: rgba(116, 92, 255, 0.05); border-radius: 0 var(--r) var(--r) 0; }
+.guide-body { max-width: 680px; }
+.guide-body h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 27px; margin: 36px 0 12px; }
+.guide-body p { color: var(--grey); font-size: 15.5px; line-height: 1.7; margin: 0 0 14px; }
+.guide-body ul { margin: 0 0 14px; padding-left: 20px; }
+.guide-body li { color: var(--grey); font-size: 15.5px; line-height: 1.7; margin-bottom: 8px; }
+.guide-body b { color: var(--ink); font-weight: 600; }
+.guide-body a { color: var(--gold); text-decoration: none; }
+.guide-body a:hover { text-decoration: underline; }
+.guide-rel { margin-top: 52px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.guide-more { margin-top: 56px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.guide-more .textlink { display: inline-block; margin-top: 22px; }
+.guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
+.guide-card { display: flex; flex-direction: column; gap: 8px; padding: 22px; border: 1px solid rgba(255, 255, 255, 0.09); border-radius: var(--r); text-decoration: none; color: var(--ink); background: rgba(255, 255, 255, 0.015); transition: border-color 0.2s ease, transform 0.25s var(--ease); }
+.guide-card:hover { border-color: rgba(116, 92, 255, 0.5); transform: translateY(-3px); }
+.guide-card h3 { font-size: 17px; font-weight: 600; margin: 0; line-height: 1.35; }
+.guide-card p { color: var(--grey-2); font-size: 13.5px; line-height: 1.55; margin: 0; }
+.guide-card .qm-cta { color: var(--gold); font-size: 13px; margin-top: auto; padding-top: 6px; }
+.learn-index .guide-grid { margin-top: 40px; }
+@media (max-width: 880px) { .guide-grid { grid-template-columns: 1fr; } }
+
 .niche-links { margin-top: 72px; padding-top: 34px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
 .niche-links .mono-sm { letter-spacing: 0.12em; }
 .niche-chiprow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
