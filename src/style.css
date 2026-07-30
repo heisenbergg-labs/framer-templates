@@ -440,6 +440,10 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .niche-more { margin-top: 72px; }
 .niche-more h2 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 40px); margin: 0 0 26px; }
 .niche-ctas { margin-top: 64px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.niche-links { margin-top: 72px; padding-top: 34px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.niche-links .mono-sm { letter-spacing: 0.12em; }
+.niche-chiprow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.niche-chiprow .chip { flex: 0 0 auto; }
 .foot-brand p { color: var(--grey-2); font-size: 14px; margin: 14px 0 22px; }
 .foot-col { display: flex; flex-direction: column; gap: 10px; }
 .foot-col .mono-sm { margin-bottom: 6px; letter-spacing: 0.12em; }

@@ -1077,9 +1077,296 @@ const NICHES = [
     tags: ["free"],
     match: (t) => t.free,
   },
+  {
+    slug: "for-wedding-photographers",
+    label: "Wedding photographers",
+    title: "Framer Templates for Wedding Photographers",
+    h1: `Framer templates for <span class="it">wedding photographers.</span>`,
+    description: "Portfolio templates for wedding photographers, built in Framer. Gallery-first layouts couples can fall in love with, no code.",
+    intro: [
+      "Couples pick a wedding photographer from the galleries, not the about page. These templates lead with full-width image sets and keep the type quiet, so your best weddings do the convincing.",
+      "Each gallery is a native Framer image grid. Drop in a new wedding by replacing images on the canvas, publish, and the portfolio is current again.",
+    ],
+    slugs: ["still"], tags: ["photography"],
+  },
+  {
+    slug: "for-artists",
+    label: "Artists",
+    title: "Framer Templates for Artists",
+    h1: `Framer templates <span class="it">for artists.</span>`,
+    description: "Portfolio templates for artists and illustrators, built in Framer. Work-first layouts with room for series and statements, no code.",
+    intro: [
+      "An artist site should feel like a room your work hangs in, not a feed it scrolls past in. These templates give each piece space, with layouts that suit series, editions and statements.",
+      "Images are native fills and every caption is an editable text layer, so updating for a new body of work takes minutes.",
+    ],
+    slugs: ["still"], tags: ["art", "creative"],
+  },
+  {
+    slug: "for-designers",
+    label: "Designers",
+    title: "Framer Templates for Designers",
+    h1: `Framer templates <span class="it">for designers.</span>`,
+    description: "Portfolio templates for graphic and digital designers, built in Framer. Case-study-ready layouts with taste, no code.",
+    intro: [
+      "A designer's portfolio gets judged on its own design before anyone opens a case study. These templates hold that bar: disciplined type, deliberate spacing, nothing decorative for its own sake.",
+      "Projects are cards on the canvas or CMS entries, so adding work is routine, not a redesign.",
+    ],
+    slugs: ["still", "cut"], tags: ["portfolio"],
+  },
+  {
+    slug: "for-freelancers",
+    label: "Freelancers",
+    title: "Framer Templates for Freelancers",
+    h1: `Framer templates <span class="it">for freelancers.</span>`,
+    description: "Website templates for freelancers, built in Framer. Show the work, state the offer, capture the inquiry. No code.",
+    intro: [
+      "A freelancer site has three jobs: show the work, state what you do, and make contacting you effortless. Every template here is structured around those three, whatever your craft.",
+      "You own the domain and the site. No page builder subscriptions stacked on retainers, just Framer and your work.",
+    ],
+    slugs: ["still", "cut", "the-collection"], tags: [],
+  },
+  {
+    slug: "for-filmmakers",
+    label: "Filmmakers",
+    title: "Framer Templates for Filmmakers",
+    h1: `Framer templates <span class="it">for filmmakers.</span>`,
+    description: "Portfolio templates for filmmakers and directors, built in Framer. Cinematic layouts built around the work, no code.",
+    intro: [
+      "A filmmaker's site should feel like a screening, not a brochure. These templates are dark, cinematic and built around full-bleed stills and reels.",
+      "Projects, credits and stills are all editable on the Framer canvas. Swap the demo films for yours and publish.",
+    ],
+    slugs: ["cut"], tags: ["filmmaker"],
+  },
+  {
+    slug: "for-videographers",
+    label: "Videographers",
+    title: "Framer Templates for Videographers",
+    h1: `Framer templates <span class="it">for videographers.</span>`,
+    description: "Portfolio templates for videographers, built in Framer. Reel-first layouts that book client work, no code.",
+    intro: [
+      "Clients booking a videographer want the reel, the range and the contact button. These templates put all three above the fold and let the footage sell the rest.",
+      "Video embeds, project cards and rates are plain layers on the canvas, editable without touching code.",
+    ],
+    slugs: ["cut"], tags: ["videographer"],
+  },
+  {
+    slug: "for-colorists",
+    label: "Colorists",
+    title: "Framer Templates for Colorists",
+    h1: `Framer templates <span class="it">for colorists.</span>`,
+    description: "Portfolio templates for film and video colorists, built in Framer. Dark, grade-friendly layouts, no code.",
+    intro: [
+      "A colorist's portfolio lives or dies on how the frames look on screen. These templates are dark by design, so your grades read true instead of fighting a white page.",
+      "Before-and-after stills, reels and credits all sit in native layers you edit on the canvas.",
+    ],
+    slugs: ["cut"], tags: ["colorist"],
+  },
+  {
+    slug: "for-motion-designers",
+    label: "Motion designers",
+    title: "Framer Templates for Motion Designers",
+    h1: `Framer templates for <span class="it">motion designers.</span>`,
+    description: "Portfolio templates for motion designers and animators, built in Framer. Layouts that move like your work does, no code.",
+    intro: [
+      "Motion designers get hired off feel, and a static portfolio undersells you. These templates carry real motion in the layout itself: scroll-driven sections, hover states, momentum.",
+      "The animation is native Framer interaction, so it stays editable and never breaks when you swap in your own work.",
+    ],
+    slugs: ["cut"], tags: ["motion"],
+  },
+  {
+    slug: "for-youtubers",
+    label: "YouTubers",
+    title: "Framer Templates for YouTubers",
+    h1: `Framer templates <span class="it">for YouTubers.</span>`,
+    description: "Website templates for YouTubers and video creators, built in Framer. A home base for videos, sponsors and merch, no code.",
+    intro: [
+      "A channel is rented space. A site is where sponsors, press and merch actually land. These templates give a video creator both: a reel-quality showcase and a storefront for everything around it.",
+      "Videos embed natively, and links, products and featured uploads are CMS entries you update like a form.",
+    ],
+    slugs: ["cut", "the-collection"], tags: [],
+  },
+  {
+    slug: "for-airbnb-hosts",
+    label: "Airbnb hosts",
+    title: "Framer Templates for Airbnb Hosts",
+    h1: `Framer templates for <span class="it">Airbnb hosts.</span>`,
+    description: "Direct-booking website templates for Airbnb and vacation rental hosts, built in Framer. Keep the platform fee, no code.",
+    intro: [
+      "Every direct booking is a platform fee you keep. A simple site with your photos, your story and a booking link turns repeat guests into direct guests.",
+      "Point the button at your booking system or a direct-booking service, swap the photos, publish. The whole thing is an afternoon.",
+    ],
+    slugs: ["fern-hollow"], tags: ["rental"],
+  },
+  {
+    slug: "for-bed-and-breakfasts",
+    label: "B&Bs & guest houses",
+    title: "Framer Templates for Bed and Breakfasts",
+    h1: `Framer templates for <span class="it">B&amp;Bs and guest houses.</span>`,
+    description: "Website templates for bed and breakfasts and guest houses, built in Framer. Warm, booking-ready, no code.",
+    intro: [
+      "Small stays win on warmth, and most booking-platform pages strip it out. These templates put it back: your rooms, your breakfast table, your corner of the map, told your way.",
+      "Rooms, rates and seasonal notes are text and image layers anyone at the front desk can edit.",
+    ],
+    slugs: ["fern-hollow"], tags: ["stay"],
+  },
+  {
+    slug: "for-private-clubs",
+    label: "Private clubs",
+    title: "Framer Templates for Private Clubs and Members Venues",
+    h1: `Framer templates for <span class="it">private clubs.</span>`,
+    description: "Website templates for private clubs, member venues and societies, built in Framer. Discreet by design, no code.",
+    intro: [
+      "A members venue should say just enough. These templates trade the usual hospitality hard-sell for atmosphere, a short story and a single invitation to apply.",
+      "Membership copy, events and imagery are editable layers, so the site stays current without a designer on call.",
+    ],
+    slugs: ["the-aubrey"], tags: ["membership", "club"],
+  },
+  {
+    slug: "for-cafes",
+    label: "Cafés",
+    title: "Framer Templates for Cafés and Coffee Shops",
+    h1: `Framer templates <span class="it">for caf&eacute;s.</span>`,
+    description: "Website templates for cafés and coffee shops, built in Framer. Menu, hours, atmosphere, no code.",
+    intro: [
+      "People check a café's site for three things: is it open, what's on, and does it look like my kind of place. These templates answer all three in one scroll.",
+      "The menu is plain text on the canvas. New pastry, new price, new hours: edit, publish, done.",
+    ],
+    slugs: ["the-aubrey"], tags: ["restaurant"],
+  },
+  {
+    slug: "for-wealth-management",
+    label: "Wealth management",
+    title: "Framer Templates for Wealth Management Firms",
+    h1: `Framer templates for <span class="it">wealth management.</span>`,
+    description: "Website templates for wealth management and advisory firms, built in Framer. Quiet money, properly presented. No code.",
+    intro: [
+      "Clients trusting you with wealth read restraint as competence. These templates are built on that: serif discipline, muted palettes, and copy structure that presents rather than pitches.",
+      "Team, philosophy and disclosures are editable text layers, so compliance edits never wait on a developer.",
+    ],
+    slugs: ["brookmere"], tags: ["finance"],
+  },
+  {
+    slug: "for-consultants",
+    label: "Consultants",
+    title: "Framer Templates for Consultants",
+    h1: `Framer templates <span class="it">for consultants.</span>`,
+    description: "Website templates for consultants and advisory practices, built in Framer. Credible in one visit, no code.",
+    intro: [
+      "A consultant's site is checked once, before the first call, usually from a phone. These templates make that one visit count: who you help, how, and the proof, in a page that reads established.",
+      "Services and case notes are canvas text. Reposition the practice in an evening, not a project.",
+    ],
+    slugs: ["brookmere"], tags: ["consulting"],
+  },
+  {
+    slug: "for-law-firms",
+    label: "Law firms",
+    title: "Framer Templates for Law Firms",
+    h1: `Framer templates <span class="it">for law firms.</span>`,
+    description: "Website templates for law firms and independent practices, built in Framer. Sober, credible, current. No code.",
+    intro: [
+      "Legal clients are choosing judgment, and the website is the first exhibit. These templates keep it sober: clear practice areas, real bios, nothing gimmicky.",
+      "Attorneys, practice areas and notices are editable layers, so the site stays accurate without IT tickets.",
+    ],
+    slugs: ["brookmere"], tags: [],
+  },
+  {
+    slug: "for-creative-agencies",
+    label: "Creative agencies",
+    title: "Framer Templates for Creative Agencies and Studios",
+    h1: `Framer templates for <span class="it">creative agencies.</span>`,
+    description: "Website templates for creative agencies and studios, built in Framer. Portfolio-grade craft at template speed, no code.",
+    intro: [
+      "An agency site has to prove taste before the deck ever gets opened. These templates hold portfolio-grade craft in type, motion and spacing, without a six-week internal project nobody has time for.",
+      "Case studies are cards and CMS entries. New win, new card, published the same day.",
+    ],
+    slugs: ["cut", "still"], tags: [],
+  },
+  {
+    slug: "for-small-businesses",
+    label: "Small businesses",
+    title: "Framer Templates for Small Businesses",
+    h1: `Framer templates for <span class="it">small businesses.</span>`,
+    description: "Website templates for small businesses, built in Framer. A real site without agency prices, live in a day. No code.",
+    intro: [
+      "Most small businesses get quoted agency prices for a five-page site and settle for a page builder that looks like it. These templates are the third option: designed properly, owned outright, live in a day.",
+      "Words, photos, prices and hours are all editable on the canvas. The person who runs the business can run the site.",
+    ],
+    slugs: ["brookmere", "the-aubrey", "fern-hollow"], tags: ["business"],
+  },
+  {
+    slug: "for-influencers",
+    label: "Influencers",
+    title: "Framer Templates for Influencers",
+    h1: `Framer templates <span class="it">for influencers.</span>`,
+    description: "Website templates for influencers, built in Framer. Your links, partnerships and shop on a domain you own, no code.",
+    intro: [
+      "Brands vet influencers off a link, and a bio page with ten buttons reads amateur next to a real site. These templates make the professional impression: media kit energy, shoppable links, your name on the domain.",
+      "Links and products are CMS entries. New drop, new partnership, updated from your phone.",
+    ],
+    slugs: ["the-collection"], tags: ["personal brand"],
+  },
+  {
+    slug: "for-fashion-and-beauty",
+    label: "Fashion & beauty",
+    title: "Framer Templates for Fashion and Beauty Creators",
+    h1: `Framer templates for <span class="it">fashion and beauty.</span>`,
+    description: "Website templates for fashion and beauty creators, built in Framer. Editorial looks, shoppable everything, no code.",
+    intro: [
+      "Fashion and beauty audiences expect editorial polish; anything less undercuts the content. These templates borrow magazine structure: strong covers, lookbook grids, credits done properly.",
+      "Looks and products live in the CMS, so a new haul or edit is a form fill, not a layout job.",
+    ],
+    slugs: ["the-collection"], tags: ["fashion", "beauty"],
+  },
+  {
+    slug: "linktree-alternative",
+    label: "Linktree alternative",
+    title: "Linktree Alternative Built in Framer",
+    h1: `A Linktree alternative <span class="it">you actually own.</span>`,
+    description: "A Linktree alternative built in Framer: your links, products and content on your own domain, designed like a real site. No code.",
+    intro: [
+      "Link-in-bio tools rent you a list of buttons on their domain, with their branding and their limits. A Framer template gives you the same one-tap convenience on a site that is actually yours.",
+      "Same job, better impression: your links and products in a designed storefront, your domain on the address bar, no monthly link-tool subscription.",
+    ],
+    slugs: ["the-collection"], tags: ["linktree alternative"],
+  },
+  {
+    slug: "for-personal-brands",
+    label: "Personal brands",
+    title: "Framer Templates for Personal Brands",
+    h1: `Framer templates for <span class="it">personal brands.</span>`,
+    description: "Website templates for personal brands, built in Framer. One page that says who you are and where everything lives, no code.",
+    intro: [
+      "A personal brand scattered across five platforms needs one address that ties it together. These templates are that address: your work, your writing, your offers, one coherent page.",
+      "Everything is editable on the Framer canvas, so the site evolves as fast as the brand does.",
+    ],
+    slugs: ["the-collection", "still"], tags: ["personal brand"],
+  },
+  {
+    slug: "for-musicians-and-djs",
+    label: "Musicians & DJs",
+    title: "Framer Templates for Musicians and DJs",
+    h1: `Framer templates for <span class="it">musicians and DJs.</span>`,
+    description: "Website templates for musicians, DJs and acts, built in Framer. Dates, releases, merch and bookings in one place, no code.",
+    intro: [
+      "An act needs one page that promoters, fans and venues can all use: the dates, the latest release, the booking contact, the merch. These templates put that in one scroll with atmosphere to spare.",
+      "Releases and dates are CMS entries, embeds are native, and the booking button is yours to point anywhere.",
+    ],
+    slugs: ["the-collection", "the-aubrey"], tags: [],
+  },
 ];
 
-const nicheMatch = (n, t) => n.match ? n.match(t) : (t.tags || []).concat(t.category).some((x) => n.tags.map((s) => s.toLowerCase()).includes(String(x).toLowerCase()));
+const nicheMatch = (n, t) => n.match ? n.match(t) : (
+  (n.slugs || []).includes(t.slug) ||
+  (t.tags || []).concat(t.category).some((x) => (n.tags || []).map((s) => s.toLowerCase()).includes(String(x).toLowerCase()))
+);
+
+const nicheChips = (root, current) => `
+<div class="niche-links">
+  <span class="mono-sm">TEMPLATES BY PROFESSION</span>
+  <div class="niche-chiprow">
+    ${NICHES.filter((n) => n.slug !== current).map((n) => `<a class="chip" href="${root}/templates/${n.slug}/index.html">${esc(n.label)}</a>`).join("")}
+  </div>
+</div>`;
 
 const nichePage = (n) => {
   const hits = live.filter((t) => nicheMatch(n, t));
@@ -1107,6 +1394,7 @@ const nichePage = (n) => {
     <a class="pill lg" href="#" data-quiz-open>Not sure? Take the 30-second quiz</a>
     <a class="textlink" href="${root}/templates/index.html">Browse everything <span class="arr">&rarr;</span></a>
   </div>
+  ${nicheChips(root, n.slug)}
 </div></section>`,
   });
 };
