@@ -461,7 +461,9 @@ footer { border-top: 1px solid var(--line); background: var(--bg-deep); }
 .guide-card:hover { border-color: rgba(116, 92, 255, 0.5); transform: translateY(-3px); }
 .guide-card h3 { font-size: 17px; font-weight: 600; margin: 0; line-height: 1.35; }
 .guide-card p { color: var(--grey-2); font-size: 13.5px; line-height: 1.55; margin: 0; }
-.guide-card .qm-cta { color: var(--gold); font-size: 13px; margin-top: auto; padding-top: 6px; }
+.gc-cta { color: var(--gold); font-size: 13px; font-weight: 500; margin-top: auto; padding-top: 14px; display: inline-flex; align-items: center; gap: 5px; }
+.gc-cta .arr { transition: transform 0.25s var(--ease); }
+.guide-card:hover .gc-cta .arr { transform: translateX(3px); }
 .learn-index .guide-grid { margin-top: 40px; }
 @media (max-width: 880px) { .guide-grid { grid-template-columns: 1fr; } }
 

@@ -1408,7 +1408,7 @@ const guideCard = (g, root) => `
   <span class="mono-sm">${esc(g.category.toUpperCase())}</span>
   <h3>${esc(g.title)}</h3>
   <p>${esc(g.answer.split(". ")[0])}.</p>
-  <span class="qm-cta">Read the answer &rarr;</span>
+  <span class="gc-cta">Read the answer <span class="arr">&rarr;</span></span>
 </a>`;
 
 const guidePage = (g) => {
