@@ -9,6 +9,7 @@ const data = JSON.parse(fs.readFileSync(path.join(ROOT, "templates.json"), "utf8
 const { site, templates } = data;
 
 const VER = Date.now().toString(36);
+const META_PIXEL_ID = "1817397522974878";
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // free first, then paid cheapest-first (browsing order)
@@ -413,7 +414,7 @@ const quizBlock = (root) => `
 /* ---------------- quick look ---------------- */
 
 /* ---------------- page wrapper ---------------- */
-const page = ({ title, description, body, root = ".", og = "assets/og/home.jpg", jsonld = null, navDelay = false }) => `<!DOCTYPE html>
+const page = ({ title, description, body, root = ".", og = "assets/og/home.jpg", jsonld = null, navDelay = false, product = null }) => `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -433,6 +434,18 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
 ${FONTS}
 <link rel="stylesheet" href="${root}/style.css?v=${VER}">
 <script data-goatcounter="https://getsites.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '${META_PIXEL_ID}');
+fbq('track', 'PageView');
+${product ? `window.gsProduct=${JSON.stringify(product)};
+fbq('track','ViewContent',{content_ids:[${JSON.stringify(product.id)}],content_type:'product',content_name:${JSON.stringify(product.name)},content_category:${JSON.stringify(product.category)},value:${Number(product.price) || 0},currency:'USD'});` : ""}
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1"></noscript>
 </head>
 <body>
 <div id="sale-bar" hidden>
@@ -515,7 +528,16 @@ window.gsPing = function (e, d) {
 };
 document.addEventListener("click", function (ev) {
   var a = ev.target.closest && ev.target.closest('a[href*="buy.polar.sh/"], a[href*="polar.sh/checkout/"]');
-  if (a) gsPing("buy-click", { template: (document.title.split(",")[0] || "").slice(0, 60) });
+  if (!a) return;
+  gsPing("buy-click", { template: (document.title.split(",")[0] || "").slice(0, 60) });
+  try {
+    if (window.fbq) {
+      var p = window.gsProduct;
+      fbq("track", "InitiateCheckout", p
+        ? { content_ids: [p.id], content_type: "product", content_name: p.name, value: Number(p.price) || 0, currency: "USD", num_items: 1 }
+        : { content_type: "product", content_name: (document.title.split(",")[0] || "").slice(0, 60), currency: "USD", num_items: 1 });
+    }
+  } catch (err) {}
 }, true);
 (function () {
   var KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
@@ -820,6 +842,7 @@ const detail = (t) => {
     description: t.description,
     root: "../..",
     og: `assets/og/${t.slug}.jpg`,
+    product: { id: t.slug, name: t.name, category: t.category, price: price },
     jsonld: {
       "@context": "https://schema.org",
       "@type": "Product",
