@@ -488,7 +488,29 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
   setTimeout(() => { pending.forEach(el => el.classList.add("in")); }, 2500);
 }
 if (matchMedia("(pointer: fine) and (hover: hover)").matches) {
+  // hover-video preview: cover image at rest, muted loop while hovered
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".tcard img[data-vid]").forEach(img => {
+      const src = img.dataset.vid;
+      if (!src) return;
+      const card = img.closest(".tcard");
+      let v = null;
+      card.addEventListener("mouseenter", () => {
+        if (!v) {
+          v = document.createElement("video");
+          v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+          v.src = src;
+          v.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity 0.25s ease;pointer-events:none";
+          img.parentElement.appendChild(v);
+        }
+        v.currentTime = 0;
+        v.play().then(() => { v.style.opacity = "1"; }).catch(() => {});
+      });
+      card.addEventListener("mouseleave", () => { if (v) { v.pause(); v.style.opacity = "0"; } });
+    });
+  }
   document.querySelectorAll(".tcard img[data-gal]").forEach(img => {
+    if (img.dataset.vid) return; // video preview owns this card's hover
     const gal = (img.dataset.gal || "").split(",").filter(Boolean);
     if (gal.length < 2) return;
     let idx = 0, timer = null, loaded = false;
@@ -575,13 +597,13 @@ const card = (t, root = ".") => `
 <article class="tcard reveal" data-free="${t.free}" data-cat="${esc(t.category)}" data-name="${esc(t.name)}">
   <div class="frame-wrap">
     <a class="frame" href="${root}/templates/${t.slug}/index.html" data-cursor="${t.free ? "Free" : (t.status === "soon" ? "Soon" : esc(t.price))}" data-kind="${t.free ? "free" : "paid"}" aria-label="${esc(t.name)}">
-      <img src="${root}/${t.cover}?v=${VER}" alt="${esc(t.name)} website template" loading="lazy" data-gal="${(t.gallery && t.gallery.length > 1) ? t.gallery.map(g => root + "/" + g + "?v=${VER}").join(",") : ""}">
+      <img src="${root}/${t.cover}?v=${VER}" alt="${esc(t.name)} website template" loading="lazy" data-vid="${t.preview || ""}" data-gal="${(t.gallery && t.gallery.length > 1) ? t.gallery.map(g => root + "/" + g + "?v=" + VER).join(",") : ""}">
     </a>
   </div>
   <div class="meta">
     <div class="meta-l">
       <h3><a href="${root}/templates/${t.slug}/index.html">${esc(t.name)}</a>${statusBadge(t)}</h3>
-      <p class="line2">${esc(t.category)} &middot; ${t.free ? "Free" : esc(t.price)}</p>
+      <p class="line2">${esc(t.category)} &middot; ${t.free ? "Free" : esc(t.price)}${t.featured ? '&ensp;<span class="feat-chip">&#9733; Featured</span>' : ""}</p>
     </div>
   </div>
 </article>`;
