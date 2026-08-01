@@ -21,6 +21,63 @@
   },
   "templates": [
     {
+      "slug": "atrium",
+      "name": "Atrium",
+      "tagline": "A portfolio you walk through like an exhibition.",
+      "description": "Atrium mounts your work in gilded museum frames under a starry night. A scroll-driven gallery cross-fades from piece to piece with museum wall labels, and a click-to-open lightbox shows every piece full screen. Six designed pages, CMS-ready Works and Journal collections, and a built-in editing guide. Everything is native and editable on the Framer canvas: swap the demo art for your own in a couple of clicks, no code needed.",
+      "category": "Portfolio",
+      "tags": [
+        "art",
+        "artist",
+        "painter",
+        "illustrator",
+        "photography",
+        "exhibition",
+        "gallery",
+        "portfolio",
+        "creative",
+        "cinematic",
+        "dark",
+        "studio"
+      ],
+      "price": "$99",
+      "free": false,
+      "new": true,
+      "featured": false,
+      "status": "live",
+      "tier": "Premium",
+      "features": [
+        "Scroll-driven gallery with museum wall labels",
+        "Click-to-open lightbox with keyboard browsing",
+        "Exhibitions timeline + Journal with article pages",
+        "CMS-ready Works and Journal collections"
+      ],
+      "included": [
+        "6 pages: Home, Works, About, Exhibitions, Journal, Contact",
+        "Works + Journal CMS collections",
+        "Built-in how-to-edit guide page",
+        "WebP-optimized imagery",
+        "Free updates through your remix link"
+      ],
+      "bestFor": [
+        "painters, illustrators and photographers",
+        "creative studios presenting a body of work",
+        "artists who want work hung, not listed"
+      ],
+      "cover": "assets/covers/atrium.jpg",
+      "demo": "https://aatrium.framer.website",
+      "get": "https://aatrium.framer.website",
+      "checkout": "https://buy.polar.sh/polar_cl_ffLh88yUNLpfwNPIXeO4uqg8vcVUV75dEz39c3A1Pkf",
+      "gallery": [
+        "assets/shots/atrium-m1.jpg",
+        "assets/shots/atrium-m2.jpg",
+        "assets/shots/atrium-m3.jpg",
+        "assets/shots/atrium-m4.jpg",
+        "assets/shots/atrium-m5.jpg"
+      ],
+      "video": "https://hsnbrg-cdn.pages.dev/atrium-hero.mp4"
+    },
+    {
       "slug": "the-collection",
       "name": "The Collection",
       "tagline": "A creator storefront that reads like an edit, not a wall of links.",
