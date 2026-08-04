@@ -708,23 +708,12 @@ ${collectionSec(".")}
 <section class="idemo-sec"><div class="wrap">
   <div class="sec-head">
     <h2 class="serif">Try one, <span class="it">right now.</span></h2>
-    <p class="idemo-sub">These are the real templates, live. Click through the pages, feel the motion, switch to phone view. What you see is what you get.</p>
+    <p class="idemo-sub">This is ${esc(featured.name)}, live. Click, scroll, open its pages. Every demo on this site is the real template.</p>
   </div>
-  <div class="idemo-chips" role="tablist" aria-label="Pick a template to try">
-    ${live.filter(t => t.demo).map((t, i) => `<button class="chip idemo-chip${t.slug === featured.slug ? " on" : ""}" type="button" data-slug="${t.slug}" data-demo="${esc(t.demo)}" data-cover="assets/covers/${t.slug}.jpg?v=${VER}">${esc(t.name)}</button>`).join("")}
-  </div>
-  <p class="idemo-note"><span class="hand">Interactive demo</span><svg class="idemo-arrow" width="34" height="30" viewBox="0 0 34 30" fill="none" aria-hidden="true"><path d="M30 3 C26 16 18 22 7 24" stroke="#b9aaff" stroke-width="1.6" stroke-linecap="round"/><path d="M12 19 L7 24 L14 26" stroke="#b9aaff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></p>
   <div class="idemo reveal" id="idemo" data-demo="${esc(featured.demo)}">
-    <div class="idemo-bar">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="idemo-url">${esc(featured.demo.replace("https://", ""))}</span>
-      <span class="idemo-devices">
-        <button class="idemo-dev on" type="button" data-w="desktop" aria-label="Desktop view">Desktop</button>
-        <button class="idemo-dev" type="button" data-w="phone" aria-label="Phone view">Phone</button>
-      </span>
-    </div>
+    <div class="idemo-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="idemo-url">${esc(featured.demo.replace("https://", ""))}</span></div>
     <div class="idemo-body">
-      <img src="assets/covers/${featured.slug}.jpg?v=${VER}" alt="Live template preview">
+      <img src="assets/covers/${featured.slug}.jpg?v=${VER}" alt="${esc(featured.name)} template preview">
       <button class="pill lg idemo-go" type="button">Try it live</button>
     </div>
   </div>
@@ -733,39 +722,16 @@ ${collectionSec(".")}
 (function () {
   var box = document.getElementById("idemo");
   if (!box) return;
-  var body = box.querySelector(".idemo-body");
-  var urlEl = box.querySelector(".idemo-url");
-  var loaded = false;
-  function mount(src) {
+  var btn = box.querySelector(".idemo-go");
+  btn.addEventListener("click", function () {
+    var body = box.querySelector(".idemo-body");
     var f = document.createElement("iframe");
-    f.src = src;
+    f.src = box.dataset.demo;
     f.setAttribute("title", "Live template demo");
+    f.setAttribute("loading", "eager");
     body.innerHTML = "";
     body.appendChild(f);
-    loaded = true;
-    if (window.gsPing) gsPing("demo-click", { template: src });
-  }
-  box.querySelector(".idemo-go").addEventListener("click", function () { mount(box.dataset.demo); });
-  document.querySelectorAll(".idemo-chip").forEach(function (c) {
-    c.addEventListener("click", function () {
-      document.querySelectorAll(".idemo-chip").forEach(function (x) { x.classList.remove("on"); });
-      c.classList.add("on");
-      box.dataset.demo = c.dataset.demo;
-      urlEl.textContent = c.dataset.demo.replace("https://", "");
-      if (loaded) { mount(c.dataset.demo); }
-      else {
-        var img = body.querySelector("img");
-        if (img) img.src = c.dataset.cover;
-      }
-    });
-  });
-  document.querySelectorAll(".idemo-dev").forEach(function (d) {
-    d.addEventListener("click", function () {
-      document.querySelectorAll(".idemo-dev").forEach(function (x) { x.classList.remove("on"); });
-      d.classList.add("on");
-      box.classList.toggle("phone", d.dataset.w === "phone");
-      if (!loaded) mount(box.dataset.demo);
-    });
+    if (window.gsPing) gsPing("demo-click", { template: box.dataset.demo });
   });
 })();
 </script>
