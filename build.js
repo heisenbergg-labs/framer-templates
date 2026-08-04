@@ -705,37 +705,6 @@ const home = page({
 
 ${collectionSec(".")}
 
-<section class="idemo-sec"><div class="wrap">
-  <div class="sec-head">
-    <h2 class="serif">Try one, <span class="it">right now.</span></h2>
-    <p class="idemo-sub">This is ${esc(featured.name)}, live. Click, scroll, open its pages. Every demo on this site is the real template.</p>
-  </div>
-  <div class="idemo reveal" id="idemo" data-demo="${esc(featured.demo)}">
-    <div class="idemo-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="idemo-url">${esc(featured.demo.replace("https://", ""))}</span></div>
-    <div class="idemo-body">
-      <img src="assets/covers/${featured.slug}.jpg?v=${VER}" alt="${esc(featured.name)} template preview">
-      <button class="pill lg idemo-go" type="button">Try it live</button>
-    </div>
-  </div>
-</div></section>
-<script>
-(function () {
-  var box = document.getElementById("idemo");
-  if (!box) return;
-  var btn = box.querySelector(".idemo-go");
-  btn.addEventListener("click", function () {
-    var body = box.querySelector(".idemo-body");
-    var f = document.createElement("iframe");
-    f.src = box.dataset.demo;
-    f.setAttribute("title", "Live template demo");
-    f.setAttribute("loading", "eager");
-    body.innerHTML = "";
-    body.appendChild(f);
-    if (window.gsPing) gsPing("demo-click", { template: box.dataset.demo });
-  });
-})();
-</script>
-
 <section class="steps-sec"><div class="wrap">
   <div class="sec-head">
     <h2 class="serif">Three steps to <span class="it">yours</span></h2>
