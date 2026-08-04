@@ -296,7 +296,7 @@ button.textlink { background: none; border: 0; color: var(--ink); font-size: 14.
 .feat-chip { color: #d6ae54; font-size: 12px; font-weight: 600; letter-spacing: 0.03em; white-space: nowrap; }
 
 /* ===== hero proof strip ===== */
-.proof-strip { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 0 26px; }
+.proof-strip { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 30px 0 0; }
 .proof-avatars { display: inline-flex; }
 .pav {
   width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
