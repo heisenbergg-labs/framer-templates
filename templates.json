@@ -1,463 +1,519 @@
 {
-  "site": {
-    "name": "getsites",
-    "tld": ".co",
-    "title": "getsites, Original Framer websites with a point of view",
-    "description": "A small collection of complete Framer websites for businesses that care how they look. Choose one, make it yours, and publish without starting from an empty canvas.",
-    "baseUrl": "https://getsites.co",
-    "leadWebhook": "https://script.google.com/macros/s/AKfycbw140BmiNcoSyUfv8MeOnp_ESb9PD6NLv47oaPJSnAnXG21D0l7jZWZUpON2MleTVz39A/exec",
-    "bundle": {
-      "name": "All access",
-      "price": "$249",
-      "checkout": "",
-      "note": "The three current templates, plus Nostalgia.exe when it ships.",
-      "includes": [
-        "Still, The Aubrey and Brookmere",
-        "Nostalgia.exe, the upcoming flagship, included",
-        "One-site license per template",
-        "Free updates through your remix links"
-      ]
-    }
+ "site": {
+  "name": "getsites",
+  "tld": ".co",
+  "title": "getsites, Original Framer websites with a point of view",
+  "description": "A small collection of complete Framer websites for businesses that care how they look. Choose one, make it yours, and publish without starting from an empty canvas.",
+  "baseUrl": "https://getsites.co",
+  "leadWebhook": "https://script.google.com/macros/s/AKfycbw140BmiNcoSyUfv8MeOnp_ESb9PD6NLv47oaPJSnAnXG21D0l7jZWZUpON2MleTVz39A/exec",
+  "bundle": {
+   "name": "All access",
+   "price": "$249",
+   "checkout": "",
+   "note": "The three current templates, plus Nostalgia.exe when it ships.",
+   "includes": [
+    "Still, The Aubrey and Brookmere",
+    "Nostalgia.exe, the upcoming flagship, included",
+    "One-site license per template",
+    "Free updates through your remix links"
+   ]
+  }
+ },
+ "templates": [
+  {
+   "slug": "bellucci",
+   "name": "BELLUCCI",
+   "tagline": "A bridal makeup template built to turn a browsing bride into a booked date.",
+   "description": "BELLUCCI is for bridal makeup artists who book weddings, not just post galleries. It is a light-led story rather than a portfolio wall: it opens on the morning of the wedding, moves through how a finish reads in window, ceremony and evening light, then closes on an enquiry form that already asks for the wedding date, the venue and how many people need makeup. Editorial black and cream, Mazius Display and General Sans. Every layer is native and editable on the Framer canvas, so you swap photography and rewrite copy without touching code.",
+   "category": "Personal",
+   "tags": [
+    "bridal",
+    "makeup",
+    "makeup artist",
+    "beauty",
+    "wedding",
+    "editorial",
+    "luxury",
+    "booking",
+    "photography",
+    "cms",
+    "minimal",
+    "elegant"
+   ],
+   "price": "$49",
+   "free": false,
+   "new": true,
+   "featured": true,
+   "status": "soon",
+   "tier": "Standard",
+   "features": [
+    "Draggable light comparison slider, window light against evening light",
+    "Scroll-controlled Light Study through three moments of light",
+    "Enquiry form capturing wedding date, venue and party size",
+    "Real Brides CMS collection you edit in the panel"
+   ],
+   "included": [
+    "8 sections on a single designed page",
+    "Real Brides CMS collection",
+    "Built-in Start Here guide page",
+    "Hand-tuned desktop, tablet and phone breakpoints",
+    "Free updates through your remix link"
+   ],
+   "bestFor": [
+    "bridal and wedding makeup artists",
+    "hair and makeup duos taking wedding bookings",
+    "beauty artists who want enquiries, not just likes"
+   ],
+   "cover": "assets/covers/bellucci.jpg",
+   "demo": "https://bellucci.framer.website",
+   "get": "https://bellucci.framer.website",
+   "checkout": "https://buy.polar.sh/polar_cl_uq1hL9KmTJEYkFLKNPjY8kxH7HeR95zG97rgG09Cg4k",
+   "gallery": [
+    "assets/shots/bellucci-m1.jpg",
+    "assets/shots/bellucci-m2.jpg",
+    "assets/shots/bellucci-m3.jpg",
+    "assets/shots/bellucci-m4.jpg",
+    "assets/shots/bellucci-m5.jpg"
+   ]
   },
-  "templates": [
-    {
-      "slug": "atrium",
-      "name": "Atrium",
-      "tagline": "A portfolio you walk through like an exhibition.",
-      "description": "Atrium mounts your work in gilded museum frames under a starry night. A scroll-driven gallery cross-fades from piece to piece with museum wall labels, and a click-to-open lightbox shows every piece full screen. Six designed pages, CMS-ready Works and Journal collections, and a built-in editing guide. Everything is native and editable on the Framer canvas: swap the demo art for your own in a couple of clicks, no code needed.",
-      "category": "Portfolio",
-      "tags": [
-        "art",
-        "artist",
-        "painter",
-        "illustrator",
-        "photography",
-        "exhibition",
-        "gallery",
-        "portfolio",
-        "creative",
-        "cinematic",
-        "dark",
-        "studio"
-      ],
-      "price": "$99",
-      "free": false,
-      "new": true,
-      "featured": true,
-      "status": "live",
-      "tier": "Premium",
-      "features": [
-        "Scroll-driven gallery with museum wall labels",
-        "Click-to-open lightbox with keyboard browsing",
-        "Exhibitions timeline + Journal with article pages",
-        "CMS-ready Works and Journal collections"
-      ],
-      "included": [
-        "6 pages: Home, Works, About, Exhibitions, Journal, Contact",
-        "Works + Journal CMS collections",
-        "Built-in how-to-edit guide page",
-        "WebP-optimized imagery",
-        "Free updates through your remix link"
-      ],
-      "bestFor": [
-        "painters, illustrators and photographers",
-        "creative studios presenting a body of work",
-        "artists who want work hung, not listed"
-      ],
-      "cover": "assets/covers/atrium.jpg",
-      "demo": "https://aatrium.framer.website",
-      "get": "https://aatrium.framer.website",
-      "checkout": "https://buy.polar.sh/polar_cl_ffLh88yUNLpfwNPIXeO4uqg8vcVUV75dEz39c3A1Pkf",
-      "gallery": [
-        "assets/shots/atrium-m1.jpg",
-        "assets/shots/atrium-m2.jpg",
-        "assets/shots/atrium-m3.jpg",
-        "assets/shots/atrium-m4.jpg",
-        "assets/shots/atrium-m5.jpg"
-      ],
-      "video": "https://hsnbrg-cdn.pages.dev/atrium-hero.mp4",
-      "preview": "https://hsnbrg-cdn.pages.dev/atrium-card.mp4"
-    },
-    {
-      "slug": "the-collection",
-      "name": "The Collection",
-      "tagline": "A creator storefront that reads like an edit, not a wall of links.",
-      "description": "Turn your link in bio into a real shop. The Collection is a mobile-first storefront for fashion, beauty and lifestyle creators: a magazine-style hero introduces you, curated edits group the pieces you actually recommend, and a weekly product feed runs off the CMS so your links never go stale. Everything is native and editable on the Framer canvas. Swap the photos, rewrite the copy, drop in your products, change two fonts, publish. No code needed.",
-      "category": "Creator",
-      "tags": [
-        "creator",
-        "storefront",
-        "shop my links",
-        "linktree alternative",
-        "personal brand",
-        "fashion",
-        "beauty",
-        "lifestyle",
-        "ecommerce",
-        "cms",
-        "editorial",
-        "mobile-first"
-      ],
-      "price": "$49",
-      "free": false,
-      "new": true,
-      "featured": false,
-      "status": "live",
-      "tier": "Premium",
-      "features": [
-        "Editorial hero with live intro + 3D tilt",
-        "Curated looks and finds sections",
-        "9-item Products CMS",
-        "Private-list email capture"
-      ],
-      "included": [
-        "Home + 404 + Start Here guide pages",
-        "Products CMS collection",
-        "Intro animation + tilt effects",
-        "Email capture wired for your list",
-        "Free updates through your remix link"
-      ],
-      "bestFor": [
-        "fashion, beauty and lifestyle creators",
-        "creators replacing a Linktree",
-        "personal brands selling curated products"
-      ],
-      "cover": "assets/covers/the-collection.jpg",
-      "demo": "https://thecollectionn.framer.website",
-      "get": "https://thecollectionn.framer.website",
-      "checkout": "https://buy.polar.sh/polar_cl_F6CpsTeYslkURKr43koIb3Q4AmbIARXc0QDce1B4Um3",
-      "gallery": [
-        "assets/shots/the-collection-m1.jpg",
-        "assets/shots/the-collection-m2.jpg",
-        "assets/shots/the-collection-m3.jpg",
-        "assets/shots/the-collection-m4.jpg"
-      ],
-      "video": "https://hsnbrg-cdn.pages.dev/collection-walkthrough.mp4",
-      "preview": "https://hsnbrg-cdn.pages.dev/collection-card.mp4"
-    },
-    {
-      "slug": "cut",
-      "name": "CUT",
-      "tagline": "A video editor's portfolio, cut like a film.",
-      "description": "CUT is a video editor portfolio and filmmaker website template for Framer. Dark and cinematic, built for video editors, filmmakers, videographers, colorists and cinematographers who need a fast, fully editable site to show their reel and land better clients. Viewfinder hero, a horizontal-scroll showreel gallery, and a dedicated Works page that plays YouTube, Vimeo or self-hosted video on click. CMS-driven projects, fully responsive, native and buyer-editable.",
-      "category": "Portfolio",
-      "tags": [
-        "video editor",
-        "filmmaker",
-        "videographer",
-        "colorist",
-        "cinematographer",
-        "portfolio",
-        "showreel",
-        "reel",
-        "cinematic",
-        "dark",
-        "motion",
-        "CMS",
-        "video production"
-      ],
-      "price": "$69",
-      "free": false,
-      "new": true,
-      "featured": true,
-      "status": "live",
-      "tier": "Premium",
-      "features": [
-        "Viewfinder hero + film-leader intro",
-        "Horizontal-scroll showreel",
-        "Works page with click-to-play video",
-        "Projects CMS"
-      ],
-      "included": [
-        "Home + Works pages",
-        "Projects CMS collection",
-        "Cinematic video lightbox (YouTube, Vimeo, mp4)",
-        "Desktop horizontal scroll, native vertical on phone",
-        "Free updates through your remix link"
-      ],
-      "bestFor": [
-        "video editors and filmmakers",
-        "videographers and colorists",
-        "cinematographers and motion designers",
-        "video production studios"
-      ],
-      "cover": "assets/covers/cut.jpg",
-      "demo": "https://cutt.framer.website",
-      "get": "https://cutt.framer.website",
-      "checkout": "https://buy.polar.sh/polar_cl_16i717WRENbGZBwDpLXVdOdSizOD4QTJmyNuv27BVcf",
-      "gallery": [
-        "assets/shots/cut-1.jpg",
-        "assets/shots/cut-2.jpg",
-        "assets/shots/cut-3.jpg",
-        "assets/shots/cut-4.jpg"
-      ],
-      "video": "https://hsnbrg-cdn.pages.dev/cut-walkthrough.mp4",
-      "preview": "https://hsnbrg-cdn.pages.dev/cut-card.mp4"
-    },
-    {
-      "slug": "still",
-      "name": "Still",
-      "tagline": "A film photographer's contact sheet, alive.",
-      "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet, marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
-      "category": "Portfolio",
-      "tags": [
-        "photography",
-        "portfolio",
-        "creative",
-        "art"
-      ],
-      "price": "$49",
-      "free": false,
-      "new": true,
-      "featured": false,
-      "status": "live",
-      "cover": "assets/covers/still.jpg",
-      "demo": "https://stillfilm.framer.website",
-      "get": "https://stillfilm.framer.website",
-      "year": "2026",
-      "tier": "Standard",
-      "features": [
-        "13 pages",
-        "Photo archive CMS",
-        "Editorial motion",
-        "Mobile ready"
-      ],
-      "included": [
-        "13 designed pages",
-        "Photo archive CMS",
-        "Contact-sheet gallery system",
-        "Editorial type system",
-        "Responsive breakpoints",
-        "Free updates"
-      ],
-      "bestFor": [
-        "Film photographers",
-        "Visual artists",
-        "Creative portfolios"
-      ],
-      "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g",
-      "gallery": [
-        "assets/shots/still-m1.jpg",
-        "assets/shots/still-m2.jpg",
-        "assets/shots/still-m3.jpg",
-        "assets/shots/still-m4.jpg"
-      ]
-    },
-    {
-      "slug": "fern-hollow",
-      "name": "Fern Hollow",
-      "tagline": "Boutique stays and cabin rentals, warm and quiet.",
-      "description": "Fern Hollow is a free template for boutique stays, cabins and rentals. Warm photography-first layout, gallery and booking sections, and copy that feels like a host, not a hotel chain. Free, forever.",
-      "category": "Hospitality",
-      "tags": [
-        "rental",
-        "stay",
-        "hospitality",
-        "travel",
-        "free"
-      ],
-      "price": "Free",
-      "free": true,
-      "new": false,
-      "featured": false,
-      "status": "live",
-      "cover": "assets/covers/fernhollow.jpg",
-      "demo": "https://fernhollow.framer.website",
-      "get": "https://fernhollow.framer.website",
-      "year": "2026",
-      "tier": "Free",
-      "features": [
-        "Gallery and booking sections",
-        "Photography-first layout",
-        "Mobile ready",
-        "No custom code"
-      ],
-      "included": [
-        "Complete one-page site",
-        "Gallery and booking sections",
-        "Responsive breakpoints",
-        "Documentation in-page",
-        "Free forever"
-      ],
-      "bestFor": [
-        "Boutique stays",
-        "Cabins and rentals",
-        "Guest houses"
-      ],
-      "checkout": "",
-      "gallery": [
-        "assets/shots/fern-hollow-m1.jpg",
-        "assets/shots/fern-hollow-m2.jpg",
-        "assets/shots/fern-hollow-m3.jpg",
-        "assets/shots/fern-hollow-m4.jpg",
-        "assets/shots/fern-hollow-m5.jpg"
-      ],
-      "preview": "https://hsnbrg-cdn.pages.dev/fern-hollow-card.mp4"
-    },
-    {
-      "slug": "the-aubrey",
-      "name": "The Aubrey",
-      "tagline": "A members' club, after dark.",
-      "description": "The Aubrey is a dark, cinematic template for members' clubs, bars, restaurants and hospitality brands. Candlelit motion, a velvet-rope invitation flow, events and journal CMS, the whole house, ready to open.",
-      "category": "Hospitality",
-      "tags": [
-        "club",
-        "restaurant",
-        "hospitality",
-        "dark",
-        "membership"
-      ],
-      "price": "$69",
-      "free": false,
-      "new": false,
-      "featured": false,
-      "status": "live",
-      "cover": "assets/covers/aubrey.jpg",
-      "demo": "https://theaubrey.framer.website",
-      "get": "https://theaubrey.framer.website",
-      "year": "2026",
-      "tier": "Premium",
-      "features": [
-        "Events CMS",
-        "Journal CMS",
-        "Invitation flow",
-        "Cinematic motion"
-      ],
-      "included": [
-        "Complete multi-page site",
-        "Events CMS collection",
-        "Journal CMS collection",
-        "Working invitation flow",
-        "Candlelit motion system",
-        "Responsive breakpoints",
-        "Free updates"
-      ],
-      "bestFor": [
-        "Members' clubs",
-        "Bars and restaurants",
-        "Boutique hotels",
-        "Private dining"
-      ],
-      "checkout": "https://buy.polar.sh/polar_cl_YPejPZbrgBCRVdDqG8Q7ZiamZGOcMw1gKfEko19EfGW",
-      "gallery": [
-        "assets/shots/the-aubrey-m1.jpg",
-        "assets/shots/the-aubrey-m2.jpg",
-        "assets/shots/the-aubrey-m3.jpg",
-        "assets/shots/the-aubrey-m4.jpg"
-      ]
-    },
-    {
-      "slug": "brookmere",
-      "name": "Brookmere",
-      "tagline": "Luxury finance, by invitation.",
-      "description": "Brookmere is a single-page template for boutique finance, wealth management and private advisory firms. Serif restraint, an emerald palette, and a working invitation form, quiet money, done right.",
-      "category": "Business",
-      "tags": [
-        "finance",
-        "business",
-        "luxury",
-        "consulting"
-      ],
-      "price": "$49",
-      "free": false,
-      "new": false,
-      "featured": false,
-      "status": "live",
-      "cover": "assets/covers/brookmere.jpg",
-      "demo": "https://brookmere.framer.website",
-      "get": "https://brookmere.framer.website",
-      "year": "2026",
-      "tier": "Standard",
-      "features": [
-        "Single page",
-        "Invitation form",
-        "Serif type system",
-        "Quiet motion"
-      ],
-      "included": [
-        "Complete single-page site",
-        "Working invitation form",
-        "Serif and emerald design system",
-        "Responsive breakpoints",
-        "Free updates"
-      ],
-      "bestFor": [
-        "Wealth management",
-        "Private advisory",
-        "Boutique finance"
-      ],
-      "checkout": "https://buy.polar.sh/polar_cl_TyVwEnJrBVIu0dqQYStfu8OuAUAiGXfm6gllP131UWc",
-      "gallery": [
-        "assets/shots/brookmere-m1.jpg",
-        "assets/shots/brookmere-m2.jpg",
-        "assets/shots/brookmere-m3.jpg",
-        "assets/shots/brookmere-m4.jpg"
-      ]
-    },
-    {
-      "slug": "nostalgia-exe",
-      "name": "Nostalgia.exe",
-      "tagline": "A Windows-XP operating system as a portfolio.",
-      "description": "Nostalgia.exe turns your portfolio into a fully working retro operating system. BIOS boot, draggable windows, Minesweeper, a BSOD 404 and three easter eggs. The portfolio nobody closes in five seconds.",
-      "category": "Portfolio",
-      "tags": [
-        "portfolio",
-        "fun",
-        "retro",
-        "creative",
-        "developer"
-      ],
-      "price": "$149",
-      "free": false,
-      "new": false,
-      "featured": false,
-      "status": "soon",
-      "cover": "assets/covers/nostalgia.jpg",
-      "demo": "https://fuchsia-iris-537502.framer.app",
-      "get": "https://fuchsia-iris-537502.framer.app",
-      "year": "2026",
-      "tier": "Signature",
-      "features": [
-        "Working OS interface",
-        "Draggable windows",
-        "Playable Minesweeper",
-        "Three easter eggs"
-      ],
-      "included": [
-        "Full desktop-OS interface",
-        "BIOS boot sequence",
-        "Draggable window system",
-        "Minesweeper",
-        "BSOD 404",
-        "Portfolio CMS",
-        "PocketPC mobile mode"
-      ],
-      "bestFor": [
-        "Developers",
-        "Designers who want to be remembered",
-        "Creative portfolios"
-      ],
-      "checkout": ""
-    }
-  ],
-  "components": [
-    {
-      "name": "The Wire",
-      "tagline": "Templates hung on a drying line, swaying on pegs.",
-      "price": "$5",
-      "get": "https://www.framer.com/@madebycarmy/"
-    },
-    {
-      "name": "ReelCarousel",
-      "tagline": "A 3D reel carousel. Drop in, bind, spin.",
-      "price": "$5",
-      "get": "https://www.framer.com/@madebycarmy/"
-    },
-    {
-      "name": "asciii",
-      "tagline": "Cards render as live monochrome ASCII, develop on hover.",
-      "price": "$5",
-      "get": "https://www.framer.com/@madebycarmy/"
-    }
-  ]
+  {
+   "slug": "atrium",
+   "name": "Atrium",
+   "tagline": "A portfolio you walk through like an exhibition.",
+   "description": "Atrium mounts your work in gilded museum frames under a starry night. A scroll-driven gallery cross-fades from piece to piece with museum wall labels, and a click-to-open lightbox shows every piece full screen. Six designed pages, CMS-ready Works and Journal collections, and a built-in editing guide. Everything is native and editable on the Framer canvas: swap the demo art for your own in a couple of clicks, no code needed.",
+   "category": "Portfolio",
+   "tags": [
+    "art",
+    "artist",
+    "painter",
+    "illustrator",
+    "photography",
+    "exhibition",
+    "gallery",
+    "portfolio",
+    "creative",
+    "cinematic",
+    "dark",
+    "studio"
+   ],
+   "price": "$99",
+   "free": false,
+   "new": true,
+   "featured": true,
+   "status": "live",
+   "tier": "Premium",
+   "features": [
+    "Scroll-driven gallery with museum wall labels",
+    "Click-to-open lightbox with keyboard browsing",
+    "Exhibitions timeline + Journal with article pages",
+    "CMS-ready Works and Journal collections"
+   ],
+   "included": [
+    "6 pages: Home, Works, About, Exhibitions, Journal, Contact",
+    "Works + Journal CMS collections",
+    "Built-in how-to-edit guide page",
+    "WebP-optimized imagery",
+    "Free updates through your remix link"
+   ],
+   "bestFor": [
+    "painters, illustrators and photographers",
+    "creative studios presenting a body of work",
+    "artists who want work hung, not listed"
+   ],
+   "cover": "assets/covers/atrium.jpg",
+   "demo": "https://aatrium.framer.website",
+   "get": "https://aatrium.framer.website",
+   "checkout": "https://buy.polar.sh/polar_cl_ffLh88yUNLpfwNPIXeO4uqg8vcVUV75dEz39c3A1Pkf",
+   "gallery": [
+    "assets/shots/atrium-m1.jpg",
+    "assets/shots/atrium-m2.jpg",
+    "assets/shots/atrium-m3.jpg",
+    "assets/shots/atrium-m4.jpg",
+    "assets/shots/atrium-m5.jpg"
+   ],
+   "video": "https://hsnbrg-cdn.pages.dev/atrium-hero.mp4",
+   "preview": "https://hsnbrg-cdn.pages.dev/atrium-card.mp4"
+  },
+  {
+   "slug": "the-collection",
+   "name": "The Collection",
+   "tagline": "A creator storefront that reads like an edit, not a wall of links.",
+   "description": "Turn your link in bio into a real shop. The Collection is a mobile-first storefront for fashion, beauty and lifestyle creators: a magazine-style hero introduces you, curated edits group the pieces you actually recommend, and a weekly product feed runs off the CMS so your links never go stale. Everything is native and editable on the Framer canvas. Swap the photos, rewrite the copy, drop in your products, change two fonts, publish. No code needed.",
+   "category": "Creator",
+   "tags": [
+    "creator",
+    "storefront",
+    "shop my links",
+    "linktree alternative",
+    "personal brand",
+    "fashion",
+    "beauty",
+    "lifestyle",
+    "ecommerce",
+    "cms",
+    "editorial",
+    "mobile-first"
+   ],
+   "price": "$49",
+   "free": false,
+   "new": true,
+   "featured": false,
+   "status": "live",
+   "tier": "Premium",
+   "features": [
+    "Editorial hero with live intro + 3D tilt",
+    "Curated looks and finds sections",
+    "9-item Products CMS",
+    "Private-list email capture"
+   ],
+   "included": [
+    "Home + 404 + Start Here guide pages",
+    "Products CMS collection",
+    "Intro animation + tilt effects",
+    "Email capture wired for your list",
+    "Free updates through your remix link"
+   ],
+   "bestFor": [
+    "fashion, beauty and lifestyle creators",
+    "creators replacing a Linktree",
+    "personal brands selling curated products"
+   ],
+   "cover": "assets/covers/the-collection.jpg",
+   "demo": "https://thecollectionn.framer.website",
+   "get": "https://thecollectionn.framer.website",
+   "checkout": "https://buy.polar.sh/polar_cl_F6CpsTeYslkURKr43koIb3Q4AmbIARXc0QDce1B4Um3",
+   "gallery": [
+    "assets/shots/the-collection-m1.jpg",
+    "assets/shots/the-collection-m2.jpg",
+    "assets/shots/the-collection-m3.jpg",
+    "assets/shots/the-collection-m4.jpg"
+   ],
+   "video": "https://hsnbrg-cdn.pages.dev/collection-walkthrough.mp4",
+   "preview": "https://hsnbrg-cdn.pages.dev/collection-card.mp4"
+  },
+  {
+   "slug": "cut",
+   "name": "CUT",
+   "tagline": "A video editor's portfolio, cut like a film.",
+   "description": "CUT is a video editor portfolio and filmmaker website template for Framer. Dark and cinematic, built for video editors, filmmakers, videographers, colorists and cinematographers who need a fast, fully editable site to show their reel and land better clients. Viewfinder hero, a horizontal-scroll showreel gallery, and a dedicated Works page that plays YouTube, Vimeo or self-hosted video on click. CMS-driven projects, fully responsive, native and buyer-editable.",
+   "category": "Portfolio",
+   "tags": [
+    "video editor",
+    "filmmaker",
+    "videographer",
+    "colorist",
+    "cinematographer",
+    "portfolio",
+    "showreel",
+    "reel",
+    "cinematic",
+    "dark",
+    "motion",
+    "CMS",
+    "video production"
+   ],
+   "price": "$69",
+   "free": false,
+   "new": true,
+   "featured": true,
+   "status": "live",
+   "tier": "Premium",
+   "features": [
+    "Viewfinder hero + film-leader intro",
+    "Horizontal-scroll showreel",
+    "Works page with click-to-play video",
+    "Projects CMS"
+   ],
+   "included": [
+    "Home + Works pages",
+    "Projects CMS collection",
+    "Cinematic video lightbox (YouTube, Vimeo, mp4)",
+    "Desktop horizontal scroll, native vertical on phone",
+    "Free updates through your remix link"
+   ],
+   "bestFor": [
+    "video editors and filmmakers",
+    "videographers and colorists",
+    "cinematographers and motion designers",
+    "video production studios"
+   ],
+   "cover": "assets/covers/cut.jpg",
+   "demo": "https://cutt.framer.website",
+   "get": "https://cutt.framer.website",
+   "checkout": "https://buy.polar.sh/polar_cl_16i717WRENbGZBwDpLXVdOdSizOD4QTJmyNuv27BVcf",
+   "gallery": [
+    "assets/shots/cut-1.jpg",
+    "assets/shots/cut-2.jpg",
+    "assets/shots/cut-3.jpg",
+    "assets/shots/cut-4.jpg"
+   ],
+   "video": "https://hsnbrg-cdn.pages.dev/cut-walkthrough.mp4",
+   "preview": "https://hsnbrg-cdn.pages.dev/cut-card.mp4"
+  },
+  {
+   "slug": "still",
+   "name": "Still",
+   "tagline": "A film photographer's contact sheet, alive.",
+   "description": "Still is a portfolio template for film photographers and visual artists. Your work hangs on a contact sheet, marked up, circled, honest. Editorial type, a photo archive CMS, and motion that stays out of the photograph's way.",
+   "category": "Portfolio",
+   "tags": [
+    "photography",
+    "portfolio",
+    "creative",
+    "art"
+   ],
+   "price": "$49",
+   "free": false,
+   "new": true,
+   "featured": false,
+   "status": "live",
+   "cover": "assets/covers/still.jpg",
+   "demo": "https://stillfilm.framer.website",
+   "get": "https://stillfilm.framer.website",
+   "year": "2026",
+   "tier": "Standard",
+   "features": [
+    "13 pages",
+    "Photo archive CMS",
+    "Editorial motion",
+    "Mobile ready"
+   ],
+   "included": [
+    "13 designed pages",
+    "Photo archive CMS",
+    "Contact-sheet gallery system",
+    "Editorial type system",
+    "Responsive breakpoints",
+    "Free updates"
+   ],
+   "bestFor": [
+    "Film photographers",
+    "Visual artists",
+    "Creative portfolios"
+   ],
+   "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g",
+   "gallery": [
+    "assets/shots/still-m1.jpg",
+    "assets/shots/still-m2.jpg",
+    "assets/shots/still-m3.jpg",
+    "assets/shots/still-m4.jpg"
+   ]
+  },
+  {
+   "slug": "fern-hollow",
+   "name": "Fern Hollow",
+   "tagline": "Boutique stays and cabin rentals, warm and quiet.",
+   "description": "Fern Hollow is a free template for boutique stays, cabins and rentals. Warm photography-first layout, gallery and booking sections, and copy that feels like a host, not a hotel chain. Free, forever.",
+   "category": "Hospitality",
+   "tags": [
+    "rental",
+    "stay",
+    "hospitality",
+    "travel",
+    "free"
+   ],
+   "price": "Free",
+   "free": true,
+   "new": false,
+   "featured": false,
+   "status": "live",
+   "cover": "assets/covers/fernhollow.jpg",
+   "demo": "https://fernhollow.framer.website",
+   "get": "https://fernhollow.framer.website",
+   "year": "2026",
+   "tier": "Free",
+   "features": [
+    "Gallery and booking sections",
+    "Photography-first layout",
+    "Mobile ready",
+    "No custom code"
+   ],
+   "included": [
+    "Complete one-page site",
+    "Gallery and booking sections",
+    "Responsive breakpoints",
+    "Documentation in-page",
+    "Free forever"
+   ],
+   "bestFor": [
+    "Boutique stays",
+    "Cabins and rentals",
+    "Guest houses"
+   ],
+   "checkout": "",
+   "gallery": [
+    "assets/shots/fern-hollow-m1.jpg",
+    "assets/shots/fern-hollow-m2.jpg",
+    "assets/shots/fern-hollow-m3.jpg",
+    "assets/shots/fern-hollow-m4.jpg",
+    "assets/shots/fern-hollow-m5.jpg"
+   ],
+   "preview": "https://hsnbrg-cdn.pages.dev/fern-hollow-card.mp4"
+  },
+  {
+   "slug": "the-aubrey",
+   "name": "The Aubrey",
+   "tagline": "A members' club, after dark.",
+   "description": "The Aubrey is a dark, cinematic template for members' clubs, bars, restaurants and hospitality brands. Candlelit motion, a velvet-rope invitation flow, events and journal CMS, the whole house, ready to open.",
+   "category": "Hospitality",
+   "tags": [
+    "club",
+    "restaurant",
+    "hospitality",
+    "dark",
+    "membership"
+   ],
+   "price": "$69",
+   "free": false,
+   "new": false,
+   "featured": false,
+   "status": "live",
+   "cover": "assets/covers/aubrey.jpg",
+   "demo": "https://theaubrey.framer.website",
+   "get": "https://theaubrey.framer.website",
+   "year": "2026",
+   "tier": "Premium",
+   "features": [
+    "Events CMS",
+    "Journal CMS",
+    "Invitation flow",
+    "Cinematic motion"
+   ],
+   "included": [
+    "Complete multi-page site",
+    "Events CMS collection",
+    "Journal CMS collection",
+    "Working invitation flow",
+    "Candlelit motion system",
+    "Responsive breakpoints",
+    "Free updates"
+   ],
+   "bestFor": [
+    "Members' clubs",
+    "Bars and restaurants",
+    "Boutique hotels",
+    "Private dining"
+   ],
+   "checkout": "https://buy.polar.sh/polar_cl_YPejPZbrgBCRVdDqG8Q7ZiamZGOcMw1gKfEko19EfGW",
+   "gallery": [
+    "assets/shots/the-aubrey-m1.jpg",
+    "assets/shots/the-aubrey-m2.jpg",
+    "assets/shots/the-aubrey-m3.jpg",
+    "assets/shots/the-aubrey-m4.jpg"
+   ]
+  },
+  {
+   "slug": "brookmere",
+   "name": "Brookmere",
+   "tagline": "Luxury finance, by invitation.",
+   "description": "Brookmere is a single-page template for boutique finance, wealth management and private advisory firms. Serif restraint, an emerald palette, and a working invitation form, quiet money, done right.",
+   "category": "Business",
+   "tags": [
+    "finance",
+    "business",
+    "luxury",
+    "consulting"
+   ],
+   "price": "$49",
+   "free": false,
+   "new": false,
+   "featured": false,
+   "status": "live",
+   "cover": "assets/covers/brookmere.jpg",
+   "demo": "https://brookmere.framer.website",
+   "get": "https://brookmere.framer.website",
+   "year": "2026",
+   "tier": "Standard",
+   "features": [
+    "Single page",
+    "Invitation form",
+    "Serif type system",
+    "Quiet motion"
+   ],
+   "included": [
+    "Complete single-page site",
+    "Working invitation form",
+    "Serif and emerald design system",
+    "Responsive breakpoints",
+    "Free updates"
+   ],
+   "bestFor": [
+    "Wealth management",
+    "Private advisory",
+    "Boutique finance"
+   ],
+   "checkout": "https://buy.polar.sh/polar_cl_TyVwEnJrBVIu0dqQYStfu8OuAUAiGXfm6gllP131UWc",
+   "gallery": [
+    "assets/shots/brookmere-m1.jpg",
+    "assets/shots/brookmere-m2.jpg",
+    "assets/shots/brookmere-m3.jpg",
+    "assets/shots/brookmere-m4.jpg"
+   ]
+  },
+  {
+   "slug": "nostalgia-exe",
+   "name": "Nostalgia.exe",
+   "tagline": "A Windows-XP operating system as a portfolio.",
+   "description": "Nostalgia.exe turns your portfolio into a fully working retro operating system. BIOS boot, draggable windows, Minesweeper, a BSOD 404 and three easter eggs. The portfolio nobody closes in five seconds.",
+   "category": "Portfolio",
+   "tags": [
+    "portfolio",
+    "fun",
+    "retro",
+    "creative",
+    "developer"
+   ],
+   "price": "$149",
+   "free": false,
+   "new": false,
+   "featured": false,
+   "status": "soon",
+   "cover": "assets/covers/nostalgia.jpg",
+   "demo": "https://fuchsia-iris-537502.framer.app",
+   "get": "https://fuchsia-iris-537502.framer.app",
+   "year": "2026",
+   "tier": "Signature",
+   "features": [
+    "Working OS interface",
+    "Draggable windows",
+    "Playable Minesweeper",
+    "Three easter eggs"
+   ],
+   "included": [
+    "Full desktop-OS interface",
+    "BIOS boot sequence",
+    "Draggable window system",
+    "Minesweeper",
+    "BSOD 404",
+    "Portfolio CMS",
+    "PocketPC mobile mode"
+   ],
+   "bestFor": [
+    "Developers",
+    "Designers who want to be remembered",
+    "Creative portfolios"
+   ],
+   "checkout": ""
+  }
+ ],
+ "components": [
+  {
+   "name": "The Wire",
+   "tagline": "Templates hung on a drying line, swaying on pegs.",
+   "price": "$5",
+   "get": "https://www.framer.com/@madebycarmy/"
+  },
+  {
+   "name": "ReelCarousel",
+   "tagline": "A 3D reel carousel. Drop in, bind, spin.",
+   "price": "$5",
+   "get": "https://www.framer.com/@madebycarmy/"
+  },
+  {
+   "name": "asciii",
+   "tagline": "Cards render as live monochrome ASCII, develop on hover.",
+   "price": "$5",
+   "get": "https://www.framer.com/@madebycarmy/"
+  }
+ ]
 }
