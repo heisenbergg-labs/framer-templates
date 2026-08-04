@@ -694,10 +694,7 @@ const home = page({
       <a class="textlink" href="#" data-quiz-open>Not sure? 3 questions, 25% off <span class="arr">&rarr;</span></a>
     </div>
     <div class="proof-strip">
-      <span class="proof-avatars">
-        <span class="pav">T</span><span class="pav">L</span><span class="pav">K</span><span class="pav">N</span><span class="pav you">You?</span>
-      </span>
-      <span class="proof-text"><span class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> so far &middot; Used by businesses in 5 countries</span>
+      <span class="proof-line"><span class="proof-rule l"></span>USED BY BUSINESSES IN 5 COUNTRIES<span class="proof-rule r"></span></span>
     </div>
     ${HERO_VISUAL ? `<div class="hero-visual"><img src="${HERO_VISUAL}" alt="A getsites template on screen"></div>` : ""}
   </div>
