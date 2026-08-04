@@ -43,7 +43,7 @@
       "price": "$49",
       "free": false,
       "new": true,
-      "featured": true,
+      "featured": false,
       "status": "soon",
       "tier": "Standard",
       "features": [
