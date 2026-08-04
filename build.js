@@ -686,18 +686,54 @@ const home = page({
   body: `
 <header class="hero centered">
   <div class="wrap">
-    <p class="eyebrow-laurel"><svg class="laurel" width="24" height="37" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="lgl" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#463a99"/><stop offset="0.45" stop-color="#8f7bff"/><stop offset="0.75" stop-color="#d9cfff"/><stop offset="1" stop-color="#745cff"/></linearGradient></defs><g fill="url(#lgl)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgl)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg><span class="goldtext">Premium Framer templates</span><svg class="laurel r" width="24" height="37" viewBox="0 0 26 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="lgr" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#463a99"/><stop offset="0.45" stop-color="#8f7bff"/><stop offset="0.75" stop-color="#d9cfff"/><stop offset="1" stop-color="#745cff"/></linearGradient></defs><g fill="url(#lgr)"><path d="M22 42 C12 36 7 26 8 12" fill="none" stroke="url(#lgr)" stroke-width="1.6" stroke-linecap="round"/><path d="M8 12 C7.5 7 9 3 12 0 C13.5 4 12.5 9 8 12 Z"/><path d="M9 16 C5 14 2.5 10.5 2.5 6 C7 7.5 9.5 11 9 16 Z"/><path d="M9.5 16.5 C13.5 15.5 17.5 16.5 20 19.5 C15.5 21 11.5 20 9.5 16.5 Z"/><path d="M10.5 24 C6.5 23.5 3.5 21 2 17 C6.5 17 10 20 10.5 24 Z"/><path d="M11 24.5 C15 24.5 18.5 26.5 20.5 30 C15.5 30.5 12 28.5 11 24.5 Z"/><path d="M13.5 31.5 C9.5 32 6 30.5 3.5 27.5 C8 26.5 12 28 13.5 31.5 Z"/><path d="M14 32 C17.5 33.5 20 36.5 20.5 40.5 C16 39.5 13.5 36.5 14 32 Z"/><path d="M17.5 38.5 C13.5 40 9.5 39.5 6.5 37 C10.5 35 15 35.5 17.5 38.5 Z"/></g></svg></p>
+    <div class="proof-strip">
+      <span class="proof-avatars">
+        <span class="pav">T</span><span class="pav">L</span><span class="pav">K</span><span class="pav">N</span><span class="pav you">You?</span>
+      </span>
+      <span class="proof-text"><span class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> so far &middot; Used by businesses in 5 countries</span>
+    </div>
     <h1>Your website, ready in <span class="it">ten minutes.</span></h1>
-    <p class="statement">Pick a template, change the words and photos, connect your domain. No code, no designer needed.</p>
+    <p class="statement">Premium Framer templates. Pick one, change the words and photos, connect your domain. Live today, no code.</p>
     <div class="ctas">
-      <a class="pill lg" href="#collection">Browse the collection</a>
-      <a class="textlink" href="#" data-quiz-open>Find my template <span class="arr">&rarr;</span></a>
+      <a class="pill lg" href="#" data-quiz-open>Find my template</a>
+      <a class="textlink" href="#" data-quiz-open>Not sure? 3 questions, 25% off <span class="arr">&rarr;</span></a>
     </div>
     ${HERO_VISUAL ? `<div class="hero-visual"><img src="${HERO_VISUAL}" alt="A getsites template on screen"></div>` : ""}
   </div>
 </header>
 
 ${collectionSec(".")}
+
+<section class="idemo-sec"><div class="wrap">
+  <div class="sec-head">
+    <h2 class="serif">Try one, <span class="it">right now.</span></h2>
+    <p class="idemo-sub">This is ${esc(featured.name)}, live. Click, scroll, open its pages. Every demo on this site is the real template.</p>
+  </div>
+  <div class="idemo reveal" id="idemo" data-demo="${esc(featured.demo)}">
+    <div class="idemo-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="idemo-url">${esc(featured.demo.replace("https://", ""))}</span></div>
+    <div class="idemo-body">
+      <img src="assets/covers/${featured.slug}.jpg?v=${VER}" alt="${esc(featured.name)} template preview">
+      <button class="pill lg idemo-go" type="button">Try it live</button>
+    </div>
+  </div>
+</div></section>
+<script>
+(function () {
+  var box = document.getElementById("idemo");
+  if (!box) return;
+  var btn = box.querySelector(".idemo-go");
+  btn.addEventListener("click", function () {
+    var body = box.querySelector(".idemo-body");
+    var f = document.createElement("iframe");
+    f.src = box.dataset.demo;
+    f.setAttribute("title", "Live template demo");
+    f.setAttribute("loading", "eager");
+    body.innerHTML = "";
+    body.appendChild(f);
+    if (window.gsPing) gsPing("demo-click", { template: box.dataset.demo });
+  });
+})();
+</script>
 
 <section class="steps-sec"><div class="wrap">
   <div class="sec-head">
