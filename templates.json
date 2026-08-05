@@ -264,8 +264,8 @@
         "creative",
         "art"
       ],
-      "price": "$49",
-      "free": false,
+      "price": "Free",
+      "free": true,
       "new": false,
       "featured": false,
       "status": "live",
@@ -273,7 +273,7 @@
       "demo": "https://stillfilm.framer.website",
       "get": "https://stillfilm.framer.website",
       "year": "2026",
-      "tier": "Standard",
+      "tier": "Free",
       "features": [
         "13 pages",
         "Photo archive CMS",
@@ -293,7 +293,7 @@
         "Visual artists",
         "Creative portfolios"
       ],
-      "checkout": "https://buy.polar.sh/polar_cl_UYKvvrOKtR86DCVbY3ueMtqZRyLzjFrLbQVXy10Ul7g",
+      "checkout": "",
       "gallery": [
         "assets/shots/still-m1.jpg",
         "assets/shots/still-m2.jpg",
