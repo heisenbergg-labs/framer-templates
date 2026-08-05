@@ -231,10 +231,11 @@ const quizBlock = (root) => `
       <p class="quiz-lab">01 of 03</p>
       <h2 class="quiz-h">What are you <span class="it">building?</span></h2>
       <div class="quiz-opts">
-        <button type="button" data-pick="portfolio">A portfolio</button>
+        <button type="button" data-pick="portfolio">A portfolio for my work</button>
         <button type="button" data-pick="hospitality">A stay, club or restaurant site</button>
-        <button type="button" data-pick="business">A business site</button>
-        <button type="button" data-pick="fun">Something people will remember</button>
+        <button type="button" data-pick="business">A business or finance site</button>
+        <button type="button" data-pick="services">A site that books me clients</button>
+        <button type="button" data-pick="creator">A creator page that sells</button>
       </div>
     </div>
     <div class="quiz-step" data-step="feel" hidden>
@@ -244,6 +245,7 @@ const quizBlock = (root) => `
         <button type="button" data-pick="warm">Warm and personal</button>
         <button type="button" data-pick="lux">Quiet and luxurious</button>
         <button type="button" data-pick="editorial">Editorial and precise</button>
+        <button type="button" data-pick="cinematic">Dark and cinematic</button>
         <button type="button" data-pick="playful">Playful and surprising</button>
       </div>
     </div>
@@ -252,6 +254,7 @@ const quizBlock = (root) => `
       <h2 class="quiz-h">What matters <span class="it">most?</span></h2>
       <div class="quiz-opts">
         <button type="button" data-pick="photos">My photos doing the talking</button>
+        <button type="button" data-pick="bookings">Enquiries and bookings coming in</button>
         <button type="button" data-pick="credibility">Looking established</button>
         <button type="button" data-pick="content">Publishing events or journal posts</button>
         <button type="button" data-pick="standout">Standing out completely</button>
@@ -287,16 +290,29 @@ const quizBlock = (root) => `
       var b = picks.build, f = picks.feel, m = picks.matters;
       if (b === "portfolio" && t.cat === "Portfolio") sc += 3;
       if (b === "hospitality" && t.cat === "Hospitality") sc += 3;
-      if (b === "business" && t.cat === "Business") sc += 3;
-      if (b === "fun" && t.slug === "nostalgia-exe") sc += 4;
+      if (b === "business" && t.slug === "brookmere") sc += 4;
+      if (b === "services" && t.slug === "bellucci") sc += 4;
+      if (b === "services" && (t.slug === "brookmere" || t.slug === "fern-hollow")) sc += 1;
+      if (b === "creator" && t.slug === "the-collection") sc += 4;
       if (f === "warm" && t.slug === "fern-hollow") sc += 2;
+      if (f === "warm" && t.slug === "bellucci") sc += 1;
       if (f === "lux" && (t.slug === "the-aubrey" || t.slug === "brookmere")) sc += 2;
-      if (f === "editorial" && (t.slug === "still" || t.slug === "brookmere")) sc += 2;
+      if (f === "lux" && (t.slug === "atrium" || t.slug === "bellucci")) sc += 1;
+      if (f === "editorial" && (t.slug === "still" || t.slug === "the-collection" || t.slug === "bellucci")) sc += 2;
+      if (f === "editorial" && t.slug === "brookmere") sc += 1;
+      if (f === "cinematic" && (t.slug === "cut" || t.slug === "atrium")) sc += 2;
+      if (f === "cinematic" && t.slug === "the-aubrey") sc += 1;
       if (f === "playful" && t.slug === "nostalgia-exe") sc += 3;
-      if (m === "photos" && (t.slug === "still" || t.slug === "fern-hollow")) sc += 2;
+      if (m === "photos" && (t.slug === "still" || t.slug === "atrium")) sc += 2;
+      if (m === "photos" && (t.slug === "fern-hollow" || t.slug === "bellucci")) sc += 1;
+      if (m === "bookings" && t.slug === "bellucci") sc += 2;
+      if (m === "bookings" && (t.slug === "fern-hollow" || t.slug === "brookmere")) sc += 1;
       if (m === "credibility" && t.slug === "brookmere") sc += 2;
-      if (m === "content" && t.slug === "the-aubrey") sc += 2;
+      if (m === "credibility" && t.slug === "bellucci") sc += 1;
+      if (m === "content" && (t.slug === "the-aubrey" || t.slug === "the-collection")) sc += 2;
+      if (m === "content" && t.slug === "atrium") sc += 1;
       if (m === "standout" && t.slug === "nostalgia-exe") sc += 3;
+      if (m === "standout" && t.slug === "atrium") sc += 1;
       if (t.soon) sc -= 1;
       return { t: t, sc: sc };
     }).sort(function (a, b) { return b.sc - a.sc; });
