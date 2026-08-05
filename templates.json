@@ -21,6 +21,64 @@
   },
   "templates": [
     {
+      "slug": "bellucci",
+      "name": "BELLUCCI",
+      "tagline": "A bridal makeup template built to turn a browsing bride into a booked date.",
+      "description": "BELLUCCI is for bridal makeup artists who book weddings, not just post galleries. It is a light-led story rather than a portfolio wall: it opens on the morning of the wedding, moves through how a finish reads in window, ceremony and evening light, then closes on an enquiry form that already asks for the wedding date, the venue and how many people need makeup. Editorial black and cream, Mazius Display and General Sans. Every layer is native and editable on the Framer canvas, so you swap photography and rewrite copy without touching code.",
+      "category": "Personal",
+      "tags": [
+        "bridal",
+        "makeup",
+        "makeup artist",
+        "beauty",
+        "wedding",
+        "editorial",
+        "luxury",
+        "booking",
+        "photography",
+        "cms",
+        "minimal",
+        "elegant"
+      ],
+      "price": "$49",
+      "free": false,
+      "new": true,
+      "featured": false,
+      "status": "live",
+      "tier": "Standard",
+      "features": [
+        "Draggable light comparison slider, window light against evening light",
+        "Scroll-controlled Light Study through three moments of light",
+        "Enquiry form capturing wedding date, venue and party size",
+        "Real Brides CMS collection you edit in the panel"
+      ],
+      "included": [
+        "8 sections on a single designed page",
+        "Real Brides CMS collection",
+        "Built-in Start Here guide page",
+        "Hand-tuned desktop, tablet and phone breakpoints",
+        "Free updates through your remix link"
+      ],
+      "bestFor": [
+        "bridal and wedding makeup artists",
+        "hair and makeup duos taking wedding bookings",
+        "beauty artists who want enquiries, not just likes"
+      ],
+      "cover": "assets/covers/bellucci.jpg",
+      "demo": "https://bellucci.framer.website",
+      "get": "https://bellucci.framer.website",
+      "checkout": "https://buy.polar.sh/polar_cl_uq1hL9KmTJEYkFLKNPjY8kxH7HeR95zG97rgG09Cg4k",
+      "gallery": [
+        "assets/shots/bellucci-m1.jpg",
+        "assets/shots/bellucci-m2.jpg",
+        "assets/shots/bellucci-m3.jpg",
+        "assets/shots/bellucci-m4.jpg",
+        "assets/shots/bellucci-m5.jpg"
+      ],
+      "video": "https://hsnbrg-cdn.pages.dev/bellucci-showreel.mp4",
+      "preview": "https://hsnbrg-cdn.pages.dev/bellucci-card.mp4"
+    },
+    {
       "slug": "atrium",
       "name": "Atrium",
       "tagline": "A portfolio you walk through like an exhibition.",
